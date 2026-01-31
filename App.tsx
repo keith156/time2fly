@@ -38,11 +38,11 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${useSolidStyle ? 'glass-nav py-3 shadow-md border-b border-slate-200' : 'bg-transparent py-5'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${useSolidStyle ? 'glass-nav py-2 shadow-md border-b border-slate-200' : 'bg-transparent py-3'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
-            <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain" />
+            <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
           </Link>
 
           <div className="hidden md:flex space-x-8 items-center">

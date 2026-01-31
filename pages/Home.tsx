@@ -123,7 +123,7 @@ const Home: React.FC = () => {
 
         <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center">
           <div className="animate-fade-in-up space-y-8">
-            <h1 className="text-[36px] font-black text-white leading-tight tracking-[0.25em] uppercase drop-shadow-2xl">
+            <h1 className="text-[45px] font-black text-white leading-none tracking-tight uppercase drop-shadow-2xl">
               IT'S <br />
               <span className="text-red-600">TIME 2 FLY</span>
             </h1>
@@ -132,12 +132,15 @@ const Home: React.FC = () => {
               Explore the world, <span className="border-b-2 border-red-600 pb-1 font-medium">Travelling is knowledge</span>
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-              <Link to="/packages" className="group bg-red-600 hover:bg-amber-500 text-white px-12 py-6 rounded-none font-black transition-all shadow-2xl hover:shadow-amber-500/20 uppercase tracking-[0.2em] text-sm flex items-center border border-red-600 hover:border-amber-500">
-                Plan Your Voyage <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-10">
+              <Link to="/packages" className="group relative bg-red-600 hover:bg-amber-500 text-white px-10 py-5 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-sm flex items-center overflow-hidden">
+                <span className="relative z-10 flex items-center">
+                  Plan Your Voyage <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
               </Link>
-              <Link to="/about" className="bg-transparent hover:bg-white/10 text-white border border-white px-12 py-6 rounded-none font-black transition-all uppercase tracking-[0.2em] text-sm hover:border-amber-500 hover:text-amber-500">
-                Our Story
+              <Link to="/about" className="group bg-white/5 backdrop-blur-md hover:bg-white/10 text-white border border-white/30 px-10 py-5 rounded-full font-black transition-all duration-300 uppercase tracking-[0.2em] text-sm hover:border-amber-500 hover:text-amber-500 flex items-center">
+                <span className="group-hover:translate-x-1 transition-transform">Our Story</span>
               </Link>
             </div>
           </div>
