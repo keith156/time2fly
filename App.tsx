@@ -41,9 +41,8 @@ const Navbar: React.FC = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${useSolidStyle ? 'glass-nav py-3 shadow-md border-b border-slate-200' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link to="/" className={`flex items-center space-x-2 text-xl font-black tracking-tighter transition-colors ${useSolidStyle ? 'text-blue-700' : 'text-white'}`}>
-            <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-12 h-12 object-contain" />
-            <span>TIME<span className={useSolidStyle ? 'text-slate-900' : 'text-amber-400'}>2FLY</span></span>
+          <Link to="/" className="flex items-center">
+            <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-16 h-16 object-contain" />
           </Link>
 
           <div className="hidden md:flex space-x-8 items-center">
@@ -109,9 +108,8 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center space-x-2 mb-6">
-              <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-16 h-16 object-contain" />
-              <h2 className="text-xl font-black text-white uppercase tracking-tighter">TIME<span className="text-amber-500">2FLY</span></h2>
+            <div className="flex items-center mb-6">
+              <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-24 h-24 object-contain" />
             </div>
             <p className="text-slate-400 mb-4 leading-relaxed font-medium">
               Time2Fly Tours & Travel Ltd. Locally owned independent agency registered in Uganda. Established 2018.
