@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
-            <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-16 h-16 object-contain" />
+            <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain" />
           </Link>
 
           <div className="hidden md:flex space-x-8 items-center">
@@ -50,9 +50,9 @@ const Navbar: React.FC = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-xs lg:text-sm font-bold transition-colors hover:text-amber-500 ${location.pathname === link.path
-                  ? 'text-amber-500 underline underline-offset-4 decoration-2'
-                  : useSolidStyle ? 'text-slate-700' : 'text-white/90'
+                className={`text-xs lg:text-sm font-black transition-colors hover:text-red-500 ${location.pathname === link.path
+                  ? 'text-red-500 underline underline-offset-4 decoration-2'
+                  : useSolidStyle ? 'text-blue-900' : 'text-white/90'
                   }`}
               >
                 {link.name}
@@ -104,12 +104,12 @@ const Navbar: React.FC = () => {
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-950 text-white pt-20 pb-10">
+    <footer className="bg-[#001a33] text-white pt-20 pb-10 border-t-4 border-red-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center mb-6">
-              <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-24 h-24 object-contain" />
+              <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain" />
             </div>
             <p className="text-slate-400 mb-4 leading-relaxed font-medium">
               Time2Fly Tours & Travel Ltd. Locally owned independent agency registered in Uganda. Established 2018.

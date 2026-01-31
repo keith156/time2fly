@@ -32,7 +32,7 @@ const Services: React.FC = () => {
   return (
     <div className="pt-24 min-h-screen bg-white">
       {/* Header */}
-      <section className="bg-slate-950 text-white py-32 relative overflow-hidden">
+      <section className="bg-[#001a33] text-white py-32 relative overflow-hidden border-b-4 border-red-600">
         <div className="absolute inset-0 opacity-10">
           <img src="https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Clouds" />
         </div>
@@ -53,8 +53,8 @@ const Services: React.FC = () => {
             {SERVICES.map((s, idx) => {
               const Icon = IconMap[s.icon];
               return (
-                <div key={s.id} className="bg-slate-50 p-10 rounded-[48px] hover:bg-amber-500 group transition-all duration-500 border border-slate-100 hover:-translate-y-4 shadow-sm hover:shadow-2xl">
-                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 text-amber-500 group-hover:text-amber-500 shadow-sm">
+                <div key={s.id} className="bg-slate-50 p-10 rounded-[48px] hover:bg-[#002244] group transition-all duration-500 border border-slate-100 hover:-translate-y-4 shadow-sm hover:shadow-2xl">
+                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 text-red-600 group-hover:text-amber-500 shadow-sm">
                     {Icon && <Icon size={32} />}
                   </div>
                   <h3 className="text-xl font-black text-slate-900 mb-4 uppercase tracking-tighter group-hover:text-white transition-colors">{s.title}</h3>
@@ -74,7 +74,7 @@ const Services: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
               {fullServiceList.map((item, i) => (
                 <div key={i} className="flex items-center space-x-4 p-4 border-b border-slate-50 hover:bg-slate-50 transition-colors rounded-xl">
-                  <div className="w-2 h-2 bg-amber-500 rounded-full shrink-0"></div>
+                  <div className="w-2 h-2 bg-red-600 rounded-full shrink-0"></div>
                   <span className="text-slate-700 font-bold uppercase tracking-tight text-sm">{item}</span>
                 </div>
               ))}
