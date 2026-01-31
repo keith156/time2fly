@@ -123,7 +123,7 @@ const Home: React.FC = () => {
 
         <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center">
           <div className="animate-fade-in-up space-y-8">
-            <h1 className="text-[36px] font-black text-white leading-tight tracking-[0.25em] uppercase drop-shadow-2xl font-serif">
+            <h1 className="text-[36px] font-black text-white leading-tight tracking-[0.25em] uppercase drop-shadow-2xl">
               IT'S <br />
               <span className="text-red-600">TIME 2 FLY</span>
             </h1>
