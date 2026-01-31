@@ -47,7 +47,7 @@ const AnimatedStat: React.FC<{ value: number, label: string, icon: React.ReactNo
 
   return (
     <div ref={elementRef} className="text-center group">
-      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-amber-500 shadow-sm border border-slate-100 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
+      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-red-600 shadow-sm border border-slate-100 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
         {icon}
       </div>
       <h4 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">
@@ -69,21 +69,21 @@ const About: React.FC = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center pt-24 overflow-hidden bg-slate-950">
+      <section className="relative min-h-[90vh] flex items-center pt-24 overflow-hidden bg-[#002244]">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#002244] via-[#002244]/80 to-transparent z-10"></div>
           <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover opacity-40 scale-105" alt="Travel Hero" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up">
-              <span className="text-amber-500 font-black tracking-[0.3em] uppercase text-xs mb-6 block">Established July 2018 — Uganda</span>
-              <h1 className="text-5xl md:text-7xl font-black text-white leading-none mb-8 tracking-tighter">WE ARE <br /><span className="text-amber-400">TIME2FLY</span></h1>
+              <span className="text-red-500 font-black tracking-[0.3em] uppercase text-xs mb-6 block">Established July 2018 — Uganda</span>
+              <h1 className="text-5xl md:text-7xl font-black text-white leading-none mb-8 tracking-tighter">WE ARE <br /><span className="text-red-600">TIME2FLY</span></h1>
               <p className="text-lg md:text-xl text-slate-300 font-medium leading-relaxed max-w-xl mb-10 italic">"Explore the world, Travelling is knowledge"</p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/packages" className="bg-amber-500 hover:bg-white hover:text-slate-950 text-white font-black px-10 py-5 rounded-2xl transition-all shadow-2xl hover:shadow-amber-500/30 uppercase tracking-widest text-sm">View Our Tours</Link>
+                <Link to="/packages" className="bg-red-600 hover:bg-amber-500 text-white font-black px-10 py-5 rounded-full transition-all shadow-2xl hover:shadow-amber-500/30 uppercase tracking-widest text-sm">View Our Tours</Link>
                 <div className="flex items-center space-x-4 bg-white/5 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/10">
-                  <div className="w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center text-amber-500"><Compass className="animate-spin-slow" /></div>
+                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-red-500"><Compass className="animate-spin-slow" /></div>
                   <span className="text-white text-xs font-black uppercase tracking-widest leading-tight">Navigating your <br /> next adventure</span>
                 </div>
               </div>
@@ -92,9 +92,9 @@ const About: React.FC = () => {
               <div className="relative z-10 rounded-[60px] overflow-hidden border-8 border-white/10 shadow-2xl">
                 <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&q=80&w=1000" className="w-full aspect-[4/5] object-cover" alt="Explore" />
               </div>
-              <div className="absolute -bottom-10 -left-10 w-64 bg-amber-500 p-8 rounded-[40px] shadow-2xl transform -rotate-3">
+              <div className="absolute -bottom-10 -left-10 w-64 bg-red-600 p-8 rounded-[40px] shadow-2xl transform -rotate-3">
                 <h3 className="text-white font-black text-2xl tracking-tighter mb-1">24/7</h3>
-                <p className="text-amber-950 font-bold uppercase tracking-widest text-[10px]">Customized Solutions</p>
+                <p className="text-red-100 font-bold uppercase tracking-widest text-[10px]">Customized Solutions</p>
               </div>
             </div>
           </div>
@@ -107,13 +107,13 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="order-2 lg:order-1">
               <div className="grid grid-cols-2 gap-6">
-                <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&q=80&w=800" className="rounded-[40px] w-full h-80 object-cover mt-12 shadow-xl" alt="Culture" />
-                <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&q=80&w=800" className="rounded-[40px] w-full h-80 object-cover shadow-xl" alt="Nature" />
+                <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&q=80&w=800" className="rounded-[40px] w-full h-80 object-cover mt-12 shadow-xl hover:scale-105 transition-transform duration-500" alt="Culture" />
+                <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&q=80&w=800" className="rounded-[40px] w-full h-80 object-cover shadow-xl hover:scale-105 transition-transform duration-500" alt="Nature" />
               </div>
             </div>
             <div className="order-1 lg:order-2">
               <SectionTitle subtitle="About Us" title="Locally Owned & Independent" centered={false} />
-              <p className="text-slate-600 text-lg font-medium leading-relaxed mb-8 border-l-4 border-amber-500 pl-8 py-2">
+              <p className="text-slate-600 text-lg font-medium leading-relaxed mb-8 border-l-4 border-red-600 pl-8 py-2">
                 Time2Fly Tours and Travel Limited is a locally owned independent travel agency registered under the companies act of Uganda, incorporated in July 2018.
               </p>
               <div className="space-y-6 text-slate-500 font-medium leading-relaxed text-base">
@@ -134,19 +134,19 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <div className="bg-white p-16 rounded-[60px] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
-              <div className="w-20 h-20 bg-amber-500 text-white rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+              <div className="w-20 h-20 bg-red-600 text-white rounded-3xl flex items-center justify-center mb-10 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
                 <Target size={40} />
               </div>
-              <h3 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Our Vision</h3>
+              <h3 className="text-3xl font-black text-[#002244] mb-8 uppercase tracking-tighter">Our Vision</h3>
               <p className="text-slate-600 text-lg leading-relaxed font-medium">
                 To be the most innovative travel management company throughout the region, while creating a culture of service excellence and distinction.
               </p>
             </div>
             <div className="bg-white p-16 rounded-[60px] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
-              <div className="w-20 h-20 bg-slate-950 text-white rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+              <div className="w-20 h-20 bg-[#002244] text-white rounded-3xl flex items-center justify-center mb-10 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
                 <Award size={40} />
               </div>
-              <h3 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Our Mission</h3>
+              <h3 className="text-3xl font-black text-[#002244] mb-8 uppercase tracking-tighter">Our Mission</h3>
               <p className="text-slate-600 text-lg leading-relaxed font-medium">
                 Our mission is to see that our clients' programmes and schedules are customized to meet their unique travel requirements and ensure a hassle-free, well organized, enjoyable & comfortable travels wherever, and anywhere in the world.
               </p>
@@ -173,16 +173,16 @@ const About: React.FC = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 px-4">
-        <div className="max-w-7xl mx-auto bg-slate-950 rounded-[60px] p-12 md:p-24 relative overflow-hidden text-center">
-          <div className="absolute inset-0 opacity-20">
-            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="CTA" />
-          </div>
-          <div className="relative z-10">
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter uppercase leading-none">Your Journey <br /> <span className="text-amber-400">Starts Today</span></h2>
+      <section className="py-24 bg-[#002244] relative overflow-hidden text-center">
+        <div className="absolute inset-0 opacity-20 z-0">
+          <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="CTA" />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="py-12 md:py-16">
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter uppercase leading-none">Your Journey <br /> <span className="text-red-500">Starts Today</span></h2>
             <p className="text-slate-400 text-lg font-medium max-w-2xl mx-auto mb-12 italic uppercase tracking-widest">Explore the world, Travelling is knowledge</p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Link to="/contact" className="bg-amber-500 hover:bg-white hover:text-slate-950 text-white font-black px-12 py-5 rounded-full transition-all shadow-xl uppercase tracking-widest text-sm">Get Expert Advice</Link>
+              <Link to="/contact" className="bg-red-600 hover:bg-amber-500 text-white font-black px-12 py-5 rounded-full transition-all shadow-xl uppercase tracking-widest text-sm">Get Expert Advice</Link>
               <Link to="/packages" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-full font-black transition-all uppercase tracking-widest text-sm">Browse Packages</Link>
             </div>
           </div>

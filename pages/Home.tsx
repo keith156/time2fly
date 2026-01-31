@@ -123,33 +123,33 @@ const Home: React.FC = () => {
 
         <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center">
           <div className="animate-fade-in-up space-y-8">
-            <h1 className="text-[45px] font-black text-white leading-none tracking-tight uppercase drop-shadow-2xl">
+            <h1 className="text-6xl md:text-[66px] font-black text-white leading-none tracking-tighter uppercase drop-shadow-2xl mb-8">
               IT'S <br />
-              <span className="text-red-600">TIME 2 FLY</span>
+              <span className="text-red-600">TIME2FLY</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-100 font-light max-w-2xl mx-auto leading-relaxed uppercase tracking-widest opacity-90">
               Explore the world, <span className="border-b-2 border-red-600 pb-1 font-medium">Travelling is knowledge</span>
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-10">
-              <Link to="/packages" className="group relative bg-red-600 hover:bg-amber-500 text-white px-10 py-5 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-sm flex items-center overflow-hidden">
-                <span className="relative z-10 flex items-center">
-                  Plan Your Voyage <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
-              </Link>
-              <Link to="/about" className="group bg-white/5 backdrop-blur-md hover:bg-white/10 text-white border border-white/30 px-10 py-5 rounded-full font-black transition-all duration-300 uppercase tracking-[0.2em] text-sm hover:border-amber-500 hover:text-amber-500 flex items-center">
-                <span className="group-hover:translate-x-1 transition-transform">Our Story</span>
-              </Link>
-            </div>
-          </div>
-        </div>
+            <div className="flex flex-col items-center gap-8 pt-10">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <Link to="/packages" className="group relative bg-red-600 hover:bg-amber-500 text-white px-10 py-4 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-sm flex items-center overflow-hidden">
+                  <span className="relative z-10 flex items-center">
+                    PLAN YOUR VOYAGE <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                </Link>
+                <Link to="/about" className="group bg-transparent hover:bg-white/10 text-white border border-white/30 px-10 py-4 rounded-full font-black transition-all duration-300 uppercase tracking-[0.2em] text-sm hover:border-amber-500 hover:text-amber-500 flex items-center">
+                  <span className="group-hover:translate-x-1 transition-transform">OUR STORY</span>
+                </Link>
+              </div>
 
-        <div className="bg-white/5 backdrop-blur-md border-t border-white/10 p-6 hover:bg-white/10 transition-all absolute bottom-0 left-0 right-0 flex justify-center space-x-12">
-          <div className="flex items-center space-x-4 opacity-70 hover:opacity-100 transition-opacity">
-            <CheckCircle2 className="text-white group-hover:text-amber-500" size={20} />
-            <span className="text-white text-xs font-bold uppercase tracking-widest">Verified Agency</span>
+              <div className="flex items-center space-x-2 opacity-70 hover:opacity-100 transition-opacity">
+                <CheckCircle2 className="text-white" size={16} />
+                <span className="text-white text-[10px] font-bold uppercase tracking-widest">Verified Agency</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
