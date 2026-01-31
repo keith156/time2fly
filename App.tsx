@@ -41,8 +41,8 @@ const Navbar: React.FC = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${useSolidStyle ? 'glass-nav py-3 shadow-md border-b border-slate-200' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link to="/" className={`flex items-center space-x-2 text-2xl font-black tracking-tighter transition-colors ${useSolidStyle ? 'text-blue-700' : 'text-white'}`}>
-            <Plane className={useSolidStyle ? 'text-amber-500' : 'text-amber-400'} size={32} />
+          <Link to="/" className={`flex items-center space-x-2 text-xl font-black tracking-tighter transition-colors ${useSolidStyle ? 'text-blue-700' : 'text-white'}`}>
+            <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-12 h-12 object-contain" />
             <span>TIME<span className={useSolidStyle ? 'text-slate-900' : 'text-amber-400'}>2FLY</span></span>
           </Link>
 
@@ -51,17 +51,16 @@ const Navbar: React.FC = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-sm lg:text-base font-bold transition-colors hover:text-amber-500 ${
-                  location.pathname === link.path 
-                    ? 'text-amber-500 underline underline-offset-4 decoration-2' 
-                    : useSolidStyle ? 'text-slate-700' : 'text-white/90'
-                }`}
+                className={`text-xs lg:text-sm font-bold transition-colors hover:text-amber-500 ${location.pathname === link.path
+                  ? 'text-amber-500 underline underline-offset-4 decoration-2'
+                  : useSolidStyle ? 'text-slate-700' : 'text-white/90'
+                  }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Link 
-              to="/packages" 
+            <Link
+              to="/packages"
               className="bg-amber-500 hover:bg-amber-600 text-white px-6 lg:px-8 py-3 rounded-full text-sm font-black transition-all shadow-lg hover:shadow-amber-500/20 active:scale-95 uppercase tracking-wider whitespace-nowrap"
             >
               Book Now
@@ -86,13 +85,13 @@ const Navbar: React.FC = () => {
               key={link.name}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              className="block text-xl font-bold text-slate-700 hover:text-amber-600 border-b border-slate-100 pb-2"
+              className="block text-lg font-bold text-slate-700 hover:text-amber-600 border-b border-slate-100 pb-2"
             >
               {link.name}
             </Link>
           ))}
-          <Link 
-            to="/packages" 
+          <Link
+            to="/packages"
             onClick={() => setIsOpen(false)}
             className="block w-full text-center bg-amber-500 text-white py-4 rounded-xl font-black uppercase tracking-widest"
           >
@@ -111,8 +110,8 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center space-x-2 mb-6">
-              <Plane className="text-amber-500" size={32} />
-              <h2 className="text-2xl font-black text-white uppercase tracking-tighter">TIME<span className="text-amber-500">2FLY</span></h2>
+              <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-16 h-16 object-contain" />
+              <h2 className="text-xl font-black text-white uppercase tracking-tighter">TIME<span className="text-amber-500">2FLY</span></h2>
             </div>
             <p className="text-slate-400 mb-4 leading-relaxed font-medium">
               Time2Fly Tours & Travel Ltd. Locally owned independent agency registered in Uganda. Established 2018.
@@ -171,7 +170,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
         </div>
-        
+
         <div className="pt-10 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm font-medium gap-4">
           <p>© {new Date().getFullYear()} Time2Fly Tours & Travel Ltd. All rights reserved.</p>
           <Link to="/login" className="flex items-center space-x-1 hover:text-amber-500 transition-colors">
@@ -213,13 +212,13 @@ const App: React.FC = () => {
               <Route path="/blog" element={<Blog />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
-              <Route 
-                path="/admin" 
+              <Route
+                path="/admin"
                 element={
                   <ProtectedRoute>
                     <AdminDashboard />
                   </ProtectedRoute>
-                } 
+                }
               />
             </Routes>
           </main>

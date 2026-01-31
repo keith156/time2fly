@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Plane, MapPin, Calendar, Search, ArrowRight, Loader2, Info, ExternalLink, Calculator } from 'lucide-react';
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import SectionTitle from '../components/SectionTitle';
 
 interface FlightOption {
@@ -19,7 +19,7 @@ const FlightEstimator: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<FlightOption[]>([]);
   const [error, setError] = useState('');
-  const [sources, setSources] = useState<{title: string, uri: string}[]>([]);
+  const [sources, setSources] = useState<{ title: string, uri: string }[]>([]);
 
   const handleEstimate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,24 +34,19 @@ const FlightEstimator: React.FC = () => {
     setSources([]);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenerativeAI(process.env.API_KEY || '');
       const prompt = `Find current real flight prices from ${origin} to ${destination} on ${date}. 
       The trip type is ${tripType}. 
       Return a list of at least 3 flight options from different airlines.
       For each option, provide: Airline Name and the Price in USD.
       Keep the description concise.`;
 
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: prompt,
-        config: {
-          tools: [{ googleSearch: {} }],
-        },
-      });
-
-      const text = response.text;
+      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash-002" });
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
       const groundingSources = response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
-      
+
       const parsedSources = groundingSources
         .filter((chunk: any) => chunk.web)
         .map((chunk: any) => ({
@@ -63,7 +58,7 @@ const FlightEstimator: React.FC = () => {
       const lines = text.split('\n');
       const flightOptions: FlightOption[] = [];
       const priceRegex = /\$\s?(\d{1,5}(?:,\d{3})*(?:\.\d{2})?)/g;
-      
+
       lines.forEach(line => {
         const matches = [...line.matchAll(priceRegex)];
         if (matches.length > 0) {
@@ -113,9 +108,9 @@ const FlightEstimator: React.FC = () => {
           <img src="https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Clouds" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <SectionTitle 
-            subtitle="Flight Tool" 
-            title="Real-Time Ticket Estimator" 
+          <SectionTitle
+            subtitle="Flight Tool"
+            title="Real-Time Ticket Estimator"
             description="Get instant estimates for your next flight based on current market trends, including our exclusive Time2Fly premium service package."
             light={true}
           />
@@ -127,15 +122,15 @@ const FlightEstimator: React.FC = () => {
           <div className="bg-white rounded-[40px] shadow-2xl p-8 md:p-12 border border-slate-100">
             <form onSubmit={handleEstimate} className="space-y-8">
               <div className="flex flex-wrap gap-4 mb-4">
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => setTripType('round-trip')}
                   className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all ${tripType === 'round-trip' ? 'bg-amber-500 text-white shadow-lg' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}
                 >
                   Round Trip
                 </button>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => setTripType('one-way')}
                   className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all ${tripType === 'one-way' ? 'bg-amber-500 text-white shadow-lg' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}
                 >
@@ -181,7 +176,7 @@ const FlightEstimator: React.FC = () => {
           {!loading && results.length > 0 && (
             <div className="space-y-8 animate-fade-in-up">
               <div className="flex items-center justify-between border-b border-slate-100 pb-6">
-                <h3 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">Time2Fly Estimates</h3>
+                <h3 className="text-2xl font-black text-slate-900 tracking-tighter uppercase">Time2Fly Estimates</h3>
                 <span className="text-xs font-bold text-slate-400 uppercase bg-slate-100 px-4 py-1 rounded-full">Results based on live search</span>
               </div>
               <div className="grid grid-cols-1 gap-6">
@@ -190,12 +185,12 @@ const FlightEstimator: React.FC = () => {
                     <div className="flex items-center space-x-6">
                       <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300"><Plane size={32} /></div>
                       <div>
-                        <h4 className="text-2xl font-black text-slate-900 uppercase tracking-tight">{res.airline}</h4>
+                        <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight">{res.airline}</h4>
                         <p className="text-slate-500 font-bold text-sm uppercase tracking-widest">{res.type} • Economy Class</p>
                       </div>
                     </div>
                     <div className="text-center md:text-right">
-                      <span className="text-amber-500 font-black text-4xl tracking-tighter">${res.price.toLocaleString()}</span>
+                      <span className="text-amber-500 font-black text-3xl tracking-tighter">${res.price.toLocaleString()}</span>
                       <p className="text-slate-400 text-xs font-bold uppercase tracking-widest italic">+ $100 Service Fee Included</p>
                     </div>
                     <button className="bg-amber-500 hover:bg-slate-950 text-white font-black px-10 py-4 rounded-2xl transition-all shadow-lg hover:shadow-amber-500/20 uppercase tracking-widest text-xs flex items-center group">

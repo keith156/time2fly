@@ -67,15 +67,15 @@ const AdminDashboard: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
           <div className="flex items-center space-x-4">
-            <div className="p-3 bg-amber-500 rounded-2xl text-white shadow-lg">
-              <PackageIcon size={24} />
+            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden p-2 border border-slate-100">
+              <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <h1 className="text-3xl font-black uppercase tracking-tighter">Dashboard</h1>
               <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Content Management</p>
             </div>
           </div>
-          <button 
+          <button
             onClick={handleLogout}
             className="flex items-center space-x-2 bg-slate-900 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-bold transition-all text-sm uppercase tracking-widest"
           >
@@ -86,14 +86,14 @@ const AdminDashboard: React.FC = () => {
 
         {/* Tabs */}
         <div className="flex space-x-4 mb-10 bg-white p-2 rounded-2xl shadow-sm border border-slate-100 max-w-md">
-          <button 
+          <button
             onClick={() => setActiveTab('packages')}
             className={`flex-1 flex items-center justify-center space-x-2 py-3 rounded-xl font-black uppercase tracking-widest text-xs transition-all ${activeTab === 'packages' ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20' : 'text-slate-400 hover:bg-slate-50'}`}
           >
             <PackageIcon size={16} />
             <span>Packages</span>
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('blogs')}
             className={`flex-1 flex items-center justify-center space-x-2 py-3 rounded-xl font-black uppercase tracking-widest text-xs transition-all ${activeTab === 'blogs' ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20' : 'text-slate-400 hover:bg-slate-50'}`}
           >
@@ -103,7 +103,7 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Action Button */}
-        <button 
+        <button
           onClick={() => activeTab === 'packages' ? setEditingPackage({}) : setEditingBlog({})}
           className="mb-8 flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all hover:-translate-y-1 active:scale-95"
         >
@@ -123,15 +123,15 @@ const AdminDashboard: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Destination Name</label>
-                    <input type="text" value={editingPackage.destination || ''} onChange={e => setEditingPackage({...editingPackage, destination: e.target.value})} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Paris, France" required />
+                    <input type="text" value={editingPackage.destination || ''} onChange={e => setEditingPackage({ ...editingPackage, destination: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Paris, France" required />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Price ($)</label>
-                    <input type="number" value={editingPackage.price || ''} onChange={e => setEditingPackage({...editingPackage, price: Number(e.target.value)})} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. 1200" required />
+                    <input type="number" value={editingPackage.price || ''} onChange={e => setEditingPackage({ ...editingPackage, price: Number(e.target.value) })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. 1200" required />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Duration</label>
-                    <input type="text" value={editingPackage.duration || ''} onChange={e => setEditingPackage({...editingPackage, duration: e.target.value})} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. 7 Days" required />
+                    <input type="text" value={editingPackage.duration || ''} onChange={e => setEditingPackage({ ...editingPackage, duration: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. 7 Days" required />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Image Upload</label>
@@ -139,7 +139,7 @@ const AdminDashboard: React.FC = () => {
                       {editingPackage.image ? (
                         <div className="relative h-32 w-full">
                           <img src={editingPackage.image} className="h-full w-full object-cover rounded-xl" />
-                          <button type="button" onClick={() => setEditingPackage({...editingPackage, image: ''})} className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full"><X size={14} /></button>
+                          <button type="button" onClick={() => setEditingPackage({ ...editingPackage, image: '' })} className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full"><X size={14} /></button>
                         </div>
                       ) : (
                         <div className="py-4">
@@ -153,11 +153,11 @@ const AdminDashboard: React.FC = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Description</label>
-                  <textarea rows={3} value={editingPackage.description || ''} onChange={e => setEditingPackage({...editingPackage, description: e.target.value})} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Short catchphrase..." required></textarea>
+                  <textarea rows={3} value={editingPackage.description || ''} onChange={e => setEditingPackage({ ...editingPackage, description: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Short catchphrase..." required></textarea>
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Detailed Itinerary</label>
-                  <textarea rows={6} value={editingPackage.itinerary || ''} onChange={e => setEditingPackage({...editingPackage, itinerary: e.target.value})} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Day 1: Arrival... Day 2: Tour..."></textarea>
+                  <textarea rows={6} value={editingPackage.itinerary || ''} onChange={e => setEditingPackage({ ...editingPackage, itinerary: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Day 1: Arrival... Day 2: Tour..."></textarea>
                 </div>
                 <div className="flex gap-4 pt-4">
                   <button type="submit" className="flex-1 bg-amber-500 hover:bg-slate-900 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest">Save Package</button>
@@ -180,17 +180,17 @@ const AdminDashboard: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Blog Title</label>
-                    <input type="text" value={editingBlog.title || ''} onChange={e => setEditingBlog({...editingBlog, title: e.target.value})} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" required />
+                    <input type="text" value={editingBlog.title || ''} onChange={e => setEditingBlog({ ...editingBlog, title: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" required />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Category</label>
-                    <input type="text" value={editingBlog.category || ''} onChange={e => setEditingBlog({...editingBlog, category: e.target.value})} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Travel Tips" required />
+                    <input type="text" value={editingBlog.category || ''} onChange={e => setEditingBlog({ ...editingBlog, category: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Travel Tips" required />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Writer / Author Name</label>
                     <div className="relative">
                       <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                      <input type="text" value={editingBlog.author || ''} onChange={e => setEditingBlog({...editingBlog, author: e.target.value})} className="w-full pl-12 pr-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. John Doe" />
+                      <input type="text" value={editingBlog.author || ''} onChange={e => setEditingBlog({ ...editingBlog, author: e.target.value })} className="w-full pl-12 pr-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. John Doe" />
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -199,7 +199,7 @@ const AdminDashboard: React.FC = () => {
                       {editingBlog.image ? (
                         <div className="relative h-24 w-full">
                           <img src={editingBlog.image} className="h-full w-full object-cover rounded-xl" />
-                          <button type="button" onClick={() => setEditingBlog({...editingBlog, image: ''})} className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full shadow-lg"><X size={14} /></button>
+                          <button type="button" onClick={() => setEditingBlog({ ...editingBlog, image: '' })} className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full shadow-lg"><X size={14} /></button>
                         </div>
                       ) : (
                         <div>
@@ -213,11 +213,11 @@ const AdminDashboard: React.FC = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Short Excerpt</label>
-                  <input type="text" value={editingBlog.excerpt || ''} onChange={e => setEditingBlog({...editingBlog, excerpt: e.target.value})} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" required />
+                  <input type="text" value={editingBlog.excerpt || ''} onChange={e => setEditingBlog({ ...editingBlog, excerpt: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" required />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Full Content</label>
-                  <textarea rows={10} value={editingBlog.content || ''} onChange={e => setEditingBlog({...editingBlog, content: e.target.value})} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Write your blog post here..." required></textarea>
+                  <textarea rows={10} value={editingBlog.content || ''} onChange={e => setEditingBlog({ ...editingBlog, content: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Write your blog post here..." required></textarea>
                 </div>
                 <div className="flex gap-4 pt-4">
                   <button type="submit" className="flex-1 bg-amber-500 hover:bg-slate-900 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest">Publish Post</button>
@@ -251,8 +251,8 @@ const AdminDashboard: React.FC = () => {
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
-                        <button onClick={() => setEditingPackage(pkg)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18}/></button>
-                        <button onClick={() => deletePackage(pkg.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18}/></button>
+                        <button onClick={() => setEditingPackage(pkg)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
+                        <button onClick={() => deletePackage(pkg.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>
                   </tr>
@@ -267,8 +267,8 @@ const AdminDashboard: React.FC = () => {
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
-                        <button onClick={() => setEditingBlog(blog)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18}/></button>
-                        <button onClick={() => deleteBlog(blog.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18}/></button>
+                        <button onClick={() => setEditingBlog(blog)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
+                        <button onClick={() => deleteBlog(blog.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>
                   </tr>

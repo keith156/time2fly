@@ -13,11 +13,11 @@ const SectionTitle: React.FC<SectionTitleProps> = ({ subtitle, title, descriptio
   return (
     <div className={`mb-16 ${centered ? 'text-center' : ''}`}>
       <span className="text-amber-500 font-black tracking-[0.3em] uppercase text-[10px] mb-5 block">{subtitle}</span>
-      <h2 className={`text-4xl md:text-7xl font-black mb-8 tracking-tighter uppercase leading-[0.95] ${light ? 'text-white' : 'text-slate-900'}`}>
+      <h2 className={`text-3xl md:text-6xl font-black mb-8 tracking-tighter uppercase leading-[0.95] ${light ? 'text-white' : 'text-slate-900'}`}>
         {title}
       </h2>
       {description && (
-        <p className={`text-lg font-medium max-w-2xl ${centered ? 'mx-auto' : ''} ${light ? 'text-slate-300' : 'text-slate-600'}`}>
+        <p className={`text-base font-medium max-w-2xl ${centered ? 'mx-auto' : ''} ${light ? 'text-slate-300' : 'text-slate-600'}`}>
           {description}
         </p>
       )}

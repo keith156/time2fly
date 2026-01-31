@@ -14,16 +14,16 @@ const Contact: React.FC = () => {
       {/* Header */}
       <section className="bg-slate-950 py-32 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <img 
-            src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&q=80&w=2000" 
-            className="w-full h-full object-cover" 
-            alt="Contact background" 
+          <img
+            src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&q=80&w=2000"
+            className="w-full h-full object-cover"
+            alt="Contact background"
           />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <SectionTitle 
-            subtitle="Contact Us" 
-            title="Get in Touch with Time2Fly" 
+          <SectionTitle
+            subtitle="Contact Us"
+            title="Get in Touch with Time2Fly"
             description="Our travel specialists are ready to help you plan your next adventure. Reach out to Time2Fly Tours & Travel Ltd today."
             light={true}
           />
@@ -103,8 +103,8 @@ const Contact: React.FC = () => {
             {/* Form */}
             <div className="lg:col-span-2">
               <div className="bg-slate-50 p-8 md:p-12 rounded-[40px] shadow-sm border border-slate-100">
-                <h3 className="text-3xl font-black mb-8 uppercase tracking-tighter">Inquiry Form</h3>
-                <form className="space-y-8" onSubmit={(e) => {e.preventDefault(); alert('Time2Fly team will contact you shortly!');}}>
+                <h3 className="text-2xl font-black mb-8 uppercase tracking-tighter">Inquiry Form</h3>
+                <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); alert('Time2Fly team will contact you shortly!'); }}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
                       <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Full Name</label>
@@ -130,7 +130,7 @@ const Contact: React.FC = () => {
                         <option>Hotel Booking</option>
                       </select>
                       <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-40">
-                         <MessageSquare size={18} />
+                        <MessageSquare size={18} />
                       </div>
                     </div>
                   </div>
@@ -151,9 +151,9 @@ const Contact: React.FC = () => {
       {/* Map Placeholder */}
       <section className="h-96 w-full relative">
         <div className="absolute inset-0 bg-slate-200 overflow-hidden cursor-pointer" onClick={() => window.open(mapsUrl, '_blank')}>
-          <img 
-            src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=2000" 
-            className="w-full h-full object-cover grayscale opacity-50" 
+          <img
+            src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=2000"
+            className="w-full h-full object-cover grayscale opacity-50"
             alt="Map location placeholder"
           />
           <div className="absolute inset-0 flex items-center justify-center">
