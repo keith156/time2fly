@@ -111,14 +111,32 @@ const Home: React.FC = () => {
   return (
     <div className="overflow-hidden">
       {/* Redesigned Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-[#002244]">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#002244]/80 via-[#002244]/40 to-[#002244] z-10"></div>
-          <img
-            src="https://images.unsplash.com/photo-1518107616385-ad30892d294a?auto=format&fit=crop&q=80&w=2000"
-            className="w-full h-full object-cover opacity-50"
-            alt="Adventure Awaits"
-          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/20 z-10"></div>
+          <video
+            ref={(el) => {
+              if (el) {
+                // Only set initial time if it hasn't been set to avoid resetting on re-renders
+                if (el.currentTime < 16) {
+                  el.currentTime = 16;
+                }
+              }
+            }}
+            onTimeUpdate={(e) => {
+              const video = e.currentTarget;
+              if (video.currentTime >= 32) {
+                video.currentTime = 16;
+              }
+            }}
+            autoPlay
+            muted
+            playsInline
+            className="w-full h-full object-cover scale-105"
+          >
+            <source src="/assets/hero-video.mp4" type="video/mp4" />
+          </video>
         </div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center">
