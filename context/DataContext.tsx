@@ -35,26 +35,25 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const fetchInitialData = async () => {
     try {
       setLoading(true);
-      
-      // Fetch Packages
-      const { data: pkgData, error: pkgError } = await supabase
-        .from('packages')
-        .select('*')
-        .order('created_at', { ascending: false });
-      
-      if (pkgError) throw pkgError;
-      
-      // Fetch Blogs
-      const { data: blogData, error: blogError } = await supabase
-        .from('blogs')
-        .select('*')
-        .order('created_at', { ascending: false });
-        
-      if (blogError) throw blogError;
+
+      // Fetch Packages and Blogs in parallel
+      const [pkgResult, blogResult] = await Promise.all([
+        supabase
+          .from('packages')
+          .select('*')
+          .order('created_at', { ascending: false }),
+        supabase
+          .from('blogs')
+          .select('*')
+          .order('created_at', { ascending: false })
+      ]);
+
+      if (pkgResult.error) throw pkgResult.error;
+      if (blogResult.error) throw blogResult.error;
 
       // Only use INITIAL data if Supabase is empty
-      setPackages(pkgData && pkgData.length > 0 ? pkgData : INITIAL_PACKAGES);
-      setBlogs(blogData && blogData.length > 0 ? blogData : INITIAL_BLOGS);
+      setPackages(pkgResult.data && pkgResult.data.length > 0 ? pkgResult.data : INITIAL_PACKAGES);
+      setBlogs(blogResult.data && blogResult.data.length > 0 ? blogResult.data : INITIAL_BLOGS);
 
     } catch (err) {
       console.error('Supabase fetch error:', err);
@@ -123,10 +122,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <DataContext.Provider value={{ 
+    <DataContext.Provider value={{
       packages, blogs, loading,
       addPackage, updatePackage, deletePackage,
-      addBlog, updateBlog, deleteBlog 
+      addBlog, updateBlog, deleteBlog
     }}>
       {children}
     </DataContext.Provider>

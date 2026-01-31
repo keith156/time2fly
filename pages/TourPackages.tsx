@@ -5,7 +5,7 @@ import { Package } from '../types.ts';
 import { Link } from 'react-router-dom';
 
 const TourPackages: React.FC = () => {
-  const { packages } = useData();
+  const { packages, loading } = useData();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
 
@@ -16,9 +16,20 @@ const TourPackages: React.FC = () => {
     }
   }, [selectedPackage]);
 
-  const filteredPackages = packages.filter(pkg => 
+  const filteredPackages = packages.filter(pkg =>
     pkg.destination.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (loading) {
+    return (
+      <div className="pt-24 min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-400 font-black uppercase tracking-widest text-xs">Loading Destinations...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (selectedPackage) {
     return (
@@ -26,15 +37,15 @@ const TourPackages: React.FC = () => {
         <article className="animate-fade-in-up">
           {/* Hero Section */}
           <div className="relative h-[65vh] min-h-[500px] w-full overflow-hidden">
-            <img 
-              src={selectedPackage.image} 
-              alt={selectedPackage.destination} 
+            <img
+              src={selectedPackage.image}
+              alt={selectedPackage.destination}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
             <div className="absolute inset-0 flex items-center justify-center p-6">
               <div className="max-w-4xl w-full text-center">
-                <button 
+                <button
                   onClick={() => setSelectedPackage(null)}
                   className="mb-8 inline-flex items-center text-amber-400 font-black uppercase tracking-widest text-xs hover:text-white transition-colors group"
                 >
@@ -46,7 +57,7 @@ const TourPackages: React.FC = () => {
                     <Star key={i} size={18} fill={i < Math.floor(selectedPackage.rating) ? "#f59e0b" : "none"} className={i < Math.floor(selectedPackage.rating) ? "text-amber-500" : "text-white/30"} />
                   ))}
                 </div>
-                <h1 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none mb-6">
+                <h1 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-6">
                   {selectedPackage.destination}
                 </h1>
                 <div className="flex flex-wrap items-center justify-center gap-8 text-white/90 text-sm font-black uppercase tracking-widest">
@@ -72,7 +83,7 @@ const TourPackages: React.FC = () => {
                     {selectedPackage.description}
                   </p>
                   <div className="prose prose-slate prose-xl max-w-none">
-                    <div className="text-slate-700 leading-relaxed font-medium space-y-8 text-xl whitespace-pre-wrap bg-slate-50 p-10 rounded-[40px] border border-slate-100 shadow-sm">
+                    <div className="text-slate-700 leading-relaxed font-medium space-y-8 text-lg whitespace-pre-wrap bg-slate-50 p-10 rounded-[40px] border border-slate-100 shadow-sm">
                       <h3 className="text-slate-900 font-black uppercase tracking-widest text-sm mb-4">Detailed Itinerary</h3>
                       {selectedPackage.itinerary || `
                         Day 1: Arrival & Welcome Dinner
@@ -126,11 +137,11 @@ const TourPackages: React.FC = () => {
                   <div className="mb-8">
                     <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-1">Starting From</p>
                     <div className="flex items-baseline">
-                      <span className="text-6xl font-black text-white tracking-tighter">${selectedPackage.price}</span>
+                      <span className="text-5xl font-black text-white tracking-tighter">${selectedPackage.price}</span>
                       <span className="text-slate-400 font-bold text-sm ml-2">/ Guest</span>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-6 mb-10">
                     <div className="flex items-center justify-between pb-4 border-b border-white/10">
                       <span className="text-slate-400 font-bold uppercase tracking-widest text-xs">Duration</span>
@@ -146,8 +157,8 @@ const TourPackages: React.FC = () => {
                     </div>
                   </div>
 
-                  <Link 
-                    to="/contact" 
+                  <Link
+                    to="/contact"
                     className="block w-full text-center bg-amber-500 hover:bg-white hover:text-slate-950 text-white py-6 rounded-2xl font-black transition-all shadow-xl hover:shadow-amber-500/20 uppercase tracking-widest mb-6"
                   >
                     Confirm Booking
@@ -175,9 +186,9 @@ const TourPackages: React.FC = () => {
           <h1 className="text-5xl md:text-7xl font-black text-white mb-8 uppercase tracking-tighter leading-none">Curated Journeys</h1>
           <div className="relative max-w-2xl mx-auto group">
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-amber-500 transition-colors" size={24} />
-            <input 
-              type="text" 
-              placeholder="Search your next horizon..." 
+            <input
+              type="text"
+              placeholder="Search your next horizon..."
               className="w-full pl-16 pr-8 py-6 rounded-[32px] bg-white/10 backdrop-blur-md border border-white/20 text-white text-lg focus:outline-none focus:ring-4 focus:ring-amber-500/20 shadow-2xl transition-all placeholder:text-white/40"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -190,7 +201,7 @@ const TourPackages: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {filteredPackages.map((pkg) => (
             <div key={pkg.id} className="bg-white rounded-[48px] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 group flex flex-col h-full">
-              <div 
+              <div
                 className="relative h-80 overflow-hidden cursor-pointer"
                 onClick={() => setSelectedPackage(pkg)}
               >
@@ -203,9 +214,9 @@ const TourPackages: React.FC = () => {
                   {pkg.rating}
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
-                   <span className="text-white font-black uppercase tracking-widest text-xs flex items-center">
-                     View Experience <ArrowLeft size={14} className="ml-2 rotate-180" />
-                   </span>
+                  <span className="text-white font-black uppercase tracking-widest text-xs flex items-center">
+                    View Experience <ArrowLeft size={14} className="ml-2 rotate-180" />
+                  </span>
                 </div>
               </div>
               <div className="p-10 flex-grow flex flex-col">
@@ -213,8 +224,8 @@ const TourPackages: React.FC = () => {
                   <MapPin size={14} className="mr-2" />
                   Exclusive Selection
                 </div>
-                <h3 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tighter leading-none">{pkg.destination}</h3>
-                <p className="text-slate-500 mb-8 line-clamp-2 font-medium text-lg leading-relaxed flex-grow">
+                <h3 className="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tighter leading-none">{pkg.destination}</h3>
+                <p className="text-slate-500 mb-8 line-clamp-2 font-medium text-base leading-relaxed flex-grow">
                   {pkg.description}
                 </p>
                 <div className="flex flex-col gap-6 mt-auto pt-8 border-t border-slate-50">
@@ -223,7 +234,7 @@ const TourPackages: React.FC = () => {
                       <span className="text-[10px] text-slate-400 block uppercase font-black tracking-[0.2em] mb-1">Package Price</span>
                       <span className="text-4xl font-black text-slate-900 tracking-tighter">${pkg.price}</span>
                     </div>
-                    <button 
+                    <button
                       onClick={() => setSelectedPackage(pkg)}
                       className="text-amber-600 font-black text-[10px] uppercase tracking-widest hover:text-slate-950 transition-colors border-b-2 border-amber-500/30 pb-1"
                     >
@@ -240,7 +251,7 @@ const TourPackages: React.FC = () => {
           {filteredPackages.length === 0 && (
             <div className="col-span-full text-center py-20 bg-white rounded-[40px] border border-dashed border-slate-200">
               <p className="text-slate-400 text-2xl font-black uppercase tracking-tighter mb-4">No horizons found</p>
-              <button 
+              <button
                 onClick={() => setSearchTerm('')}
                 className="text-amber-500 font-bold uppercase tracking-widest text-xs hover:text-slate-900 transition-colors"
               >

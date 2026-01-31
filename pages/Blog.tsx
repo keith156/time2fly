@@ -5,7 +5,7 @@ import { useData } from '../context/DataContext';
 import { BlogPost } from '../types';
 
 const Blog: React.FC = () => {
-  const { blogs } = useData();
+  const { blogs, loading } = useData();
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [readingProgress, setReadingProgress] = useState(0);
 
@@ -13,33 +13,44 @@ const Blog: React.FC = () => {
   useEffect(() => {
     if (selectedPost) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      
+
       const updateProgress = () => {
         const scrolled = window.scrollY;
         const height = document.documentElement.scrollHeight - window.innerHeight;
         setReadingProgress((scrolled / height) * 100);
       };
-      
+
       window.addEventListener('scroll', updateProgress);
       return () => window.removeEventListener('scroll', updateProgress);
     }
   }, [selectedPost]);
 
+  if (loading) {
+    return (
+      <div className="pt-24 min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-400 font-black uppercase tracking-widest text-xs">Opening Journal...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (selectedPost) {
     return (
       <div className="pt-20 bg-white min-h-screen">
         {/* Reading Progress Bar */}
-        <div 
-          className="fixed top-0 left-0 h-1.5 bg-amber-500 z-[60] transition-all duration-300" 
+        <div
+          className="fixed top-0 left-0 h-1.5 bg-amber-500 z-[60] transition-all duration-300"
           style={{ width: `${readingProgress}%` }}
         />
 
         <article className="animate-fade-in-up">
           {/* Immersive Detail Hero */}
           <div className="relative h-[80vh] w-full overflow-hidden">
-            <img 
-              src={selectedPost.image} 
-              alt={selectedPost.title} 
+            <img
+              src={selectedPost.image}
+              alt={selectedPost.title}
               className="w-full h-full object-cover transition-transform duration-[10000ms] ease-linear scale-110"
               style={{ transform: 'scale(1)' }}
               onLoad={(e) => (e.currentTarget.style.transform = 'scale(1.2)')}
@@ -47,7 +58,7 @@ const Blog: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
             <div className="absolute inset-0 flex items-end justify-center pb-24 px-6">
               <div className="max-w-4xl w-full text-center">
-                <button 
+                <button
                   onClick={() => setSelectedPost(null)}
                   className="mb-8 inline-flex items-center text-white/70 font-black uppercase tracking-widest text-[10px] hover:text-amber-400 transition-colors group bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/10"
                 >
@@ -59,7 +70,7 @@ const Blog: React.FC = () => {
                   <span className="text-amber-500 text-xs font-black uppercase tracking-[0.3em]">{selectedPost.category}</span>
                   <span className="h-[2px] w-8 bg-amber-500"></span>
                 </div>
-                <h1 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-10 drop-shadow-2xl">
+                <h1 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-10 drop-shadow-2xl">
                   {selectedPost.title}
                 </h1>
                 <div className="flex flex-wrap items-center justify-center gap-10 text-white/60 text-[10px] font-black uppercase tracking-[0.2em]">
@@ -76,8 +87,8 @@ const Blog: React.FC = () => {
               {/* Floating Meta Sidebar */}
               <div className="lg:col-span-1 hidden lg:block">
                 <div className="sticky top-32 flex flex-col space-y-8 items-center">
-                  <button className="p-4 bg-slate-50 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-2xl transition-all"><Share2 size={20}/></button>
-                  <button className="p-4 bg-slate-50 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-2xl transition-all"><Bookmark size={20}/></button>
+                  <button className="p-4 bg-slate-50 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-2xl transition-all"><Share2 size={20} /></button>
+                  <button className="p-4 bg-slate-50 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-2xl transition-all"><Bookmark size={20} /></button>
                   <div className="h-20 w-[1px] bg-slate-100"></div>
                   <span className="rotate-90 whitespace-nowrap text-[10px] font-black text-slate-300 uppercase tracking-[0.3em]">Scroll Down</span>
                 </div>
@@ -86,11 +97,11 @@ const Blog: React.FC = () => {
               {/* Main Content Area */}
               <div className="lg:col-span-8 lg:col-start-2">
                 <div className="prose prose-slate prose-2xl max-w-none">
-                  <p className="text-slate-900 font-bold text-3xl md:text-4xl mb-16 leading-tight italic">
+                  <p className="text-slate-900 font-bold text-2xl md:text-3xl mb-16 leading-tight italic">
                     "{selectedPost.excerpt}"
                   </p>
-                  
-                  <div className="text-slate-700 leading-relaxed font-medium space-y-10 text-xl md:text-2xl whitespace-pre-wrap">
+
+                  <div className="text-slate-700 leading-relaxed font-medium space-y-10 text-lg md:text-xl whitespace-pre-wrap">
                     {selectedPost.content || `
                       Traveling the world isn't just about seeing new places; it's about shifting your perspective. At Time2Fly, we believe every journey should be as unique as the traveler embarking on it.
 
@@ -106,7 +117,7 @@ const Blog: React.FC = () => {
                     <img src={selectedPost.image} className="w-full h-full object-cover grayscale" />
                   </div>
                   <div className="relative z-10">
-                    <h3 className="text-white text-3xl font-black uppercase tracking-tighter mb-4">Inspired by this story?</h3>
+                    <h3 className="text-white text-2xl font-black uppercase tracking-tighter mb-4">Inspired by this story?</h3>
                     <p className="text-slate-400 font-medium mb-10 max-w-md mx-auto italic">Explore our custom packages to experience this destination for yourself.</p>
                     <button className="bg-amber-500 hover:bg-white hover:text-slate-950 text-white font-black px-12 py-5 rounded-full transition-all uppercase tracking-widest text-xs">Book the Journey</button>
                   </div>
@@ -143,10 +154,10 @@ const Blog: React.FC = () => {
       {/* Mesmerizing Hero Section */}
       <section className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-slate-950">
         <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1491557345352-5929e343d421?auto=format&fit=crop&q=80&w=2000" 
-            className="w-full h-full object-cover opacity-30" 
-            alt="Background" 
+          <img
+            src="https://images.unsplash.com/photo-1491557345352-5929e343d421?auto=format&fit=crop&q=80&w=2000"
+            className="w-full h-full object-cover opacity-30"
+            alt="Background"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/0 via-slate-950/80 to-white"></div>
         </div>
@@ -154,7 +165,7 @@ const Blog: React.FC = () => {
           <span className="inline-block px-6 py-2 bg-amber-500 text-white rounded-full text-[10px] font-black uppercase tracking-[0.4em] mb-10 shadow-2xl animate-fade-in-up">
             Venture Stories
           </span>
-          <h1 className="text-6xl md:text-9xl font-black text-white mb-6 tracking-tighter uppercase leading-[0.8] animate-fade-in-up">
+          <h1 className="text-5xl md:text-8xl font-black text-white mb-6 tracking-tighter uppercase leading-[0.8] animate-fade-in-up">
             THE TRAVEL <br /><span className="text-amber-500">JOURNAL</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed italic animate-fade-in-up">
@@ -167,11 +178,11 @@ const Blog: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 -mt-24 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogs.map((post, idx) => (
-            <article 
-              key={post.id} 
+            <article
+              key={post.id}
               className={`bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-4 border border-slate-100 group flex flex-col h-full ${idx === 0 ? 'md:col-span-2 lg:col-span-2 md:flex-row' : ''}`}
             >
-              <div 
+              <div
                 className={`relative overflow-hidden cursor-pointer ${idx === 0 ? 'md:w-[50%] h-[400px] md:h-auto' : 'h-[320px]'}`}
                 onClick={() => setSelectedPost(post)}
               >
@@ -182,20 +193,20 @@ const Blog: React.FC = () => {
                   </span>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
-                   <div className="flex items-center text-white text-[10px] font-black uppercase tracking-widest">
-                     Explore Story <ChevronRight size={14} className="ml-1" />
-                   </div>
+                  <div className="flex items-center text-white text-[10px] font-black uppercase tracking-widest">
+                    Explore Story <ChevronRight size={14} className="ml-1" />
+                  </div>
                 </div>
               </div>
-              
+
               <div className={`p-10 flex flex-col justify-between ${idx === 0 ? 'md:w-[50%]' : 'flex-grow'}`}>
                 <div>
                   <div className="flex items-center space-x-4 mb-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                     <span className="flex items-center"><Calendar size={14} className="mr-1.5 text-amber-500" /> {post.date}</span>
                     <span className="flex items-center"><User size={14} className="mr-1.5 text-amber-500" /> {post.author.split(' ')[0]}</span>
                   </div>
-                  <h2 
-                    className={`font-black text-slate-900 mb-6 hover:text-amber-500 transition-colors cursor-pointer leading-none uppercase tracking-tighter ${idx === 0 ? 'text-3xl md:text-5xl' : 'text-3xl'}`}
+                  <h2
+                    className={`font-black text-slate-900 mb-6 hover:text-amber-500 transition-colors cursor-pointer leading-none uppercase tracking-tighter ${idx === 0 ? 'text-2xl md:text-4xl' : 'text-2xl'}`}
                     onClick={() => setSelectedPost(post)}
                   >
                     {post.title}
@@ -205,7 +216,7 @@ const Blog: React.FC = () => {
                   </p>
                 </div>
                 <div className="pt-8 border-t border-slate-50 flex items-center justify-between">
-                  <button 
+                  <button
                     onClick={() => setSelectedPost(post)}
                     className="flex items-center text-slate-950 font-black uppercase tracking-widest text-[10px] group-hover:text-amber-500 transition-colors"
                   >
@@ -223,8 +234,8 @@ const Blog: React.FC = () => {
 
         {blogs.length === 0 && (
           <div className="text-center py-40">
-             <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-200"><Hash size={40} /></div>
-             <p className="text-slate-400 text-2xl font-black uppercase tracking-widest">Awaiting new stories...</p>
+            <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-200"><Hash size={40} /></div>
+            <p className="text-slate-400 text-2xl font-black uppercase tracking-widest">Awaiting new stories...</p>
           </div>
         )}
       </div>
@@ -232,7 +243,7 @@ const Blog: React.FC = () => {
       {/* Magazine Footer Info */}
       <section className="mt-32 border-t border-slate-100 py-24 text-center">
         <div className="max-w-2xl mx-auto px-4">
-          <h4 className="text-4xl font-black text-slate-900 uppercase tracking-tighter mb-6">Stay in the Loop</h4>
+          <h4 className="text-3xl font-black text-slate-900 uppercase tracking-tighter mb-6">Stay in the Loop</h4>
           <p className="text-slate-500 font-medium mb-10 leading-relaxed">Subscribe to our monthly digest for exclusive travel deals, local Ugandan insights, and global adventure guides.</p>
           <div className="flex flex-col sm:flex-row gap-4">
             <input type="email" placeholder="Your email address" className="flex-grow px-8 py-5 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-amber-500 font-medium" />
