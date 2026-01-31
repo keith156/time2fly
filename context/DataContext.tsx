@@ -30,10 +30,51 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     fetchInitialData();
+
+    // Subscribe to Real-time changes
+    const packagesChannel = supabase
+      .channel('public:packages')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'packages' }, (payload) => {
+        console.log('Real-time package update:', payload.eventType);
+        if (payload.eventType === 'INSERT') {
+          setPackages(prev => {
+            if (prev.some(p => p.id === payload.new.id)) return prev;
+            return [payload.new as Package, ...prev];
+          });
+        } else if (payload.eventType === 'UPDATE') {
+          setPackages(prev => prev.map(p => p.id === payload.new.id ? (payload.new as Package) : p));
+        } else if (payload.eventType === 'DELETE') {
+          setPackages(prev => prev.filter(p => p.id !== payload.old.id));
+        }
+      })
+      .subscribe();
+
+    const blogsChannel = supabase
+      .channel('public:blogs')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'blogs' }, (payload) => {
+        console.log('Real-time blog update:', payload.eventType);
+        if (payload.eventType === 'INSERT') {
+          setBlogs(prev => {
+            if (prev.some(b => b.id === payload.new.id)) return prev;
+            return [payload.new as BlogPost, ...prev];
+          });
+        } else if (payload.eventType === 'UPDATE') {
+          setBlogs(prev => prev.map(b => b.id === payload.new.id ? (payload.new as BlogPost) : b));
+        } else if (payload.eventType === 'DELETE') {
+          setBlogs(prev => prev.filter(b => b.id !== payload.old.id));
+        }
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(packagesChannel);
+      supabase.removeChannel(blogsChannel);
+    };
   }, []);
 
   const fetchInitialData = async () => {
     try {
+      console.log('Syncing starting data from Supabase...');
       setLoading(true);
 
       // Fetch Packages and Blogs in parallel
@@ -51,9 +92,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (pkgResult.error) throw pkgResult.error;
       if (blogResult.error) throw blogResult.error;
 
-      // Only use INITIAL data if Supabase is empty
-      setPackages(pkgResult.data && pkgResult.data.length > 0 ? pkgResult.data : INITIAL_PACKAGES);
-      setBlogs(blogResult.data && blogResult.data.length > 0 ? blogResult.data : INITIAL_BLOGS);
+      // Only overwrite if we actually got data from Supabase
+      if (pkgResult.data && pkgResult.data.length > 0) {
+        setPackages(pkgResult.data);
+      }
+      if (blogResult.data && blogResult.data.length > 0) {
+        setBlogs(blogResult.data);
+      }
+      console.log('Initial sync complete.');
 
     } catch (err) {
       console.error('Supabase fetch error:', err);
