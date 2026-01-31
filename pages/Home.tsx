@@ -116,23 +116,11 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent z-10"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/20 z-10"></div>
           <video
-            ref={(el) => {
-              if (el) {
-                // Only set initial time if it hasn't been set to avoid resetting on re-renders
-                if (el.currentTime < 16) {
-                  el.currentTime = 16;
-                }
-              }
-            }}
-            onTimeUpdate={(e) => {
-              const video = e.currentTarget;
-              if (video.currentTime >= 32) {
-                video.currentTime = 16;
-              }
-            }}
             autoPlay
+            loop
             muted
             playsInline
+            preload="auto"
             className="w-full h-full object-cover scale-105"
           >
             <source src="/assets/hero-video.mp4" type="video/mp4" />
