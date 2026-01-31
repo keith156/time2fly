@@ -20,17 +20,6 @@ const TourPackages: React.FC = () => {
     pkg.destination.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  if (loading) {
-    return (
-      <div className="pt-24 min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-400 font-black uppercase tracking-widest text-xs">Loading Destinations...</p>
-        </div>
-      </div>
-    );
-  }
-
   if (selectedPackage) {
     return (
       <div className="pt-20 bg-white min-h-screen">
@@ -41,6 +30,7 @@ const TourPackages: React.FC = () => {
               src={selectedPackage.image}
               alt={selectedPackage.destination}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
             <div className="absolute inset-0 flex items-center justify-center p-6">
@@ -179,7 +169,7 @@ const TourPackages: React.FC = () => {
     <div className="pt-24 min-h-screen bg-slate-50">
       <div className="bg-slate-950 py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Background" />
+          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Background" loading="lazy" />
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <span className="text-amber-500 font-black tracking-widest uppercase text-xs mb-4 block">World Expeditions</span>
@@ -205,7 +195,7 @@ const TourPackages: React.FC = () => {
                 className="relative h-80 overflow-hidden cursor-pointer"
                 onClick={() => setSelectedPackage(pkg)}
               >
-                <img src={pkg.image} alt={pkg.destination} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                <img src={pkg.image} alt={pkg.destination} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" loading="lazy" />
                 <div className="absolute top-6 left-6 bg-slate-950/80 backdrop-blur-md px-6 py-2 rounded-full flex items-center text-white font-black text-[10px] uppercase tracking-widest shadow-xl">
                   {pkg.duration}
                 </div>

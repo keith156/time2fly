@@ -24,9 +24,9 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [packages, setPackages] = useState<Package[]>([]);
-  const [blogs, setBlogs] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [packages, setPackages] = useState<Package[]>(INITIAL_PACKAGES);
+  const [blogs, setBlogs] = useState<BlogPost[]>(INITIAL_BLOGS);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchInitialData();

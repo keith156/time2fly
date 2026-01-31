@@ -25,17 +25,6 @@ const Blog: React.FC = () => {
     }
   }, [selectedPost]);
 
-  if (loading) {
-    return (
-      <div className="pt-24 min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-400 font-black uppercase tracking-widest text-xs">Opening Journal...</p>
-        </div>
-      </div>
-    );
-  }
-
   if (selectedPost) {
     return (
       <div className="pt-20 bg-white min-h-screen">
@@ -54,6 +43,7 @@ const Blog: React.FC = () => {
               className="w-full h-full object-cover transition-transform duration-[10000ms] ease-linear scale-110"
               style={{ transform: 'scale(1)' }}
               onLoad={(e) => (e.currentTarget.style.transform = 'scale(1.2)')}
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
             <div className="absolute inset-0 flex items-end justify-center pb-24 px-6">
@@ -114,7 +104,7 @@ const Blog: React.FC = () => {
 
                 <div className="mt-24 p-12 bg-slate-950 rounded-[60px] relative overflow-hidden text-center group">
                   <div className="absolute inset-0 opacity-20 transition-transform duration-[5000ms] group-hover:scale-110">
-                    <img src={selectedPost.image} className="w-full h-full object-cover grayscale" />
+                    <img src={selectedPost.image} className="w-full h-full object-cover grayscale" loading="lazy" />
                   </div>
                   <div className="relative z-10">
                     <h3 className="text-white text-2xl font-black uppercase tracking-tighter mb-4">Inspired by this story?</h3>
@@ -158,6 +148,7 @@ const Blog: React.FC = () => {
             src="https://images.unsplash.com/photo-1491557345352-5929e343d421?auto=format&fit=crop&q=80&w=2000"
             className="w-full h-full object-cover opacity-30"
             alt="Background"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/0 via-slate-950/80 to-white"></div>
         </div>
@@ -186,7 +177,7 @@ const Blog: React.FC = () => {
                 className={`relative overflow-hidden cursor-pointer ${idx === 0 ? 'md:w-[50%] h-[400px] md:h-auto' : 'h-[320px]'}`}
                 onClick={() => setSelectedPost(post)}
               >
-                <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" />
+                <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" loading="lazy" />
                 <div className="absolute top-6 left-6 flex space-x-2">
                   <span className="bg-white/20 backdrop-blur-md text-white border border-white/20 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">
                     {post.category}
