@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
             ))}
             <Link
               to="/packages"
-              className="bg-amber-500 hover:bg-amber-600 text-white px-6 lg:px-8 py-3 rounded-full text-sm font-black transition-all shadow-lg hover:shadow-amber-500/20 active:scale-95 uppercase tracking-wider whitespace-nowrap"
+              className="bg-red-600 hover:bg-amber-500 text-white px-6 lg:px-8 py-3 rounded-full text-sm font-black transition-all shadow-lg hover:shadow-amber-500/20 active:scale-95 uppercase tracking-wider whitespace-nowrap"
             >
               Book Now
             </Link>
