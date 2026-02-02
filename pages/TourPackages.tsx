@@ -231,10 +231,10 @@ const TourPackages: React.FC = () => {
                 <div className="absolute top-6 right-6 flex space-x-2">
                   <button
                     onClick={(e) => handleShare(e, pkg)}
-                    className="bg-white/90 backdrop-blur-md p-2 rounded-2xl text-slate-900 hover:text-amber-600 shadow-xl transition-all"
+                    className="bg-white/90 backdrop-blur-md w-10 h-10 rounded-full text-slate-900 hover:text-amber-600 shadow-xl transition-all flex items-center justify-center"
                     title="Share Package"
                   >
-                    {copyFeedback === pkg.id ? <span className="text-[10px] font-black px-1 uppercase">Copied!</span> : <Share2 size={16} />}
+                    {copyFeedback === pkg.id ? <span className="text-[10px] font-black uppercase">Link</span> : <Share2 size={16} />}
                   </button>
                   <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl flex items-center text-amber-600 font-black text-sm shadow-xl">
                     <Star size={14} fill="#f59e0b" className="mr-1.5" />

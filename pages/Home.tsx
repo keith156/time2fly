@@ -298,10 +298,10 @@ const Home: React.FC = () => {
                   <div className="absolute top-4 right-4 flex space-x-2">
                     <button
                       onClick={(e) => handleShare(e, pkg)}
-                      className="bg-white/90 backdrop-blur-md p-2 rounded-full text-slate-900 hover:text-red-600 shadow-xl transition-all"
+                      className="bg-white/90 backdrop-blur-md w-10 h-10 rounded-full text-slate-900 hover:text-red-600 shadow-xl transition-all flex items-center justify-center"
                       title="Share Package"
                     >
-                      {copyFeedback === pkg.id ? <span className="text-[10px] font-black px-1 uppercase tracking-tight">Copied!</span> : <Share2 size={16} />}
+                      {copyFeedback === pkg.id ? <span className="text-[10px] font-black uppercase tracking-tight">Link</span> : <Share2 size={16} />}
                     </button>
                     <div className="bg-red-600 text-white px-4 py-2 rounded-full font-black text-sm shadow-lg">${pkg.price}</div>
                   </div>
