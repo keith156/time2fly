@@ -9,21 +9,21 @@ export const SERVICES: Service[] = [
     title: 'Reservations',
     description: 'Local, regional, and international flight and accommodation bookings tailored to your itinerary.',
     icon: 'Plane',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109c05c?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1540553016722-983e48a2cd10?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '2',
     title: '24h Emergency Reservations',
     description: 'Round-the-clock support for urgent travel changes and last-minute bookings wherever you are.',
     icon: 'Clock',
-    image: 'https://images.unsplash.com/photo-1454165833767-027eeea160d7?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '3',
     title: 'Adventure Sports',
     description: 'Thrilling water rafting and bungee jumping experiences at world-famous locations.',
     icon: 'Zap',
-    image: 'https://images.unsplash.com/photo-1530866495547-084978a3dc24?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/adventure-sports.jpg'
   },
   {
     id: '4',

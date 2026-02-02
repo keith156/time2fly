@@ -116,14 +116,16 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent z-10"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/20 z-10"></div>
           <video
-            autoPlay
-            loop
-            muted
-            playsInline
+            autoPlay={true}
+            loop={true}
+            muted={true}
+            playsInline={true}
             preload="auto"
+            key="/assets/bg-video.mp4"
             className="w-full h-full object-cover scale-105"
+            onEnded={(e) => e.currentTarget.play()}
           >
-            <source src="/assets/hero-video.mp4" type="video/mp4" />
+            <source src="/assets/bg-video.mp4" type="video/mp4" />
           </video>
         </div>
 

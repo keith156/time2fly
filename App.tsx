@@ -16,7 +16,6 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,8 +24,6 @@ const Navbar: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const useSolidStyle = !isHomePage || isScrolled;
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -38,64 +35,73 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${useSolidStyle ? 'glass-nav py-2 shadow-md border-b border-slate-200' : 'bg-transparent py-3'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          <Link to="/" className="flex items-center">
-            <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
+    <nav className="fixed w-full z-50 px-4 pt-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="bg-[#001a33] rounded-full px-6 py-2 flex items-center justify-between shadow-2xl border border-white/10">
+          <Link to="/" className="flex items-center space-x-3 shrink-0 group">
+            <img
+              src="/assets/logo.png"
+              alt="Time2Fly Logo"
+              className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform duration-300 group-hover:scale-110"
+            />
+            <span className="text-white font-black text-xl md:text-2xl tracking-tight">Time2Fly</span>
           </Link>
 
-          <div className="hidden md:flex space-x-8 items-center">
+          <div className="hidden lg:flex items-center space-x-6 ml-auto mr-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-xs lg:text-sm font-black transition-colors hover:text-red-500 ${location.pathname === link.path
-                  ? 'text-red-500 underline underline-offset-4 decoration-2'
-                  : useSolidStyle ? 'text-blue-900' : 'text-white/90'
-                  }`}
+                className="text-white font-medium text-sm hover:text-white/80 transition-colors whitespace-nowrap"
               >
                 {link.name}
               </Link>
             ))}
-            <Link
-              to="/packages"
-              className="bg-red-600 hover:bg-amber-500 text-white px-6 lg:px-8 py-3 rounded-full text-sm font-black transition-all shadow-lg hover:shadow-amber-500/20 active:scale-95 uppercase tracking-wider whitespace-nowrap"
-            >
-              Book Now
-            </Link>
+          </div>
+
+          <div className="hidden md:flex items-center bg-white rounded-full p-1 pl-4 shrink-0 w-48 lg:w-64">
+            <input
+              type="text"
+              placeholder="Search"
+              className="bg-transparent border-none focus:outline-none text-slate-400 text-sm w-full outline-none"
+            />
+            <button className="bg-[#001a33] text-white p-2 rounded-full hover:bg-slate-900 transition-colors">
+              <span className="flex items-center justify-center">
+                <Menu size={16} />
+              </span>
+            </button>
           </div>
 
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`${useSolidStyle ? 'text-slate-900' : 'text-white'} p-2`}
+              className="text-white p-2"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
       </div>
 
-      <div className={`md:hidden absolute top-full left-0 w-full bg-white shadow-xl transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[500px]' : 'max-h-0'}`}>
-        <div className="px-4 py-6 space-y-4">
+      {/* Mobile Menu */}
+      <div className={`md:hidden absolute top-full left-0 w-full px-4 pt-2 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
+        <div className="bg-[#001a33] rounded-3xl p-6 shadow-2xl border border-white/10 space-y-4">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              className="block text-lg font-bold text-slate-700 hover:text-amber-600 border-b border-slate-100 pb-2"
+              className="block text-white font-medium text-lg border-b border-white/10 pb-2"
             >
               {link.name}
             </Link>
           ))}
-          <Link
-            to="/packages"
-            onClick={() => setIsOpen(false)}
-            className="block w-full text-center bg-amber-500 text-white py-4 rounded-xl font-black uppercase tracking-widest"
-          >
-            Book Now
-          </Link>
+          <div className="pt-4">
+            <div className="bg-white rounded-full p-1 pl-4 flex items-center">
+              <input type="text" placeholder="Search" className="bg-transparent border-none focus:outline-none text-slate-400 text-sm w-full outline-none" />
+              <button className="bg-[#001a33] text-white p-2 rounded-full"><Menu size={16} /></button>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
