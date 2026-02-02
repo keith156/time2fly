@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, ArrowLeft, Calendar, MapPin, Clock, CreditCard, Send, Zap, Ship, GraduationCap, Car, Briefcase, ChevronDown, CheckCircle2, Compass } from 'lucide-react';
+import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, ArrowLeft, Calendar, MapPin, Clock, CreditCard, Send, Zap, Ship, GraduationCap, Car, Briefcase, ChevronDown, CheckCircle2, Compass, Share2 } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle.tsx';
 import { SERVICES, TESTIMONIALS } from '../constants.tsx';
 import { useData } from '../context/DataContext.tsx';
@@ -23,11 +23,22 @@ const Home: React.FC = () => {
     return () => clearInterval(serviceTimer);
   }, []);
 
+  const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
+
   useEffect(() => {
     if (selectedPackage) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [selectedPackage]);
+
+  const handleShare = (e: React.MouseEvent, pkg: Package) => {
+    e.stopPropagation();
+    const shareUrl = `${window.location.origin}${window.location.pathname}#/packages?pkg=${pkg.id}`;
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      setCopyFeedback(pkg.id);
+      setTimeout(() => setCopyFeedback(null), 2000);
+    });
+  };
 
   const extendedTestimonials = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
 
@@ -56,6 +67,13 @@ const Home: React.FC = () => {
                   <span className="flex items-center bg-white/10 px-6 py-2 rounded-full backdrop-blur-md border border-white/20">
                     <MapPin size={18} className="mr-2 text-amber-500" /> Premium Tour
                   </span>
+                  <button
+                    onClick={(e) => handleShare(e, selectedPackage)}
+                    className="flex items-center bg-white/10 hover:bg-white/20 px-6 py-2 rounded-full backdrop-blur-md border border-white/20 transition-all text-amber-400 font-bold"
+                  >
+                    <Share2 size={18} className="mr-2" />
+                    {copyFeedback === selectedPackage.id ? 'LINK COPIED!' : 'SHARE EXPERIENCE'}
+                  </button>
                 </div>
               </div>
             </div>
@@ -277,7 +295,16 @@ const Home: React.FC = () => {
                 <div className="relative h-72 overflow-hidden">
                   <img src={pkg.image} alt={pkg.destination} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute top-4 left-4 bg-[#002244]/80 backdrop-blur-md text-white px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest">{pkg.duration}</div>
-                  <div className="absolute top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-full font-black text-sm shadow-lg">${pkg.price}</div>
+                  <div className="absolute top-4 right-4 flex space-x-2">
+                    <button
+                      onClick={(e) => handleShare(e, pkg)}
+                      className="bg-white/90 backdrop-blur-md p-2 rounded-full text-slate-900 hover:text-red-600 shadow-xl transition-all"
+                      title="Share Package"
+                    >
+                      {copyFeedback === pkg.id ? <span className="text-[10px] font-black px-1 uppercase tracking-tight">Copied!</span> : <Share2 size={16} />}
+                    </button>
+                    <div className="bg-red-600 text-white px-4 py-2 rounded-full font-black text-sm shadow-lg">${pkg.price}</div>
+                  </div>
                 </div>
                 <div className="p-8 flex-grow flex flex-col">
                   <div className="flex items-center space-x-1 mb-2">

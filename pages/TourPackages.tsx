@@ -2,12 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Star, Clock, MapPin, Search, ArrowLeft, Calendar, Share2, Shield, CreditCard, Send } from 'lucide-react';
 import { useData } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const TourPackages: React.FC = () => {
   const { packages, loading } = useData();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
+
+  const location = useLocation();
+  const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
+
+  // Handle deep linking from share URL
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const pkgId = params.get('pkg');
+    if (pkgId && packages.length > 0) {
+      const pkg = packages.find(p => p.id === pkgId);
+      if (pkg) setSelectedPackage(pkg);
+    }
+  }, [location.search, packages]);
 
   // Scroll to top when a package is selected
   useEffect(() => {
@@ -15,6 +28,15 @@ const TourPackages: React.FC = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [selectedPackage]);
+
+  const handleShare = (e: React.MouseEvent, pkg: Package) => {
+    e.stopPropagation();
+    const shareUrl = `${window.location.origin}${window.location.pathname}#/packages?pkg=${pkg.id}`;
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      setCopyFeedback(pkg.id);
+      setTimeout(() => setCopyFeedback(null), 2000);
+    });
+  };
 
   const filteredPackages = packages.filter(pkg =>
     pkg.destination.toLowerCase().includes(searchTerm.toLowerCase())
@@ -57,6 +79,13 @@ const TourPackages: React.FC = () => {
                   <span className="flex items-center bg-white/10 px-6 py-2 rounded-full backdrop-blur-md border border-white/20">
                     <MapPin size={18} className="mr-2 text-amber-500" /> Premium Tour
                   </span>
+                  <button
+                    onClick={(e) => handleShare(e, selectedPackage)}
+                    className="flex items-center bg-white/10 hover:bg-white/20 px-6 py-2 rounded-full backdrop-blur-md border border-white/20 transition-all text-amber-400 font-bold"
+                  >
+                    <Share2 size={18} className="mr-2" />
+                    {copyFeedback === selectedPackage.id ? 'LINK COPIED!' : 'SHARE EXPERIENCE'}
+                  </button>
                 </div>
               </div>
             </div>
@@ -199,9 +228,18 @@ const TourPackages: React.FC = () => {
                 <div className="absolute top-6 left-6 bg-slate-950/80 backdrop-blur-md px-6 py-2 rounded-full flex items-center text-white font-black text-[10px] uppercase tracking-widest shadow-xl">
                   {pkg.duration}
                 </div>
-                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl flex items-center text-amber-600 font-black text-sm shadow-xl">
-                  <Star size={14} fill="#f59e0b" className="mr-1.5" />
-                  {pkg.rating}
+                <div className="absolute top-6 right-6 flex space-x-2">
+                  <button
+                    onClick={(e) => handleShare(e, pkg)}
+                    className="bg-white/90 backdrop-blur-md p-2 rounded-2xl text-slate-900 hover:text-amber-600 shadow-xl transition-all"
+                    title="Share Package"
+                  >
+                    {copyFeedback === pkg.id ? <span className="text-[10px] font-black px-1 uppercase">Copied!</span> : <Share2 size={16} />}
+                  </button>
+                  <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl flex items-center text-amber-600 font-black text-sm shadow-xl">
+                    <Star size={14} fill="#f59e0b" className="mr-1.5" />
+                    {pkg.rating}
+                  </div>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
                   <span className="text-white font-black uppercase tracking-widest text-xs flex items-center">
