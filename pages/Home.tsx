@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, ArrowLeft, Calendar, MapPin, Clock, CreditCard, Send, Zap, Ship, GraduationCap, Car, Briefcase, ChevronDown, CheckCircle2, Compass, Share2 } from 'lucide-react';
+import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, ArrowLeft, Calendar, MapPin, Clock, CreditCard, Send, Zap, Ship, GraduationCap, Car, Briefcase, ChevronDown, CheckCircle2, Compass, Share2, Search, DollarSign } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle.tsx';
-import { SERVICES, TESTIMONIALS } from '../constants.tsx';
+import { SERVICES, TESTIMONIALS, PARTNERS } from '../constants.tsx';
 import { useData } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
 
@@ -41,6 +41,11 @@ const Home: React.FC = () => {
   };
 
   const extendedTestimonials = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
+  const extendedPartners = [...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS];
+
+  const openGoogleFlights = () => {
+    window.open('https://www.google.com/travel/flights', '_blank');
+  };
 
   if (selectedPackage) {
     return (
@@ -147,15 +152,15 @@ const Home: React.FC = () => {
           </video>
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center">
+        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-32 md:pt-40">
           <div className="animate-fade-in-up space-y-8">
             <h1 className="text-6xl md:text-[66px] font-black text-white leading-none tracking-tighter uppercase drop-shadow-2xl mb-8">
               IT'S <br />
-              <span className="text-red-600">TIME2FLY</span>
+              <span className="text-blue-600">TIME2FLY</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-100 font-light max-w-2xl mx-auto leading-relaxed uppercase tracking-widest opacity-90">
-              Explore the world, <span className="border-b-2 border-red-600 pb-1 font-medium">Travelling is knowledge</span>
+              Explore the world, <span className="font-medium">Travelling is knowledge</span>
             </p>
 
             <div className="flex flex-col items-center gap-8 pt-10">
@@ -180,27 +185,30 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Services/About Hybrid Feature */}
-      <section className="py-24 bg-white relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-[#002244]/5 p-10 rounded-[40px] border border-[#002244]/10 hover:shadow-2xl transition-all group">
-              <Globe className="text-red-600 mb-4 group-hover:text-amber-500 transition-colors" size={24} />
-              <h4 className="text-[#002244] font-black text-sm uppercase tracking-tight mb-2">95+ Global Destinies</h4>
-              <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Across 5 Continents</p>
-            </div>
 
-            <div className="bg-[#002244]/5 p-10 rounded-[40px] border border-[#002244]/10 hover:shadow-2xl transition-all group">
-              <Compass className="text-[#002244] mb-4 group-hover:text-amber-500 transition-colors" size={24} />
-              <h4 className="text-[#002244] font-black text-sm uppercase tracking-tight mb-2">Expert Guides</h4>
-              <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Local Knowledge</p>
-            </div>
+      {/* Partners Section (Replaces Hybrid Feature) */}
+      <section className="py-20 bg-white overflow-hidden border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
+          <span className="text-red-600 font-black tracking-[0.3em] uppercase text-[10px] mb-4 block">Official Partners</span>
+          <h2 className="text-3xl font-black text-navy-900 uppercase tracking-tighter">Our Global Network</h2>
+        </div>
 
-            <div className="bg-[#002244]/5 p-10 rounded-[40px] border border-[#002244]/10 hover:shadow-2xl transition-all group">
-              <Shield className="text-red-600 mb-4 group-hover:text-amber-500 transition-colors" size={24} />
-              <h4 className="text-[#002244] font-black text-sm uppercase tracking-tight mb-2">Secure Bookings</h4>
-              <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Peace of Mind</p>
-            </div>
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
+            {extendedPartners.map((partner, i) => (
+              <div key={`${partner.name}-${i}`} className="inline-block px-10 md:px-16 h-36 shrink-0">
+                <div className="h-full flex items-center justify-center hover:scale-110 transition-all duration-500">
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-20 md:h-28 max-w-[240px] object-contain drop-shadow-sm"
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -222,14 +230,14 @@ const Home: React.FC = () => {
                     <div className="bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 flex flex-col lg:flex-row h-full lg:h-[480px] group/card">
                       <div className="w-full lg:w-[45%] h-64 lg:h-full overflow-hidden relative">
                         <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover/card:scale-110" />
-                        <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#002244]/40 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-navy-800/40 to-transparent"></div>
                       </div>
 
                       <div className="w-full lg:w-[55%] p-10 lg:p-20 flex flex-col justify-center">
                         <div className="w-20 h-20 bg-slate-50 text-slate-900 group-hover/card:bg-amber-500 group-hover/card:text-white rounded-3xl flex items-center justify-center mb-10 shadow-sm transition-colors duration-300">
                           {Icon && <Icon size={40} />}
                         </div>
-                        <h3 className="text-2xl lg:text-4xl font-black mb-6 text-[#002244] uppercase tracking-tighter leading-none">
+                        <h3 className="text-2xl lg:text-4xl font-black mb-6 text-navy-800 uppercase tracking-tighter leading-none">
                           {service.title}
                         </h3>
                         <p className="text-slate-500 leading-relaxed mb-10 text-base lg:text-lg font-medium max-w-xl">
@@ -238,7 +246,7 @@ const Home: React.FC = () => {
                         <div className="flex flex-wrap gap-6 items-center">
                           <Link
                             to="/services"
-                            className="bg-[#002244] hover:bg-amber-500 text-white font-black px-8 py-4 rounded-2xl transition-all uppercase tracking-widest text-xs flex items-center shadow-lg"
+                            className="bg-navy-800 hover:bg-amber-500 text-white font-black px-8 py-4 rounded-2xl transition-all uppercase tracking-widest text-xs flex items-center shadow-lg"
                           >
                             Explore Service <ArrowRight size={16} className="ml-2" />
                           </Link>
@@ -294,7 +302,7 @@ const Home: React.FC = () => {
               <div key={pkg.id} className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group flex flex-col h-full">
                 <div className="relative h-72 overflow-hidden">
                   <img src={pkg.image} alt={pkg.destination} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute top-4 left-4 bg-[#002244]/80 backdrop-blur-md text-white px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest">{pkg.duration}</div>
+                  <div className="absolute top-4 left-4 bg-navy-800/80 backdrop-blur-md text-white px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest">{pkg.duration}</div>
                   <div className="absolute top-4 right-4 flex space-x-2">
                     <button
                       onClick={(e) => handleShare(e, pkg)}
@@ -311,11 +319,11 @@ const Home: React.FC = () => {
                     {[...Array(5)].map((_, i) => (<Star key={i} size={16} fill={i < Math.floor(pkg.rating) ? "#f59e0b" : "none"} className={i < Math.floor(pkg.rating) ? "text-amber-500" : "text-slate-300"} />))}
                     <span className="text-slate-400 text-sm ml-2 font-bold">{pkg.rating}</span>
                   </div>
-                  <h3 className="text-xl font-black mb-3 text-[#002244] uppercase tracking-tight">{pkg.destination}</h3>
+                  <h3 className="text-xl font-black mb-3 text-navy-800 uppercase tracking-tight">{pkg.destination}</h3>
                   <p className="text-slate-600 mb-6 line-clamp-2 font-medium flex-grow">{pkg.description}</p>
                   <div className="flex flex-col gap-3">
                     <button onClick={() => setSelectedPackage(pkg)} className="w-full text-center bg-slate-100 hover:bg-slate-200 text-slate-900 py-3 rounded-xl font-bold transition-all uppercase tracking-widest text-[10px]">View Itinerary</button>
-                    <Link to="/contact" className="w-full block text-center bg-[#002244] hover:bg-amber-500 text-white py-4 rounded-xl font-black transition-all uppercase tracking-widest text-xs shadow-xl">Book Now</Link>
+                    <Link to="/contact" className="w-full block text-center bg-navy-800 hover:bg-amber-500 text-white py-4 rounded-xl font-black transition-all uppercase tracking-widest text-xs shadow-xl">Book Now</Link>
                   </div>
                 </div>
               </div>
@@ -325,17 +333,17 @@ const Home: React.FC = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-32 bg-[#001a33] relative overflow-hidden border-t-4 border-red-600">
+      <section className="py-32 bg-navy-900 relative overflow-hidden border-t-4 border-red-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
           <SectionTitle subtitle="Our Reputation" title="Voices of Our Travellers" light={true} />
         </div>
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#001a33] to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#001a33] to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-navy-900 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-navy-900 to-transparent z-10 pointer-events-none"></div>
           <div className="flex whitespace-nowrap animate-marquee">
             {extendedTestimonials.map((t, i) => (
               <div key={`${t.id}-${i}`} className="inline-block px-4 w-[400px] shrink-0">
-                <div className="bg-[#002244]/50 backdrop-blur-md border border-[#002244] p-8 rounded-[40px] hover:border-amber-500 transition-all duration-300 group h-full flex flex-col shadow-2xl">
+                <div className="bg-navy-800/50 backdrop-blur-md border border-navy-800 p-8 rounded-[40px] hover:border-amber-500 transition-all duration-300 group h-full flex flex-col shadow-2xl">
                   <div className="flex justify-between items-start mb-6">
                     <div className="flex space-x-1">
                       {[...Array(5)].map((_, starIdx) => (<Star key={starIdx} size={16} fill={starIdx < t.rating ? "#f59e0b" : "none"} className={starIdx < t.rating ? "text-amber-500" : "text-slate-700"} />))}
@@ -353,6 +361,7 @@ const Home: React.FC = () => {
           <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-xs">Trusted by thousands of explorers since 2018</p>
         </div>
       </section>
+
     </div>
   );
 };

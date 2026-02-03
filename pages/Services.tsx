@@ -32,7 +32,7 @@ const Services: React.FC = () => {
   return (
     <div className="pt-24 min-h-screen bg-white">
       {/* Header */}
-      <section className="bg-[#001a33] text-white py-32 relative overflow-hidden border-b-4 border-red-600">
+      <section className="bg-navy-900 text-white py-32 relative overflow-hidden border-b-4 border-red-600">
         <div className="absolute inset-0 opacity-10">
           <img src="https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Clouds" />
         </div>
@@ -53,7 +53,7 @@ const Services: React.FC = () => {
             {SERVICES.map((s, idx) => {
               const Icon = IconMap[s.icon];
               return (
-                <div key={s.id} className="bg-slate-50 p-10 rounded-[48px] hover:bg-[#002244] group transition-all duration-500 border border-slate-100 hover:-translate-y-4 shadow-sm hover:shadow-2xl">
+                <div key={s.id} className="bg-slate-50 p-10 rounded-[48px] hover:bg-navy-800 group transition-all duration-500 border border-slate-100 hover:-translate-y-4 shadow-sm hover:shadow-2xl">
                   <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 text-red-600 group-hover:text-amber-500 shadow-sm">
                     {Icon && <Icon size={32} />}
                   </div>

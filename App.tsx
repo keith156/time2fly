@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
-import { Menu, X, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Plane, Lock, Music2 } from 'lucide-react';
+import { Menu, X, ArrowRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -15,7 +16,31 @@ import { DataProvider } from './context/DataContext';
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMuted, setIsMuted] = useState(false); // Auto-play music on load
+  const [searchQuery, setSearchQuery] = useState('');
+  const audioRef = React.useRef<HTMLAudioElement>(null);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSearch = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/packages?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.4;
+      if (!isMuted) {
+        audioRef.current.play().catch(err => console.log("Audio play blocked:", err));
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isMuted]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,69 +62,92 @@ const Navbar: React.FC = () => {
   return (
     <nav className="fixed w-full z-50 px-4 pt-4">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-[#001a33] rounded-full px-6 py-2 flex items-center justify-between shadow-2xl border border-white/10">
+        <div className="bg-red-600 rounded-full px-6 py-2 flex items-center justify-between shadow-2xl border border-white/10">
           <Link to="/" className="flex items-center space-x-3 shrink-0 group">
             <img
               src="/assets/logo.png"
               alt="Time2Fly Logo"
-              className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform duration-300 group-hover:scale-110"
+              className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform duration-300 group-hover:scale-125 scale-125 md:scale-150 origin-left"
             />
             <span className="text-white font-black text-xl md:text-2xl tracking-tight">Time2Fly</span>
           </Link>
 
-          <div className="hidden lg:flex items-center space-x-6 ml-auto mr-8">
+          <div className="flex items-center space-x-4 ml-auto">
+            <audio ref={audioRef} src="/assets/WhatsApp Audio 2026-02-02 at 17.04.32.mpeg" loop />
+            <button
+              onClick={() => setIsMuted(!isMuted)}
+              className="w-10 h-10 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center transition-all backdrop-blur-md border border-white/10"
+              title={isMuted ? "Unmute Music" : "Mute Music"}
+            >
+              {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} className="animate-pulse" />}
+            </button>
+            <div className="hidden lg:flex items-center space-x-6 mr-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className="text-white font-medium text-sm hover:text-white/80 transition-colors whitespace-nowrap"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            <form onSubmit={handleSearch} className="hidden md:flex items-center bg-white rounded-full p-1 pl-4 shrink-0 w-48 lg:w-64">
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="bg-transparent border-none focus:outline-none text-slate-400 text-sm w-full outline-none"
+              />
+              <button
+                type="submit"
+                className="bg-navy-800 text-white p-2 rounded-full hover:bg-black transition-colors"
+              >
+                <span className="flex items-center justify-center">
+                  <Search size={16} />
+                </span>
+              </button>
+            </form>
+
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-white p-2"
+              >
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className={`md:hidden absolute top-full left-0 w-full px-4 pt-2 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
+          <div className="bg-red-600 rounded-3xl p-6 shadow-2xl border border-white/10 space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-white font-medium text-sm hover:text-white/80 transition-colors whitespace-nowrap"
+                onClick={() => setIsOpen(false)}
+                className="block text-white font-medium text-lg border-b border-white/10 pb-2"
               >
                 {link.name}
               </Link>
             ))}
-          </div>
-
-          <div className="hidden md:flex items-center bg-white rounded-full p-1 pl-4 shrink-0 w-48 lg:w-64">
-            <input
-              type="text"
-              placeholder="Search"
-              className="bg-transparent border-none focus:outline-none text-slate-400 text-sm w-full outline-none"
-            />
-            <button className="bg-[#001a33] text-white p-2 rounded-full hover:bg-slate-900 transition-colors">
-              <span className="flex items-center justify-center">
-                <Menu size={16} />
-              </span>
-            </button>
-          </div>
-
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-white p-2"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <div className={`md:hidden absolute top-full left-0 w-full px-4 pt-2 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-        <div className="bg-[#001a33] rounded-3xl p-6 shadow-2xl border border-white/10 space-y-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              onClick={() => setIsOpen(false)}
-              className="block text-white font-medium text-lg border-b border-white/10 pb-2"
-            >
-              {link.name}
-            </Link>
-          ))}
-          <div className="pt-4">
-            <div className="bg-white rounded-full p-1 pl-4 flex items-center">
-              <input type="text" placeholder="Search" className="bg-transparent border-none focus:outline-none text-slate-400 text-sm w-full outline-none" />
-              <button className="bg-[#001a33] text-white p-2 rounded-full"><Menu size={16} /></button>
+            <div className="pt-4">
+              <form onSubmit={handleSearch} className="bg-white rounded-full p-1 pl-4 flex items-center">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="bg-transparent border-none focus:outline-none text-slate-400 text-sm w-full outline-none"
+                />
+                <button type="submit" className="bg-navy-800 text-white p-2 rounded-full">
+                  <Search size={16} />
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -110,7 +158,7 @@ const Navbar: React.FC = () => {
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#001a33] text-white pt-20 pb-10 border-t-4 border-red-600">
+    <footer className="bg-navy-800 text-white pt-20 pb-10 border-t-4 border-red-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
@@ -227,6 +275,18 @@ const App: React.FC = () => {
             </Routes>
           </main>
           <Footer />
+          <a
+            href="https://wa.me/256783084521"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed bottom-8 right-8 z-[60] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 group"
+            title="Chat on WhatsApp"
+          >
+            <div className="flex items-center space-x-2">
+              <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 font-bold text-sm whitespace-nowrap">Chat with us</span>
+              <MessageCircle size={28} />
+            </div>
+          </a>
         </div>
       </HashRouter>
     </DataProvider>

@@ -5,7 +5,7 @@ import SectionTitle from '../components/SectionTitle.tsx';
 
 const Contact: React.FC = () => {
   const phoneNumber = "+256 759 243 331";
-  const whatsAppNumber = "+256 702 171 521";
+  const whatsAppNumber = "+256 783 084 521";
   const whatsAppUrl = `https://wa.me/${whatsAppNumber.replace(/\D/g, '')}`;
   const mapsUrl = "https://share.google/Cfq91VFGLqOJaaU9y";
 
@@ -42,7 +42,7 @@ const Contact: React.FC = () => {
                 <div>
                   <h4 className="text-lg font-bold mb-1">Email Us</h4>
                   <p className="text-slate-500 mb-2">Bookings & Support</p>
-                  <p className="text-blue-700 font-bold">time2fly06@gmail.com</p>
+                  <p className="text-blue-600 font-bold">time2fly06@gmail.com</p>
                 </div>
               </div>
 
@@ -53,7 +53,7 @@ const Contact: React.FC = () => {
                 <div>
                   <h4 className="text-lg font-bold mb-1">Call Us</h4>
                   <p className="text-slate-500 mb-2">Mon - Sat: 8am - 7pm</p>
-                  <div className="flex flex-col text-blue-700 font-bold">
+                  <div className="flex flex-col text-blue-600 font-bold">
                     <span>+256 759 243 331</span>
                     <span>+256 757 717 302</span>
                     <span>+256 783 084 521</span>
@@ -81,7 +81,7 @@ const Contact: React.FC = () => {
                 <div>
                   <h4 className="text-lg font-bold mb-1">Our Location</h4>
                   <p className="text-slate-500 mb-2">Visit our Office</p>
-                  <p className="text-blue-700 font-bold">Kampala, Uganda</p>
+                  <p className="text-blue-600 font-bold">Kampala, Uganda</p>
                   <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center text-amber-600 font-black text-xs uppercase tracking-widest hover:text-slate-900 transition-colors">
                     Open in Google Maps <ExternalLink size={14} className="ml-2" />
                   </a>

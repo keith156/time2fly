@@ -12,13 +12,20 @@ const TourPackages: React.FC = () => {
   const location = useLocation();
   const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
 
-  // Handle deep linking from share URL
+  // Handle deep linking from share URL and search parameter
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const pkgId = params.get('pkg');
+    const searchParam = params.get('search');
+
     if (pkgId && packages.length > 0) {
       const pkg = packages.find(p => p.id === pkgId);
       if (pkg) setSelectedPackage(pkg);
+    }
+
+    if (searchParam) {
+      setSearchTerm(searchParam);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [location.search, packages]);
 

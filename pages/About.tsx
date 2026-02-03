@@ -69,9 +69,9 @@ const About: React.FC = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center pt-24 overflow-hidden bg-[#002244]">
+      <section className="relative min-h-[90vh] flex items-center pt-24 overflow-hidden bg-navy-800">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#002244] via-[#002244]/80 to-transparent z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-800 via-navy-800/80 to-transparent z-10"></div>
           <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover opacity-40 scale-105" alt="Travel Hero" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
@@ -137,16 +137,16 @@ const About: React.FC = () => {
               <div className="w-20 h-20 bg-red-600 text-white rounded-3xl flex items-center justify-center mb-10 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
                 <Target size={40} />
               </div>
-              <h3 className="text-3xl font-black text-[#002244] mb-8 uppercase tracking-tighter">Our Vision</h3>
+              <h3 className="text-3xl font-black text-navy-800 mb-8 uppercase tracking-tighter">Our Vision</h3>
               <p className="text-slate-600 text-lg leading-relaxed font-medium">
                 To be the most innovative travel management company throughout the region, while creating a culture of service excellence and distinction.
               </p>
             </div>
             <div className="bg-white p-16 rounded-[60px] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
-              <div className="w-20 h-20 bg-[#002244] text-white rounded-3xl flex items-center justify-center mb-10 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
+              <div className="w-20 h-20 bg-navy-800 text-white rounded-3xl flex items-center justify-center mb-10 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
                 <Award size={40} />
               </div>
-              <h3 className="text-3xl font-black text-[#002244] mb-8 uppercase tracking-tighter">Our Mission</h3>
+              <h3 className="text-3xl font-black text-navy-800 mb-8 uppercase tracking-tighter">Our Mission</h3>
               <p className="text-slate-600 text-lg leading-relaxed font-medium">
                 Our mission is to see that our clients' programmes and schedules are customized to meet their unique travel requirements and ensure a hassle-free, well organized, enjoyable & comfortable travels wherever, and anywhere in the world.
               </p>
@@ -173,7 +173,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-[#002244] relative overflow-hidden text-center">
+      <section className="py-24 bg-navy-800 relative overflow-hidden text-center">
         <div className="absolute inset-0 opacity-20 z-0">
           <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="CTA" />
         </div>

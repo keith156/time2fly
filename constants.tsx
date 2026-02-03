@@ -184,9 +184,18 @@ export const TESTIMONIALS: Testimonial[] = [
 ];
 
 export const PARTNERS = [
-  { name: 'SkyHigh Airways', logo: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' },
-  { name: 'Elite Hotels', logo: 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png' },
-  { name: 'Global Cruises', logo: 'https://cdn-icons-png.flaticon.com/512/3135/3135783.png' },
-  { name: 'Adventure Co', logo: 'https://cdn-icons-png.flaticon.com/512/3135/3135805.png' },
-  { name: 'SafeTravel Ins', logo: 'https://cdn-icons-png.flaticon.com/512/3135/3135810.png' }
+  { name: 'Emirates', logo: 'https://www.logo.wine/a/logo/Emirates_(airline)/Emirates_(airline)-Logo.wine.svg' },
+  { name: 'Air France', logo: 'https://www.logo.wine/a/logo/Air_France/Air_France-Logo.wine.svg' },
+  { name: 'Flydubai', logo: 'https://www.logo.wine/a/logo/Flydubai/Flydubai-Logo.wine.svg' },
+  { name: 'EgyptAir', logo: 'https://www.logo.wine/a/logo/EgyptAir/EgyptAir-Logo.wine.svg' },
+  { name: 'Jambojet', logo: 'https://airhex.com/images/airline-logos/jambojet.png' },
+  { name: 'Qatar Airways', logo: 'https://www.logo.wine/a/logo/Qatar_Airways/Qatar_Airways-Logo.wine.svg' },
+  { name: 'Turkish Airlines', logo: 'https://www.logo.wine/a/logo/Turkish_Airlines/Turkish_Airlines-Logo.wine.svg' },
+  { name: 'Ethiopian Airlines', logo: 'https://www.logo.wine/a/logo/Ethiopian_Airlines/Ethiopian_Airlines-Logo.wine.svg' },
+  { name: 'Kenya Airways', logo: 'https://www.logo.wine/a/logo/Kenya_Airways/Kenya_Airways-Logo.wine.svg' },
+  { name: 'Uganda Airlines', logo: '/assets/uganda-airlines.png' },
+  { name: 'KLM Royal Dutch', logo: 'https://www.logo.wine/a/logo/KLM/KLM-Logo.wine.svg' },
+  { name: 'Lufthansa', logo: 'https://www.logo.wine/a/logo/Lufthansa/Lufthansa-Logo.wine.svg' },
+  { name: 'British Airways', logo: 'https://www.logo.wine/a/logo/British_Airways/British_Airways-Logo.wine.svg' },
+  { name: 'Brussels Airlines', logo: 'https://www.logo.wine/a/logo/Brussels_Airlines/Brussels_Airlines-Logo.wine.svg' }
 ];
