@@ -144,6 +144,7 @@ const Home: React.FC = () => {
             muted={true}
             playsInline={true}
             preload="auto"
+            poster="/assets/hero-fallback.png"
             key="/assets/bg-video.mp4"
             className="w-full h-full object-cover scale-105"
             onEnded={(e) => e.currentTarget.play()}
