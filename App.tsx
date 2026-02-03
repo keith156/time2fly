@@ -159,17 +159,14 @@ const Navbar: React.FC = () => {
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-navy-800 text-white pt-20 pb-10 border-t-4 border-red-600">
+    <footer className="bg-navy-800 text-white py-8 border-t-4 border-red-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center mb-6">
-              <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain" />
+            <div className="flex items-center mb-4">
+              <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain" />
             </div>
-            <p className="text-slate-400 mb-4 leading-relaxed font-medium">
-              Time2Fly Tours & Travel Ltd. Locally owned independent agency registered in Uganda. Established 2018.
-            </p>
-            <p className="text-amber-500 font-black uppercase tracking-widest text-[10px] mb-8 italic">
+            <p className="text-amber-500 font-black uppercase tracking-widest text-[10px] mb-6 italic">
               Explore the world, Travelling is knowledge
             </p>
             <div className="flex space-x-4">
