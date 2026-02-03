@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import { DataProvider } from './context/DataContext';
+import LoadingScreen from './components/LoadingScreen';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -248,6 +249,20 @@ const App: React.FC = () => {
     }, [pathname]);
     return null;
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate initial loading time for assets
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500); // 2.5 seconds loading time
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <DataProvider>
