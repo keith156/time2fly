@@ -161,21 +161,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-navy-800 text-white py-8 border-t-4 border-red-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center mb-4">
-              <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain" />
-            </div>
-            <p className="text-amber-500 font-black uppercase tracking-widest text-[10px] mb-6 italic">
-              Explore the world, Travelling is knowledge
-            </p>
-            <div className="flex space-x-4">
-              <a href="https://www.facebook.com/timetofly.ug/" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-slate-900 rounded-xl hover:bg-blue-600 transition-all hover:-translate-y-1"><Facebook size={18} /></a>
-              <a href="https://www.instagram.com/time2fly06/" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-slate-900 rounded-xl hover:bg-pink-600 transition-all hover:-translate-y-1"><Instagram size={18} /></a>
-              <a href="https://www.tiktok.com/@time2fly06" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-slate-900 rounded-xl hover:bg-slate-700 transition-all hover:-translate-y-1"><Music2 size={18} /></a>
-              <a href="https://ug.linkedin.com/company/time2fly06" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-slate-900 rounded-xl hover:bg-blue-700 transition-all hover:-translate-y-1"><Linkedin size={18} /></a>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-center md:text-left">
 
           <div>
             <h3 className="text-lg font-bold mb-6 text-amber-500 uppercase tracking-widest text-xs">Quick Links</h3>
@@ -221,8 +207,31 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-10 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm font-medium gap-4">
-          <p>© {new Date().getFullYear()} Time2Fly Tours & Travel Ltd. All rights reserved.</p>
+
+
+        {/* Social Media - Centered Row */}
+        <div className="flex justify-center flex-wrap gap-4 mb-8">
+          <a href="https://www.facebook.com/timetofly.ug/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-blue-600 transition-all hover:-translate-y-1 text-white border border-white/10" title="Facebook"><Facebook size={20} /></a>
+          <a href="https://x.com/time2fly06/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="X (Twitter)"><Twitter size={20} /></a>
+          <a href="https://www.instagram.com/time2fly06/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-pink-600 transition-all hover:-translate-y-1 text-white border border-white/10" title="Instagram"><Instagram size={20} /></a>
+          <a href="https://ug.linkedin.com/company/time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-blue-700 transition-all hover:-translate-y-1 text-white border border-white/10" title="LinkedIn"><Linkedin size={20} /></a>
+          <a href="https://medium.com/@time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="Medium">
+            {/* Medium Icon */}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+            </svg>
+          </a>
+          <a href="https://www.tripadvisor.com/Profile/Time2Fly5" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-green-500 transition-all hover:-translate-y-1 text-white border border-white/10" title="TripAdvisor">
+            {/* TripAdvisor Icon */}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-4.32-6.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm8.64 0a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm-4.32 1.5c-1.8 0-3.35-1.1-3.9-2.65h7.8c-.55 1.55-2.1 2.65-3.9 2.65z" />
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="TikTok"><Music2 size={20} /></a>
+        </div>
+
+        <div className="pt-8 border-t border-slate-900 flex flex-col items-center justify-center text-center text-slate-500 text-sm font-medium gap-4">
+          <p>© 2026 Time2Fly Tours & Travel Ltd. All rights reserved.</p>
           <Link to="/login" className="flex items-center space-x-1 hover:text-amber-500 transition-colors">
             <Lock size={14} />
             <span>Admin Login</span>

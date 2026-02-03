@@ -188,24 +188,24 @@ const Home: React.FC = () => {
 
 
       {/* Partners Section (Replaces Hybrid Feature) */}
-      <section className="py-10 bg-white overflow-hidden border-b border-slate-100">
+      <section className="py-16 bg-slate-800 overflow-hidden border-b border-slate-700">
         <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
 
-          <h2 className="text-3xl font-black text-navy-900 uppercase tracking-tighter">Our Global Network</h2>
+          <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Our Global Network</h2>
         </div>
 
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-800 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-800 to-transparent z-10 pointer-events-none"></div>
 
-          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
+          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-4">
             {extendedPartners.map((partner, i) => (
-              <div key={`${partner.name}-${i}`} className="inline-block px-10 md:px-16 h-36 shrink-0">
-                <div className="h-full flex items-center justify-center hover:scale-110 transition-all duration-500">
+              <div key={`${partner.name}-${i}`} className="inline-block px-4 shrink-0">
+                <div className="bg-white rounded-3xl shadow-sm hover:shadow-md border border-slate-200/60 p-6 w-[200px] h-32 flex items-center justify-center hover:scale-105 transition-all duration-300">
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="h-20 md:h-28 max-w-[240px] object-contain drop-shadow-sm"
+                    className="h-full w-full object-contain p-2"
                   />
                 </div>
               </div>
