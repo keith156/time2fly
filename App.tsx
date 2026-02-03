@@ -3,16 +3,16 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { Menu, X, ArrowRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import TourPackages from './pages/TourPackages';
-import Blog from './pages/Blog';
-import Contact from './pages/Contact';
-import Login from './pages/Login';
-import AdminDashboard from './pages/AdminDashboard';
+const Home = React.lazy(() => import('./pages/Home'));
+const About = React.lazy(() => import('./pages/About'));
+const Services = React.lazy(() => import('./pages/Services'));
+const TourPackages = React.lazy(() => import('./pages/TourPackages'));
+const Blog = React.lazy(() => import('./pages/Blog'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+const Login = React.lazy(() => import('./pages/Login'));
+const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
+
 import { DataProvider } from './context/DataContext';
-import LoadingScreen from './components/LoadingScreen';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -250,20 +250,6 @@ const App: React.FC = () => {
     return null;
   };
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Simulate initial loading time for assets
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); // 2.5 seconds loading time
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
   return (
     <DataProvider>
       <HashRouter>
@@ -271,23 +257,29 @@ const App: React.FC = () => {
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/packages" element={<TourPackages />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<Login />} />
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedRoute>
-                    <AdminDashboard />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
+            <React.Suspense fallback={
+              <div className="h-screen flex items-center justify-center bg-white">
+                <div className="w-10 h-10 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            }>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/packages" element={<TourPackages />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/login" element={<Login />} />
+                <Route
+                  path="/admin"
+                  element={
+                    <ProtectedRoute>
+                      <AdminDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+            </React.Suspense>
           </main>
           <Footer />
           <a
