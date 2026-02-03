@@ -134,7 +134,7 @@ const Home: React.FC = () => {
   return (
     <div className="overflow-hidden">
       {/* Redesigned Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent z-10"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/20 z-10"></div>
@@ -144,6 +144,7 @@ const Home: React.FC = () => {
             muted={true}
             playsInline={true}
             preload="auto"
+            poster="/assets/hero-fallback.png"
             key="/assets/bg-video.mp4"
             className="w-full h-full object-cover scale-105"
             onEnded={(e) => e.currentTarget.play()}
@@ -152,7 +153,7 @@ const Home: React.FC = () => {
           </video>
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-32 md:pt-40">
+        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
           <div className="animate-fade-in-up space-y-8">
             <h1 className="text-6xl md:text-[66px] font-black text-white leading-none tracking-tighter uppercase drop-shadow-2xl mb-8">
               IT'S <br />
@@ -187,7 +188,7 @@ const Home: React.FC = () => {
 
 
       {/* Partners Section (Replaces Hybrid Feature) */}
-      <section className="py-20 bg-white overflow-hidden border-b border-slate-100">
+      <section className="py-10 bg-white overflow-hidden border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
           <span className="text-red-600 font-black tracking-[0.3em] uppercase text-[10px] mb-4 block">Official Partners</span>
           <h2 className="text-3xl font-black text-navy-900 uppercase tracking-tighter">Our Global Network</h2>
@@ -214,11 +215,11 @@ const Home: React.FC = () => {
       </section>
 
       {/* Services Slider Section */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-12 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle subtitle="Our Services" title="Innovative Travel Management" description="Explore our diverse range of services, from emergency reservations to adventurous Gorilla tracking." />
 
-          <div className="relative group overflow-hidden py-10">
+          <div className="relative group overflow-hidden py-6">
             <div
               className="flex transition-transform duration-700 ease-in-out"
               style={{ transform: `translateX(-${activeServiceIdx * 100}%)` }}
@@ -229,11 +230,11 @@ const Home: React.FC = () => {
                   <div key={service.id} className="w-full flex-shrink-0 px-4">
                     <div className="bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 flex flex-col lg:flex-row h-full lg:h-[480px] group/card">
                       <div className="w-full lg:w-[45%] h-64 lg:h-full overflow-hidden relative">
-                        <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover/card:scale-110" />
+                        <img src={service.image} alt={service.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-1000 group-hover/card:scale-110" />
                         <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-navy-800/40 to-transparent"></div>
                       </div>
 
-                      <div className="w-full lg:w-[55%] p-10 lg:p-20 flex flex-col justify-center">
+                      <div className="w-full lg:w-[55%] p-6 lg:p-12 flex flex-col justify-center">
                         <div className="w-20 h-20 bg-slate-50 text-slate-900 group-hover/card:bg-amber-500 group-hover/card:text-white rounded-3xl flex items-center justify-center mb-10 shadow-sm transition-colors duration-300">
                           {Icon && <Icon size={40} />}
                         </div>
@@ -291,17 +292,17 @@ const Home: React.FC = () => {
       </section>
 
       {/* Featured Packages */}
-      <section className="py-24 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12">
             <SectionTitle subtitle="Popular Tours" title="Featured Destinations" centered={false} />
-            <Link to="/packages" className="bg-slate-100 hover:bg-amber-500 hover:text-white text-slate-900 px-8 py-4 rounded-full font-black transition-all mb-6 md:mb-12 uppercase tracking-widest text-sm shadow-sm">View All Packages</Link>
+            <Link to="/packages" className="bg-slate-100 hover:bg-amber-500 hover:text-white text-slate-900 px-8 py-4 rounded-full font-black transition-all mb-6 uppercase tracking-widest text-sm shadow-sm">View All Packages</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {packages.slice(0, 3).map((pkg) => (
               <div key={pkg.id} className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group flex flex-col h-full">
                 <div className="relative h-72 overflow-hidden">
-                  <img src={pkg.image} alt={pkg.destination} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <img src={pkg.image} alt={pkg.destination} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute top-4 left-4 bg-navy-800/80 backdrop-blur-md text-white px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest">{pkg.duration}</div>
                   <div className="absolute top-4 right-4 flex space-x-2">
                     <button
@@ -333,8 +334,8 @@ const Home: React.FC = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-32 bg-navy-900 relative overflow-hidden border-t-4 border-red-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
+      <section className="py-16 bg-navy-900 relative overflow-hidden border-t-4 border-red-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center">
           <SectionTitle subtitle="Our Reputation" title="Voices of Our Travellers" light={true} />
         </div>
         <div className="relative">
@@ -357,7 +358,7 @@ const Home: React.FC = () => {
             ))}
           </div>
         </div>
-        <div className="mt-20 text-center">
+        <div className="mt-10 text-center">
           <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-xs">Trusted by thousands of explorers since 2018</p>
         </div>
       </section>
