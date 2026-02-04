@@ -11,6 +11,16 @@ const IconMap: Record<string, any> = {
   Plane, Hotel, Map, Shield, Globe, Landmark, Zap, Ship, GraduationCap, Car, Briefcase, Clock
 };
 
+const AirlineLiverySeparator: React.FC = () => (
+  <div className="w-full bg-white py-12 overflow-hidden flex items-center justify-center">
+    <img
+      src="/assets/office-separator.png"
+      alt="Time2Fly Office Information"
+      className="w-full max-w-7xl h-auto"
+    />
+  </div>
+);
+
 const Home: React.FC = () => {
   const { packages } = useData();
   const [activeServiceIdx, setActiveServiceIdx] = useState(0);
@@ -156,8 +166,8 @@ const Home: React.FC = () => {
         <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
           <div className="animate-fade-in-up space-y-8">
             <h1 className="text-6xl md:text-[66px] font-black text-white leading-none tracking-tighter uppercase drop-shadow-2xl mb-8">
-              IT'S <br />
-              <span className="text-blue-600">TIME2FLY</span>
+              DISCOVER <br />
+              <span className="text-blue-600">MORE</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-100 font-light max-w-2xl mx-auto leading-relaxed uppercase tracking-widest opacity-90">
@@ -188,24 +198,24 @@ const Home: React.FC = () => {
 
 
       {/* Partners Section (Replaces Hybrid Feature) */}
-      <section className="py-16 bg-slate-800 overflow-hidden border-b border-slate-700">
+      <section className="py-16 bg-[#0000ff] overflow-hidden border-b border-blue-700">
         <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
 
           <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Our Global Network</h2>
         </div>
 
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-800 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-800 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0000ff] to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0000ff] to-transparent z-10 pointer-events-none"></div>
 
           <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-4">
             {extendedPartners.map((partner, i) => (
               <div key={`${partner.name}-${i}`} className="inline-block px-4 shrink-0">
-                <div className="bg-white rounded-3xl shadow-sm hover:shadow-md border border-slate-200/60 p-6 w-[200px] h-32 flex items-center justify-center hover:scale-105 transition-all duration-300">
+                <div className="bg-white rounded-3xl shadow-sm hover:shadow-md border border-slate-200/60 p-3 w-[200px] h-32 flex items-center justify-center hover:scale-105 transition-all duration-300">
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="h-full w-full object-contain p-2"
+                    className="h-full w-full object-contain p-1"
                   />
                 </div>
               </div>
@@ -237,7 +247,12 @@ const Home: React.FC = () => {
                     <div className="text-red-600/30 group-hover:text-amber-500/30 transition-colors"><Quote size={32} /></div>
                   </div>
                   <p className="text-slate-100 font-medium italic mb-8 leading-relaxed whitespace-normal text-base">"{t.review}"</p>
-                  <div className="mt-auto pt-6 border-t border-white/10"><h4 className="text-white font-black uppercase tracking-tight text-base">{t.name}</h4></div>
+                  <div className="mt-auto pt-6 border-t border-white/10 flex items-center gap-4">
+                    <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full border-2 border-amber-500 object-cover shadow-lg" />
+                    <div>
+                      <h4 className="text-white font-semibold uppercase tracking-tight text-base">{t.name}</h4>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -247,6 +262,8 @@ const Home: React.FC = () => {
           <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-xs">Trusted by thousands of explorers since 2018</p>
         </div>
       </section>
+
+      <AirlineLiverySeparator />
 
     </div>
   );

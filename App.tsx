@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
-import { Menu, X, ArrowRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 const Home = React.lazy(() => import('./pages/Home'));
 const About = React.lazy(() => import('./pages/About'));
@@ -52,10 +52,11 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Packages', path: '/packages' },
+    { name: 'Destinations', path: '/packages' },
+    { name: 'Special offers', path: '/packages' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -159,55 +160,33 @@ const Navbar: React.FC = () => {
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-navy-800 text-white py-8 border-t-4 border-red-600">
+    <footer className="bg-[#0000ff] text-white py-8 border-t-4 border-red-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-center md:text-left">
-
-          <div>
-            <h3 className="text-lg font-bold mb-6 text-amber-500 uppercase tracking-widest text-xs">Quick Links</h3>
-            <ul className="space-y-4 text-slate-400 font-medium">
-              <li><Link to="/about" className="hover:text-amber-400 transition-colors">About Time2Fly</Link></li>
-              <li><Link to="/services" className="hover:text-amber-400 transition-colors">Our Services</Link></li>
-              <li><Link to="/packages" className="hover:text-amber-400 transition-colors">Tour Packages</Link></li>
-              <li><Link to="/blog" className="hover:text-amber-400 transition-colors">Travel Journal</Link></li>
-              <li><Link to="/contact" className="hover:text-amber-400 transition-colors">Contact Us</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-bold mb-6 text-amber-500 uppercase tracking-widest text-xs">Our Expertise</h3>
-            <ul className="space-y-4 text-slate-400 font-medium">
-              <li className="hover:text-amber-400 cursor-pointer transition-colors">Reservations</li>
-              <li className="hover:text-amber-400 cursor-pointer transition-colors">Wildlife Tracking</li>
-              <li className="hover:text-amber-400 cursor-pointer transition-colors">Educational Tours</li>
-              <li className="hover:text-amber-400 cursor-pointer transition-colors">Visa Assistance</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-bold mb-6 text-amber-500 uppercase tracking-widest text-xs">Reach Us</h3>
-            <ul className="space-y-4 text-slate-400 font-medium">
-              <li className="flex items-center space-x-3">
-                <MapPin size={20} className="text-amber-500 flex-shrink-0" />
-                <span>Kampala, Uganda</span>
-              </li>
-              <li className="flex items-start space-x-3">
-                <Phone size={20} className="text-amber-500 flex-shrink-0 mt-1" />
-                <div className="flex flex-col">
-                  <span>+256 759 243 331</span>
-                  <span>+256 757 717 302</span>
-                  <span>+256 783 084 521</span>
-                </div>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Mail size={20} className="text-amber-500 flex-shrink-0" />
-                <span>time2fly06@gmail.com</span>
-              </li>
-            </ul>
+        <div className="flex flex-col items-center mb-8 px-4 text-center">
+          <h3 className="font-bold mb-6 text-amber-500 uppercase tracking-widest text-xs max-w-2xl leading-relaxed">
+            For inquiries, support, or additional details, our team is happy to assist you. please Get In Touch With Us
+          </h3>
+          <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 text-white font-medium">
+            <div className="flex items-center space-x-3">
+              <MapPin size={18} className="text-amber-500 flex-shrink-0" />
+              <span>Kampala, Uganda</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Phone size={18} className="text-amber-500 flex-shrink-0" />
+              <div className="flex items-center space-x-4">
+                <span>+256 759 243 331</span>
+                <span className="text-white/20 hidden md:block">|</span>
+                <span>+256 757 717 302</span>
+                <span className="text-white/20 hidden md:block">|</span>
+                <span>+256 783 084 521</span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Mail size={18} className="text-amber-500 flex-shrink-0" />
+              <span>t2f.reservations@gmail.com</span>
+            </div>
           </div>
         </div>
-
-
 
         {/* Social Media - Centered Row */}
         <div className="flex justify-center flex-wrap gap-4 mb-8">
@@ -222,10 +201,7 @@ const Footer: React.FC = () => {
             </svg>
           </a>
           <a href="https://www.tripadvisor.com/Profile/Time2Fly5" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-green-500 transition-all hover:-translate-y-1 text-white border border-white/10" title="TripAdvisor">
-            {/* TripAdvisor Icon */}
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-4.32-6.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm8.64 0a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm-4.32 1.5c-1.8 0-3.35-1.1-3.9-2.65h7.8c-.55 1.55-2.1 2.65-3.9 2.65z" />
-            </svg>
+            <img src="/assets/tripadvisor-icon.png" alt="TripAdvisor" className="w-5 h-5 object-contain invert" />
           </a>
           <a href="https://www.tiktok.com/@time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="TikTok"><Music2 size={20} /></a>
         </div>

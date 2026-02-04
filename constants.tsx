@@ -158,28 +158,44 @@ export const BLOG_POSTS: BlogPost[] = [
 
 export const TESTIMONIALS: Testimonial[] = [
   {
-    id: '1',
-    name: 'Sarah Williams',
-    role: 'Adventure Enthusiast',
-    review: 'Our trip to Santorini was perfectly planned. Time2Fly took care of everything from the airport transfer to the best dining recommendations.',
-    avatar: 'https://picsum.photos/seed/sarah/100/100',
+    id: '6',
+    name: 'WANDERA CALEB',
+    role: 'Verified Traveller',
+    review: 'Best Travel Company in Uganda, reach out to them.',
+    avatar: '/assets/avatars/wandera_caleb.png',
+    rating: 5
+  },
+  {
+    id: '7',
+    name: 'NIMUSIIMA ANITA',
+    role: 'Verified Traveller',
+    review: 'Valuable, enjoyable and comfortable',
+    avatar: '/assets/avatars/nimusiima_anita.png',
+    rating: 5
+  },
+  {
+    id: '8',
+    name: 'Keith J',
+    role: 'Safari Adventurer',
+    review: 'Time2Fly made our safari experience unforgettable! Every detail was perfectly organized, and their expertise ensured we saw incredible wildlife safely and comfortably. Highly recommend for anyone wanting a seamless, once-in-a-lifetime adventure!',
+    avatar: '/assets/avatars/keith_j.jpg',
     rating: 5
   },
   {
     id: '2',
-    name: 'David Chen',
-    role: 'Business Traveler',
-    review: 'The best travel agency I have worked with. Their hotel selections are always top-tier and they handle last-minute changes with ease.',
-    avatar: 'https://picsum.photos/seed/david/100/100',
+    name: 'Namaganda Joy',
+    role: 'Global Voyager',
+    review: 'Are trusted tours and travel agency that you can use in preparing your visa, tour trips all around the world.. They are the best..',
+    avatar: '/assets/avatars/namaganda_joy.png',
     rating: 5
   },
   {
     id: '3',
-    name: 'Emma Johnson',
-    role: 'Family Vacationer',
-    review: 'Traveling with kids can be stressful, but the itinerary provided by Time2Fly was balanced and fun for the whole family.',
-    avatar: 'https://picsum.photos/seed/emma/100/100',
-    rating: 4
+    name: 'Sarah Ndagire',
+    role: 'Adventure Seeker',
+    review: 'Time2fly Tours and travel is the best company I would recommend, they have the best professionals with great customer care.',
+    avatar: '/assets/avatars/sarah_ndagire.png',
+    rating: 5
   }
 ];
 
