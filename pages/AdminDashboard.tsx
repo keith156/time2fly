@@ -84,13 +84,6 @@ const AdminDashboard: React.FC = () => {
     updatePackage({ ...pkg, is_starred: !pkg.is_starred });
   };
 
-  const renderActiveForm = () => {
-    switch (activeTab) {
-      case 'packages': return setEditingPackage({});
-      case 'blogs': return setEditingBlog({});
-      case 'destinations': return setEditingDest({});
-    }
-  };
 
   return (
     <div className="pt-24 min-h-screen bg-slate-50 pb-20">
@@ -321,36 +314,36 @@ const AdminDashboard: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
-                {activeTab === 'packages' ? packages.map(pkg => (
-                  <tr key={pkg.id} className="hover:bg-slate-50/50 transition-colors">
+                {activeTab === 'packages' ? (packages || []).map(pkg => (
+                  <tr key={pkg?.id || Math.random()} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-8 py-6 relative">
-                      <img src={pkg.image} className="w-16 h-16 rounded-xl object-cover shadow-sm" />
-                      {pkg.is_starred && (
+                      <img src={pkg?.image || ''} className="w-16 h-16 rounded-xl object-cover shadow-sm" />
+                      {pkg?.is_starred && (
                         <div className="absolute top-4 left-6 bg-red-600 rounded-full p-1 border-2 border-white shadow-lg">
                           <Star size={10} fill="white" className="text-white" />
                         </div>
                       )}
                     </td>
                     <td className="px-8 py-6">
-                      <p className="font-black text-slate-900 uppercase tracking-tight">{pkg.destination}</p>
-                      <p className="text-sm font-bold text-amber-500">${pkg.price} • {pkg.duration}</p>
+                      <p className="font-black text-slate-900 uppercase tracking-tight">{pkg?.destination || 'Unnamed Package'}</p>
+                      <p className="text-sm font-bold text-amber-500">${pkg?.price || 0} • {pkg?.duration || 'TBD'}</p>
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
-                        <button onClick={() => toggleStar(pkg)} className={`p-3 rounded-xl transition-all ${pkg.is_starred ? 'bg-red-600 text-white shadow-lg shadow-red-200' : 'bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-500'}`} title={pkg.is_starred ? 'Unstar' : 'Star for Special Offers'}><Star size={18} fill={pkg.is_starred ? "white" : "none"} /></button>
+                        <button onClick={() => toggleStar(pkg)} className={`p-3 rounded-xl transition-all ${pkg?.is_starred ? 'bg-red-600 text-white shadow-lg shadow-red-200' : 'bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-500'}`} title={pkg?.is_starred ? 'Unstar' : 'Star for Special Offers'}><Star size={18} fill={pkg?.is_starred ? "white" : "none"} /></button>
                         <button onClick={() => setEditingPackage(pkg)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
                         <button onClick={() => deletePackage(pkg.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>
                   </tr>
-                )) : activeTab === 'destinations' ? destinations.map(dest => (
-                  <tr key={dest.id} className="hover:bg-slate-50/50 transition-colors">
+                )) : activeTab === 'destinations' ? (destinations || []).map(dest => (
+                  <tr key={dest?.id || Math.random()} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-8 py-6">
-                      <img src={dest.image} className="w-16 h-16 rounded-xl object-cover shadow-sm" />
+                      <img src={dest?.image || ''} className="w-16 h-16 rounded-xl object-cover shadow-sm" />
                     </td>
                     <td className="px-8 py-6">
-                      <p className="font-black text-slate-900 uppercase tracking-tight">{dest.name}</p>
-                      <p className="text-xs font-bold text-slate-400 line-clamp-1">{dest.details}</p>
+                      <p className="font-black text-slate-900 uppercase tracking-tight">{dest?.name || 'Unnamed Destination'}</p>
+                      <p className="text-xs font-bold text-slate-400 line-clamp-1">{dest?.details || ''}</p>
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
@@ -359,14 +352,14 @@ const AdminDashboard: React.FC = () => {
                       </div>
                     </td>
                   </tr>
-                )) : blogs.map(blog => (
-                  <tr key={blog.id} className="hover:bg-slate-50/50 transition-colors">
+                )) : (blogs || []).map(blog => (
+                  <tr key={blog?.id || Math.random()} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-8 py-6">
-                      <img src={blog.image} className="w-16 h-16 rounded-xl object-cover shadow-sm" />
+                      <img src={blog?.image || ''} className="w-16 h-16 rounded-xl object-cover shadow-sm" />
                     </td>
                     <td className="px-8 py-6">
-                      <p className="font-black text-slate-900 uppercase tracking-tight">{blog.title}</p>
-                      <p className="text-sm font-bold text-slate-500">{blog.category} • {blog.date} • By {blog.author}</p>
+                      <p className="font-black text-slate-900 uppercase tracking-tight">{blog?.title || 'Untitled Post'}</p>
+                      <p className="text-sm font-bold text-slate-500">{blog?.category || 'News'} • {blog?.date || ''} • By {blog?.author || 'Admin'}</p>
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">

@@ -14,6 +14,7 @@ const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
 const Destinations = React.lazy(() => import('./pages/Destinations'));
 const SpecialOffers = React.lazy(() => import('./pages/SpecialOffers'));
 
+import ErrorBoundary from './components/ErrorBoundary.tsx';
 import { DataProvider } from './context/DataContext';
 
 const Navbar: React.FC = () => {
@@ -235,52 +236,54 @@ const App: React.FC = () => {
 
   return (
     <DataProvider>
-      <HashRouter>
-        <ScrollToTop />
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-grow">
-            <React.Suspense fallback={
-              <div className="h-screen flex items-center justify-center bg-white">
-                <div className="w-10 h-10 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+      <ErrorBoundary>
+        <HashRouter>
+          <ScrollToTop />
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <main className="flex-grow">
+              <React.Suspense fallback={
+                <div className="h-screen flex items-center justify-center bg-white">
+                  <div className="w-10 h-10 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              }>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/packages" element={<TourPackages />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/destinations" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><Destinations /></React.Suspense>} />
+                  <Route path="/special-offers" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><SpecialOffers /></React.Suspense>} />
+                  <Route path="/login" element={<React.Suspense fallback={null}><Login /></React.Suspense>} />
+                  <Route
+                    path="/admin"
+                    element={
+                      <ProtectedRoute>
+                        <AdminDashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Routes>
+              </React.Suspense>
+            </main>
+            <Footer />
+            <a
+              href="https://wa.me/256783084521"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="fixed bottom-8 right-8 z-[60] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 group"
+              title="Chat on WhatsApp"
+            >
+              <div className="flex items-center space-x-2">
+                <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 font-bold text-sm whitespace-nowrap">Chat with us</span>
+                <MessageCircle size={28} />
               </div>
-            }>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/packages" element={<TourPackages />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/destinations" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><Destinations /></React.Suspense>} />
-                <Route path="/special-offers" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><SpecialOffers /></React.Suspense>} />
-                <Route path="/login" element={<React.Suspense fallback={null}><Login /></React.Suspense>} />
-                <Route
-                  path="/admin"
-                  element={
-                    <ProtectedRoute>
-                      <AdminDashboard />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </React.Suspense>
-          </main>
-          <Footer />
-          <a
-            href="https://wa.me/256783084521"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="fixed bottom-8 right-8 z-[60] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 group"
-            title="Chat on WhatsApp"
-          >
-            <div className="flex items-center space-x-2">
-              <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 font-bold text-sm whitespace-nowrap">Chat with us</span>
-              <MessageCircle size={28} />
-            </div>
-          </a>
-        </div>
-      </HashRouter>
+            </a>
+          </div>
+        </HashRouter>
+      </ErrorBoundary>
     </DataProvider>
   );
 };

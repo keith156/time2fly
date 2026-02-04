@@ -84,13 +84,18 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // CRITICAL: Auto-save ANY change (real-time or local) to localStorage
   // This ensures other devices see the update next time they open the site
   useEffect(() => {
-    const dataToCache = {
-      packages,
-      blogs,
-      destinations,
-      lastUpdated: new Date().toISOString()
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToCache));
+    try {
+      const dataToCache = {
+        packages,
+        blogs,
+        destinations,
+        lastUpdated: new Date().toISOString()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToCache));
+    } catch (e) {
+      console.warn("Storage quota exceeded or unavailable. Disabling cache for this session.", e);
+      // Optional: Clear old cache to make room or just fail silently to preserve app stability
+    }
   }, [packages, blogs, destinations]);
 
   const fetchInitialData = async () => {
