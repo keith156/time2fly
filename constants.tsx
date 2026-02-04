@@ -77,7 +77,8 @@ export const PACKAGES: Package[] = [
     duration: '7 Days',
     description: 'Experience the iconic blue domes and sunset views of Oia in this luxury island getaway.',
     image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&q=80&w=800',
-    rating: 4.9
+    rating: 4.9,
+    is_starred: true
   },
   {
     id: '2',
@@ -104,7 +105,8 @@ export const PACKAGES: Package[] = [
     duration: '8 Days',
     description: 'Breathtaking mountain scenery and luxury chalet living in the heart of Europe.',
     image: 'https://images.unsplash.com/photo-1531210483974-4f8c1f33fd35?auto=format&fit=crop&q=80&w=800',
-    rating: 4.9
+    rating: 4.9,
+    is_starred: true
   },
   {
     id: '5',
@@ -122,7 +124,8 @@ export const PACKAGES: Package[] = [
     duration: '7 Days',
     description: 'Charming coastal villages, exquisite cuisine, and dramatic cliffside ocean views.',
     image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=800',
-    rating: 4.8
+    rating: 4.8,
+    is_starred: true
   }
 ];
 

@@ -69,10 +69,6 @@ const Destinations: React.FC = () => {
                                     <p className="text-slate-500 mb-8 font-medium text-lg leading-relaxed flex-grow">
                                         {dest.details}
                                     </p>
-                                    <button className="w-full bg-slate-950 hover:bg-amber-500 text-white py-5 rounded-[24px] font-black transition-all shadow-xl shadow-slate-950/10 active:scale-95 uppercase tracking-widest text-xs flex items-center justify-center group">
-                                        View Adventure Details
-                                        <ArrowRight size={18} className="ml-2 group-hover:translate-x-2 transition-transform" />
-                                    </button>
                                 </div>
                             </div>
                         ))}

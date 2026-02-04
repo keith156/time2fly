@@ -54,10 +54,10 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services' },
     { name: 'Destinations', path: '/destinations' },
     { name: 'Special offers', path: '/special-offers' },
+    { name: 'Services', path: '/services' },
+    { name: 'About', path: '/about' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];

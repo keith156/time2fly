@@ -62,7 +62,7 @@ const Home: React.FC = () => {
       <div className="pt-20 bg-white min-h-screen">
         <article className="animate-fade-in-up">
           <div className="relative h-[65vh] min-h-[500px] w-full overflow-hidden">
-            <img src={selectedPackage.image} alt={selectedPackage.destination} className="w-full h-full object-cover" />
+            <img src={selectedPackage.image} alt={selectedPackage.destination} className="w-full h-full object-cover" loading="lazy" />
             <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
             <div className="absolute inset-0 flex items-center justify-center p-6">
               <div className="max-w-4xl w-full text-center">
@@ -216,6 +216,7 @@ const Home: React.FC = () => {
                     src={partner.logo}
                     alt={partner.name}
                     className="h-full w-full object-contain p-1"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -248,7 +249,7 @@ const Home: React.FC = () => {
                   </div>
                   <p className="text-slate-100 font-medium italic mb-8 leading-relaxed whitespace-normal text-base">"{t.review}"</p>
                   <div className="mt-auto pt-6 border-t border-white/10 flex items-center gap-4">
-                    <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full border-2 border-amber-500 object-cover shadow-lg" />
+                    <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full border-2 border-amber-500 object-cover shadow-lg" loading="lazy" />
                     <div>
                       <h4 className="text-white font-semibold uppercase tracking-tight text-base">{t.name}</h4>
                     </div>

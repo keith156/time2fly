@@ -16,7 +16,7 @@ export interface Package {
   image: string;
   rating: number;
   itinerary?: string;
-  isStarred?: boolean; // Added for Special Offers
+  is_starred?: boolean; // Added for Special Offers
 }
 
 export interface Destination {

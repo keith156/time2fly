@@ -27,6 +27,8 @@ interface DataContextType {
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
+const STORAGE_KEY = 't2f_cached_data';
+
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [packages, setPackages] = useState<Package[]>(INITIAL_PACKAGES);
   const [blogs, setBlogs] = useState<BlogPost[]>(INITIAL_BLOGS);
@@ -34,6 +36,19 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // 1. Try to load from LocalStorage first for instant UI
+    const cachedData = localStorage.getItem(STORAGE_KEY);
+    if (cachedData) {
+      try {
+        const parsed = JSON.parse(cachedData);
+        if (parsed.packages) setPackages(parsed.packages);
+        if (parsed.blogs) setBlogs(parsed.blogs);
+        if (parsed.destinations) setDestinations(parsed.destinations);
+      } catch (e) {
+        console.error("Cache parsing error", e);
+      }
+    }
+
     fetchInitialData();
 
     // Subscribe to Real-time changes
@@ -65,16 +80,38 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchInitialData = async () => {
     try {
-      setLoading(true);
+      // Only show spinner if we have NO data at all
+      const hasData = packages.length > 0 || destinations.length > 0;
+      if (!hasData) setLoading(true);
+
       const [pkgResult, blogResult, destResult] = await Promise.all([
         supabase.from('packages').select('*').order('created_at', { ascending: false }),
         supabase.from('blogs').select('*').order('created_at', { ascending: false }),
         supabase.from('destinations').select('*').order('created_at', { ascending: false })
       ]);
 
-      if (pkgResult.data && pkgResult.data.length > 0) setPackages(pkgResult.data);
-      if (blogResult.data && blogResult.data.length > 0) setBlogs(blogResult.data);
-      if (destResult.data && destResult.data.length > 0) setDestinations(destResult.data);
+      const freshData: any = {};
+      if (pkgResult.data && pkgResult.data.length > 0) {
+        setPackages(pkgResult.data);
+        freshData.packages = pkgResult.data;
+      }
+      if (blogResult.data && blogResult.data.length > 0) {
+        setBlogs(blogResult.data);
+        freshData.blogs = blogResult.data;
+      }
+      if (destResult.data && destResult.data.length > 0) {
+        setDestinations(destResult.data);
+        freshData.destinations = destResult.data;
+      }
+
+      // 2. Cache the fresh data for next visit
+      if (Object.keys(freshData).length > 0) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          packages: freshData.packages || packages,
+          blogs: freshData.blogs || blogs,
+          destinations: freshData.destinations || destinations
+        }));
+      }
 
     } catch (err) {
       console.error('Supabase fetch error:', err);

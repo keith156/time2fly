@@ -44,7 +44,7 @@ const AdminDashboard: React.FC = () => {
       ...editingPackage,
       id: editingPackage.id || Date.now().toString(),
       rating: editingPackage.rating || 5,
-      isStarred: editingPackage.isStarred || false
+      is_starred: editingPackage.is_starred || false
     } as Package;
 
     if (editingPackage.id) updatePackage(pkg);
@@ -81,7 +81,7 @@ const AdminDashboard: React.FC = () => {
   };
 
   const toggleStar = (pkg: Package) => {
-    updatePackage({ ...pkg, isStarred: !pkg.isStarred });
+    updatePackage({ ...pkg, is_starred: !pkg.is_starred });
   };
 
   const renderActiveForm = () => {
@@ -129,7 +129,7 @@ const AdminDashboard: React.FC = () => {
             className={`flex-1 flex items-center justify-center space-x-2 py-3 rounded-xl font-black uppercase tracking-widest text-xs transition-all ${activeTab === 'destinations' ? 'bg-amber-500 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-50'}`}
           >
             <MapPin size={16} />
-            <span>Regions</span>
+            <span>Destinations</span>
           </button>
           <button
             onClick={() => setActiveTab('blogs')}
@@ -275,7 +275,7 @@ const AdminDashboard: React.FC = () => {
               <form onSubmit={saveDest} className="p-10 space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
-                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Country/Region Name</label>
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Destination Name</label>
                     <input type="text" value={editingDest.name || ''} onChange={e => setEditingDest({ ...editingDest, name: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Switzerland" required />
                   </div>
                   <div className="space-y-2">
@@ -301,7 +301,7 @@ const AdminDashboard: React.FC = () => {
                   <textarea rows={4} value={editingDest.details || ''} onChange={e => setEditingDest({ ...editingDest, details: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Describe the region's appeal..." required></textarea>
                 </div>
                 <div className="flex gap-4 pt-4">
-                  <button type="submit" className="flex-1 bg-amber-500 hover:bg-slate-900 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest">Save Region</button>
+                  <button type="submit" className="flex-1 bg-amber-500 hover:bg-slate-900 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest">Save Destination</button>
                   <button type="button" onClick={() => setEditingDest(null)} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest">Cancel</button>
                 </div>
               </form>
@@ -325,7 +325,7 @@ const AdminDashboard: React.FC = () => {
                   <tr key={pkg.id} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-8 py-6 relative">
                       <img src={pkg.image} className="w-16 h-16 rounded-xl object-cover shadow-sm" />
-                      {pkg.isStarred && (
+                      {pkg.is_starred && (
                         <div className="absolute top-4 left-6 bg-red-600 rounded-full p-1 border-2 border-white shadow-lg">
                           <Star size={10} fill="white" className="text-white" />
                         </div>
@@ -337,7 +337,7 @@ const AdminDashboard: React.FC = () => {
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
-                        <button onClick={() => toggleStar(pkg)} className={`p-3 rounded-xl transition-all ${pkg.isStarred ? 'bg-red-600 text-white shadow-lg shadow-red-200' : 'bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-500'}`} title={pkg.isStarred ? 'Unstar' : 'Star for Special Offers'}><Star size={18} fill={pkg.isStarred ? "white" : "none"} /></button>
+                        <button onClick={() => toggleStar(pkg)} className={`p-3 rounded-xl transition-all ${pkg.is_starred ? 'bg-red-600 text-white shadow-lg shadow-red-200' : 'bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-500'}`} title={pkg.is_starred ? 'Unstar' : 'Star for Special Offers'}><Star size={18} fill={pkg.is_starred ? "white" : "none"} /></button>
                         <button onClick={() => setEditingPackage(pkg)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
                         <button onClick={() => deletePackage(pkg.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>

@@ -9,7 +9,7 @@ const SpecialOffers: React.FC = () => {
     const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    const starredPackages = packages.filter(pkg => pkg.isStarred);
+    const starredPackages = packages.filter(pkg => pkg.is_starred);
 
     const handleShare = (e: React.MouseEvent, pkg: Package) => {
         e.stopPropagation();
