@@ -57,7 +57,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .channel(`public:${table}`)
         .on('postgres_changes', { event: '*', schema: 'public', table }, (payload) => {
           if (payload.eventType === 'INSERT') {
-            setter(prev => prev.some(item => item.id === payload.new.id) ? prev : [payload.new, ...prev]);
+            setter(prev => {
+              const next = prev.some(item => item.id === payload.new.id) ? prev : [payload.new, ...prev];
+              return next;
+            });
           } else if (payload.eventType === 'UPDATE') {
             setter(prev => prev.map(item => item.id === payload.new.id ? payload.new : item));
           } else if (payload.eventType === 'DELETE') {
@@ -78,6 +81,18 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
+  // CRITICAL: Auto-save ANY change (real-time or local) to localStorage
+  // This ensures other devices see the update next time they open the site
+  useEffect(() => {
+    const dataToCache = {
+      packages,
+      blogs,
+      destinations,
+      lastUpdated: new Date().toISOString()
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToCache));
+  }, [packages, blogs, destinations]);
+
   const fetchInitialData = async () => {
     try {
       // Only show spinner if we have NO data at all
@@ -90,28 +105,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         supabase.from('destinations').select('*').order('created_at', { ascending: false })
       ]);
 
-      const freshData: any = {};
-      if (pkgResult.data && pkgResult.data.length > 0) {
-        setPackages(pkgResult.data);
-        freshData.packages = pkgResult.data;
-      }
-      if (blogResult.data && blogResult.data.length > 0) {
-        setBlogs(blogResult.data);
-        freshData.blogs = blogResult.data;
-      }
-      if (destResult.data && destResult.data.length > 0) {
-        setDestinations(destResult.data);
-        freshData.destinations = destResult.data;
-      }
-
-      // 2. Cache the fresh data for next visit
-      if (Object.keys(freshData).length > 0) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({
-          packages: freshData.packages || packages,
-          blogs: freshData.blogs || blogs,
-          destinations: freshData.destinations || destinations
-        }));
-      }
+      if (pkgResult.data && pkgResult.data.length > 0) setPackages(pkgResult.data);
+      if (blogResult.data && blogResult.data.length > 0) setBlogs(blogResult.data);
+      if (destResult.data && destResult.data.length > 0) setDestinations(destResult.data);
 
     } catch (err) {
       console.error('Supabase fetch error:', err);
