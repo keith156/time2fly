@@ -85,16 +85,28 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // This ensures other devices see the update next time they open the site
   useEffect(() => {
     try {
+      // STRIP LARGE IMAGES FROM CACHE TO PREVENT QUOTA ERRORS
+      // We only want the text data (itinerary, description, etc.) cached
+      const stripImages = (items: any[]) => items.map(item => {
+        const { image, ...rest } = item;
+        // Only keep URL images, strip base64
+        if (typeof image === 'string' && image.startsWith('data:')) {
+          return { ...rest, image: '' };
+        }
+        return item;
+      });
+
       const dataToCache = {
-        packages,
-        blogs,
-        destinations,
+        packages: stripImages(packages),
+        blogs: stripImages(blogs),
+        destinations: stripImages(destinations),
         lastUpdated: new Date().toISOString()
       };
+
       localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToCache));
     } catch (e) {
-      console.warn("Storage quota exceeded or unavailable. Disabling cache for this session.", e);
-      // Optional: Clear old cache to make room or just fail silently to preserve app stability
+      console.warn("Storage quota exceeded or unavailable. Clearing cache to maintain stability.", e);
+      localStorage.removeItem(STORAGE_KEY);
     }
   }, [packages, blogs, destinations]);
 

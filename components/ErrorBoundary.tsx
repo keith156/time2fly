@@ -10,7 +10,7 @@ interface State {
     error?: Error;
 }
 
-class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends React.Component<Props, State> {
     public state: State = {
         hasError: false
     };
@@ -42,7 +42,7 @@ class ErrorBoundary extends Component<Props, State> {
                             We encountered an unexpected error. This usually happens due to a temporary connection issue or a data sync error.
                         </p>
                         <button
-                            onClick={handleRefresh}
+                            onClick={this.handleRefresh}
                             className="w-full bg-slate-950 hover:bg-amber-500 text-white py-5 rounded-2xl font-black transition-all shadow-xl uppercase tracking-widest text-sm flex items-center justify-center gap-3 active:scale-95"
                         >
                             <RefreshCcw size={20} />
