@@ -11,6 +11,8 @@ const Blog = React.lazy(() => import('./pages/Blog'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 const Login = React.lazy(() => import('./pages/Login'));
 const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
+const Destinations = React.lazy(() => import('./pages/Destinations'));
+const SpecialOffers = React.lazy(() => import('./pages/SpecialOffers'));
 
 import { DataProvider } from './context/DataContext';
 
@@ -54,9 +56,8 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
-    { name: 'Packages', path: '/packages' },
-    { name: 'Destinations', path: '/packages' },
-    { name: 'Special offers', path: '/packages' },
+    { name: 'Destinations', path: '/destinations' },
+    { name: 'Special offers', path: '/special-offers' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -251,7 +252,9 @@ const App: React.FC = () => {
                 <Route path="/packages" element={<TourPackages />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/destinations" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><Destinations /></React.Suspense>} />
+                <Route path="/special-offers" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><SpecialOffers /></React.Suspense>} />
+                <Route path="/login" element={<React.Suspense fallback={null}><Login /></React.Suspense>} />
                 <Route
                   path="/admin"
                   element={

@@ -15,7 +15,15 @@ export interface Package {
   description: string;
   image: string;
   rating: number;
-  itinerary?: string; // Added for admin management
+  itinerary?: string;
+  isStarred?: boolean; // Added for Special Offers
+}
+
+export interface Destination {
+  id: string;
+  name: string;
+  image: string;
+  details: string;
 }
 
 export interface BlogPost {

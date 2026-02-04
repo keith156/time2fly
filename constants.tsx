@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Plane, Hotel, Map, Shield, Globe, Landmark, Clock, Award, Compass, Ship, GraduationCap, Car, Briefcase, Zap } from 'lucide-react';
-import { Service, Package, BlogPost, Testimonial } from './types';
+import { Service, Package, BlogPost, Testimonial, Destination } from './types';
 
 export const SERVICES: Service[] = [
   {
@@ -196,6 +196,33 @@ export const TESTIMONIALS: Testimonial[] = [
     review: 'Time2fly Tours and travel is the best company I would recommend, they have the best professionals with great customer care.',
     avatar: '/assets/avatars/sarah_ndagire.png',
     rating: 5
+  }
+];
+
+export const DESTINATIONS: Destination[] = [
+  {
+    id: '1',
+    name: 'Uganda',
+    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&q=80&w=800',
+    details: 'The Pearl of Africa, known for its gorilla trekking and source of the Nile.'
+  },
+  {
+    id: '2',
+    name: 'Kenya',
+    image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&q=80&w=800',
+    details: 'Famous for the Masai Mara National Reserve and coastal beaches.'
+  },
+  {
+    id: '3',
+    name: 'Tanzania',
+    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800',
+    details: 'Home to Mount Kilimanjaro and the Serengeti.'
+  },
+  {
+    id: '4',
+    name: 'Dubai',
+    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800',
+    details: 'A global travel hub known for luxury shopping and ultramodern architecture.'
   }
 ];
 

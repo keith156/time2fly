@@ -1,8 +1,8 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { Package, BlogPost } from '../types';
-import { PACKAGES as INITIAL_PACKAGES, BLOG_POSTS as INITIAL_BLOGS } from '../constants';
+import { Package, BlogPost, Destination } from '../types';
+import { PACKAGES as INITIAL_PACKAGES, BLOG_POSTS as INITIAL_BLOGS, DESTINATIONS as INITIAL_DESTINATIONS } from '../constants';
 
 // Supabase Configuration
 const SUPABASE_URL = 'https://goxpwwrtonavvvijwvmw.supabase.co';
@@ -12,6 +12,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 interface DataContextType {
   packages: Package[];
   blogs: BlogPost[];
+  destinations: Destination[];
   loading: boolean;
   addPackage: (pkg: Package) => Promise<void>;
   updatePackage: (pkg: Package) => Promise<void>;
@@ -19,6 +20,9 @@ interface DataContextType {
   addBlog: (blog: BlogPost) => Promise<void>;
   updateBlog: (blog: BlogPost) => Promise<void>;
   deleteBlog: (id: string) => Promise<void>;
+  addDestination: (dest: Destination) => Promise<void>;
+  updateDestination: (dest: Destination) => Promise<void>;
+  deleteDestination: (id: string) => Promise<void>;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -26,86 +30,54 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [packages, setPackages] = useState<Package[]>(INITIAL_PACKAGES);
   const [blogs, setBlogs] = useState<BlogPost[]>(INITIAL_BLOGS);
+  const [destinations, setDestinations] = useState<Destination[]>(INITIAL_DESTINATIONS);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchInitialData();
 
     // Subscribe to Real-time changes
-    const packagesChannel = supabase
-      .channel('public:packages')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'packages' }, (payload) => {
-        console.log('Real-time package update:', payload.eventType);
-        if (payload.eventType === 'INSERT') {
-          setPackages(prev => {
-            if (prev.some(p => p.id === payload.new.id)) return prev;
-            return [payload.new as Package, ...prev];
-          });
-        } else if (payload.eventType === 'UPDATE') {
-          setPackages(prev => prev.map(p => p.id === payload.new.id ? (payload.new as Package) : p));
-        } else if (payload.eventType === 'DELETE') {
-          setPackages(prev => prev.filter(p => p.id !== payload.old.id));
-        }
-      })
-      .subscribe();
+    const fetchTableSync = (table: string, setter: React.Dispatch<React.SetStateAction<any[]>>) => {
+      return supabase
+        .channel(`public:${table}`)
+        .on('postgres_changes', { event: '*', schema: 'public', table }, (payload) => {
+          if (payload.eventType === 'INSERT') {
+            setter(prev => prev.some(item => item.id === payload.new.id) ? prev : [payload.new, ...prev]);
+          } else if (payload.eventType === 'UPDATE') {
+            setter(prev => prev.map(item => item.id === payload.new.id ? payload.new : item));
+          } else if (payload.eventType === 'DELETE') {
+            setter(prev => prev.filter(item => item.id !== payload.old.id));
+          }
+        })
+        .subscribe();
+    };
 
-    const blogsChannel = supabase
-      .channel('public:blogs')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'blogs' }, (payload) => {
-        console.log('Real-time blog update:', payload.eventType);
-        if (payload.eventType === 'INSERT') {
-          setBlogs(prev => {
-            if (prev.some(b => b.id === payload.new.id)) return prev;
-            return [payload.new as BlogPost, ...prev];
-          });
-        } else if (payload.eventType === 'UPDATE') {
-          setBlogs(prev => prev.map(b => b.id === payload.new.id ? (payload.new as BlogPost) : b));
-        } else if (payload.eventType === 'DELETE') {
-          setBlogs(prev => prev.filter(b => b.id !== payload.old.id));
-        }
-      })
-      .subscribe();
+    const packagesChannel = fetchTableSync('packages', setPackages);
+    const blogsChannel = fetchTableSync('blogs', setBlogs);
+    const destinationsChannel = fetchTableSync('destinations', setDestinations);
 
     return () => {
       supabase.removeChannel(packagesChannel);
       supabase.removeChannel(blogsChannel);
+      supabase.removeChannel(destinationsChannel);
     };
   }, []);
 
   const fetchInitialData = async () => {
     try {
-      console.log('Syncing starting data from Supabase...');
       setLoading(true);
-
-      // Fetch Packages and Blogs in parallel
-      const [pkgResult, blogResult] = await Promise.all([
-        supabase
-          .from('packages')
-          .select('*')
-          .order('created_at', { ascending: false }),
-        supabase
-          .from('blogs')
-          .select('*')
-          .order('created_at', { ascending: false })
+      const [pkgResult, blogResult, destResult] = await Promise.all([
+        supabase.from('packages').select('*').order('created_at', { ascending: false }),
+        supabase.from('blogs').select('*').order('created_at', { ascending: false }),
+        supabase.from('destinations').select('*').order('created_at', { ascending: false })
       ]);
 
-      if (pkgResult.error) throw pkgResult.error;
-      if (blogResult.error) throw blogResult.error;
-
-      // Only overwrite if we actually got data from Supabase
-      if (pkgResult.data && pkgResult.data.length > 0) {
-        setPackages(pkgResult.data);
-      }
-      if (blogResult.data && blogResult.data.length > 0) {
-        setBlogs(blogResult.data);
-      }
-      console.log('Initial sync complete.');
+      if (pkgResult.data && pkgResult.data.length > 0) setPackages(pkgResult.data);
+      if (blogResult.data && blogResult.data.length > 0) setBlogs(blogResult.data);
+      if (destResult.data && destResult.data.length > 0) setDestinations(destResult.data);
 
     } catch (err) {
       console.error('Supabase fetch error:', err);
-      // Fallback to constants
-      setPackages(INITIAL_PACKAGES);
-      setBlogs(INITIAL_BLOGS);
     } finally {
       setLoading(false);
     }
@@ -114,64 +86,57 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const addPackage = async (pkg: Package) => {
     const { id, ...pkgData } = pkg;
     const { data, error } = await supabase.from('packages').insert([pkgData]).select();
-    if (error) {
-      console.error('Error adding package:', error);
-      return;
-    }
     if (data) setPackages([data[0], ...packages]);
   };
 
   const updatePackage = async (pkg: Package) => {
-    const { error } = await supabase.from('packages').update(pkg).eq('id', pkg.id);
-    if (error) {
-      console.error('Error updating package:', error);
-      return;
-    }
+    await supabase.from('packages').update(pkg).eq('id', pkg.id);
     setPackages(packages.map(p => p.id === pkg.id ? pkg : p));
   };
 
   const deletePackage = async (id: string) => {
-    const { error } = await supabase.from('packages').delete().eq('id', id);
-    if (error) {
-      console.error('Error deleting package:', error);
-      return;
-    }
+    await supabase.from('packages').delete().eq('id', id);
     setPackages(packages.filter(p => p.id !== id));
   };
 
   const addBlog = async (blog: BlogPost) => {
     const { id, ...blogData } = blog;
     const { data, error } = await supabase.from('blogs').insert([blogData]).select();
-    if (error) {
-      console.error('Error adding blog:', error);
-      return;
-    }
     if (data) setBlogs([data[0], ...blogs]);
   };
 
   const updateBlog = async (blog: BlogPost) => {
-    const { error } = await supabase.from('blogs').update(blog).eq('id', blog.id);
-    if (error) {
-      console.error('Error updating blog:', error);
-      return;
-    }
+    await supabase.from('blogs').update(blog).eq('id', blog.id);
     setBlogs(blogs.map(b => b.id === blog.id ? blog : b));
   };
 
   const deleteBlog = async (id: string) => {
-    const { error } = await supabase.from('blogs').delete().eq('id', id);
-    if (error) {
-      console.error('Error deleting blog:', error);
-      return;
-    }
+    await supabase.from('blogs').delete().eq('id', id);
     setBlogs(blogs.filter(b => b.id !== id));
+  };
+
+  const addDestination = async (dest: Destination) => {
+    const { id, ...destData } = dest;
+    const { data } = await supabase.from('destinations').insert([destData]).select();
+    if (data) setDestinations([data[0], ...destinations]);
+  };
+
+  const updateDestination = async (dest: Destination) => {
+    await supabase.from('destinations').update(dest).eq('id', dest.id);
+    setDestinations(destinations.map(d => d.id === dest.id ? dest : d));
+  };
+
+  const deleteDestination = async (id: string) => {
+    await supabase.from('destinations').delete().eq('id', id);
+    setDestinations(destinations.filter(d => d.id !== id));
   };
 
   return (
     <DataContext.Provider value={{
-      packages, blogs, loading,
+      packages, blogs, destinations, loading,
       addPackage, updatePackage, deletePackage,
-      addBlog, updateBlog, deleteBlog
+      addBlog, updateBlog, deleteBlog,
+      addDestination, updateDestination, deleteDestination
     }}>
       {children}
     </DataContext.Provider>
