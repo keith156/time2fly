@@ -68,11 +68,13 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="bg-red-600 rounded-full px-6 py-2 flex items-center justify-between shadow-2xl border border-white/10">
           <Link to="/" className="flex items-center space-x-3 shrink-0 group">
-            <img
-              src="/assets/logo.png"
-              alt="Time2Fly Logo"
-              className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform duration-300 group-hover:scale-125 scale-125 md:scale-150 origin-left"
-            />
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center shrink-0 shadow-lg overflow-hidden">
+              <img
+                src="/assets/logo.png"
+                alt="Time2Fly Logo"
+                className="w-8 h-8 md:w-10 md:h-10 object-contain transition-transform duration-300 group-hover:scale-110"
+              />
+            </div>
             <span className="text-white font-black text-xl md:text-2xl tracking-tight">Time2Fly</span>
           </Link>
 
