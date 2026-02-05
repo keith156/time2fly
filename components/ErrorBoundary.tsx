@@ -7,29 +7,33 @@ interface Props {
 
 interface State {
     hasError: boolean;
-    error?: Error;
+    error: Error | null;
 }
 
-class ErrorBoundary extends React.Component<Props, State> {
-    public state: State = {
-        hasError: false
-    };
+export class ErrorBoundary extends (Component as any)<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.state = { hasError: false, error: null };
+    }
 
-    public static getDerivedStateFromError(error: Error): State {
+    static getDerivedStateFromError(error: Error): State {
         return { hasError: true, error };
     }
 
-    public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        console.error('Uncaught error:', error, errorInfo);
+    componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+        console.error('ErrorBoundary caught an error', error, errorInfo);
     }
 
-    private handleRefresh = () => {
-        // Clear potentially corrupted cache
+    handleRefresh = () => {
         localStorage.removeItem('t2f_cached_data');
         window.location.reload();
     };
 
-    public render() {
+    handleReset = () => {
+        this.setState({ hasError: false, error: null });
+    };
+
+    render() {
         if (this.state.hasError) {
             return (
                 <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 text-center">
@@ -41,6 +45,14 @@ class ErrorBoundary extends React.Component<Props, State> {
                         <p className="text-slate-500 font-medium mb-10 leading-relaxed">
                             We encountered an unexpected error. This usually happens due to a temporary connection issue or a data sync error.
                         </p>
+
+                        {this.state.error && (
+                            <div className="mb-8 p-4 bg-red-50 rounded-2xl text-left border border-red-100">
+                                <p className="text-[10px] font-black text-red-400 uppercase tracking-widest mb-1">Error Details</p>
+                                <p className="text-xs font-mono text-red-600 break-words">{this.state.error.message}</p>
+                            </div>
+                        )}
+
                         <button
                             onClick={this.handleRefresh}
                             className="w-full bg-slate-950 hover:bg-amber-500 text-white py-5 rounded-2xl font-black transition-all shadow-xl uppercase tracking-widest text-sm flex items-center justify-center gap-3 active:scale-95"
@@ -49,7 +61,7 @@ class ErrorBoundary extends React.Component<Props, State> {
                             Refresh Application
                         </button>
                         <button
-                            onClick={() => this.setState({ hasError: false })}
+                            onClick={this.handleReset}
                             className="mt-6 text-slate-400 hover:text-slate-600 font-bold uppercase tracking-widest text-[10px] transition-colors"
                         >
                             Try to continue anyway

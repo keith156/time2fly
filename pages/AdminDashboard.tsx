@@ -80,6 +80,12 @@ const AdminDashboard: React.FC = () => {
     setEditingDest(null);
   };
 
+  const handleAddNew = () => {
+    if (activeTab === 'packages') setEditingPackage({});
+    else if (activeTab === 'blogs') setEditingBlog({});
+    else setEditingDest({});
+  };
+
   const toggleStar = (pkg: Package) => {
     updatePackage({ ...pkg, is_starred: !pkg.is_starred });
   };
@@ -135,7 +141,7 @@ const AdminDashboard: React.FC = () => {
 
         {/* Action Button */}
         <button
-          onClick={renderActiveForm}
+          onClick={handleAddNew}
           className="mb-8 flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all hover:-translate-y-1 active:scale-95"
         >
           <Plus size={20} />
