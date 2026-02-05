@@ -14,6 +14,8 @@ interface DataContextType {
   blogs: BlogPost[];
   destinations: Destination[];
   loading: boolean;
+  lastUpdated: string | null;
+  refreshData: () => Promise<void>;
   addPackage: (pkg: Package) => Promise<void>;
   updatePackage: (pkg: Package) => Promise<void>;
   deletePackage: (id: string) => Promise<void>;
@@ -34,6 +36,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [blogs, setBlogs] = useState<BlogPost[]>(INITIAL_BLOGS);
   const [destinations, setDestinations] = useState<Destination[]>(INITIAL_DESTINATIONS);
   const [loading, setLoading] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
 
   useEffect(() => {
     // 1. Try to load from LocalStorage first for instant UI
@@ -44,6 +47,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (parsed.packages) setPackages(parsed.packages);
         if (parsed.blogs) setBlogs(parsed.blogs);
         if (parsed.destinations) setDestinations(parsed.destinations);
+        if (parsed.lastUpdated) setLastUpdated(parsed.lastUpdated);
       } catch (e) {
         console.error("Cache parsing error", e);
       }
@@ -51,11 +55,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     fetchInitialData();
 
-    // Subscribe to Real-time changes
+    // Subscribe to Real-time changes with automatic reconnection handling
     const fetchTableSync = (table: string, setter: React.Dispatch<React.SetStateAction<any[]>>) => {
-      return supabase
-        .channel(`public:${table}`)
+      const channel = supabase.channel(`public:${table}`);
+
+      channel
         .on('postgres_changes', { event: '*', schema: 'public', table }, (payload) => {
+          console.log(`Real-time update for ${table}:`, payload.eventType);
           if (payload.eventType === 'INSERT') {
             setter(prev => {
               const next = prev.some(item => item.id === payload.new.id) ? prev : [payload.new, ...prev];
@@ -66,8 +72,19 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           } else if (payload.eventType === 'DELETE') {
             setter(prev => prev.filter(item => item.id !== payload.old.id));
           }
+          setLastUpdated(new Date().toISOString());
         })
-        .subscribe();
+        .subscribe((status) => {
+          if (status === 'SUBSCRIBED') {
+            console.log(`Successfully subscribed to ${table} changes`);
+          }
+          if (status === 'CLOSED' || status === 'CHANNEL_ERROR') {
+            console.warn(`Real-time connection ${status} for ${table}. Attempting to re-fetch...`);
+            fetchInitialData();
+          }
+        });
+
+      return channel;
     };
 
     const packagesChannel = fetchTableSync('packages', setPackages);
@@ -126,11 +143,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (blogResult.data && blogResult.data.length > 0) setBlogs(blogResult.data);
       if (destResult.data && destResult.data.length > 0) setDestinations(destResult.data);
 
+      setLastUpdated(new Date().toISOString());
     } catch (err) {
       console.error('Supabase fetch error:', err);
     } finally {
       setLoading(false);
     }
+  };
+
+  const refreshData = async () => {
+    await fetchInitialData();
   };
 
   const addPackage = async (pkg: Package) => {
@@ -183,7 +205,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   return (
     <DataContext.Provider value={{
-      packages, blogs, destinations, loading,
+      packages, blogs, destinations, loading, lastUpdated, refreshData,
       addPackage, updatePackage, deletePackage,
       addBlog, updateBlog, deleteBlog,
       addDestination, updateDestination, deleteDestination

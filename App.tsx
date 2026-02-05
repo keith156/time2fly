@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
-import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search, RefreshCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 const Home = React.lazy(() => import('./pages/Home'));
 const About = React.lazy(() => import('./pages/About'));
@@ -15,7 +15,7 @@ const Destinations = React.lazy(() => import('./pages/Destinations'));
 const SpecialOffers = React.lazy(() => import('./pages/SpecialOffers'));
 
 import ErrorBoundary from './components/ErrorBoundary.tsx';
-import { DataProvider } from './context/DataContext';
+import { DataProvider, useData } from './context/DataContext';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -161,6 +161,15 @@ const Navbar: React.FC = () => {
 };
 
 const Footer: React.FC = () => {
+  const { lastUpdated, refreshData, loading } = useData();
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleManualRefresh = async () => {
+    setIsRefreshing(true);
+    await refreshData();
+    setTimeout(() => setIsRefreshing(false), 1000);
+  };
+
   return (
     <footer className="bg-[#0000ff] text-white py-8 border-t-4 border-red-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -214,6 +223,19 @@ const Footer: React.FC = () => {
             <Lock size={14} />
             <span>Admin Login</span>
           </Link>
+          {lastUpdated && (
+            <div className="flex items-center space-x-2 text-[10px] uppercase font-black tracking-widest text-slate-600">
+              <span>Last Synced: {new Date(lastUpdated).toLocaleTimeString()}</span>
+              <button
+                onClick={handleManualRefresh}
+                className={`p-1 hover:text-amber-500 transition-all ${loading || isRefreshing ? 'animate-spin text-amber-500' : ''}`}
+                title="Force Refresh Data"
+                disabled={loading || isRefreshing}
+              >
+                <RefreshCcw size={10} />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </footer>
