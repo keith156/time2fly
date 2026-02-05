@@ -78,8 +78,8 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up">
               <span className="text-red-500 font-black tracking-[0.3em] uppercase text-xs mb-6 block">Established July 2018 — Uganda</span>
-              <h1 className="text-5xl md:text-7xl font-black text-white leading-none mb-8 tracking-tighter">WE ARE <br /><span className="text-red-600">TIME2FLY</span></h1>
-              <p className="text-lg md:text-xl text-slate-300 font-medium leading-relaxed max-w-xl mb-10 italic">"Explore the world, Travelling is knowledge"</p>
+              <h1 className="text-5xl md:text-7xl font-black text-white leading-none mb-6 md:mb-8 tracking-tighter">WE ARE <br /><span className="text-red-600">TIME2FLY</span></h1>
+              <p className="text-lg md:text-xl text-slate-300 font-medium leading-relaxed max-w-xl mb-8 md:mb-10 italic">"Explore the world, Travelling is knowledge"</p>
               <div className="flex flex-wrap gap-4">
                 <Link to="/packages" className="bg-red-600 hover:bg-amber-500 text-white font-black px-10 py-5 rounded-full transition-all shadow-2xl hover:shadow-amber-500/30 uppercase tracking-widest text-sm">View Our Tours</Link>
                 <div className="flex items-center space-x-4 bg-white/5 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/10">
@@ -113,7 +113,7 @@ const About: React.FC = () => {
             </div>
             <div className="order-1 lg:order-2">
               <SectionTitle subtitle="About Us" title="Locally Owned & Independent" centered={false} />
-              <p className="text-slate-600 text-lg font-medium leading-relaxed mb-8 border-l-4 border-red-600 pl-8 py-2">
+              <p className="text-slate-600 text-lg font-medium leading-relaxed mb-6 md:mb-8 border-l-4 border-red-600 pl-8 py-2">
                 Time2Fly Tours and Travel Limited is a locally owned independent travel agency registered under the companies act of Uganda, incorporated in July 2018.
               </p>
               <div className="space-y-6 text-slate-500 font-medium leading-relaxed text-base">
@@ -146,7 +146,7 @@ const About: React.FC = () => {
               <div className="w-16 h-16 md:w-20 md:h-20 bg-navy-800 text-white rounded-2xl md:rounded-3xl flex items-center justify-center mb-6 md:mb-10 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
                 <Award size={40} />
               </div>
-              <h3 className="text-3xl font-black text-navy-800 mb-8 uppercase tracking-tighter">Our Mission</h3>
+              <h3 className="text-3xl font-black text-navy-800 mb-6 md:mb-8 uppercase tracking-tighter">Our Mission</h3>
               <p className="text-slate-600 text-lg leading-relaxed font-medium">
                 Our mission is to see that our clients' programmes and schedules are customized to meet their unique travel requirements and ensure a hassle-free, well organized, enjoyable & comfortable travels wherever, and anywhere in the world.
               </p>
@@ -179,8 +179,8 @@ const About: React.FC = () => {
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="py-12 md:py-16">
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter uppercase leading-none">Your Journey <br /> <span className="text-red-500">Starts Today</span></h2>
-            <p className="text-slate-400 text-lg font-medium max-w-2xl mx-auto mb-12 italic uppercase tracking-widest">Explore the world, Travelling is knowledge</p>
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 md:mb-8 tracking-tighter uppercase leading-none">Your Journey <br /> <span className="text-red-500">Starts Today</span></h2>
+            <p className="text-slate-400 text-lg font-medium max-w-2xl mx-auto mb-8 md:mb-12 italic uppercase tracking-widest">Explore the world, Travelling is knowledge</p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <Link to="/contact" className="bg-red-600 hover:bg-amber-500 text-white font-black px-12 py-5 rounded-full transition-all shadow-xl uppercase tracking-widest text-sm">Get Expert Advice</Link>
               <Link to="/packages" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-full font-black transition-all uppercase tracking-widest text-sm">Browse Packages</Link>
