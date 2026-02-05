@@ -47,7 +47,7 @@ const AnimatedStat: React.FC<{ value: number, label: string, icon: React.ReactNo
 
   return (
     <div ref={elementRef} className="text-center group">
-      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-red-600 shadow-sm border border-slate-100 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
+      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 text-red-600 shadow-sm border border-slate-100 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
         {icon}
       </div>
       <h4 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">
@@ -69,7 +69,7 @@ const About: React.FC = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center pt-24 overflow-hidden bg-navy-800">
+      <section className="relative min-h-[60vh] md:min-h-[90vh] flex items-center pt-20 md:pt-32 overflow-hidden bg-navy-800">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-navy-800 via-navy-800/80 to-transparent z-10"></div>
           <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover opacity-40 scale-105" alt="Travel Hero" />
@@ -102,9 +102,9 @@ const About: React.FC = () => {
       </section>
 
       {/* About Us Description */}
-      <section className="py-32 bg-white">
+      <section className="py-16 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-center">
             <div className="order-2 lg:order-1">
               <div className="grid grid-cols-2 gap-6">
                 <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&q=80&w=800" className="rounded-[40px] w-full h-80 object-cover mt-12 shadow-xl hover:scale-105 transition-transform duration-500" alt="Culture" />
@@ -130,11 +130,11 @@ const About: React.FC = () => {
       </section>
 
       {/* Vision & Mission */}
-      <section className="py-32 bg-slate-50">
+      <section className="py-16 md:py-32 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div className="bg-white p-16 rounded-[60px] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
-              <div className="w-20 h-20 bg-red-600 text-white rounded-3xl flex items-center justify-center mb-10 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+            <div className="bg-white p-8 md:p-16 rounded-[40px] md:rounded-[60px] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-red-600 text-white rounded-2xl md:rounded-3xl flex items-center justify-center mb-6 md:mb-10 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
                 <Target size={40} />
               </div>
               <h3 className="text-3xl font-black text-navy-800 mb-8 uppercase tracking-tighter">Our Vision</h3>
@@ -142,8 +142,8 @@ const About: React.FC = () => {
                 To be the most innovative travel management company throughout the region, while creating a culture of service excellence and distinction.
               </p>
             </div>
-            <div className="bg-white p-16 rounded-[60px] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
-              <div className="w-20 h-20 bg-navy-800 text-white rounded-3xl flex items-center justify-center mb-10 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
+            <div className="bg-white p-8 md:p-16 rounded-[40px] md:rounded-[60px] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-navy-800 text-white rounded-2xl md:rounded-3xl flex items-center justify-center mb-6 md:mb-10 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
                 <Award size={40} />
               </div>
               <h3 className="text-3xl font-black text-navy-800 mb-8 uppercase tracking-tighter">Our Mission</h3>
@@ -156,7 +156,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Global Impact Stats - Updated with Counting Animation */}
-      <section className="py-24 bg-white relative overflow-hidden border-y border-slate-50">
+      <section className="py-12 md:py-24 bg-white relative overflow-hidden border-y border-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {stats.map((stat, i) => (
@@ -173,7 +173,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-navy-800 relative overflow-hidden text-center">
+      <section className="py-12 md:py-24 bg-navy-800 relative overflow-hidden text-center">
         <div className="absolute inset-0 opacity-20 z-0">
           <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="CTA" />
         </div>
