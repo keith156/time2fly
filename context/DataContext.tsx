@@ -6,8 +6,9 @@ import { PACKAGES as INITIAL_PACKAGES, BLOG_POSTS as INITIAL_BLOGS, DESTINATIONS
 
 // Supabase Configuration
 // Supabase Configuration
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Use fallbacks to prevent crash if env vars aren't loaded yet (requires restart)
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co';
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder';
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 interface DataContextType {
