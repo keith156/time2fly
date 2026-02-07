@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Package as PackageIcon, FileText, Plus, Edit, Trash2, LogOut, Upload, X, User, MapPin, Star } from 'lucide-react';
+import { Package as PackageIcon, FileText, Plus, Edit, Trash2, LogOut, Upload, X, User, MapPin, Star, Loader2 } from 'lucide-react';
 import { useData } from '../context/DataContext.tsx';
 import { Package, BlogPost, Destination } from '../types';
 
 const AdminDashboard: React.FC = () => {
   const {
-    packages, blogs, destinations,
+    packages, blogs, destinations, loading, isUploading,
     addPackage, updatePackage, deletePackage,
     addBlog, updateBlog, deleteBlog,
     addDestination, updateDestination, deleteDestination
@@ -197,8 +197,28 @@ const AdminDashboard: React.FC = () => {
                   <textarea rows={6} value={editingPackage.itinerary || ''} onChange={e => setEditingPackage({ ...editingPackage, itinerary: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Day 1: Arrival... Day 2: Tour..."></textarea>
                 </div>
                 <div className="flex gap-4 pt-4">
-                  <button type="submit" className="flex-1 bg-amber-500 hover:bg-slate-900 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest">Save Package</button>
-                  <button type="button" onClick={() => setEditingPackage(null)} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest">Cancel</button>
+                  <button
+                    type="submit"
+                    disabled={isUploading}
+                    className="flex-1 bg-amber-500 hover:bg-slate-900 disabled:bg-slate-300 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest flex items-center justify-center space-x-2"
+                  >
+                    {isUploading ? (
+                      <>
+                        <Loader2 className="animate-spin" size={20} />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <span>Save Package</span>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isUploading}
+                    onClick={() => setEditingPackage(null)}
+                    className="flex-1 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest"
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>
@@ -256,8 +276,28 @@ const AdminDashboard: React.FC = () => {
                   <textarea rows={10} value={editingBlog.content || ''} onChange={e => setEditingBlog({ ...editingBlog, content: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Write your blog post here..." required></textarea>
                 </div>
                 <div className="flex gap-4 pt-4">
-                  <button type="submit" className="flex-1 bg-amber-500 hover:bg-slate-900 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest">Publish Post</button>
-                  <button type="button" onClick={() => setEditingBlog(null)} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest">Cancel</button>
+                  <button
+                    type="submit"
+                    disabled={isUploading}
+                    className="flex-1 bg-amber-500 hover:bg-slate-900 disabled:bg-slate-300 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest flex items-center justify-center space-x-2"
+                  >
+                    {isUploading ? (
+                      <>
+                        <Loader2 className="animate-spin" size={20} />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <span>Publish Post</span>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isUploading}
+                    onClick={() => setEditingBlog(null)}
+                    className="flex-1 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest"
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>
@@ -300,8 +340,28 @@ const AdminDashboard: React.FC = () => {
                   <textarea rows={4} value={editingDest.details || ''} onChange={e => setEditingDest({ ...editingDest, details: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Describe the region's appeal..." required></textarea>
                 </div>
                 <div className="flex gap-4 pt-4">
-                  <button type="submit" className="flex-1 bg-amber-500 hover:bg-slate-900 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest">Save Destination</button>
-                  <button type="button" onClick={() => setEditingDest(null)} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest">Cancel</button>
+                  <button
+                    type="submit"
+                    disabled={isUploading}
+                    className="flex-1 bg-amber-500 hover:bg-slate-900 disabled:bg-slate-300 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest flex items-center justify-center space-x-2"
+                  >
+                    {isUploading ? (
+                      <>
+                        <Loader2 className="animate-spin" size={20} />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <span>Save Destination</span>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isUploading}
+                    onClick={() => setEditingDest(null)}
+                    className="flex-1 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest"
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>

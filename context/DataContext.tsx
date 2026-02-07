@@ -16,6 +16,7 @@ interface DataContextType {
   loading: boolean;
   lastUpdated: string | null;
   refreshData: () => Promise<void>;
+  isUploading: boolean;
   addPackage: (pkg: Package) => Promise<void>;
   updatePackage: (pkg: Package) => Promise<void>;
   deletePackage: (id: string) => Promise<void>;
@@ -36,6 +37,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [blogs, setBlogs] = useState<BlogPost[]>(INITIAL_BLOGS);
   const [destinations, setDestinations] = useState<Destination[]>(INITIAL_DESTINATIONS);
   const [loading, setLoading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
 
   useEffect(() => {
@@ -155,15 +157,71 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await fetchInitialData();
   };
 
+  const uploadImage = async (base64String: string, path: string): Promise<string> => {
+    if (!base64String.startsWith('data:')) return base64String;
+
+    try {
+      // Extract content type and base64 data
+      const [header, data] = base64String.split(',');
+      const contentType = header.split(':')[1].split(';')[0];
+      const binary = atob(data);
+      const array = [];
+      for (let i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      const blob = new Blob([new Uint8Array(array)], { type: contentType });
+
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
+      const filePath = `${path}/${fileName}`;
+
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('images')
+        .upload(filePath, blob, { contentType, upsert: true });
+
+      if (uploadError) {
+        // If 'images' bucket doesn't exist, this might fail. 
+        // In a real app we'd ensure it exists, but here we'll log and return original if fail.
+        console.error('Upload error:', uploadError);
+        return base64String;
+      }
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('images')
+        .getPublicUrl(filePath);
+
+      return publicUrl;
+    } catch (err) {
+      console.error('Image processing error:', err);
+      return base64String;
+    }
+  };
+
   const addPackage = async (pkg: Package) => {
-    const { id, ...pkgData } = pkg;
-    const { data, error } = await supabase.from('packages').insert([pkgData]).select();
-    if (data) setPackages([data[0], ...packages]);
+    setIsUploading(true);
+    try {
+      const { id, ...pkgData } = pkg;
+      if (pkgData.image) {
+        pkgData.image = await uploadImage(pkgData.image, 'packages');
+      }
+      const { data, error } = await supabase.from('packages').insert([pkgData]).select();
+      if (data) setPackages([data[0], ...packages]);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const updatePackage = async (pkg: Package) => {
-    await supabase.from('packages').update(pkg).eq('id', pkg.id);
-    setPackages(packages.map(p => p.id === pkg.id ? pkg : p));
+    setIsUploading(true);
+    try {
+      const updatedPkg = { ...pkg };
+      if (updatedPkg.image && updatedPkg.image.startsWith('data:')) {
+        updatedPkg.image = await uploadImage(updatedPkg.image, 'packages');
+      }
+      await supabase.from('packages').update(updatedPkg).eq('id', pkg.id);
+      setPackages(packages.map(p => p.id === pkg.id ? updatedPkg : p));
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const deletePackage = async (id: string) => {
@@ -172,14 +230,31 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const addBlog = async (blog: BlogPost) => {
-    const { id, ...blogData } = blog;
-    const { data, error } = await supabase.from('blogs').insert([blogData]).select();
-    if (data) setBlogs([data[0], ...blogs]);
+    setIsUploading(true);
+    try {
+      const { id, ...blogData } = blog;
+      if (blogData.image) {
+        blogData.image = await uploadImage(blogData.image, 'blogs');
+      }
+      const { data, error } = await supabase.from('blogs').insert([blogData]).select();
+      if (data) setBlogs([data[0], ...blogs]);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const updateBlog = async (blog: BlogPost) => {
-    await supabase.from('blogs').update(blog).eq('id', blog.id);
-    setBlogs(blogs.map(b => b.id === blog.id ? blog : b));
+    setIsUploading(true);
+    try {
+      const updatedBlog = { ...blog };
+      if (updatedBlog.image && updatedBlog.image.startsWith('data:')) {
+        updatedBlog.image = await uploadImage(updatedBlog.image, 'blogs');
+      }
+      await supabase.from('blogs').update(updatedBlog).eq('id', blog.id);
+      setBlogs(blogs.map(b => b.id === blog.id ? updatedBlog : b));
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const deleteBlog = async (id: string) => {
@@ -188,14 +263,31 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const addDestination = async (dest: Destination) => {
-    const { id, ...destData } = dest;
-    const { data } = await supabase.from('destinations').insert([destData]).select();
-    if (data) setDestinations([data[0], ...destinations]);
+    setIsUploading(true);
+    try {
+      const { id, ...destData } = dest;
+      if (destData.image) {
+        destData.image = await uploadImage(destData.image, 'destinations');
+      }
+      const { data } = await supabase.from('destinations').insert([destData]).select();
+      if (data) setDestinations([data[0], ...destinations]);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const updateDestination = async (dest: Destination) => {
-    await supabase.from('destinations').update(dest).eq('id', dest.id);
-    setDestinations(destinations.map(d => d.id === dest.id ? dest : d));
+    setIsUploading(true);
+    try {
+      const updatedDest = { ...dest };
+      if (updatedDest.image && updatedDest.image.startsWith('data:')) {
+        updatedDest.image = await uploadImage(updatedDest.image, 'destinations');
+      }
+      await supabase.from('destinations').update(updatedDest).eq('id', dest.id);
+      setDestinations(destinations.map(d => d.id === dest.id ? updatedDest : d));
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const deleteDestination = async (id: string) => {
@@ -205,7 +297,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   return (
     <DataContext.Provider value={{
-      packages, blogs, destinations, loading, lastUpdated, refreshData,
+      packages, blogs, destinations, loading, isUploading, lastUpdated, refreshData,
       addPackage, updatePackage, deletePackage,
       addBlog, updateBlog, deleteBlog,
       addDestination, updateDestination, deleteDestination

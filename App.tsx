@@ -72,7 +72,7 @@ const Navbar: React.FC = () => {
               <img
                 src="/assets/logo.png"
                 alt="Time2Fly Logo"
-                className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                className="w-full h-full object-contain scale-[1.4] transition-transform duration-300 group-hover:scale-[1.5]"
               />
             </div>
             <span className="text-white font-black text-xl md:text-2xl tracking-tight">Time2Fly</span>
