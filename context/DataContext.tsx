@@ -5,8 +5,9 @@ import { Package, BlogPost, Destination } from '../types';
 import { PACKAGES as INITIAL_PACKAGES, BLOG_POSTS as INITIAL_BLOGS, DESTINATIONS as INITIAL_DESTINATIONS } from '../constants';
 
 // Supabase Configuration
-const SUPABASE_URL = 'https://goxpwwrtonavvvijwvmw.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_mfAHnhWwCb6EVEOBGIsK0w_xBESkd1c';
+// Supabase Configuration
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 interface DataContextType {
@@ -26,6 +27,7 @@ interface DataContextType {
   addDestination: (dest: Destination) => Promise<void>;
   updateDestination: (dest: Destination) => Promise<void>;
   deleteDestination: (id: string) => Promise<void>;
+  migrateLocalData: () => Promise<{ packages: number; blogs: number; destinations: number }>;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -274,20 +276,35 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const addDestination = async (dest: Destination) => {
+    console.log('addDestination: Setting isUploading to true');
+    console.log('addDestination: Destination data:', dest);
     setIsUploading(true);
     try {
       const { id, ...destData } = dest;
       if (destData.image) {
         destData.image = await uploadImage(destData.image, 'destinations');
       }
-      const { data } = await supabase.from('destinations').insert([destData]).select();
-      if (data) setDestinations([data[0], ...destinations]);
+      console.log('addDestination: Inserting into Supabase:', destData);
+      const { data, error } = await supabase.from('destinations').insert([destData]).select();
+      if (error) {
+        console.error('Destination insert error:', error);
+      }
+      if (data) {
+        console.log('addDestination: Success! Data:', data[0]);
+        setDestinations([data[0], ...destinations]);
+      } else {
+        console.warn('addDestination: No data returned from insert');
+      }
+    } catch (err) {
+      console.error('addDestination: Exception:', err);
     } finally {
+      console.log('addDestination: Setting isUploading to false');
       setIsUploading(false);
     }
   };
 
   const updateDestination = async (dest: Destination) => {
+    console.log('updateDestination: Setting isUploading to true');
     setIsUploading(true);
     try {
       const updatedDest = { ...dest };
@@ -297,6 +314,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       await supabase.from('destinations').update(updatedDest).eq('id', dest.id);
       setDestinations(destinations.map(d => d.id === dest.id ? updatedDest : d));
     } finally {
+      console.log('updateDestination: Setting isUploading to false');
       setIsUploading(false);
     }
   };
@@ -306,12 +324,95 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setDestinations(destinations.filter(d => d.id !== id));
   };
 
+  const migrateLocalData = async () => {
+    setIsUploading(true);
+    let counts = { packages: 0, blogs: 0, destinations: 0 };
+
+    try {
+      const cachedData = localStorage.getItem(STORAGE_KEY);
+      if (!cachedData) return counts;
+
+      const parsed = JSON.parse(cachedData);
+
+      // Migrate Packages
+      if (parsed.packages && Array.isArray(parsed.packages)) {
+        for (const pkg of parsed.packages) {
+          try {
+            // Strip ID to let Supabase generate a new UUID
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { id, ...pkgData } = pkg;
+
+            // Upload image if needed
+            if (pkgData.image && pkgData.image.startsWith('data:')) {
+              pkgData.image = await uploadImage(pkgData.image, 'packages');
+            }
+
+            const { error } = await supabase.from('packages').insert([pkgData]);
+            if (!error) counts.packages++;
+            else console.error('Migration package error:', error);
+          } catch (e) {
+            console.error('Migration package exception:', e);
+          }
+        }
+      }
+
+      // Migrate Blogs
+      if (parsed.blogs && Array.isArray(parsed.blogs)) {
+        for (const blog of parsed.blogs) {
+          try {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { id, ...blogData } = blog;
+
+            if (blogData.image && blogData.image.startsWith('data:')) {
+              blogData.image = await uploadImage(blogData.image, 'blogs');
+            }
+
+            const { error } = await supabase.from('blogs').insert([blogData]);
+            if (!error) counts.blogs++;
+          } catch (e) {
+            console.error('Migration blog exception:', e);
+          }
+        }
+      }
+
+      // Migrate Destinations
+      if (parsed.destinations && Array.isArray(parsed.destinations)) {
+        for (const dest of parsed.destinations) {
+          try {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { id, ...destData } = dest;
+
+            if (destData.image && destData.image.startsWith('data:')) {
+              destData.image = await uploadImage(destData.image, 'destinations');
+            }
+
+            const { error } = await supabase.from('destinations').insert([destData]);
+            if (!error) counts.destinations++;
+          } catch (e) {
+            console.error('Migration destination exception:', e);
+          }
+        }
+      }
+
+      // Refresh data from Supabase after migration
+      await fetchInitialData();
+
+    } catch (err) {
+      console.error('Migration failed:', err);
+    } finally {
+      setIsUploading(false);
+    }
+
+    return counts;
+  };
+
   return (
     <DataContext.Provider value={{
       packages, blogs, destinations, loading, isUploading, lastUpdated, refreshData,
       addPackage, updatePackage, deletePackage,
       addBlog, updateBlog, deleteBlog,
-      addDestination, updateDestination, deleteDestination
+      addDestination, updateDestination, deleteDestination,
+      migrateLocalData
     }}>
       {children}
     </DataContext.Provider>
