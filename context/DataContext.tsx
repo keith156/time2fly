@@ -158,7 +158,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const uploadImage = async (base64String: string, path: string): Promise<string> => {
+    // If it's already a URL, return it
     if (!base64String.startsWith('data:')) return base64String;
+
+    console.log('Starting image upload...');
 
     try {
       // Extract content type and base64 data
@@ -174,14 +177,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
       const filePath = `${path}/${fileName}`;
 
+      console.log('Uploading to Supabase Storage...');
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('images')
         .upload(filePath, blob, { contentType, upsert: true });
 
       if (uploadError) {
-        // If 'images' bucket doesn't exist, this might fail. 
-        // In a real app we'd ensure it exists, but here we'll log and return original if fail.
-        console.error('Upload error:', uploadError);
+        console.warn('Supabase Storage upload failed. Using base64 fallback.', uploadError);
+        // Fallback: keep base64 in database
+        // This ensures upload still works even if storage bucket isn't configured
         return base64String;
       }
 
@@ -189,14 +193,17 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .from('images')
         .getPublicUrl(filePath);
 
+      console.log('Image uploaded successfully:', publicUrl);
       return publicUrl;
     } catch (err) {
-      console.error('Image processing error:', err);
+      console.error('Image upload error. Using base64 fallback:', err);
+      // Fallback to base64 so upload doesn't fail completely
       return base64String;
     }
   };
 
   const addPackage = async (pkg: Package) => {
+    console.log('addPackage: Setting isUploading to true');
     setIsUploading(true);
     try {
       const { id, ...pkgData } = pkg;
@@ -205,12 +212,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       const { data, error } = await supabase.from('packages').insert([pkgData]).select();
       if (data) setPackages([data[0], ...packages]);
+      if (error) console.error('Package insert error:', error);
     } finally {
+      console.log('addPackage: Setting isUploading to false');
       setIsUploading(false);
     }
   };
 
   const updatePackage = async (pkg: Package) => {
+    console.log('updatePackage: Setting isUploading to true');
     setIsUploading(true);
     try {
       const updatedPkg = { ...pkg };
@@ -220,6 +230,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       await supabase.from('packages').update(updatedPkg).eq('id', pkg.id);
       setPackages(packages.map(p => p.id === pkg.id ? updatedPkg : p));
     } finally {
+      console.log('updatePackage: Setting isUploading to false');
       setIsUploading(false);
     }
   };

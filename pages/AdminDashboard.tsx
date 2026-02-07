@@ -37,7 +37,7 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  const savePackage = (e: React.FormEvent) => {
+  const savePackage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingPackage) return;
     const pkg = {
@@ -47,12 +47,12 @@ const AdminDashboard: React.FC = () => {
       is_starred: editingPackage.is_starred || false
     } as Package;
 
-    if (editingPackage.id) updatePackage(pkg);
-    else addPackage(pkg);
+    if (editingPackage.id) await updatePackage(pkg);
+    else await addPackage(pkg);
     setEditingPackage(null);
   };
 
-  const saveBlog = (e: React.FormEvent) => {
+  const saveBlog = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingBlog) return;
     const blog = {
@@ -62,12 +62,12 @@ const AdminDashboard: React.FC = () => {
       author: editingBlog.author || 'Editorial Team',
     } as BlogPost;
 
-    if (editingBlog.id) updateBlog(blog);
-    else addBlog(blog);
+    if (editingBlog.id) await updateBlog(blog);
+    else await addBlog(blog);
     setEditingBlog(null);
   };
 
-  const saveDest = (e: React.FormEvent) => {
+  const saveDest = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingDest) return;
     const dest = {
@@ -75,8 +75,8 @@ const AdminDashboard: React.FC = () => {
       id: editingDest.id || Date.now().toString(),
     } as Destination;
 
-    if (editingDest.id) updateDestination(dest);
-    else addDestination(dest);
+    if (editingDest.id) await updateDestination(dest);
+    else await addDestination(dest);
     setEditingDest(null);
   };
 
