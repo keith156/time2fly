@@ -88,7 +88,7 @@ const About: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="hidden lg:block relative">
+            <div className="relative mt-12 lg:mt-0">
               <div className="relative z-10 rounded-[40px] overflow-hidden border-4 border-white/10 shadow-2xl">
                 <img src="/assets/director.jpg" className="w-full aspect-[4/5] object-cover" alt="Director" />
               </div>
