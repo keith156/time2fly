@@ -3,8 +3,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { Package, BlogPost, Destination } from '../types';
 import { PACKAGES as INITIAL_PACKAGES, BLOG_POSTS as INITIAL_BLOGS, DESTINATIONS as INITIAL_DESTINATIONS } from '../constants';
+import { compressImage } from '../utils/imageCompression';
 
-// Supabase Configuration
 // Supabase Configuration
 // Use fallbacks to prevent crash if env vars aren't loaded yet (requires restart)
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co';
@@ -34,6 +34,7 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 const STORAGE_KEY = 't2f_cached_data';
+const CACHE_DURATION_MS = 60 * 60 * 1000; // 1 Hour
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [packages, setPackages] = useState<Package[]>(INITIAL_PACKAGES);
@@ -46,19 +47,33 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     // 1. Try to load from LocalStorage first for instant UI
     const cachedData = localStorage.getItem(STORAGE_KEY);
+    let shouldFetch = true;
+
     if (cachedData) {
       try {
         const parsed = JSON.parse(cachedData);
         if (parsed.packages) setPackages(parsed.packages);
         if (parsed.blogs) setBlogs(parsed.blogs);
         if (parsed.destinations) setDestinations(parsed.destinations);
-        if (parsed.lastUpdated) setLastUpdated(parsed.lastUpdated);
+
+        if (parsed.lastUpdated) {
+          setLastUpdated(parsed.lastUpdated);
+          const cacheTime = new Date(parsed.lastUpdated).getTime();
+          const now = new Date().getTime();
+          // Only fetch if cache is older than 1 hour or empty
+          if (now - cacheTime < CACHE_DURATION_MS && parsed.packages.length > 0) {
+            console.log('Using cached data, skipping initial fetch.');
+            shouldFetch = false;
+          }
+        }
       } catch (e) {
         console.error("Cache parsing error", e);
       }
     }
 
-    fetchInitialData();
+    if (shouldFetch) {
+      fetchInitialData();
+    }
 
     // Subscribe to Real-time changes with automatic reconnection handling
     const fetchTableSync = (table: string, setter: React.Dispatch<React.SetStateAction<any[]>>) => {
@@ -85,7 +100,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           }
           if (status === 'CLOSED' || status === 'CHANNEL_ERROR') {
             console.warn(`Real-time connection ${status} for ${table}. Attempting to re-fetch...`);
-            fetchInitialData();
+            // Only re-fetch if we really need to
           }
         });
 
@@ -111,7 +126,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // We only want the text data (itinerary, description, etc.) cached
       const stripImages = (items: any[]) => items.map(item => {
         const { image, ...rest } = item;
-        // Only keep URL images, strip base64
+        // Only keep URL images, strip base64 if it somehow got in
         if (typeof image === 'string' && image.startsWith('data:')) {
           return { ...rest, image: '' };
         }
@@ -167,29 +182,21 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     console.log('Starting image upload...');
 
     try {
-      // Extract content type and base64 data
-      const [header, data] = base64String.split(',');
-      const contentType = header.split(':')[1].split(';')[0];
-      const binary = atob(data);
-      const array = [];
-      for (let i = 0; i < binary.length; i++) {
-        array.push(binary.charCodeAt(i));
-      }
-      const blob = new Blob([new Uint8Array(array)], { type: contentType });
+      // COMPRESS IMAGE BEFORE UPLOAD
+      const blob = await compressImage(base64String);
+      const contentType = 'image/jpeg'; // compressImage forces jpeg
 
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.jpg`;
       const filePath = `${path}/${fileName}`;
 
-      console.log('Uploading to Supabase Storage...');
+      console.log(`Uploading compressed image to Supabase Storage (${blob.size} bytes)...`);
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('images')
         .upload(filePath, blob, { contentType, upsert: true });
 
       if (uploadError) {
-        console.warn('Supabase Storage upload failed. Using base64 fallback.', uploadError);
-        // Fallback: keep base64 in database
-        // This ensures upload still works even if storage bucket isn't configured
-        return base64String;
+        console.error('Supabase Storage upload failed:', uploadError);
+        throw new Error('Image upload failed. Please try again.');
       }
 
       const { data: { publicUrl } } = supabase.storage
@@ -199,9 +206,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.log('Image uploaded successfully:', publicUrl);
       return publicUrl;
     } catch (err) {
-      console.error('Image upload error. Using base64 fallback:', err);
-      // Fallback to base64 so upload doesn't fail completely
-      return base64String;
+      console.error('Image upload critical error:', err);
+      throw err; // Re-throw to prevent saving invalid data
     }
   };
 
@@ -425,3 +431,4 @@ export const useData = () => {
   if (!context) throw new Error('useData must be used within a DataProvider');
   return context;
 };
+

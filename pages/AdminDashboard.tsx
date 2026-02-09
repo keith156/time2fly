@@ -107,19 +107,7 @@ const AdminDashboard: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <button
-              onClick={async () => {
-                if (window.confirm('This will upload your local data to Supabase. Continue?')) {
-                  const counts = await migrateLocalData();
-                  alert(`Migration Complete!\nUploaded:\n${counts.packages} Packages\n${counts.blogs} Blogs\n${counts.destinations} Destinations`);
-                }
-              }}
-              disabled={isUploading}
-              className="flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl font-bold transition-all text-sm uppercase tracking-widest disabled:opacity-50"
-            >
-              <Upload size={18} />
-              <span>{isUploading ? 'Migrating...' : 'Migrate to Cloud'}</span>
-            </button>
+
 
             <button
               onClick={handleLogout}

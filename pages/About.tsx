@@ -90,7 +90,7 @@ const About: React.FC = () => {
             </div>
             <div className="hidden lg:block relative">
               <div className="relative z-10 rounded-[60px] overflow-hidden border-8 border-white/10 shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&q=80&w=1000" className="w-full aspect-[4/5] object-cover" alt="Explore" />
+                <img src="/assets/director.jpg" className="w-full aspect-[4/5] object-cover" alt="Director" />
               </div>
               <div className="absolute -bottom-10 -left-10 w-64 bg-red-600 p-8 rounded-[40px] shadow-2xl transform -rotate-3">
                 <h3 className="text-white font-black text-2xl tracking-tighter mb-1">24/7</h3>
