@@ -185,14 +185,14 @@ const Footer: React.FC = () => {
               <MapPin size={18} className="text-amber-500 flex-shrink-0" />
               <span>Kampala, Uganda</span>
             </div>
-            <div className="flex items-center space-x-3">
-              <Phone size={18} className="text-amber-500 flex-shrink-0" />
-              <div className="flex items-center space-x-4">
-                <span>+256 759 243 331</span>
+            <div className="flex items-start md:items-center space-x-3">
+              <Phone size={18} className="text-amber-500 flex-shrink-0 mt-1 md:mt-0" />
+              <div className="flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-4">
+                <span className="whitespace-nowrap">+256 759 243 331</span>
                 <span className="text-white/20 hidden md:block">|</span>
-                <span>+256 757 717 302</span>
+                <span className="whitespace-nowrap">+256 757 717 302</span>
                 <span className="text-white/20 hidden md:block">|</span>
-                <span>+256 783 084 521</span>
+                <span className="whitespace-nowrap">+256 783 084 521</span>
               </div>
             </div>
             <div className="flex items-center space-x-3">
