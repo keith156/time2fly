@@ -229,6 +229,47 @@ const Home: React.FC = () => {
 
 
 
+      {/* Featured Packages Section */}
+      <section className="py-24 bg-slate-50 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-slate-900 uppercase tracking-tighter mb-4">Curated Journeys</h2>
+            <p className="text-slate-500 font-medium text-lg uppercase tracking-widest">Hand-picked experiences for the modern voyager</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {packages.slice(0, 3).map((pkg) => (
+              <div key={pkg.id} className="group bg-white rounded-[32px] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100 cursor-pointer" onClick={() => setSelectedPackage(pkg)}>
+                <div className="relative h-72 overflow-hidden">
+                  <img src={pkg.image} alt={pkg.destination} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full flex items-center text-amber-600 font-black text-xs uppercase tracking-widest shadow-lg">
+                    <Star size={12} fill="#f59e0b" className="mr-1" /> {pkg.rating}
+                  </div>
+                </div>
+                <div className="p-8">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight leading-none mb-1">{pkg.destination}</h3>
+                      <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">{pkg.duration} • Premium Tour</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center mt-6 pt-6 border-t border-slate-50">
+                    <span className="text-2xl font-black text-slate-900 tracking-tight">${pkg.price}</span>
+                    <span className="text-amber-500 font-bold uppercase tracking-widest text-[10px] group-hover:underline">View Details</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <Link to="/packages" className="inline-flex items-center bg-slate-950 hover:bg-amber-500 text-white px-10 py-4 rounded-full font-black transition-all shadow-xl uppercase tracking-widest text-xs group">
+              View All Destinations <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="py-16 bg-navy-900 relative overflow-hidden border-t-4 border-red-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center">
