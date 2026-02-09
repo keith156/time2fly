@@ -220,7 +220,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         pkgData.image = await uploadImage(pkgData.image, 'packages');
       }
       const { data, error } = await supabase.from('packages').insert([pkgData]).select();
-      if (data) setPackages([data[0], ...packages]);
+      if (data) setPackages(prev => [data[0], ...prev]);
       if (error) console.error('Package insert error:', error);
     } finally {
       console.log('addPackage: Setting isUploading to false');
@@ -237,7 +237,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         updatedPkg.image = await uploadImage(updatedPkg.image, 'packages');
       }
       await supabase.from('packages').update(updatedPkg).eq('id', pkg.id);
-      setPackages(packages.map(p => p.id === pkg.id ? updatedPkg : p));
+      setPackages(prev => prev.map(p => p.id === pkg.id ? updatedPkg : p));
     } finally {
       console.log('updatePackage: Setting isUploading to false');
       setIsUploading(false);
@@ -246,7 +246,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const deletePackage = async (id: string) => {
     await supabase.from('packages').delete().eq('id', id);
-    setPackages(packages.filter(p => p.id !== id));
+    setPackages(prev => prev.filter(p => p.id !== id));
   };
 
   const addBlog = async (blog: BlogPost) => {
@@ -257,7 +257,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         blogData.image = await uploadImage(blogData.image, 'blogs');
       }
       const { data, error } = await supabase.from('blogs').insert([blogData]).select();
-      if (data) setBlogs([data[0], ...blogs]);
+      if (data) setBlogs(prev => [data[0], ...prev]);
     } finally {
       setIsUploading(false);
     }
@@ -298,7 +298,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       if (data) {
         console.log('addDestination: Success! Data:', data[0]);
-        setDestinations([data[0], ...destinations]);
+        // Update local state immediately with the real data from DB
+        setDestinations(prev => [data[0], ...prev]);
       } else {
         console.warn('addDestination: No data returned from insert');
       }
@@ -307,6 +308,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } finally {
       console.log('addDestination: Setting isUploading to false');
       setIsUploading(false);
+      // Refresh to ensure sync (optional but safer)
+      // fetchInitialData(); 
     }
   };
 
