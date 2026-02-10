@@ -232,7 +232,7 @@ const Home: React.FC = () => {
 
 
       {/* Testimonials */}
-      <section className="py-16 bg-navy-900 relative overflow-hidden border-t-4 border-red-600">
+      <section className="py-16 bg-navy-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center">
           <SectionTitle title="Voices of Our Travellers" light={true} />
         </div>
@@ -247,7 +247,7 @@ const Home: React.FC = () => {
                     <div className="flex space-x-1">
                       {[...Array(5)].map((_, starIdx) => (<Star key={starIdx} size={16} fill={starIdx < t.rating ? "#f59e0b" : "none"} className={starIdx < t.rating ? "text-amber-500" : "text-slate-700"} />))}
                     </div>
-                    <div className="text-red-600/30 group-hover:text-amber-500/30 transition-colors"><Quote size={32} /></div>
+                    <div className="text-slate-700 font-serif text-6xl opacity-20 transition-all duration-300 group-hover:text-amber-500/20 group-hover:scale-110">"</div>
                   </div>
                   <p className="text-slate-100 font-medium italic mb-8 leading-relaxed whitespace-normal text-base">"{t.review}"</p>
                   <div className="mt-auto pt-6 border-t border-white/10 flex items-center gap-4">

@@ -92,10 +92,6 @@ const About: React.FC = () => {
               <div className="relative z-10 rounded-[40px] overflow-hidden border-4 border-white/10 shadow-2xl">
                 <img src="/assets/director.jpg" className="w-full aspect-[4/5] object-cover" alt="Director" />
               </div>
-              <div className="absolute -bottom-8 -left-8 w-56 bg-red-600 p-6 rounded-[30px] shadow-2xl transform -rotate-3">
-                <h3 className="text-white font-black text-xl tracking-tighter mb-1">24/7</h3>
-                <p className="text-red-100 font-bold uppercase tracking-widest text-[9px]">Customized Solutions</p>
-              </div>
             </div>
           </div>
         </div>
@@ -127,10 +123,10 @@ const About: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Vision & Mission */}
-      <section className="py-12 md:py-20 bg-slate-50">
+      < section className="py-12 md:py-20 bg-slate-50" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             <div className="bg-white p-8 md:p-10 rounded-[30px] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
@@ -153,10 +149,10 @@ const About: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Global Impact Stats - Updated with Counting Animation */}
-      <section className="py-10 md:py-16 bg-white relative overflow-hidden border-y border-slate-50">
+      < section className="py-10 md:py-16 bg-white relative overflow-hidden border-y border-slate-50" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
@@ -170,10 +166,10 @@ const About: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Final CTA */}
-      <section className="py-10 md:py-16 bg-navy-800 relative overflow-hidden text-center">
+      < section className="py-10 md:py-16 bg-navy-800 relative overflow-hidden text-center" >
         <div className="absolute inset-0 opacity-20 z-0">
           <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="CTA" />
         </div>
@@ -187,8 +183,8 @@ const About: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 };
 

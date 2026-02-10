@@ -53,11 +53,11 @@ const SpecialOffers: React.FC = () => {
                                         <div className="relative h-80 overflow-hidden cursor-pointer" onClick={() => navigate(`/packages?pkg=${pkg.id}`)}>
                                             <img src={pkg.image} alt={pkg.destination} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" loading="lazy" />
                                             <div className="absolute top-6 right-6 flex space-x-2 z-20">
-                                                <button onClick={(e) => handleShare(e, pkg)} className="bg-white/90 backdrop-blur-md w-10 h-10 rounded-full text-slate-900 hover:text-red-600 shadow-xl transition-all flex items-center justify-center">
+                                                <button onClick={(e) => handleShare(e, pkg)} className="bg-white/90 backdrop-blur-md w-10 h-10 rounded-full text-slate-900 hover:text-blue-600 shadow-xl transition-all flex items-center justify-center">
                                                     {copyFeedback === pkg.id ? <span className="text-[10px] font-black uppercase">Link</span> : <Share2 size={16} />}
                                                 </button>
                                             </div>
-                                            <div className="absolute inset-0 bg-gradient-to-t from-red-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                                            <div className="absolute inset-0 bg-gradient-to-t from-blue-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
                                                 <span className="text-white font-black uppercase tracking-widest text-xs">Unlock Exclusive Perks <ArrowRight size={14} className="inline ml-2" /></span>
                                             </div>
                                         </div>
@@ -100,7 +100,7 @@ const SpecialOffers: React.FC = () => {
                                     <Star className="text-red-200" size={48} />
                                 </div>
                                 <h3 className="text-3xl font-black uppercase tracking-tighter text-slate-300 mb-4">No Seasonal Offers Available</h3>
-                                <p className="text-slate-400 font-medium max-w-sm mx-auto mb-10">Our curation team is currently finalizing our next wave of exclusive travel collections. Check back soon!</p>
+                                <p className="text-slate-400 font-medium max-sm mx-auto mb-10">Our curation team is currently finalizing our next wave of exclusive travel collections. Check back soon!</p>
                                 <Link to="/packages" className="text-red-600 font-bold uppercase tracking-widest text-xs border-b-2 border-red-600 pb-1 hover:text-slate-950 hover:border-slate-950 transition-all">Explore Regular Collections</Link>
                             </div>
                         )}
