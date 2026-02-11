@@ -55,7 +55,6 @@ const Contact: React.FC = () => {
                   <p className="text-slate-500 mb-2">Mon - Sat: 8am - 7pm</p>
                   <div className="flex flex-col text-blue-600 font-bold">
                     <span>+256 759 243 331</span>
-                    <span>+256 757 717 302</span>
                     <span>+256 783 084 521</span>
                   </div>
                 </div>

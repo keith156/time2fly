@@ -47,7 +47,7 @@ const Destinations: React.FC = () => {
                             <div
                                 key={dest.id}
                                 className="bg-white rounded-[48px] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 group flex flex-col h-full cursor-pointer"
-                                onClick={() => navigate(`/packages?search=${dest.name}`)}
+                                onClick={() => navigate(`/destinations/${dest.id}`)}
                             >
                                 <div className="relative h-96 overflow-hidden">
                                     <img
@@ -64,11 +64,6 @@ const Destinations: React.FC = () => {
                                         </div>
                                         <h3 className="text-4xl font-black text-white uppercase tracking-tighter leading-none">{dest.name}</h3>
                                     </div>
-                                </div>
-                                <div className="p-10 flex-grow flex flex-col">
-                                    <p className="text-slate-500 mb-8 font-medium text-lg leading-relaxed flex-grow">
-                                        {dest.details}
-                                    </p>
                                 </div>
                             </div>
                         ))}

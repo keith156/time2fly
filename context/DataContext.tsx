@@ -133,9 +133,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { id, ...pkgData } = pkg;
       if (pkgData.image) pkgData.image = await uploadImage(pkgData.image, 'packages');
 
-      const { error } = await supabase.from('packages').insert([pkgData]);
-      if (error) console.error('Package insert error:', error);
-      // No manual local update - wait for realtime
+      const { data, error } = await supabase.from('packages').insert([pkgData]).select().single();
+      if (error) {
+        console.error('Package insert error:', error);
+      } else if (data) {
+        setPackages(prev => [data, ...prev]);
+      }
     } finally {
       setIsUploading(false);
     }
@@ -148,8 +151,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (updatedPkg.image && updatedPkg.image.startsWith('data:')) {
         updatedPkg.image = await uploadImage(updatedPkg.image, 'packages');
       }
-      const { error } = await supabase.from('packages').update(updatedPkg).eq('id', pkg.id);
-      if (error) console.error('Package update error:', error);
+      const { data, error } = await supabase.from('packages').update(updatedPkg).eq('id', pkg.id).select().single();
+      if (error) {
+        console.error('Package update error:', error);
+      } else if (data) {
+        setPackages(prev => prev.map(item => item.id === pkg.id ? data : item));
+      }
     } finally {
       setIsUploading(false);
     }
@@ -157,7 +164,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const deletePackage = async (id: string) => {
     const { error } = await supabase.from('packages').delete().eq('id', id);
-    if (error) console.error('Package delete error:', error);
+    if (error) {
+      console.error('Package delete error:', error);
+    } else {
+      setPackages(prev => prev.filter(item => item.id !== id));
+    }
   };
 
   const addBlog = async (blog: BlogPost) => {
@@ -166,8 +177,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { id, ...blogData } = blog;
       if (blogData.image) blogData.image = await uploadImage(blogData.image, 'blogs');
 
-      const { error } = await supabase.from('blogs').insert([blogData]);
-      if (error) console.error('Blog insert error:', error);
+      const { data, error } = await supabase.from('blogs').insert([blogData]).select().single();
+      if (error) {
+        console.error('Blog insert error:', error);
+      } else if (data) {
+        setBlogs(prev => [data, ...prev]);
+      }
     } finally {
       setIsUploading(false);
     }
@@ -180,8 +195,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (updatedBlog.image && updatedBlog.image.startsWith('data:')) {
         updatedBlog.image = await uploadImage(updatedBlog.image, 'blogs');
       }
-      const { error } = await supabase.from('blogs').update(updatedBlog).eq('id', blog.id);
-      if (error) console.error('Blog update error:', error);
+      const { data, error } = await supabase.from('blogs').update(updatedBlog).eq('id', blog.id).select().single();
+      if (error) {
+        console.error('Blog update error:', error);
+      } else if (data) {
+        setBlogs(prev => prev.map(item => item.id === blog.id ? data : item));
+      }
     } finally {
       setIsUploading(false);
     }
@@ -189,7 +208,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const deleteBlog = async (id: string) => {
     const { error } = await supabase.from('blogs').delete().eq('id', id);
-    if (error) console.error('Blog delete error:', error);
+    if (error) {
+      console.error('Blog delete error:', error);
+    } else {
+      setBlogs(prev => prev.filter(item => item.id !== id));
+    }
   };
 
   const addDestination = async (dest: Destination) => {
@@ -198,8 +221,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { id, ...destData } = dest;
       if (destData.image) destData.image = await uploadImage(destData.image, 'destinations');
 
-      const { error } = await supabase.from('destinations').insert([destData]);
-      if (error) console.error('Destination insert error:', error);
+      const { data, error } = await supabase.from('destinations').insert([destData]).select().single();
+      if (error) {
+        console.error('Destination insert error:', error);
+      } else if (data) {
+        setDestinations(prev => [data, ...prev]);
+      }
     } finally {
       setIsUploading(false);
     }
@@ -212,8 +239,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (updatedDest.image && updatedDest.image.startsWith('data:')) {
         updatedDest.image = await uploadImage(updatedDest.image, 'destinations');
       }
-      const { error } = await supabase.from('destinations').update(updatedDest).eq('id', dest.id);
-      if (error) console.error('Destination update error:', error);
+      const { data, error } = await supabase.from('destinations').update(updatedDest).eq('id', dest.id).select().single();
+      if (error) {
+        console.error('Destination update error:', error);
+      } else if (data) {
+        setDestinations(prev => prev.map(item => item.id === dest.id ? data : item));
+      }
     } finally {
       setIsUploading(false);
     }
@@ -221,7 +252,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const deleteDestination = async (id: string) => {
     const { error } = await supabase.from('destinations').delete().eq('id', id);
-    if (error) console.error('Destination delete error:', error);
+    if (error) {
+      console.error('Destination delete error:', error);
+    } else {
+      setDestinations(prev => prev.filter(item => item.id !== id));
+    }
   };
 
   const migrateLocalData = async () => {

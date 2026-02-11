@@ -340,9 +340,11 @@ const AdminDashboard: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Brief Insights/Details</label>
-                  <textarea rows={4} value={editingDest.details || ''} onChange={e => setEditingDest({ ...editingDest, details: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Describe the region's appeal..." required></textarea>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Country Information (Pure Text)</label>
+                    <textarea rows={16} value={editingDest.details || ''} onChange={e => setEditingDest({ ...editingDest, details: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Enter all country details, tips, and cultural info here..." required></textarea>
+                  </div>
                 </div>
                 <div className="flex gap-4 pt-4">
                   <button

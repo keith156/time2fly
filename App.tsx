@@ -13,6 +13,7 @@ const Login = React.lazy(() => import('./pages/Login'));
 const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
 const Destinations = React.lazy(() => import('./pages/Destinations'));
 const SpecialOffers = React.lazy(() => import('./pages/SpecialOffers'));
+const DestinationDetail = React.lazy(() => import('./pages/DestinationDetail'));
 
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import { DataProvider, useData } from './context/DataContext';
@@ -80,7 +81,7 @@ const Navbar: React.FC = () => {
           </Link>
 
           <div className="flex items-center space-x-4 ml-auto">
-            <audio ref={audioRef} src="/assets/WhatsApp Audio 2026-02-02 at 17.04.32.mpeg" loop />
+            <video ref={audioRef as any} src="/assets/Selected Travel Destinations - with Audio.mp4" loop className="hidden" />
             <button
               onClick={() => setIsMuted(!isMuted)}
               className="w-10 h-10 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center transition-all backdrop-blur-md border border-white/10"
@@ -190,8 +191,6 @@ const Footer: React.FC = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-4">
                 <span className="whitespace-nowrap">+256 759 243 331</span>
                 <span className="text-white/20 hidden md:block">|</span>
-                <span className="whitespace-nowrap">+256 757 717 302</span>
-                <span className="text-white/20 hidden md:block">|</span>
                 <span className="whitespace-nowrap">+256 783 084 521</span>
               </div>
             </div>
@@ -220,9 +219,9 @@ const Footer: React.FC = () => {
           <a href="https://www.tiktok.com/@time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="TikTok"><Music2 size={20} /></a>
         </div>
 
-        <div className="pt-8 border-t border-slate-900 flex flex-col items-center justify-center text-center text-slate-500 text-sm font-medium gap-4">
-          <p>© 2026 Time2Fly Tours & Travel Ltd. All rights reserved.</p>
-          <Link to="/login" className="flex items-center space-x-1 hover:text-amber-500 transition-colors">
+        <div className="pt-8 border-t border-blue-700 flex flex-col items-center justify-center text-center text-white/50 text-sm font-medium gap-4">
+          <p className="text-white">© 2026 Time2Fly Tours & Travel Ltd. All rights reserved.</p>
+          <Link to="/login" className="flex items-center space-x-1 opacity-20 hover:opacity-100 transition-opacity">
             <Lock size={14} />
             <span>Admin Login</span>
           </Link>
@@ -283,6 +282,7 @@ const App: React.FC = () => {
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/destinations" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><Destinations /></React.Suspense>} />
+                  <Route path="/destinations/:id" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><DestinationDetail /></React.Suspense>} />
                   <Route path="/special-offers" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><SpecialOffers /></React.Suspense>} />
                   <Route path="/login" element={<React.Suspense fallback={null}><Login /></React.Suspense>} />
                   <Route

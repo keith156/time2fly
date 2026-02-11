@@ -57,6 +57,30 @@ const Home: React.FC = () => {
     window.open('https://www.google.com/travel/flights', '_blank');
   };
 
+  const testimonialRef = React.useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = React.useState(false);
+
+  React.useEffect(() => {
+    const scrollContainer = testimonialRef.current;
+    if (!scrollContainer || isPaused) return;
+
+    let animationFrameId: number;
+    const scroll = () => {
+      if (scrollContainer && !isPaused) {
+        scrollContainer.scrollLeft += 0.6; // Slightly slower for even smoother feel
+
+        const maxScroll = scrollContainer.scrollWidth / 3;
+        if (scrollContainer.scrollLeft >= maxScroll * 2) {
+          scrollContainer.scrollLeft = maxScroll;
+        }
+      }
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+
+    animationFrameId = requestAnimationFrame(scroll);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isPaused]);
+
   if (selectedPackage) {
     return (
       <div className="pt-20 bg-white min-h-screen">
@@ -146,20 +170,17 @@ const Home: React.FC = () => {
       {/* Redesigned Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent z-10"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/20 z-10"></div>
           <video
             autoPlay={true}
             loop={true}
             muted={true}
             playsInline={true}
             preload="auto"
-            poster="/assets/hero-fallback.png"
-            key="/assets/bg-video.mp4"
+            key="/assets/Selected Travel Destinations - with Audio.mp4"
             className="w-full h-full object-cover scale-105"
             onEnded={(e) => e.currentTarget.play()}
           >
-            <source src="/assets/bg-video.mp4" type="video/mp4" />
+            <source src="/assets/Selected Travel Destinations - with Audio.mp4" type="video/mp4" />
           </video>
         </div>
 
@@ -239,7 +260,14 @@ const Home: React.FC = () => {
         <div className="relative">
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-navy-900 to-transparent z-10 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-navy-900 to-transparent z-10 pointer-events-none"></div>
-          <div className="flex whitespace-nowrap animate-marquee">
+          <div
+            ref={testimonialRef}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+            className="flex overflow-x-auto flex-nowrap pb-12 hide-scrollbar select-none cursor-grab active:cursor-grabbing"
+          >
             {extendedTestimonials.map((t, i) => (
               <div key={`${t.id}-${i}`} className="inline-block px-4 w-[400px] shrink-0">
                 <div className="bg-navy-800/50 backdrop-blur-md border border-navy-800 p-8 rounded-[40px] hover:border-amber-500 transition-all duration-300 group h-full flex flex-col shadow-2xl">

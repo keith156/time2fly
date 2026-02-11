@@ -167,13 +167,23 @@
         transform: translateX(100%);
       }
     }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
   <link rel="stylesheet" href="/index.css">
 </head>
 
 <body class="bg-slate-50 text-slate-900 overflow-x-hidden">
   <!-- Version Check to verify deployment -->
-  <div style="position: fixed; top: 0; left: 0; background: red; color: white; padding: 4px; z-index: 99999; font-size: 10px;">
+  <div
+    style="position: fixed; top: 0; left: 0; background: red; color: white; padding: 4px; z-index: 99999; font-size: 10px;">
     V2.2-HTML-DIRECT
   </div>
   <div id="root"></div>
