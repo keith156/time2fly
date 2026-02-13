@@ -101,7 +101,7 @@ const Navbar: React.FC = () => {
           </Link>
 
           <div className="flex items-center space-x-4 ml-auto">
-            <audio ref={audioRef as any} src="/assets/WhatsApp Audio 2026-02-02 at 17.04.32.mpeg" loop className="hidden" />
+            <audio ref={audioRef as any} src="/assets/bg-audio.mpeg" loop className="hidden" />
             <button
               onClick={() => setIsMuted(!isMuted)}
               className="w-10 h-10 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center transition-all backdrop-blur-md border border-white/10"
@@ -317,18 +317,6 @@ const App: React.FC = () => {
               </React.Suspense>
             </main>
             <Footer />
-            <a
-              href="https://wa.me/256783084521"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="fixed bottom-8 right-8 z-[60] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 group"
-              title="Chat on WhatsApp"
-            >
-              <div className="flex items-center space-x-2">
-                <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 font-bold text-sm whitespace-nowrap">Chat with us</span>
-                <MessageCircle size={28} />
-              </div>
-            </a>
           </div>
         </HashRouter>
       </ErrorBoundary>

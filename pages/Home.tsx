@@ -177,11 +177,11 @@ const Home: React.FC = () => {
             muted={true}
             playsInline={true}
             preload="auto"
-            key="/assets/WhatsApp Video 2026-02-11 at 12.16.41.mp4"
+            key="/assets/hero-video.mp4"
             className="w-full h-full object-cover scale-105"
             onEnded={(e) => e.currentTarget.play()}
           >
-            <source src="/assets/WhatsApp Video 2026-02-11 at 12.16.41.mp4" type="video/mp4" />
+            <source src="/assets/hero-video.mp4" type="video/mp4" />
           </video>
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-slate-900/40 z-[1]"></div>
