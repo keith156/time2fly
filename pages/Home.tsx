@@ -26,6 +26,7 @@ const Home: React.FC = () => {
   const [activeServiceIdx, setActiveServiceIdx] = useState(0);
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
 
+
   useEffect(() => {
     const serviceTimer = setInterval(() => {
       setActiveServiceIdx((prev) => (prev + 1) % SERVICES.length);
@@ -176,13 +177,16 @@ const Home: React.FC = () => {
             muted={true}
             playsInline={true}
             preload="auto"
-            key="/assets/Selected Travel Destinations - with Audio.mp4"
+            key="/assets/WhatsApp Video 2026-02-11 at 12.16.41.mp4"
             className="w-full h-full object-cover scale-105"
             onEnded={(e) => e.currentTarget.play()}
           >
-            <source src="/assets/Selected Travel Destinations - with Audio.mp4" type="video/mp4" />
+            <source src="/assets/WhatsApp Video 2026-02-11 at 12.16.41.mp4" type="video/mp4" />
           </video>
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-slate-900/40 z-[1]"></div>
         </div>
+
 
         <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
           <div className="animate-fade-in-up space-y-8">

@@ -37,14 +37,34 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
+    const handleInteraction = () => {
+      if (audioRef.current && !isMuted) {
+        audioRef.current.play().catch(err => console.log("Audio play blocked:", err));
+      }
+      // Remove the event listeners once the first interaction happens
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+      window.removeEventListener('scroll', handleInteraction);
+    };
+
+    window.addEventListener('click', handleInteraction);
+    window.addEventListener('touchstart', handleInteraction);
+    window.addEventListener('scroll', handleInteraction);
+
     if (audioRef.current) {
       audioRef.current.volume = 0.4;
       if (!isMuted) {
-        audioRef.current.play().catch(err => console.log("Audio play blocked:", err));
+        audioRef.current.play().catch(err => console.log("Initial audio play blocked:", err));
       } else {
         audioRef.current.pause();
       }
     }
+
+    return () => {
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+      window.removeEventListener('scroll', handleInteraction);
+    };
   }, [isMuted]);
 
   useEffect(() => {
@@ -81,7 +101,7 @@ const Navbar: React.FC = () => {
           </Link>
 
           <div className="flex items-center space-x-4 ml-auto">
-            <video ref={audioRef as any} src="/assets/Selected Travel Destinations - with Audio.mp4" loop className="hidden" />
+            <audio ref={audioRef as any} src="/assets/WhatsApp Audio 2026-02-02 at 17.04.32.mpeg" loop className="hidden" />
             <button
               onClick={() => setIsMuted(!isMuted)}
               className="w-10 h-10 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center transition-all backdrop-blur-md border border-white/10"
