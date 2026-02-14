@@ -85,6 +85,18 @@ const Navbar: React.FC = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
+  const prefetchPage = (path: string) => {
+    switch (path) {
+      case '/destinations': import('./pages/Destinations'); break;
+      case '/packages': import('./pages/TourPackages'); break;
+      case '/special-offers': import('./pages/SpecialOffers'); break;
+      case '/services': import('./pages/Services'); break;
+      case '/about': import('./pages/About'); break;
+      case '/blog': import('./pages/Blog'); break;
+      case '/contact': import('./pages/Contact'); break;
+    }
+  };
+
   return (
     <nav className="fixed w-full z-50 px-4 pt-4">
       <div className="max-w-7xl mx-auto">
@@ -114,6 +126,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={link.name}
                   to={link.path}
+                  onMouseEnter={() => prefetchPage(link.path)}
                   className="text-white font-medium text-sm hover:text-white/80 transition-colors whitespace-nowrap"
                 >
                   {link.name}

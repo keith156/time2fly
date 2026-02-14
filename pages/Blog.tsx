@@ -43,7 +43,7 @@ const Blog: React.FC = () => {
               className="w-full h-full object-cover transition-transform duration-[10000ms] ease-linear scale-110"
               style={{ transform: 'scale(1)' }}
               onLoad={(e) => (e.currentTarget.style.transform = 'scale(1.2)')}
-              loading="lazy"
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent"></div>
             <div className="absolute inset-0 flex items-end justify-center pb-24 px-6">

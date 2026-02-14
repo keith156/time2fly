@@ -121,3 +121,20 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Performance Optimizations */
+.grid-cols-1,
+.grid-cols-2,
+.grid-cols-3 {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
+}
+
+img {
+  content-visibility: auto;
+}
+
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+}

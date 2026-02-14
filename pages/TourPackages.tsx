@@ -59,7 +59,7 @@ const TourPackages: React.FC = () => {
               src={selectedPackage.image}
               alt={selectedPackage.destination}
               className="w-full h-full object-cover"
-              loading="lazy"
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
             <div className="absolute inset-0 flex items-center justify-center p-6">
