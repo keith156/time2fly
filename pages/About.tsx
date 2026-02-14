@@ -91,7 +91,7 @@ const About: React.FC = () => {
             <div className="relative mt-12 lg:mt-0">
               <div className="relative z-10 rounded-[40px] overflow-hidden border-4 border-white/10 shadow-2xl">
                 <div className="w-full aspect-[4/5] bg-slate-800">
-                  <img src="/assets/ceo_final.jpg" className="w-full h-full object-cover" alt="Director" />
+                  <img src="/assets/ceo_final.jpeg" className="w-full h-full object-cover" alt="Director" />
                 </div>
               </div>
             </div>

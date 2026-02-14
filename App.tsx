@@ -269,7 +269,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
 };
 
-import ConnectionStatus from './components/ConnectionStatus';
+
 
 const App: React.FC = () => {
   const ScrollToTop = () => {
@@ -287,7 +287,6 @@ const App: React.FC = () => {
           <ScrollToTop />
           <div className="flex flex-col min-h-screen">
             <Navbar />
-            <ConnectionStatus />
             <main className="flex-grow">
               <React.Suspense fallback={
                 <div className="h-screen flex items-center justify-center bg-white">
