@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import SectionTitle from '../components/SectionTitle.tsx';
-import { Shield, Target, Award, Users, Plane, Globe, Compass, Heart, ArrowRight } from 'lucide-react';
+import { Shield, Target, Award, Users, Plane, Globe, Compass, Heart, ArrowRight, Headset, Gem, Zap, Palette } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Added React.FC type to handle the 'key' prop correctly when this component is used in a map
@@ -58,6 +58,49 @@ const AnimatedStat: React.FC<{ value: number, label: string, icon: React.ReactNo
   );
 };
 
+const FeatureCard: React.FC<{ icon: React.ReactNode, title: string, index: number, color: string, glow: string }> = ({ icon, title, index, color, glow }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={cardRef}
+      style={{ transitionDelay: `${index * 150}ms` }}
+      className={`group p-10 rounded-[48px] bg-white/5 border border-white/10 backdrop-blur-md hover:grayscale hover:opacity-40 transition-all duration-700 flex flex-col items-center text-center relative overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+        }`}
+    >
+      {/* Dynamic Glow Background */}
+      <div className={`absolute -top-20 -right-20 w-40 h-40 ${glow} rounded-full blur-[80px] group-hover:opacity-0 transition-opacity`}></div>
+
+      <div className={`mb-8 w-24 h-24 rounded-[32px] bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-90 transition-all duration-700 shadow-2xl ${color}`}>
+        {icon}
+      </div>
+      <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter leading-tight max-w-[180px]">
+        {title}
+      </h3>
+      <div className={`mt-6 w-16 h-1.5 ${color.replace('text', 'bg')} rounded-full opacity-50`}></div>
+    </div>
+  );
+};
+
 const About: React.FC = () => {
   const stats = [
     { label: 'Flights Booked', value: 15, suffix: 'k+', icon: <Plane size={24} /> },
@@ -80,6 +123,9 @@ const About: React.FC = () => {
               <span className="text-red-500 font-black tracking-[0.3em] uppercase text-xs mb-4 block">Established July 2018 — Uganda</span>
               <h1 className="text-4xl md:text-6xl font-black text-white leading-none mb-4 md:mb-6 tracking-tighter">WE ARE <br /><span className="text-red-600">TIME2FLY</span></h1>
               <p className="text-lg md:text-xl text-slate-300 font-medium leading-relaxed max-w-xl mb-6 md:mb-8 italic">"Explore the world, Travelling is knowledge"</p>
+              <p className="text-base text-slate-300 font-medium leading-relaxed max-w-xl mb-8">
+                Time2Fly Tours & Travel Ltd is your dependable travel partner for stress-free planning and unforgettable destinations. With a commitment to professionalism, integrity, and innovation, we turn travel dreams into reality.
+              </p>
               <div className="flex flex-wrap gap-4">
                 <Link to="/packages" className="bg-red-600 hover:bg-amber-500 text-white font-black px-8 py-4 rounded-full transition-all shadow-2xl hover:shadow-amber-500/30 uppercase tracking-widest text-xs">View Our Tours</Link>
                 <div className="flex items-center space-x-3 bg-white/5 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/10">
@@ -88,9 +134,9 @@ const About: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="relative mt-12 lg:mt-0">
-              <div className="relative z-10 rounded-[40px] overflow-hidden border-4 border-white/10 shadow-2xl">
-                <div className="w-full aspect-[4/5] bg-slate-800">
+            <div className="relative mt-12 lg:mt-0 max-w-md mx-auto">
+              <div className="relative z-10 rounded-[32px] overflow-hidden border-2 border-white/10 shadow-2xl">
+                <div className="w-full h-full max-h-[450px] bg-slate-800">
                   <img src="/assets/ceo_final.jpeg" className="w-full h-full object-cover" alt="Director" />
                 </div>
               </div>
@@ -103,29 +149,96 @@ const About: React.FC = () => {
       <section className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
-            <div className="order-2 lg:order-1">
-              <div className="grid grid-cols-2 gap-4">
-                <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&q=80&w=800" className="rounded-[30px] w-full h-64 object-cover mt-8 shadow-xl hover:scale-105 transition-transform duration-500" alt="Culture" />
-                <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&q=80&w=800" className="rounded-[30px] w-full h-64 object-cover shadow-xl hover:scale-105 transition-transform duration-500" alt="Nature" />
+            <div className="order-2 lg:order-1 pb-24 md:pb-32">
+              <div className="flex items-start justify-center lg:justify-start gap-4 md:gap-8">
+                <div className="flex flex-col items-center">
+                  <div className="w-24 md:w-36 lg:w-40 h-64 md:h-80 lg:h-96 bg-[#13607E] rounded-[60px] shadow-2xl overflow-hidden">
+                    <img src="/assets/about_pics (3).jpg" alt="About 1" className="w-full h-full object-cover" />
+                  </div>
+                </div>
+                <div className="flex flex-col items-center translate-y-12 md:translate-y-16">
+                  <div className="w-24 md:w-36 lg:w-40 h-64 md:h-80 lg:h-96 bg-[#13607E] rounded-[60px] shadow-2xl border-4 border-white overflow-hidden">
+                    <img src="/assets/about_pics (2).jpg" alt="About 2" className="w-full h-full object-cover" />
+                  </div>
+                </div>
+                <div className="flex flex-col items-center translate-y-24 md:translate-y-32">
+                  <div className="w-24 md:w-36 lg:w-40 h-64 md:h-80 lg:h-96 bg-[#13607E] rounded-[60px] shadow-2xl overflow-hidden">
+                    <img src="/assets/about_pics (1).jpg" alt="About 3" className="w-full h-full object-cover" />
+                  </div>
+                </div>
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <SectionTitle subtitle="About Us" title="Locally Owned & Independent" centered={false} />
+              <SectionTitle subtitle="Who We Are" title="Locally Owned & Independent" centered={false} />
               <p className="text-slate-600 text-lg font-medium leading-relaxed mb-6 border-l-4 border-red-600 pl-6 py-1">
                 Time2Fly Tours and Travel Limited is a locally owned independent travel agency registered under the companies act of Uganda, incorporated in July 2018.
               </p>
-              <div className="space-y-4 text-slate-500 font-medium leading-relaxed text-base">
-                <p>
-                  We are a dedicated team focused on redefining travel management in the East African region and beyond. Since our inception, we have built a reputation for excellence, reliability, and unparalleled local expertise.
+              <div className="space-y-6 text-slate-500 font-medium leading-relaxed text-sm md:text-base">
+                <p className="text-slate-700">
+                  At Time2Fly, our success is built on three guiding principles that shape every journey we plan.
                 </p>
-                <p>
-                  As an independent agency, we have the flexibility to offer truly unbiased advice and the most competitive rates, ensuring that every dollar you spend on your travel yields maximum value and unforgettable memories.
-                </p>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <span className="text-blue-500 mt-1">◆</span>
+                    <div>
+                      <h4 className="font-bold text-slate-800 inline">Professionalism</h4>
+                      <p className="mt-1">
+                        We deliver seamless, well-organized travel experiences with attention to detail at every stage, from consultation to return flight. Our team provides timely communication, clear pricing, and expert guidance to ensure stress-free travel planning. We have; Experienced travel consultants, Prompt responses, Structured itineraries, and Reliable partner networks
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <span className="text-blue-500 mt-1">◆</span>
+                    <div>
+                      <h4 className="font-bold text-slate-800 inline">Integrity</h4>
+                      <p className="mt-1">
+                        We operate with honesty and transparency. Our clients receive clear quotations with no hidden charges, accurate travel information, and genuine advice tailored to their needs. Your trust is our greatest asset.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <span className="text-blue-500 mt-1">◆</span>
+                    <div>
+                      <h4 className="font-bold text-slate-800 inline">Innovation</h4>
+                      <p className="mt-1">
+                        We continuously embrace modern travel solutions, from digital booking systems and flexible payment options to customized itineraries designed around emerging travel trends.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section >
+
+      {/* Why Choose Us */}
+      <section className="py-24 bg-slate-950 relative overflow-hidden">
+        {/* Background Accents */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[150px] translate-y-1/2 -translate-x-1/2"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-24">
+            <span className="text-amber-500 font-black tracking-[0.5em] uppercase text-xs mb-6 block drop-shadow-sm">The Time2Fly Advantage</span>
+            <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-10 leading-none">Why <span className="text-red-600 underline decoration-white/20 underline-offset-[16px] decoration-4">Choose Us</span></h2>
+            <p className="text-slate-400 font-medium max-w-3xl mx-auto text-xl md:text-2xl italic leading-relaxed">"Delivering excellence in every mile, ensuring your journey is as remarkable as the destination."</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+            {[
+              { icon: <Headset size={40} />, title: "24/7 customer support", color: "text-amber-500", glow: "bg-amber-500/20" },
+              { icon: <Gem size={40} />, title: "competitive pricing", color: "text-red-500", glow: "bg-red-500/20" },
+              { icon: <Zap size={40} />, title: "fast and reliable service", color: "text-blue-500", glow: "bg-blue-500/20" },
+              { icon: <Palette size={40} />, title: "Tailor-made travel packages", color: "text-purple-500", glow: "bg-purple-500/20" },
+              { icon: <Users size={40} />, title: "trusted by hundreds of satisfied clients", color: "text-green-500", glow: "bg-green-500/20" },
+              { icon: <Globe size={40} />, title: "strong global travel", color: "text-cyan-500", glow: "bg-cyan-500/20" }
+            ].map((item, index) => (
+              <FeatureCard key={index} index={index} icon={item.icon} title={item.title} color={item.color} glow={item.glow} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Vision & Mission */}
       < section className="py-12 md:py-20 bg-slate-50" >

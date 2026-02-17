@@ -209,7 +209,11 @@ const TourPackages: React.FC = () => {
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <span className="text-amber-500 font-black tracking-widest uppercase text-xs mb-4 block">World Expeditions</span>
-          <h1 className="text-5xl md:text-7xl font-black text-white mb-8 uppercase tracking-tighter leading-none">Curated Journeys</h1>
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-none">Curated Journeys</h1>
+          <p className="text-slate-300 text-sm md:text-base font-medium max-w-4xl mx-auto mb-12 leading-relaxed">
+            We design thoughtfully crafted travel experiences tailored to your interests, budget, and timeline.
+            Every itinerary is carefully planned to ensure comfort, authenticity, and seamless execution from departure to return.
+          </p>
           <div className="relative max-w-2xl mx-auto group">
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-amber-500 transition-colors" size={24} />
             <input

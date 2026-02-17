@@ -274,7 +274,7 @@ const Home: React.FC = () => {
           >
             {extendedTestimonials.map((t, i) => (
               <div key={`${t.id}-${i}`} className="inline-block px-4 w-[400px] shrink-0">
-                <div className="bg-navy-800/50 backdrop-blur-md border border-navy-800 p-8 rounded-[40px] hover:border-amber-500 transition-all duration-300 group h-full flex flex-col shadow-2xl">
+                <div className="bg-navy-800/50 backdrop-blur-md border-[3.5px] border-navy-800 p-8 rounded-[40px] hover:border-amber-500 transition-all duration-300 group h-full flex flex-col shadow-2xl">
                   <div className="flex justify-between items-start mb-6">
                     <div className="flex space-x-1">
                       {[...Array(5)].map((_, starIdx) => (<Star key={starIdx} size={16} fill={starIdx < t.rating ? "#f59e0b" : "none"} className={starIdx < t.rating ? "text-amber-500" : "text-slate-700"} />))}

@@ -16,6 +16,7 @@ const SpecialOffers = React.lazy(() => import('./pages/SpecialOffers'));
 const DestinationDetail = React.lazy(() => import('./pages/DestinationDetail'));
 
 import ErrorBoundary from './components/ErrorBoundary.tsx';
+import WhatsAppButton from './components/WhatsAppButton.tsx';
 import { DataProvider, useData } from './context/DataContext';
 
 const Navbar: React.FC = () => {
@@ -79,8 +80,8 @@ const Navbar: React.FC = () => {
     { name: 'Destinations', path: '/destinations' },
     { name: 'Packages', path: '/packages' },
     { name: 'Special offers', path: '/special-offers' },
-    { name: 'Services', path: '/services' },
     { name: 'About', path: '/about' },
+    { name: 'Services', path: '/services' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -328,6 +329,7 @@ const App: React.FC = () => {
                 </Routes>
               </React.Suspense>
             </main>
+            <WhatsAppButton />
             <Footer />
           </div>
         </HashRouter>
