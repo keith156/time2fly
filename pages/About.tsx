@@ -149,19 +149,19 @@ const About: React.FC = () => {
       <section className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
-            <div className="order-2 lg:order-1 pb-24 md:pb-32">
+            <div className="order-2 lg:order-1 pb-24 md:pb-[32rem]">
               <div className="flex items-start justify-center lg:justify-start gap-4 md:gap-8">
                 <div className="flex flex-col items-center">
                   <div className="w-24 md:w-36 lg:w-40 h-64 md:h-80 lg:h-96 bg-[#13607E] rounded-[60px] shadow-2xl overflow-hidden">
                     <img src="/assets/about_pics (3).jpg" alt="About 1" className="w-full h-full object-cover" />
                   </div>
                 </div>
-                <div className="flex flex-col items-center translate-y-12 md:translate-y-16">
+                <div className="flex flex-col items-center translate-y-12 md:translate-y-[16rem]">
                   <div className="w-24 md:w-36 lg:w-40 h-64 md:h-80 lg:h-96 bg-[#13607E] rounded-[60px] shadow-2xl border-4 border-white overflow-hidden">
                     <img src="/assets/about_pics (2).jpg" alt="About 2" className="w-full h-full object-cover" />
                   </div>
                 </div>
-                <div className="flex flex-col items-center translate-y-24 md:translate-y-32">
+                <div className="flex flex-col items-center translate-y-24 md:translate-y-[32rem]">
                   <div className="w-24 md:w-36 lg:w-40 h-64 md:h-80 lg:h-96 bg-[#13607E] rounded-[60px] shadow-2xl overflow-hidden">
                     <img src="/assets/about_pics (1).jpg" alt="About 3" className="w-full h-full object-cover" />
                   </div>
