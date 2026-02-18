@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import SectionTitle from '../components/SectionTitle.tsx';
-import { Shield, Target, Award, Users, Plane, Globe, Compass, Heart, ArrowRight, Headset, Gem, Zap, Palette } from 'lucide-react';
+import { Shield, Target, Award, Users, Plane, Globe, Compass, Heart, ArrowRight, Headset, Gem, Zap, Palette, Briefcase, Handshake, Lightbulb } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Added React.FC type to handle the 'key' prop correctly when this component is used in a map
@@ -127,7 +127,7 @@ const About: React.FC = () => {
                 Time2Fly Tours & Travel Ltd is your dependable travel partner for stress-free planning and unforgettable destinations. With a commitment to professionalism, integrity, and innovation, we turn travel dreams into reality.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/packages" className="bg-red-600 hover:bg-amber-500 text-white font-black px-8 py-4 rounded-full transition-all shadow-2xl hover:shadow-amber-500/30 uppercase tracking-widest text-xs">View Our Tours</Link>
+                <Link to="/packages" className="inline-flex items-center bg-red-600 hover:bg-amber-500 text-white font-black px-8 py-4 rounded-full transition-all uppercase tracking-widest text-xs whitespace-nowrap">View Our Tour Packages</Link>
                 <div className="flex items-center space-x-3 bg-white/5 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/10">
                   <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-red-500"><Compass className="animate-spin-slow" size={20} /></div>
                   <span className="text-white text-[10px] font-black uppercase tracking-widest leading-tight">Navigating your <br /> next adventure</span>
@@ -146,71 +146,83 @@ const About: React.FC = () => {
       </section>
 
       {/* About Us Description */}
-      <section className="py-12 md:py-20 bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
-            <div className="order-2 lg:order-1 pb-24 md:pb-[32rem]">
-              <div className="flex items-start justify-center lg:justify-start gap-4 md:gap-8">
-                <div className="flex flex-col items-center">
-                  <div className="w-24 md:w-36 lg:w-40 h-64 md:h-80 lg:h-96 bg-[#13607E] rounded-[60px] shadow-2xl overflow-hidden">
-                    <img src="/assets/about_pics (3).jpg" alt="About 1" className="w-full h-full object-cover" />
-                  </div>
-                </div>
-                <div className="flex flex-col items-center translate-y-12 md:translate-y-[16rem]">
-                  <div className="w-24 md:w-36 lg:w-40 h-64 md:h-80 lg:h-96 bg-[#13607E] rounded-[60px] shadow-2xl border-4 border-white overflow-hidden">
-                    <img src="/assets/about_pics (2).jpg" alt="About 2" className="w-full h-full object-cover" />
-                  </div>
-                </div>
-                <div className="flex flex-col items-center translate-y-24 md:translate-y-[32rem]">
-                  <div className="w-24 md:w-36 lg:w-40 h-64 md:h-80 lg:h-96 bg-[#13607E] rounded-[60px] shadow-2xl overflow-hidden">
-                    <img src="/assets/about_pics (1).jpg" alt="About 3" className="w-full h-full object-cover" />
-                  </div>
-                </div>
+
+          {/* Section Header */}
+          <div className="mb-12">
+            <SectionTitle subtitle="Who We Are" title="Locally Owned & Independent" centered={false} />
+          </div>
+
+          {/* Main grid: images left, text right */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+            {/* Left: 3 tall oval images side by side */}
+            <div className="flex items-stretch justify-center lg:justify-start gap-4">
+              <div className="flex-1 max-w-[160px] h-[420px] rounded-[80px] overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100">
+                <img src="/assets/about_pics (3).jpg" alt="About 1" className="w-full h-full object-cover" />
+              </div>
+              <div className="flex-1 max-w-[160px] h-[420px] rounded-[80px] overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100 mt-24">
+                <img src="/assets/about_pics (2).jpg" alt="About 2" className="w-full h-full object-cover" />
+              </div>
+              <div className="flex-1 max-w-[160px] h-[420px] rounded-[80px] overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100">
+                <img src="/assets/about_pics (1).jpg" alt="About 3" className="w-full h-full object-cover" />
               </div>
             </div>
-            <div className="order-1 lg:order-2">
-              <SectionTitle subtitle="Who We Are" title="Locally Owned & Independent" centered={false} />
-              <p className="text-slate-600 text-lg font-medium leading-relaxed mb-6 border-l-4 border-red-600 pl-6 py-1">
+
+            {/* Right: text content */}
+            <div className="flex flex-col justify-start space-y-6">
+              <p className="text-slate-600 text-lg font-medium leading-relaxed border-l-4 border-red-600 pl-6 py-1">
                 Time2Fly Tours and Travel Limited is a locally owned independent travel agency registered under the companies act of Uganda, incorporated in July 2018.
               </p>
-              <div className="space-y-6 text-slate-500 font-medium leading-relaxed text-sm md:text-base">
-                <p className="text-slate-700">
-                  At Time2Fly, our success is built on three guiding principles that shape every journey we plan.
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <span className="text-blue-500 mt-1">◆</span>
-                    <div>
-                      <h4 className="font-bold text-slate-800 inline">Professionalism</h4>
-                      <p className="mt-1">
-                        We deliver seamless, well-organized travel experiences with attention to detail at every stage, from consultation to return flight. Our team provides timely communication, clear pricing, and expert guidance to ensure stress-free travel planning. We have; Experienced travel consultants, Prompt responses, Structured itineraries, and Reliable partner networks
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <span className="text-blue-500 mt-1">◆</span>
-                    <div>
-                      <h4 className="font-bold text-slate-800 inline">Integrity</h4>
-                      <p className="mt-1">
-                        We operate with honesty and transparency. Our clients receive clear quotations with no hidden charges, accurate travel information, and genuine advice tailored to their needs. Your trust is our greatest asset.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <span className="text-blue-500 mt-1">◆</span>
-                    <div>
-                      <h4 className="font-bold text-slate-800 inline">Innovation</h4>
-                      <p className="mt-1">
-                        We continuously embrace modern travel solutions, from digital booking systems and flexible payment options to customized itineraries designed around emerging travel trends.
-                      </p>
-                    </div>
-                  </div>
+              <p className="text-slate-700 font-medium">
+                At Time2Fly, our success is built on three guiding principles that shape every journey we plan.
+              </p>
+
+              {/* Professionalism */}
+              <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: '#0000ff' }}>
+                  <Briefcase size={20} className="text-white" />
+                </div>
+                <div>
+                  <h4 className="font-black text-slate-900 text-base uppercase tracking-tight mb-1">Professionalism</h4>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    We deliver seamless, well-organized travel experiences with attention to detail at every stage — from consultation to return flight. Experienced consultants, prompt responses, structured itineraries, and reliable partner networks.
+                  </p>
+                </div>
+              </div>
+
+              {/* Integrity */}
+              <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: '#0000ff' }}>
+                  <Handshake size={20} className="text-white" />
+                </div>
+                <div>
+                  <h4 className="font-black text-slate-900 text-base uppercase tracking-tight mb-1">Integrity</h4>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    We operate with honesty and transparency. Clear quotations with no hidden charges, accurate travel information, and genuine advice tailored to your needs. Your trust is our greatest asset.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Innovation - full width below */}
+          <div className="mt-6 flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: '#0000ff' }}>
+              <Lightbulb size={20} className="text-white" />
+            </div>
+            <div>
+              <h4 className="font-black text-slate-900 text-base uppercase tracking-tight mb-1">Innovation</h4>
+              <p className="text-slate-500 text-sm leading-relaxed">
+                We embrace modern travel solutions, using digital booking tools, flexible payment options, and customized itineraries that reflect emerging trends—ensuring seamless, smart, and personalized travel experiences for every journey.
+              </p>
+            </div>
+          </div>
+
         </div>
-      </section >
+      </section>
+
 
       {/* Why Choose Us */}
       <section className="py-24 bg-slate-950 relative overflow-hidden">

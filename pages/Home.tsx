@@ -177,11 +177,11 @@ const Home: React.FC = () => {
             muted={true}
             playsInline={true}
             preload="auto"
-            key="/assets/hero-video.mp4"
+            key="/assets/WhatsApp%20Video%202026-02-18%20at%202.04.02%20PM%20(1).mp4"
             className="w-full h-full object-cover scale-105"
             onEnded={(e) => e.currentTarget.play()}
           >
-            <source src="/assets/hero-video.mp4" type="video/mp4" />
+            <source src="/assets/WhatsApp%20Video%202026-02-18%20at%202.04.02%20PM%20(1).mp4" type="video/mp4" />
           </video>
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-slate-900/40 z-[1]"></div>
@@ -190,9 +190,49 @@ const Home: React.FC = () => {
 
         <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
           <div className="animate-fade-in-up space-y-8">
-            <h1 className="text-6xl md:text-[66px] font-black text-white leading-none tracking-tighter uppercase drop-shadow-2xl mb-8">
-              DISCOVER <br />
-              <span className="text-blue-600">MORE</span>
+            <h1 className="font-black leading-none tracking-tighter uppercase mb-4 w-full">
+              {/* DISCOVER - 66px on desktop */}
+              <svg
+                viewBox="0 0 520 90"
+                style={{ display: 'block', margin: '0 auto', width: '100%', maxWidth: '520px', overflow: 'visible' }}
+              >
+                <text
+                  x="50%"
+                  y="55"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fontFamily="Poppins, sans-serif"
+                  fontWeight="900"
+                  fontSize="66"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="2"
+                  className="svg-draw-discover"
+                >
+                  DISCOVER
+                </text>
+              </svg>
+              {/* MORE - 60px on desktop */}
+              <svg
+                viewBox="0 0 520 80"
+                style={{ display: 'block', margin: '0 auto', width: '100%', maxWidth: '520px', overflow: 'visible' }}
+              >
+                <text
+                  x="50%"
+                  y="48"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fontFamily="Poppins, sans-serif"
+                  fontWeight="900"
+                  fontSize="60"
+                  fill="none"
+                  stroke="#2563eb"
+                  strokeWidth="2"
+                  className="svg-draw-more"
+                >
+                  MORE
+                </text>
+              </svg>
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-100 font-light max-w-2xl mx-auto leading-relaxed uppercase tracking-widest opacity-90">

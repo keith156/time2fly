@@ -28,7 +28,7 @@ const SpecialOffers: React.FC = () => {
                     <Star size={400} fill="white" className="text-white" />
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <span className="text-white font-black tracking-widest uppercase text-xs mb-4 block bg-white/20 w-fit mx-auto px-6 py-2 rounded-full backdrop-blur-md border border-white/20">Limited Time Access</span>
+                    <span className="text-white font-black tracking-widest uppercase text-xs mb-4 block bg-[#0000ff] w-fit mx-auto px-6 py-2 rounded-full backdrop-blur-md border border-white/20">Limited Time Access</span>
                     <h1 className="text-5xl md:text-7xl font-black text-white mb-8 uppercase tracking-tighter leading-none">Special Offers</h1>
                     <p className="text-white/80 text-xl font-medium max-w-2xl mx-auto uppercase tracking-widest">Hand-picked premium experiences at exclusive value.</p>
                 </div>

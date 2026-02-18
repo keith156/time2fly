@@ -138,3 +138,51 @@ section {
   content-visibility: auto;
   contain-intrinsic-size: 1px 500px;
 }
+
+/* SVG Text Write & Unwrite Loop - Hero */
+@keyframes svg-write-loop {
+
+  /* Start invisible */
+  0% {
+    stroke-dashoffset: 2000;
+    opacity: 1;
+  }
+
+  /* Slowly write itself */
+  35% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  /* Hold fully written */
+  55% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  /* Slowly unwrite itself */
+  90% {
+    stroke-dashoffset: 2000;
+    opacity: 1;
+  }
+
+  /* Brief pause blank before next loop */
+  100% {
+    stroke-dashoffset: 2000;
+    opacity: 1;
+  }
+}
+
+.svg-draw-discover {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: svg-write-loop 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 0s;
+}
+
+.svg-draw-more {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: svg-write-loop 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 4.5s;
+}

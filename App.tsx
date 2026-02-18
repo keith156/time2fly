@@ -3,23 +3,24 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search, RefreshCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-const Home = React.lazy(() => import('./pages/Home'));
-const About = React.lazy(() => import('./pages/About'));
-const Services = React.lazy(() => import('./pages/Services'));
-const TourPackages = React.lazy(() => import('./pages/TourPackages'));
-const Blog = React.lazy(() => import('./pages/Blog'));
-const Contact = React.lazy(() => import('./pages/Contact'));
-const Login = React.lazy(() => import('./pages/Login'));
-const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
-const Destinations = React.lazy(() => import('./pages/Destinations'));
-const SpecialOffers = React.lazy(() => import('./pages/SpecialOffers'));
-const DestinationDetail = React.lazy(() => import('./pages/DestinationDetail'));
+import Home from './pages/Home';
+import About from './pages/About';
+import TourPackages from './pages/TourPackages';
+import Services from './pages/Services';
+import Blog from './pages/Blog';
+import Contact from './pages/Contact';
+import Login from './pages/Login';
+import AdminDashboard from './pages/AdminDashboard';
+import Destinations from './pages/Destinations';
+import SpecialOffers from './pages/SpecialOffers';
+import DestinationDetail from './pages/DestinationDetail';
 
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import WhatsAppButton from './components/WhatsAppButton.tsx';
 import { DataProvider, useData } from './context/DataContext';
 
 const Navbar: React.FC = () => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMuted, setIsMuted] = useState(false); // Auto-play music on load
@@ -113,16 +114,16 @@ const Navbar: React.FC = () => {
             <span className="text-white font-black text-xl md:text-2xl tracking-tight">Time2Fly</span>
           </Link>
 
-          <div className="flex items-center space-x-4 ml-auto">
+          <div className="flex items-center gap-2 ml-auto min-w-0">
             <audio ref={audioRef as any} src="/assets/bg-audio.mpeg" loop className="hidden" />
             <button
               onClick={() => setIsMuted(!isMuted)}
-              className="w-10 h-10 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center transition-all backdrop-blur-md border border-white/10"
+              className="w-9 h-9 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center transition-all backdrop-blur-md border border-white/10 shrink-0"
               title={isMuted ? "Unmute Music" : "Mute Music"}
             >
-              {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} className="animate-pulse" />}
+              {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} className="animate-pulse" />}
             </button>
-            <div className="hidden lg:flex items-center space-x-6 mr-4">
+            <div className="hidden lg:flex items-center gap-4 xl:gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -135,25 +136,29 @@ const Navbar: React.FC = () => {
               ))}
             </div>
 
-            <form onSubmit={handleSearch} className="hidden md:flex items-center bg-white rounded-full p-1 pl-4 shrink-0 w-48 lg:w-64">
+            {/* Compact inline search pill - always visible, never overflows */}
+            <form
+              onSubmit={handleSearch}
+              className="hidden md:flex items-center bg-white rounded-full pl-3 pr-1 py-1 gap-2 shrink-0 border border-white/20"
+            >
+              <Search size={14} className="text-slate-400 shrink-0" />
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-transparent border-none focus:outline-none text-slate-400 text-sm w-full outline-none"
+                className="bg-transparent border-none focus:outline-none text-slate-700 placeholder-slate-400 text-xs w-20 lg:w-28 outline-none"
               />
               <button
                 type="submit"
-                className="bg-navy-800 text-white p-2 rounded-full hover:bg-black transition-colors"
+                className="font-black text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-full transition-colors shrink-0 text-white hover:opacity-80"
+                style={{ backgroundColor: '#0000ff' }}
               >
-                <span className="flex items-center justify-center">
-                  <Search size={16} />
-                </span>
+                GO
               </button>
             </form>
 
-            <div className="md:hidden flex items-center">
+            <div className="lg:hidden flex items-center shrink-0">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-white p-2"
@@ -163,6 +168,8 @@ const Navbar: React.FC = () => {
             </div>
           </div>
         </div>
+
+
 
         {/* Mobile Menu */}
         <div className={`md:hidden absolute top-full left-0 w-full px-4 pt-2 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
@@ -302,32 +309,28 @@ const App: React.FC = () => {
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow">
-              <React.Suspense fallback={
-                <div className="h-screen flex items-center justify-center bg-white">
-                  <div className="w-10 h-10 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              }>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/services" element={<Services />} />
-                  <Route path="/packages" element={<TourPackages />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/destinations" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><Destinations /></React.Suspense>} />
-                  <Route path="/destinations/:id" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><DestinationDetail /></React.Suspense>} />
-                  <Route path="/special-offers" element={<React.Suspense fallback={<div className="pt-24 min-h-screen bg-slate-50"></div>}><SpecialOffers /></React.Suspense>} />
-                  <Route path="/login" element={<React.Suspense fallback={null}><Login /></React.Suspense>} />
-                  <Route
-                    path="/admin"
-                    element={
-                      <ProtectedRoute>
-                        <AdminDashboard />
-                      </ProtectedRoute>
-                    }
-                  />
-                </Routes>
-              </React.Suspense>
+
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/packages" element={<TourPackages />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/destinations" element={<Destinations />} />
+                <Route path="/destinations/:id" element={<DestinationDetail />} />
+                <Route path="/special-offers" element={<SpecialOffers />} />
+                <Route path="/login" element={<Login />} />
+                <Route
+                  path="/admin"
+                  element={
+                    <ProtectedRoute>
+                      <AdminDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+
             </main>
             <WhatsAppButton />
             <Footer />

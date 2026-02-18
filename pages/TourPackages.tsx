@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, Clock, MapPin, Search, ArrowLeft, Calendar, Share2, Shield, CreditCard, Send } from 'lucide-react';
+import { Star, Clock, MapPin, ArrowLeft, Calendar, Share2, Shield, CreditCard, Send } from 'lucide-react';
 import { useData } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
 import { Link, useLocation } from 'react-router-dom';
@@ -204,32 +204,18 @@ const TourPackages: React.FC = () => {
   return (
     <div className="pt-24 min-h-screen bg-slate-50">
       <div className="bg-slate-950 py-24 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0 opacity-30 pointer-events-none">
           <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Background" loading="lazy" />
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <span className="text-amber-500 font-black tracking-widest uppercase text-xs mb-4 block">World Expeditions</span>
           <h1 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-none">Curated Journeys</h1>
-          <p className="text-slate-300 text-sm md:text-base font-medium max-w-4xl mx-auto mb-12 leading-relaxed">
-            We design thoughtfully crafted travel experiences tailored to your interests, budget, and timeline.
-            Every itinerary is carefully planned to ensure comfort, authenticity, and seamless execution from departure to return.
-          </p>
-          <div className="relative max-w-2xl mx-auto group">
-            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-amber-500 transition-colors" size={24} />
-            <input
-              type="text"
-              placeholder="Search your next horizon..."
-              className="w-full pl-16 pr-8 py-6 rounded-[32px] bg-white/10 backdrop-blur-md border border-white/20 text-white text-lg focus:outline-none focus:ring-4 focus:ring-amber-500/20 shadow-2xl transition-all placeholder:text-white/40"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {filteredPackages.map((pkg) => (
+          {packages.map((pkg) => (
             <div key={pkg.id} className="bg-white rounded-[48px] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 group flex flex-col h-full">
               <div
                 className="relative h-80 overflow-hidden cursor-pointer"
@@ -287,17 +273,7 @@ const TourPackages: React.FC = () => {
               </div>
             </div>
           ))}
-          {filteredPackages.length === 0 && (
-            <div className="col-span-full text-center py-20 bg-white rounded-[40px] border border-dashed border-slate-200">
-              <p className="text-slate-400 text-2xl font-black uppercase tracking-tighter mb-4">No horizons found</p>
-              <button
-                onClick={() => setSearchTerm('')}
-                className="text-amber-500 font-bold uppercase tracking-widest text-xs hover:text-slate-900 transition-colors"
-              >
-                Reset Search Filters
-              </button>
-            </div>
-          )}
+
         </div>
       </div>
     </div>
