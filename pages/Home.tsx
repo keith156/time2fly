@@ -200,10 +200,10 @@ const Home: React.FC = () => {
         <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
           <div className="animate-fade-in-up space-y-12">
             <div className="flex flex-col items-center gap-6">
-              <Link to="/contact" className="group relative bg-blue-600 hover:bg-blue-500 active:scale-95 text-white px-8 py-4 rounded-full font-black transition-all duration-200 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 uppercase tracking-[0.2em] text-sm flex items-center gap-3 overflow-hidden">
+              <a href="#flight-search" className="group relative bg-blue-600 hover:bg-blue-500 active:scale-95 text-white px-8 py-4 rounded-full font-black transition-all duration-200 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 uppercase tracking-[0.2em] text-sm flex items-center gap-3 overflow-hidden">
                 <Search className="shrink-0" size={16} />
                 <span className="relative z-10">BOOK FLIGHT</span>
-              </Link>
+              </a>
             </div>
 
             <h1 className="font-black leading-none tracking-tighter uppercase mb-4 w-full">
@@ -257,9 +257,9 @@ const Home: React.FC = () => {
               </p>
 
               <div className="flex justify-center">
-                <Link to="/packages" className="group relative bg-red-600 hover:bg-amber-500 text-white px-8 py-3 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-sm flex items-center overflow-hidden">
+                <Link to="/packages" className="group relative bg-red-600 hover:bg-amber-500 text-white px-5 py-2 md:px-8 md:py-3 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-[10px] md:text-sm flex items-center overflow-hidden">
                   <span className="relative z-10 flex items-center">
-                    PLAN YOUR VOYAGE <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" />
+                    PLAN YOUR VOYAGE <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" size={12} />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
                 </Link>

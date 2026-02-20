@@ -291,7 +291,7 @@ const FlightSearchBar: React.FC = () => {
     const panelCls = "bg-slate-900 border border-white/10 rounded-2xl shadow-2xl shadow-black/60";
 
     return (
-        <section style={{ backgroundColor: '#000033' }} className="py-6 px-4">
+        <section id="flight-search" style={{ backgroundColor: '#000033' }} className="py-6 px-4">
             <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-6">
 
                 {/* Heading */}
