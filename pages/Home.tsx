@@ -197,7 +197,7 @@ const Home: React.FC = () => {
         </div>
 
 
-        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
+        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32 pb-24 md:pb-0">
           <div className="animate-fade-in-up space-y-8">
             <h1 className="font-black leading-none tracking-tighter uppercase mb-4 w-full">
               {/* DISCOVER - 66px on desktop */}

@@ -9,13 +9,13 @@ const WhatsAppButton: React.FC = () => {
             href={whatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="fixed bottom-8 right-8 z-[9999] group flex items-center justify-center"
+            className="fixed bottom-6 md:bottom-8 left-6 md:left-auto md:right-8 z-[9999] group flex items-center justify-center"
             aria-label="Chat on WhatsApp"
         >
             {/* Tooltip */}
-            <div className="absolute right-full mr-4 px-4 py-2 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-xl opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap border border-white/10 shadow-2xl">
+            <div className="absolute left-full ml-4 md:left-auto md:right-full md:mr-4 px-4 py-2 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-xl opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap border border-white/10 shadow-2xl">
                 Chat with us
-                <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-slate-900 rotate-45 border-t border-r border-white/10"></div>
+                <div className="absolute top-1/2 -left-1 md:left-auto md:-right-1 -translate-y-1/2 w-2 h-2 bg-slate-900 rotate-45 border-t border-l md:border-l-0 md:border-r border-white/10"></div>
             </div>
 
             {/* Main Button */}
