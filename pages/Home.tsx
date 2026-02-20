@@ -60,8 +60,8 @@ const Home: React.FC = () => {
   const row1 = PARTNERS.slice(0, half);
   const row2 = PARTNERS.slice(half);
 
-  const extendedRow1 = [...row1, ...row1, ...row1, ...row1, ...row1, ...row1];
-  const extendedRow2 = [...row2, ...row2, ...row2, ...row2, ...row2, ...row2];
+  const extendedRow1 = [...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1];
+  const extendedRow2 = [...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2];
 
   const openGoogleFlights = () => {
     window.open('https://www.google.com/travel/flights', '_blank');
@@ -197,8 +197,15 @@ const Home: React.FC = () => {
         </div>
 
 
-        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32 pb-24 md:pb-0">
-          <div className="animate-fade-in-up space-y-8">
+        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
+          <div className="animate-fade-in-up space-y-12">
+            <div className="flex flex-col items-center gap-6">
+              <Link to="/contact" className="group relative bg-blue-600 hover:bg-blue-500 active:scale-95 text-white px-8 py-4 rounded-full font-black transition-all duration-200 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 uppercase tracking-[0.2em] text-sm flex items-center gap-3 overflow-hidden">
+                <Search className="shrink-0" size={16} />
+                <span className="relative z-10">BOOK FLIGHT</span>
+              </Link>
+            </div>
+
             <h1 className="font-black leading-none tracking-tighter uppercase mb-4 w-full">
               {/* DISCOVER - 66px on desktop */}
               <svg
@@ -244,25 +251,21 @@ const Home: React.FC = () => {
               </svg>
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-100 font-light max-w-2xl mx-auto leading-relaxed uppercase tracking-widest opacity-90">
-              Explore the world, <span className="font-medium">Travelling is knowledge</span>
-            </p>
+            <div className="space-y-10">
+              <p className="text-xl md:text-2xl text-slate-100 font-light max-w-2xl mx-auto leading-relaxed uppercase tracking-widest opacity-90">
+                Explore the world, <span className="font-medium">Travelling is knowledge</span>
+              </p>
 
-            <div className="flex flex-col items-center gap-8 pt-10">
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <Link to="/packages" className="group relative bg-red-600 hover:bg-amber-500 text-white px-10 py-4 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-sm flex items-center overflow-hidden">
+              <div className="flex justify-center">
+                <Link to="/packages" className="group relative bg-red-600 hover:bg-amber-500 text-white px-8 py-3 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-sm flex items-center overflow-hidden">
                   <span className="relative z-10 flex items-center">
                     PLAN YOUR VOYAGE <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
                 </Link>
-                <Link to="/contact" className="group relative bg-blue-600 hover:bg-blue-500 active:scale-95 text-white px-8 py-4 rounded-xl font-black transition-all duration-200 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 uppercase tracking-[0.2em] text-sm flex items-center gap-3 overflow-hidden">
-                  <Search className="shrink-0" size={16} />
-                  <span className="relative z-10">BOOK FLIGHT</span>
-                </Link>
               </div>
 
-              <div className="flex items-center space-x-2 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="flex items-center justify-center space-x-2 opacity-70 hover:opacity-100 transition-opacity pb-8">
                 <CheckCircle2 className="text-white" size={16} />
                 <span className="text-white text-[10px] font-bold uppercase tracking-widest">Verified Agency</span>
               </div>
