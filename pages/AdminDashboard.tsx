@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Package as PackageIcon, FileText, Plus, Edit, Trash2, LogOut, Upload, X, User, MapPin, Star, Loader2 } from 'lucide-react';
+import { Package as PackageIcon, FileText, Plus, Edit, Trash2, LogOut, Upload, X, User, MapPin, Star, Loader2, Plane, TrendingDown, TrendingUp, Minus } from 'lucide-react';
 import { useData } from '../context/DataContext.tsx';
-import { Package, BlogPost, Destination } from '../types';
+import { Package, BlogPost, Destination, LiveTicket } from '../types';
 
 const AdminDashboard: React.FC = () => {
   const {
-    packages, blogs, destinations, loading, isUploading,
+    packages, blogs, destinations, liveTickets, loading, isUploading,
     addPackage, updatePackage, deletePackage,
     addBlog, updateBlog, deleteBlog,
     addDestination, updateDestination, deleteDestination,
+    addLiveTicket, updateLiveTicket, deleteLiveTicket,
     migrateLocalData
   } = useData();
 
-  const [activeTab, setActiveTab] = useState<'packages' | 'blogs' | 'destinations'>('packages');
+  const [activeTab, setActiveTab] = useState<'packages' | 'blogs' | 'destinations' | 'tickets'>('packages');
   const [editingPackage, setEditingPackage] = useState<Partial<Package> | null>(null);
   const [editingBlog, setEditingBlog] = useState<Partial<BlogPost> | null>(null);
   const [editingDest, setEditingDest] = useState<Partial<Destination> | null>(null);
+  const [editingTicket, setEditingTicket] = useState<Partial<LiveTicket> | null>(null);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -81,10 +83,24 @@ const AdminDashboard: React.FC = () => {
     setEditingDest(null);
   };
 
+  const saveTicket = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingTicket) return;
+    const ticket = {
+      ...editingTicket,
+      id: editingTicket.id || Date.now().toString(),
+    } as LiveTicket;
+
+    if (editingTicket.id) await updateLiveTicket(ticket);
+    else await addLiveTicket(ticket);
+    setEditingTicket(null);
+  };
+
   const handleAddNew = () => {
     if (activeTab === 'packages') setEditingPackage({});
     else if (activeTab === 'blogs') setEditingBlog({});
-    else setEditingDest({});
+    else if (activeTab === 'destinations') setEditingDest({});
+    else setEditingTicket({});
   };
 
   const toggleStar = (pkg: Package) => {
@@ -142,6 +158,13 @@ const AdminDashboard: React.FC = () => {
             <FileText size={16} />
             <span>Blogs</span>
           </button>
+          <button
+            onClick={() => setActiveTab('tickets')}
+            className={`flex-1 flex items-center justify-center space-x-2 py-3 rounded-xl font-black uppercase tracking-widest text-xs transition-all ${activeTab === 'tickets' ? 'bg-amber-500 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-50'}`}
+          >
+            <Plane size={16} />
+            <span>Live Prices</span>
+          </button>
         </div>
 
         {/* Action Button */}
@@ -150,7 +173,7 @@ const AdminDashboard: React.FC = () => {
           className="mb-8 flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all hover:-translate-y-1 active:scale-95"
         >
           <Plus size={20} />
-          <span>Add New {activeTab === 'packages' ? 'Package' : activeTab === 'blogs' ? 'Post' : 'Destination'}</span>
+          <span>Add New {activeTab === 'packages' ? 'Package' : activeTab === 'blogs' ? 'Post' : activeTab === 'destinations' ? 'Destination' : 'Ticket'}</span>
         </button>
 
         {/* Modals (Package, Blog, Destination) */}
@@ -375,6 +398,60 @@ const AdminDashboard: React.FC = () => {
           </div>
         )}
 
+        {editingTicket && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+            <div className="bg-white rounded-[40px] shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-slate-200">
+              <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50 rounded-t-[40px]">
+                <h2 className="text-2xl font-black uppercase tracking-tighter">{editingTicket.id ? 'Edit' : 'Create'} Live Ticket</h2>
+                <button onClick={() => setEditingTicket(null)} className="p-2 hover:bg-slate-200 rounded-full transition-colors"><X /></button>
+              </div>
+              <form onSubmit={saveTicket} className="p-10 space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Origin (From)</label>
+                    <input type="text" value={editingTicket.from || ''} onChange={e => setEditingTicket({ ...editingTicket, from: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Entebbe" required />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Destination (To)</label>
+                    <input type="text" value={editingTicket.to || ''} onChange={e => setEditingTicket({ ...editingTicket, to: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Dubai" required />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Price (UGX)</label>
+                    <input type="number" value={editingTicket.price_ugx || ''} onChange={e => setEditingTicket({ ...editingTicket, price_ugx: Number(e.target.value) })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. 1500000" required />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Price Trend</label>
+                    <select
+                      value={editingTicket.trend || 'stable'}
+                      onChange={e => setEditingTicket({ ...editingTicket, trend: e.target.value as 'up' | 'down' | 'stable' })}
+                      className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium"
+                    >
+                      <option value="up">Trending Up (Red)</option>
+                      <option value="down">Trending Down (Green)</option>
+                      <option value="stable">Stable (Gray)</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="flex gap-4 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-amber-500 hover:bg-slate-900 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest flex items-center justify-center space-x-2"
+                  >
+                    <span>Save Ticket</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditingTicket(null)}
+                    className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
         {/* Content List */}
         <div className="bg-white rounded-[40px] shadow-sm border border-slate-100 overflow-hidden">
           <div className="overflow-x-auto">
@@ -422,6 +499,30 @@ const AdminDashboard: React.FC = () => {
                       <div className="flex justify-end space-x-2">
                         <button onClick={() => setEditingDest(dest)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
                         <button onClick={() => deleteDestination(dest.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
+                      </div>
+                    </td>
+                  </tr>
+                )) : activeTab === 'tickets' ? (liveTickets || []).map(ticket => (
+                  <tr key={ticket?.id || Math.random()} className="hover:bg-slate-50/50 transition-colors">
+                    <td className="px-8 py-6">
+                      <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                        <Plane size={24} />
+                      </div>
+                    </td>
+                    <td className="px-8 py-6">
+                      <p className="font-black text-slate-900 uppercase tracking-tight">{ticket?.from} → {ticket?.to}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm font-bold text-slate-500">UGX {ticket?.price_ugx?.toLocaleString()}</p>
+                        <div className={`flex items-center gap-1 text-[10px] font-black uppercase px-2 py-0.5 rounded-full ${ticket?.trend === 'down' ? 'bg-green-100 text-green-600' : ticket?.trend === 'up' ? 'bg-red-100 text-red-600' : 'bg-slate-100 text-slate-400'}`}>
+                          {ticket?.trend === 'down' ? <TrendingDown size={10} /> : ticket?.trend === 'up' ? <TrendingUp size={10} /> : <Minus size={10} />}
+                          {ticket?.trend}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-8 py-6 text-right">
+                      <div className="flex justify-end space-x-2">
+                        <button onClick={() => setEditingTicket(ticket)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
+                        <button onClick={() => deleteLiveTicket(ticket.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>
                   </tr>

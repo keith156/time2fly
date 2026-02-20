@@ -200,13 +200,25 @@ const Home: React.FC = () => {
         <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
           <div className="animate-fade-in-up space-y-12">
             <div className="flex flex-col items-center gap-6">
-              <button
-                onClick={() => document.getElementById('flight-search')?.scrollIntoView({ behavior: 'smooth' })}
-                className="group relative bg-blue-600 hover:bg-blue-500 active:scale-95 text-white px-8 py-4 rounded-full font-black transition-all duration-200 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 uppercase tracking-[0.2em] text-sm flex items-center gap-3 overflow-hidden"
-              >
-                <Search className="shrink-0" size={16} />
-                <span className="relative z-10">BOOK FLIGHT</span>
-              </button>
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.4em] mb-3">Book</span>
+                <div className="flex bg-navy-900/40 backdrop-blur-md p-1 rounded-full border border-white/10 shadow-2xl scale-110">
+                  <button
+                    onClick={() => document.getElementById('flight-search')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-black text-[11px] uppercase tracking-widest transition-all shadow-lg shadow-blue-600/20 active:scale-95"
+                  >
+                    <Plane size={14} />
+                    Ticket
+                  </button>
+                  <Link
+                    to="/packages"
+                    className="flex items-center gap-2 px-6 py-2.5 text-white/60 hover:text-white rounded-full font-black text-[11px] uppercase tracking-widest transition-all hover:bg-white/5 active:scale-95"
+                  >
+                    <Star size={14} />
+                    Tour
+                  </Link>
+                </div>
+              </div>
             </div>
 
             <h1 className="font-black leading-none tracking-tighter uppercase mb-4 w-full">
@@ -260,9 +272,9 @@ const Home: React.FC = () => {
               </p>
 
               <div className="flex justify-center">
-                <Link to="/packages" className="group relative bg-red-600 hover:bg-amber-500 text-white px-5 py-4 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-sm flex items-center overflow-hidden">
+                <Link to="/live-prices" className="group relative bg-red-600 hover:bg-amber-500 text-white px-6 py-3 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-xs flex items-center overflow-hidden">
                   <span className="relative z-10 flex items-center">
-                    PLAN YOUR VOYAGE
+                    View today's prices
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
                 </Link>

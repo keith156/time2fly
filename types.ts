@@ -45,3 +45,12 @@ export interface Testimonial {
   avatar: string;
   rating: number;
 }
+
+export interface LiveTicket {
+  id: string;
+  from: string;
+  to: string;
+  price_ugx: number;
+  trend: 'up' | 'down' | 'stable';
+  created_at?: string;
+}

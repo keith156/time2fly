@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { Package, BlogPost, Destination } from '../types';
+import { Package, BlogPost, Destination, LiveTicket } from '../types';
 import { compressImage } from '../utils/imageCompression';
 
 // Supabase Configuration
@@ -13,6 +13,7 @@ interface DataContextType {
   packages: Package[];
   blogs: BlogPost[];
   destinations: Destination[];
+  liveTickets: LiveTicket[];
   loading: boolean;
   lastUpdated: string | null;
   refreshData: () => Promise<void>;
@@ -26,6 +27,9 @@ interface DataContextType {
   addDestination: (dest: Destination) => Promise<void>;
   updateDestination: (dest: Destination) => Promise<void>;
   deleteDestination: (id: string) => Promise<void>;
+  addLiveTicket: (ticket: LiveTicket) => Promise<void>;
+  updateLiveTicket: (ticket: LiveTicket) => Promise<void>;
+  deleteLiveTicket: (id: string) => Promise<void>;
   migrateLocalData: () => Promise<{ packages: number; blogs: number; destinations: number }>;
 }
 
@@ -35,6 +39,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [packages, setPackages] = useState<Package[]>([]);
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [liveTickets, setLiveTickets] = useState<LiveTicket[]>([]);
   const [loading, setLoading] = useState(true); // Start loading by default
   const [isUploading, setIsUploading] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
@@ -65,26 +70,30 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const packagesChannel = fetchTableSync('packages', setPackages);
     const blogsChannel = fetchTableSync('blogs', setBlogs);
     const destinationsChannel = fetchTableSync('destinations', setDestinations);
+    const ticketsChannel = fetchTableSync('live_tickets', setLiveTickets);
 
     return () => {
       supabase.removeChannel(packagesChannel);
       supabase.removeChannel(blogsChannel);
       supabase.removeChannel(destinationsChannel);
+      supabase.removeChannel(ticketsChannel);
     };
   }, []);
 
   const fetchInitialData = async () => {
     try {
       setLoading(true);
-      const [pkgResult, blogResult, destResult] = await Promise.all([
+      const [pkgResult, blogResult, destResult, ticketResult] = await Promise.all([
         supabase.from('packages').select('*').order('created_at', { ascending: false }),
         supabase.from('blogs').select('*').order('created_at', { ascending: false }),
-        supabase.from('destinations').select('*').order('created_at', { ascending: false })
+        supabase.from('destinations').select('*').order('created_at', { ascending: false }),
+        supabase.from('live_tickets').select('*').order('created_at', { ascending: false })
       ]);
 
       if (pkgResult.data) setPackages(pkgResult.data);
       if (blogResult.data) setBlogs(blogResult.data);
       if (destResult.data) setDestinations(destResult.data);
+      if (ticketResult.data) setLiveTickets(ticketResult.data);
 
       setLastUpdated(new Date().toISOString());
     } catch (err) {
@@ -98,34 +107,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await fetchInitialData();
   };
 
-  const uploadImage = async (base64String: string, path: string): Promise<string> => {
-    if (!base64String.startsWith('data:')) return base64String;
-
-    try {
-      const blob = await compressImage(base64String);
-      const contentType = 'image/jpeg';
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.jpg`;
-      const filePath = `${path}/${fileName}`;
-
-      const { error: uploadError } = await supabase.storage
-        .from('images')
-        .upload(filePath, blob, { contentType, upsert: true });
-
-      if (uploadError) throw new Error('Image upload failed');
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('images')
-        .getPublicUrl(filePath);
-
-      return publicUrl;
-    } catch (err) {
-      console.error('Image upload critical error:', err);
-      throw err;
-    }
-  };
-
-  // CRUD Operations - Direct to Supabase (Optimistic updates are handled by Realtime subscription mostly, 
-  // but we can locally update for instant feedback if Realtime is slow, though Realtime is preferred for consistency)
+  // ... (keep uploadImage and existing CRUD functions)
 
   const addPackage = async (pkg: Package) => {
     setIsUploading(true);
@@ -259,6 +241,34 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const addLiveTicket = async (ticket: LiveTicket) => {
+    const { id, ...ticketData } = ticket;
+    const { data, error } = await supabase.from('live_tickets').insert([ticketData]).select().single();
+    if (error) {
+      console.error('Ticket insert error:', error);
+    } else if (data) {
+      setLiveTickets(prev => [data, ...prev]);
+    }
+  };
+
+  const updateLiveTicket = async (ticket: LiveTicket) => {
+    const { data, error } = await supabase.from('live_tickets').update(ticket).eq('id', ticket.id).select().single();
+    if (error) {
+      console.error('Ticket update error:', error);
+    } else if (data) {
+      setLiveTickets(prev => prev.map(item => item.id === ticket.id ? data : item));
+    }
+  };
+
+  const deleteLiveTicket = async (id: string) => {
+    const { error } = await supabase.from('live_tickets').delete().eq('id', id);
+    if (error) {
+      console.error('Ticket delete error:', error);
+    } else {
+      setLiveTickets(prev => prev.filter(item => item.id !== id));
+    }
+  };
+
   const migrateLocalData = async () => {
     // Migration is no longer needed/supported in the strict sync version
     // returning empty counts
@@ -267,10 +277,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   return (
     <DataContext.Provider value={{
-      packages, blogs, destinations, loading, isUploading, lastUpdated, refreshData,
+      packages, blogs, destinations, liveTickets, loading, isUploading, lastUpdated, refreshData,
       addPackage, updatePackage, deletePackage,
       addBlog, updateBlog, deleteBlog,
       addDestination, updateDestination, deleteDestination,
+      addLiveTicket, updateLiveTicket, deleteLiveTicket,
       migrateLocalData
     }}>
       {children}

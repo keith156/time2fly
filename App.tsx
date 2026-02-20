@@ -14,6 +14,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import Destinations from './pages/Destinations';
 import SpecialOffers from './pages/SpecialOffers';
 import DestinationDetail from './pages/DestinationDetail';
+import LivePrices from './pages/LivePrices';
 
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import WhatsAppButton from './components/WhatsAppButton.tsx';
@@ -81,6 +82,7 @@ const Navbar: React.FC = () => {
     { name: 'Destinations', path: '/destinations' },
     { name: 'Packages', path: '/packages' },
     { name: 'Special offers', path: '/special-offers' },
+    { name: 'Live Prices', path: '/live-prices' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Blog', path: '/blog' },
@@ -320,6 +322,7 @@ const App: React.FC = () => {
                 <Route path="/destinations" element={<Destinations />} />
                 <Route path="/destinations/:id" element={<DestinationDetail />} />
                 <Route path="/special-offers" element={<SpecialOffers />} />
+                <Route path="/live-prices" element={<LivePrices />} />
                 <Route path="/login" element={<Login />} />
                 <Route
                   path="/admin"
