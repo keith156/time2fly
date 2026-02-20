@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, ArrowLeft, Calendar, MapPin, Clock, CreditCard, Send, Zap, Ship, GraduationCap, Car, Briefcase, ChevronDown, CheckCircle2, Compass, Share2, Search, DollarSign } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle.tsx';
+import FlightSearchBar from '../components/FlightSearchBar.tsx';
 import { SERVICES, TESTIMONIALS, PARTNERS } from '../constants.tsx';
 import { useData } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
@@ -53,6 +54,14 @@ const Home: React.FC = () => {
 
   const extendedTestimonials = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
   const extendedPartners = [...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS];
+
+  // Split partners for two distinct rows
+  const half = Math.ceil(PARTNERS.length / 2);
+  const row1 = PARTNERS.slice(0, half);
+  const row2 = PARTNERS.slice(half);
+
+  const extendedRow1 = [...row1, ...row1, ...row1, ...row1, ...row1, ...row1];
+  const extendedRow2 = [...row2, ...row2, ...row2, ...row2, ...row2, ...row2];
 
   const openGoogleFlights = () => {
     window.open('https://www.google.com/travel/flights', '_blank');
@@ -167,7 +176,7 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="overflow-hidden">
+    <div>
       {/* Redesigned Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -247,8 +256,9 @@ const Home: React.FC = () => {
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
                 </Link>
-                <Link to="/about" className="group bg-transparent hover:bg-white/10 text-white border border-white/30 px-10 py-4 rounded-full font-black transition-all duration-300 uppercase tracking-[0.2em] text-sm hover:border-amber-500 hover:text-amber-500 flex items-center">
-                  <span className="group-hover:translate-x-1 transition-transform">OUR STORY</span>
+                <Link to="/contact" className="group relative bg-blue-600 hover:bg-blue-500 active:scale-95 text-white px-8 py-4 rounded-xl font-black transition-all duration-200 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 uppercase tracking-[0.2em] text-sm flex items-center gap-3 overflow-hidden">
+                  <Search className="shrink-0" size={16} />
+                  <span className="relative z-10">BOOK FLIGHT</span>
                 </Link>
               </div>
 
@@ -261,27 +271,40 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Flight Search Bar */}
+      <FlightSearchBar />
 
-      {/* Partners Section (Replaces Hybrid Feature) */}
-      <section className="py-16 bg-[#0000ff] overflow-hidden border-b border-blue-700">
-        <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
-
-          <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Our Global Network</h2>
-        </div>
-
+      {/* Partners Section */}
+      <section className="py-12 bg-navy-900 relative overflow-hidden">
+        <p className="text-center text-[9px] font-bold uppercase tracking-[0.4em] text-white/30 mb-6">Trusted Partners</p>
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0000ff] to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0000ff] to-transparent z-10 pointer-events-none"></div>
-
-          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-4">
-            {extendedPartners.map((partner, i) => (
-              <div key={`${partner.name}-${i}`} className="inline-block px-4 shrink-0">
-                <div className="bg-white rounded-3xl shadow-sm hover:shadow-md border border-slate-200/60 p-3 w-[200px] h-32 flex items-center justify-center hover:scale-105 transition-all duration-300">
+          <div className="absolute inset-y-0 left-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(90deg, #0f172a, transparent)' }}></div>
+          <div className="absolute inset-y-0 right-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(270deg, #0f172a, transparent)' }}></div>
+          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
+            {extendedRow1.map((partner, i) => (
+              <div key={`${partner.name}-${i}`} className="inline-block px-3 shrink-0">
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl border border-white/10 p-4 w-[260px] h-[130px] flex items-center justify-center hover:scale-105 hover:bg-white transition-all duration-300">
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="h-full w-full object-contain p-1"
+                    className="h-full w-full object-contain opacity-85 hover:opacity-100 transition-opacity duration-300"
                     loading="lazy"
+                    style={{ transform: `scale(${partner.scale || 1})` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="flex whitespace-nowrap animate-marquee-reverse hover:[animation-play-state:paused] mt-8">
+            {extendedRow2.map((partner, i) => (
+              <div key={`${partner.name}-rev-${i}`} className="inline-block px-3 shrink-0">
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl border border-white/10 p-4 w-[260px] h-[130px] flex items-center justify-center hover:scale-105 hover:bg-white transition-all duration-300">
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-full w-full object-contain opacity-85 hover:opacity-100 transition-opacity duration-300"
+                    loading="lazy"
+                    style={{ transform: `scale(${partner.scale || 1})` }}
                   />
                 </div>
               </div>
@@ -296,8 +319,11 @@ const Home: React.FC = () => {
 
 
 
+
+
+
       {/* Testimonials */}
-      <section className="py-16 bg-navy-900 relative overflow-hidden">
+      < section className="py-16 bg-navy-900 relative overflow-hidden" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center">
           <SectionTitle title="Voices of Our Travellers" light={true} />
         </div>
@@ -336,11 +362,11 @@ const Home: React.FC = () => {
         <div className="mt-10 text-center">
           <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-xs">Trusted by thousands of explorers since 2018</p>
         </div>
-      </section>
+      </section >
 
       <AirlineLiverySeparator />
 
-    </div>
+    </div >
   );
 };
 
