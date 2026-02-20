@@ -260,7 +260,7 @@ const Home: React.FC = () => {
               </p>
 
               <div className="flex justify-center">
-                <Link to="/packages" className="group relative bg-red-600 hover:bg-amber-500 text-white px-4 py-3 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-sm flex items-center overflow-hidden">
+                <Link to="/packages" className="group relative bg-red-600 hover:bg-amber-500 text-white px-5 py-4 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-sm flex items-center overflow-hidden">
                   <span className="relative z-10 flex items-center">
                     PLAN YOUR VOYAGE
                   </span>
