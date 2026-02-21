@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { Package, BlogPost, Destination, LiveTicket } from '../types';
+import { DUMMY_TICKETS } from '../constants';
 import { compressImage } from '../utils/imageCompression';
 
 // Supabase Configuration
@@ -93,7 +94,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (pkgResult.data) setPackages(pkgResult.data);
       if (blogResult.data) setBlogs(blogResult.data);
       if (destResult.data) setDestinations(destResult.data);
-      if (ticketResult.data) setLiveTickets(ticketResult.data);
+
+      if (ticketResult.data && ticketResult.data.length > 0) {
+        setLiveTickets(ticketResult.data);
+      } else {
+        console.log('No live tickets found in database, using dummy data.');
+        setLiveTickets(DUMMY_TICKETS);
+      }
 
       setLastUpdated(new Date().toISOString());
     } catch (err) {
@@ -107,7 +114,32 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await fetchInitialData();
   };
 
-  // ... (keep uploadImage and existing CRUD functions)
+  const uploadImage = async (base64: string, folder: string) => {
+    try {
+      const compressed = await compressImage(base64);
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.jpg`;
+      const filePath = `${folder}/${fileName}`;
+
+      // Convert base64 to Blob
+      const response = await fetch(compressed);
+      const blob = await response.blob();
+
+      const { data, error } = await supabase.storage
+        .from('images')
+        .upload(filePath, blob, { contentType: 'image/jpeg' });
+
+      if (error) throw error;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('images')
+        .getPublicUrl(filePath);
+
+      return publicUrl;
+    } catch (error) {
+      console.error('Image upload failed:', error);
+      throw error;
+    }
+  };
 
   const addPackage = async (pkg: Package) => {
     setIsUploading(true);
@@ -242,21 +274,34 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const addLiveTicket = async (ticket: LiveTicket) => {
-    const { id, ...ticketData } = ticket;
-    const { data, error } = await supabase.from('live_tickets').insert([ticketData]).select().single();
-    if (error) {
-      console.error('Ticket insert error:', error);
-    } else if (data) {
-      setLiveTickets(prev => [data, ...prev]);
+    setIsUploading(true);
+    try {
+      const { id, ...ticketData } = ticket;
+      const { data, error } = await supabase.from('live_tickets').insert([ticketData]).select().single();
+      if (error) {
+        console.error('Ticket insert error:', error);
+        alert(`Error saving ticket: ${error.message}. Make sure you ran the SQL migration!`);
+      } else if (data) {
+        setLiveTickets(prev => [data, ...prev]);
+      }
+    } finally {
+      setIsUploading(false);
     }
   };
 
   const updateLiveTicket = async (ticket: LiveTicket) => {
-    const { data, error } = await supabase.from('live_tickets').update(ticket).eq('id', ticket.id).select().single();
-    if (error) {
-      console.error('Ticket update error:', error);
-    } else if (data) {
-      setLiveTickets(prev => prev.map(item => item.id === ticket.id ? data : item));
+    setIsUploading(true);
+    try {
+      const { id, ...updateData } = ticket;
+      const { data, error } = await supabase.from('live_tickets').update(updateData).eq('id', id).select().single();
+      if (error) {
+        console.error('Ticket update error:', error);
+        alert(`Error updating ticket: ${error.message}`);
+      } else if (data) {
+        setLiveTickets(prev => prev.map(item => item.id === id ? data : item));
+      }
+    } finally {
+      setIsUploading(false);
     }
   };
 

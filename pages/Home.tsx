@@ -201,7 +201,7 @@ const Home: React.FC = () => {
           <div className="animate-fade-in-up space-y-12">
             <div className="flex flex-col items-center gap-6">
               <div className="flex flex-col items-center">
-                <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.4em] mb-3">Book</span>
+                <span className="text-[15px] font-black text-white uppercase tracking-[0.4em] mb-3">Book</span>
                 <div className="flex bg-navy-900/40 backdrop-blur-md p-1 rounded-full border border-white/10 shadow-2xl scale-110">
                   <button
                     onClick={() => document.getElementById('flight-search')?.scrollIntoView({ behavior: 'smooth' })}
@@ -274,7 +274,7 @@ const Home: React.FC = () => {
               <div className="flex justify-center">
                 <Link to="/live-prices" className="group relative bg-red-600 hover:bg-amber-500 text-white px-6 py-3 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-xs flex items-center overflow-hidden">
                   <span className="relative z-10 flex items-center">
-                    View today's prices
+                    view flight prices
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
                 </Link>

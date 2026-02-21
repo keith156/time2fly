@@ -91,7 +91,8 @@ const AdminDashboard: React.FC = () => {
       id: editingTicket.id || Date.now().toString(),
     } as LiveTicket;
 
-    if (editingTicket.id) await updateLiveTicket(ticket);
+    const isDummy = editingTicket.id?.toString().startsWith('d');
+    if (editingTicket.id && !isDummy) await updateLiveTicket(ticket);
     else await addLiveTicket(ticket);
     setEditingTicket(null);
   };
@@ -416,8 +417,12 @@ const AdminDashboard: React.FC = () => {
                     <input type="text" value={editingTicket.to || ''} onChange={e => setEditingTicket({ ...editingTicket, to: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Dubai" required />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Price (UGX)</label>
-                    <input type="number" value={editingTicket.price_ugx || ''} onChange={e => setEditingTicket({ ...editingTicket, price_ugx: Number(e.target.value) })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. 1500000" required />
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">USD Range ($Min - $Max)</label>
+                    <div className="flex items-center gap-3">
+                      <input type="number" value={editingTicket.price_usd_min || ''} onChange={e => setEditingTicket({ ...editingTicket, price_usd_min: Number(e.target.value) })} className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Min (e.g. 250)" />
+                      <span className="text-slate-400">-</span>
+                      <input type="number" value={editingTicket.price_usd_max || ''} onChange={e => setEditingTicket({ ...editingTicket, price_usd_max: Number(e.target.value) })} className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Max (e.g. 280)" />
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Price Trend</label>
@@ -435,9 +440,17 @@ const AdminDashboard: React.FC = () => {
                 <div className="flex gap-4 pt-4">
                   <button
                     type="submit"
-                    className="flex-1 bg-amber-500 hover:bg-slate-900 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest flex items-center justify-center space-x-2"
+                    disabled={isUploading}
+                    className="flex-1 bg-amber-500 hover:bg-slate-900 disabled:bg-slate-300 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest flex items-center justify-center space-x-2"
                   >
-                    <span>Save Ticket</span>
+                    {isUploading ? (
+                      <>
+                        <Loader2 className="animate-spin" size={20} />
+                        <span>Saving...</span>
+                      </>
+                    ) : (
+                      <span>Save Ticket</span>
+                    )}
                   </button>
                   <button
                     type="button"
@@ -511,8 +524,10 @@ const AdminDashboard: React.FC = () => {
                     </td>
                     <td className="px-8 py-6">
                       <p className="font-black text-slate-900 uppercase tracking-tight">{ticket?.from} → {ticket?.to}</p>
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm font-bold text-slate-500">UGX {ticket?.price_ugx?.toLocaleString()}</p>
+                      <div className="flex items-center gap-3">
+                        <p className="text-sm font-bold text-slate-900">
+                          {ticket.price_usd_min && ticket.price_usd_max ? `$${ticket.price_usd_min}-$${ticket.price_usd_max}` : 'USD Range Not Set'}
+                        </p>
                         <div className={`flex items-center gap-1 text-[10px] font-black uppercase px-2 py-0.5 rounded-full ${ticket?.trend === 'down' ? 'bg-green-100 text-green-600' : ticket?.trend === 'up' ? 'bg-red-100 text-red-600' : 'bg-slate-100 text-slate-400'}`}>
                           {ticket?.trend === 'down' ? <TrendingDown size={10} /> : ticket?.trend === 'up' ? <TrendingUp size={10} /> : <Minus size={10} />}
                           {ticket?.trend}

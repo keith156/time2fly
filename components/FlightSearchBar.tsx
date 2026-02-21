@@ -299,7 +299,7 @@ const FlightSearchBar: React.FC = () => {
                     <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
                         <Plane size={16} className="text-white" />
                     </div>
-                    <h2 className="text-base font-black text-slate-800 uppercase tracking-widest">Flight Estimation</h2>
+                    <h2 className="text-base font-black text-slate-800 uppercase tracking-widest">BOOK FLIGHT</h2>
                     <span className="ml-auto text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden sm:block">Book via WhatsApp</span>
                 </div>
 
@@ -419,7 +419,7 @@ const FlightSearchBar: React.FC = () => {
                     {/* Explore button */}
                     <button type="button" onClick={handleExplore} className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-black px-7 py-3 rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 transition-all duration-200 text-sm uppercase tracking-wide shrink-0 mt-1 md:mt-0">
                         <Search size={16} />
-                        <span>Explore</span>
+                        <span>GET QUOTE</span>
                     </button>
                 </div>
 

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Plane, Hotel, Map, Shield, Globe, Landmark, Clock, Award, Compass, Ship, GraduationCap, Car, Briefcase, Zap } from 'lucide-react';
-import { Service, Package, BlogPost, Testimonial, Destination } from './types';
+import { Service, Package, BlogPost, Testimonial, Destination, LiveTicket } from './types';
 
 export const APP_VERSION = '2.1-DEBUG';
 
@@ -137,4 +137,12 @@ export const PARTNERS = [
   { name: 'Brussels Airlines', logo: '/assets/brussel-logo.svg', scale: 0.8 },
   { name: 'South African Airways', logo: '/assets/South_African_Airways-Logo.wine.svg', scale: 1.7 },
   { name: 'RwandAir', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/RwandAir_logo.svg/1024px-RwandAir_logo.svg.png', scale: 1.5 }
+];
+
+export const DUMMY_TICKETS: LiveTicket[] = [
+  { id: 'd1', from: 'Entebbe (EBB)', to: 'Dubai (DXB)', price_ugx: 1850000, price_usd_min: 480, price_usd_max: 520, trend: 'down' },
+  { id: 'd2', from: 'Entebbe (EBB)', to: 'Nairobi (NBO)', price_ugx: 950000, price_usd_min: 240, price_usd_max: 270, trend: 'stable' },
+  { id: 'd3', from: 'Entebbe (EBB)', to: 'Istanbul (IST)', price_ugx: 2400000, price_usd_min: 620, price_usd_max: 680, trend: 'up' },
+  { id: 'd4', from: 'Entebbe (EBB)', to: 'Johannesburg (JNB)', price_ugx: 1600000, price_usd_min: 410, price_usd_max: 450, trend: 'down' },
+  { id: 'd5', from: 'Entebbe (EBB)', to: 'London (LHR)', price_ugx: 3200000, price_usd_min: 820, price_usd_max: 890, trend: 'stable' }
 ];

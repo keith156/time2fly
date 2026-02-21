@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
-import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search, RefreshCcw } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search, RefreshCcw, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -79,14 +79,26 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Destinations', path: '/destinations' },
+    { name: 'Flight Prices', path: '/live-prices' },
+    {
+      name: 'Flights & Deals',
+      path: '#',
+      children: [
+        { name: 'Destinations', path: '/destinations' },
+        { name: 'Special Offers', path: '/special-offers' },
+      ]
+    },
     { name: 'Packages', path: '/packages' },
-    { name: 'Special offers', path: '/special-offers' },
-    { name: 'Live Prices', path: '/live-prices' },
-    { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services' },
     { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/contact' },
+    {
+      name: 'Contact',
+      path: '#',
+      children: [
+        { name: 'Services', path: '/services' },
+        { name: 'Contact Us', path: '/contact' },
+        { name: 'About Us', path: '/about' },
+      ]
+    },
   ];
 
   const prefetchPage = (path: string) => {
@@ -125,16 +137,40 @@ const Navbar: React.FC = () => {
             >
               {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} className="animate-pulse" />}
             </button>
-            <div className="hidden lg:flex items-center gap-4 xl:gap-6">
+            <div className="hidden lg:flex items-center gap-4 xl:gap-8">
               {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  onMouseEnter={() => prefetchPage(link.path)}
-                  className="text-white font-medium text-sm hover:text-white/80 transition-colors whitespace-nowrap"
-                >
-                  {link.name}
-                </Link>
+                <div key={link.name} className="relative group">
+                  {link.children ? (
+                    <div className="flex items-center gap-1 text-white font-medium text-sm hover:text-white/80 transition-colors cursor-pointer py-2">
+                      <span className="uppercase tracking-widest text-[11px] font-bold">{link.name}</span>
+                      <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
+
+                      {/* Dropdown Menu */}
+                      <div className="absolute top-full left-0 pt-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50">
+                        <div className="bg-white rounded-2xl shadow-2xl border border-slate-100 py-3 min-w-[200px] overflow-hidden">
+                          {link.children.map((child) => (
+                            <Link
+                              key={child.name}
+                              to={child.path}
+                              onMouseEnter={() => prefetchPage(child.path)}
+                              className="block px-6 py-2.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 text-xs font-bold uppercase tracking-widest transition-all"
+                            >
+                              {child.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      onMouseEnter={() => prefetchPage(link.path)}
+                      className="text-white font-bold text-[11px] hover:text-white/80 transition-colors whitespace-nowrap uppercase tracking-widest py-2 block"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
+                </div>
               ))}
             </div>
 
@@ -177,14 +213,31 @@ const Navbar: React.FC = () => {
         <div className={`md:hidden absolute top-full left-0 w-full px-4 pt-2 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
           <div className="bg-red-600 rounded-3xl p-6 shadow-2xl border border-white/10 space-y-4">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className="block text-white font-medium text-lg border-b border-white/10 pb-2"
-              >
-                {link.name}
-              </Link>
+              <div key={link.name} className="space-y-2">
+                {link.children ? (
+                  <div className="space-y-2">
+                    <div className="text-white/40 font-bold text-[10px] uppercase tracking-[0.2em] pt-4">{link.name}</div>
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.name}
+                        to={child.path}
+                        onClick={() => setIsOpen(false)}
+                        className="block text-white font-bold text-lg hover:text-amber-400 transition-colors pl-4 border-l-2 border-white/10"
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <Link
+                    to={link.path}
+                    onClick={() => setIsOpen(false)}
+                    className="block text-white font-bold text-lg border-b border-white/10 pb-2 hover:text-amber-400 transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </div>
             ))}
             <div className="pt-4">
               <form onSubmit={handleSearch} className="bg-white rounded-full p-1 pl-4 flex items-center">

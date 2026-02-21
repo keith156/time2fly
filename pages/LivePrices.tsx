@@ -16,14 +16,14 @@ const LivePrices: React.FC = () => {
                             <CheckCircle2 size={12} />
                             <span>Human-Verified & Always Current</span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tight leading-none mb-4">
+                        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 uppercase tracking-tight leading-none mb-4">
                             Live <span className="text-blue-600">Prices</span>
                         </h1>
                         <p className="text-slate-500 text-lg max-w-xl font-medium leading-relaxed">
                             Real-time rates for flights and tours, <span className="text-slate-900 font-bold italic">backed by real people</span>. No bots, just expert human verification.
                         </p>
                     </div>
-                    <Link to="/" className="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-slate-100 text-slate-900 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl shadow-slate-200/50 transition-all border border-slate-100 group self-start md:self-center">
+                    <Link to="/" className="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-slate-100 text-slate-900 rounded-2xl font-bold uppercase tracking-widest text-xs shadow-xl shadow-slate-200/50 transition-all border border-slate-100 group self-start md:self-center">
                         <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
                         Back to Home
                     </Link>
@@ -37,10 +37,10 @@ const LivePrices: React.FC = () => {
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-10">
                                     <div>
-                                        <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">Current Flight Rates</h2>
-                                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Updates every few minutes</p>
+                                        <h2 className="text-2xl font-bold text-slate-900 uppercase tracking-tighter">Current Flight Rates</h2>
+                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">Updates every few minutes</p>
                                     </div>
-                                    <div className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-full text-[10px] font-black uppercase tracking-widest border border-green-100 animate-pulse">
+                                    <div className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-full text-[10px] font-bold uppercase tracking-widest border border-green-100 animate-pulse">
                                         <div className="w-2 h-2 bg-green-600 rounded-full shadow-[0_0_8px_rgba(22,163,74,0.5)]"></div>
                                         Live Now
                                     </div>
@@ -54,46 +54,72 @@ const LivePrices: React.FC = () => {
                                 ) : (
                                     <div className="space-y-4">
                                         {liveTickets.length > 0 ? liveTickets.map((ticket, i) => (
-                                            <div key={ticket.id} className="group relative bg-white border border-slate-100 hover:border-blue-200 rounded-3xl p-6 transition-all hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1">
-                                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                                                    <div className="flex items-center gap-5">
-                                                        <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-inner">
-                                                            <Plane size={24} className="group-hover:rotate-45 transition-transform" />
+                                            <div key={ticket.id} className="group relative bg-white border border-slate-200 rounded-2xl p-4 lg:p-6 transition-all hover:border-blue-400 hover:shadow-md">
+                                                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+
+                                                    {/* Route & Basic Info */}
+                                                    <div className="flex items-center gap-6 flex-grow min-w-0 w-full md:w-auto">
+                                                        <div className="hidden sm:flex w-12 h-12 bg-slate-50 rounded-full items-center justify-center text-slate-400 shrink-0">
+                                                            <Plane size={20} />
                                                         </div>
-                                                        <div>
-                                                            <div className="text-xl font-black text-slate-900 items-center flex gap-2">
-                                                                {ticket.from}
-                                                                <span className="text-blue-500 text-sm">→</span>
-                                                                {ticket.to}
+                                                        <div className="min-w-0 flex-grow">
+                                                            <div className="flex items-center gap-3 text-lg lg:text-xl font-semibold text-slate-900 leading-tight mb-1">
+                                                                <span className="truncate">{ticket.from}-{ticket.to}</span>
                                                             </div>
-                                                            <div className="flex items-center gap-2 mt-1">
-                                                                <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 bg-slate-100 text-slate-500 rounded">Economy</span>
-                                                                <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 bg-blue-50 text-blue-600 rounded">Verified</span>
+                                                            <div className="flex items-center gap-3 text-[11px] font-medium text-slate-500">
+                                                                <span className="uppercase tracking-wider">Economy</span>
+                                                                <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                                                                <span className="flex items-center gap-1.5 whitespace-nowrap text-blue-600 font-bold border border-blue-100 px-2.5 py-0.5 rounded-full bg-blue-50/50 transition-all group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600">
+                                                                    <CheckCircle2 size={10} className="shrink-0" />
+                                                                    <span className="text-[9px] uppercase tracking-wider">Market Price</span>
+                                                                </span>
+                                                                <span className="w-1 h-1 bg-slate-200 rounded-full shrink-0"></span>
+                                                                <span className="text-slate-400 whitespace-nowrap">Last update: Today</span>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <div className="flex items-center justify-between sm:justify-end gap-8 border-t sm:border-t-0 pt-4 sm:pt-0">
-                                                        <div className="text-right">
-                                                            <div className="text-2xl font-black text-slate-900 leading-none">
-                                                                UGX {ticket.price_ugx.toLocaleString()}
+                                                    {/* Pricing Section */}
+                                                    <div className="flex items-center justify-between md:justify-end gap-10 w-full md:w-auto border-t md:border-t-0 pt-4 md:pt-0">
+                                                        <div className="text-left md:text-right relative group/price">
+                                                            <div className="absolute -inset-2 bg-blue-50 rounded-xl opacity-0 px-4 py-8 group-hover/price:opacity-100 transition-opacity pointer-events-none"></div>
+                                                            <div className="relative text-2xl lg:text-3xl font-bold text-slate-900 tracking-tighter flex items-center md:justify-end">
+                                                                {ticket.price_usd_min && ticket.price_usd_max ? (
+                                                                    <div className="flex items-center">
+                                                                        <span className="text-blue-600 font-extrabold text-lg lg:text-xl mr-0.5">$</span>
+                                                                        <span>{ticket.price_usd_min}</span>
+                                                                        <span className="text-slate-400 font-bold mx-1.5">-</span>
+                                                                        <span className="text-blue-600 font-extrabold text-lg lg:text-xl mr-0.5">$</span>
+                                                                        <span>{ticket.price_usd_max}</span>
+                                                                    </div>
+                                                                ) : (
+                                                                    <div className="flex items-center">
+                                                                        <span className="text-blue-600 font-extrabold text-xl lg:text-2xl mr-1">$</span>
+                                                                        {Math.round(ticket.price_ugx / 3800)}
+                                                                    </div>
+                                                                )}
                                                             </div>
-                                                            <div className={`mt-1 flex items-center justify-end gap-1 text-[10px] font-black uppercase tracking-widest ${ticket.trend === 'down' ? 'text-green-500' : ticket.trend === 'up' ? 'text-red-500' : 'text-slate-400'}`}>
-                                                                {ticket.trend === 'down' ? <TrendingDown size={12} /> : ticket.trend === 'up' ? <TrendingUp size={12} /> : <Minus size={12} />}
-                                                                {ticket.trend === 'down' ? 'Down 4%' : ticket.trend === 'up' ? 'Peak' : 'No Change'}
+                                                            <div className={`relative mt-1 flex items-center md:justify-end gap-1 text-[10px] font-bold uppercase tracking-widest ${ticket.trend === 'down' ? 'text-green-600' : ticket.trend === 'up' ? 'text-red-500' : 'text-slate-400'}`}>
+                                                                {ticket.trend === 'down' ? (
+                                                                    <><TrendingDown size={12} /> Great Price</>
+                                                                ) : ticket.trend === 'up' ? (
+                                                                    <><TrendingUp size={12} /> Peak</>
+                                                                ) : (
+                                                                    <><Minus size={12} /> Stable</>
+                                                                )}
                                                             </div>
                                                         </div>
 
                                                         <a
-                                                            href={`https://wa.me/256783084521?text=Hello! I'm interested in the live price for ${ticket.from} to ${ticket.to} at UGX ${ticket.price_ugx.toLocaleString()}. I saw this on the website and would like a real person to help me finalize this!`}
+                                                            href={`https://wa.me/256783084521?text=Hello! I'm interested in the live price for ${ticket.from}-${ticket.to} at around $${ticket.price_usd_min ?? Math.round(ticket.price_ugx / 3800)}. I saw this on the website and would like to finalize my booking with an agent!`}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 hover:bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all shadow-lg active:scale-95 group/btn"
+                                                            className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all shadow-sm active:scale-95 whitespace-nowrap"
                                                         >
-                                                            <MessageCircle size={14} className="group-hover/btn:scale-110 transition-transform" />
-                                                            Secure with Agent
+                                                            Confirm Price
                                                         </a>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         )) : (
@@ -106,7 +132,7 @@ const LivePrices: React.FC = () => {
 
                                 <button
                                     onClick={() => refreshData()}
-                                    className="w-full mt-10 py-5 bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-100 rounded-3xl font-black uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
+                                    className="w-full mt-10 py-5 bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-100 rounded-3xl font-bold uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
                                 >
                                     Refresh Market Feed
                                     <RefreshCcw size={16} className="text-blue-500" />
@@ -125,7 +151,7 @@ const LivePrices: React.FC = () => {
                                 </div>
                                 <h3 className="text-xl font-bold uppercase tracking-tight">Our Edge</h3>
                             </div>
-                            <h4 className="text-amber-500 font-black uppercase tracking-widest text-[10px] mb-3 relative z-10">Backed By Real People</h4>
+                            <h4 className="text-amber-500 font-bold uppercase tracking-widest text-[10px] mb-3 relative z-10">Backed By Real People</h4>
                             <p className="text-slate-400 text-sm leading-relaxed mb-8 relative z-10 font-medium">
                                 Unlike automated booking sites, our prices are verified by <span className="text-white">Professional Travel Agents</span> who know the market. We find the deals bots miss.
                             </p>
@@ -147,17 +173,17 @@ const LivePrices: React.FC = () => {
                                 <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-md">
                                     <MessageCircle size={24} fill="white" />
                                 </div>
-                                <h3 className="text-2xl font-black uppercase tracking-tighter mb-4 leading-tight">Need a custom<br />itinerary?</h3>
+                                <h3 className="text-2xl font-bold uppercase tracking-tighter mb-4 leading-tight">Need a custom<br />itinerary?</h3>
                                 <p className="text-white/80 text-sm font-medium mb-8 leading-relaxed">Let our real experts craft the perfect journey for you. Skip the stress and chat with us.</p>
-                                <a href="https://wa.me/256783084521" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full py-5 bg-white text-blue-600 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-slate-100 transition-all shadow-xl active:scale-95">
+                                <a href="https://wa.me/256783084521" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full py-5 bg-white text-blue-600 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-slate-100 transition-all shadow-xl active:scale-95">
                                     Talk to a Human Now
                                 </a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div >
+            </div >
+        </div >
     );
 };
 

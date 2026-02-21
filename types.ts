@@ -50,7 +50,9 @@ export interface LiveTicket {
   id: string;
   from: string;
   to: string;
-  price_ugx: number;
+  price_ugx?: number;
+  price_usd_min?: number;
+  price_usd_max?: number;
   trend: 'up' | 'down' | 'stable';
   created_at?: string;
 }
