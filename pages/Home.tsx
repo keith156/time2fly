@@ -197,11 +197,31 @@ const Home: React.FC = () => {
         </div>
 
 
-        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
+        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-16 md:pt-20">
           <div className="animate-fade-in-up space-y-12">
             <div className="flex flex-col items-center gap-6">
               <div className="flex flex-col items-center">
-                <span className="text-[15px] font-black text-white uppercase tracking-[0.4em] mb-3">Book</span>
+                <svg
+                  viewBox="0 0 200 60"
+                  style={{ display: 'block', margin: '0 auto', width: '100%', maxWidth: '180px', overflow: 'visible' }}
+                  className="mb-1"
+                >
+                  <text
+                    x="50%"
+                    y="30"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fontFamily="Poppins, sans-serif"
+                    fontWeight="900"
+                    fontSize="32"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    letterSpacing="0.2em"
+                  >
+                    BOOK
+                  </text>
+                </svg>
                 <div className="flex bg-navy-900/40 backdrop-blur-md p-1 rounded-full border border-white/10 shadow-2xl scale-110">
                   <button
                     onClick={() => document.getElementById('flight-search')?.scrollIntoView({ behavior: 'smooth' })}
@@ -272,12 +292,31 @@ const Home: React.FC = () => {
               </p>
 
               <div className="flex justify-center">
-                <Link to="/live-prices" className="group relative bg-red-600 hover:bg-amber-500 text-white px-6 py-3 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.6)] uppercase tracking-[0.2em] text-xs flex items-center overflow-hidden">
-                  <span className="relative z-10 flex items-center">
-                    view flight prices
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
-                </Link>
+                <div className="relative group">
+                  <button className="bg-red-600 hover:bg-amber-500 text-white px-8 py-4 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] uppercase tracking-[0.2em] text-xs flex items-center gap-3 overflow-hidden">
+                    <span className="relative z-10">view flight prices</span>
+                    <ChevronDown size={14} className="relative z-10 transition-transform group-hover:rotate-180" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden transform group-hover:translate-y-0 translate-y-2">
+                    <Link
+                      to="/live-prices"
+                      className="flex items-center gap-3 px-6 py-4 text-slate-900 hover:bg-slate-50 font-bold text-[11px] uppercase tracking-wider transition-colors border-b border-slate-50"
+                    >
+                      <Plane size={14} className="text-blue-600" />
+                      View Flight Prices
+                    </Link>
+                    <button
+                      onClick={() => document.getElementById('flight-search')?.scrollIntoView({ behavior: 'smooth' })}
+                      className="flex items-center gap-3 px-6 py-4 text-slate-900 hover:bg-slate-50 font-bold text-[11px] uppercase tracking-wider transition-colors w-full text-left"
+                    >
+                      <Search size={14} className="text-blue-600" />
+                      Book Flight
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <div className="flex items-center justify-center space-x-2 opacity-70 hover:opacity-100 transition-opacity pb-8">

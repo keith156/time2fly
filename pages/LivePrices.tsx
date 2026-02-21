@@ -63,8 +63,8 @@ const LivePrices: React.FC = () => {
                                                             <Plane size={20} />
                                                         </div>
                                                         <div className="min-w-0 flex-grow">
-                                                            <div className="flex items-center gap-3 text-lg lg:text-xl font-semibold text-slate-900 leading-tight mb-1">
-                                                                <span className="truncate">{ticket.from}-{ticket.to}</span>
+                                                            <div className="flex items-center gap-3 text-lg lg:text-xl font-semibold text-slate-900 leading-tight mb-2">
+                                                                <span className="truncate max-w-[180px] sm:max-w-none">{ticket.from}-{ticket.to}</span>
                                                             </div>
                                                             <div className="flex items-center gap-3 text-[11px] font-medium text-slate-500">
                                                                 <span className="uppercase tracking-wider">Economy</span>
@@ -80,8 +80,8 @@ const LivePrices: React.FC = () => {
                                                     </div>
 
                                                     {/* Pricing Section */}
-                                                    <div className="flex items-center justify-between md:justify-end gap-10 w-full md:w-auto border-t md:border-t-0 pt-4 md:pt-0">
-                                                        <div className="text-left md:text-right relative group/price">
+                                                    <div className="flex flex-row md:flex-row items-center justify-between md:justify-end gap-4 lg:gap-10 w-full md:w-auto border-t md:border-t-0 pt-4 md:pt-0">
+                                                        <div className="text-left md:text-right relative group/price min-w-[120px]">
                                                             <div className="absolute -inset-2 bg-blue-50 rounded-xl opacity-0 px-4 py-8 group-hover/price:opacity-100 transition-opacity pointer-events-none"></div>
                                                             <div className="relative text-2xl lg:text-3xl font-bold text-slate-900 tracking-tighter flex items-center md:justify-end">
                                                                 {ticket.price_usd_min && ticket.price_usd_max ? (
@@ -99,13 +99,13 @@ const LivePrices: React.FC = () => {
                                                                     </div>
                                                                 )}
                                                             </div>
-                                                            <div className={`relative mt-1 flex items-center md:justify-end gap-1 text-[10px] font-bold uppercase tracking-widest ${ticket.trend === 'down' ? 'text-green-600' : ticket.trend === 'up' ? 'text-red-500' : 'text-slate-400'}`}>
+                                                            <div className={`relative mt-1.5 flex items-center md:justify-end gap-1 text-[10px] font-black uppercase tracking-widest ${ticket.trend === 'down' ? 'text-green-600' : ticket.trend === 'up' ? 'text-red-500' : 'text-slate-400'}`}>
                                                                 {ticket.trend === 'down' ? (
-                                                                    <><TrendingDown size={12} /> Great Price</>
+                                                                    <><TrendingDown size={11} className="shrink-0" /> GREAT PRICE</>
                                                                 ) : ticket.trend === 'up' ? (
-                                                                    <><TrendingUp size={12} /> Peak</>
+                                                                    <><TrendingUp size={11} className="shrink-0" /> PEAK</>
                                                                 ) : (
-                                                                    <><Minus size={12} /> Stable</>
+                                                                    <><Minus size={11} className="shrink-0" /> STABLE</>
                                                                 )}
                                                             </div>
                                                         </div>
