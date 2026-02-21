@@ -79,7 +79,14 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Flight Prices', path: '/live-prices' },
+    {
+      name: 'Flight Prices',
+      path: '#',
+      children: [
+        { name: 'View Flight Prices', path: '/live-prices' },
+        { name: 'Book Flight', path: '/', scroll: 'flight-search' },
+      ]
+    },
     {
       name: 'Flights & Deals',
       path: '#',
@@ -148,15 +155,33 @@ const Navbar: React.FC = () => {
                       {/* Dropdown Menu */}
                       <div className="absolute top-full left-0 pt-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50">
                         <div className="bg-white rounded-2xl shadow-2xl border border-slate-100 py-3 min-w-[200px] overflow-hidden">
-                          {link.children.map((child) => (
-                            <Link
-                              key={child.name}
-                              to={child.path}
-                              onMouseEnter={() => prefetchPage(child.path)}
-                              className="block px-6 py-2.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 text-xs font-bold uppercase tracking-widest transition-all"
-                            >
-                              {child.name}
-                            </Link>
+                          {link.children.map((child: any) => (
+                            child.scroll ? (
+                              <button
+                                key={child.name}
+                                onClick={() => {
+                                  if (location.pathname !== '/') {
+                                    navigate('/');
+                                    setTimeout(() => document.getElementById(child.scroll)?.scrollIntoView({ behavior: 'smooth' }), 500);
+                                  } else {
+                                    document.getElementById(child.scroll)?.scrollIntoView({ behavior: 'smooth' });
+                                  }
+                                  setIsOpen(false);
+                                }}
+                                className="block w-full text-left px-6 py-2.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 text-xs font-bold uppercase tracking-widest transition-all"
+                              >
+                                {child.name}
+                              </button>
+                            ) : (
+                              <Link
+                                key={child.name}
+                                to={child.path}
+                                onMouseEnter={() => prefetchPage(child.path)}
+                                className="block px-6 py-2.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 text-xs font-bold uppercase tracking-widest transition-all"
+                              >
+                                {child.name}
+                              </Link>
+                            )
                           ))}
                         </div>
                       </div>

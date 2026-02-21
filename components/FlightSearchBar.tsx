@@ -419,7 +419,7 @@ const FlightSearchBar: React.FC = () => {
                     {/* Explore button */}
                     <button type="button" onClick={handleExplore} className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-black px-7 py-3 rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 transition-all duration-200 text-sm uppercase tracking-wide shrink-0 mt-1 md:mt-0">
                         <Search size={16} />
-                        <span>GET QUOTE</span>
+                        <span>REQUEST QUOTE</span>
                     </button>
                 </div>
 

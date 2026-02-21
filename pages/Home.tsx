@@ -292,31 +292,10 @@ const Home: React.FC = () => {
               </p>
 
               <div className="flex justify-center">
-                <div className="relative group">
-                  <button className="bg-red-600 hover:bg-amber-500 text-white px-8 py-4 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] uppercase tracking-[0.2em] text-xs flex items-center gap-3 overflow-hidden">
-                    <span className="relative z-10">view flight prices</span>
-                    <ChevronDown size={14} className="relative z-10 transition-transform group-hover:rotate-180" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
-                  </button>
-
-                  {/* Dropdown Menu */}
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden transform group-hover:translate-y-0 translate-y-2">
-                    <Link
-                      to="/live-prices"
-                      className="flex items-center gap-3 px-6 py-4 text-slate-900 hover:bg-slate-50 font-bold text-[11px] uppercase tracking-wider transition-colors border-b border-slate-50"
-                    >
-                      <Plane size={14} className="text-blue-600" />
-                      View Flight Prices
-                    </Link>
-                    <button
-                      onClick={() => document.getElementById('flight-search')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="flex items-center gap-3 px-6 py-4 text-slate-900 hover:bg-slate-50 font-bold text-[11px] uppercase tracking-wider transition-colors w-full text-left"
-                    >
-                      <Search size={14} className="text-blue-600" />
-                      Book Flight
-                    </button>
-                  </div>
-                </div>
+                <Link to="/live-prices" className="group relative bg-red-600 hover:bg-amber-500 text-white px-8 py-4 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] uppercase tracking-[0.2em] text-xs flex items-center gap-3 overflow-hidden">
+                  <span className="relative z-10">view flight prices</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                </Link>
               </div>
 
               <div className="flex items-center justify-center space-x-2 opacity-70 hover:opacity-100 transition-opacity pb-8">

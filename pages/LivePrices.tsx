@@ -17,10 +17,10 @@ const LivePrices: React.FC = () => {
                             <span>Human-Verified & Always Current</span>
                         </div>
                         <h1 className="text-4xl md:text-5xl font-bold text-slate-900 uppercase tracking-tight leading-none mb-4">
-                            Live <span className="text-blue-600">Prices</span>
+                            Current Flight <span className="text-blue-600">Rates</span>
                         </h1>
                         <p className="text-slate-500 text-lg max-w-xl font-medium leading-relaxed">
-                            Real-time rates for flights and tours, <span className="text-slate-900 font-bold italic">backed by real people</span>. No bots, just expert human verification.
+                            check out today's flight prices from Entebbe (Uganda), backed by real people . No bots
                         </p>
                     </div>
                     <Link to="/" className="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-slate-100 text-slate-900 rounded-2xl font-bold uppercase tracking-widest text-xs shadow-xl shadow-slate-200/50 transition-all border border-slate-100 group self-start md:self-center">
@@ -37,8 +37,7 @@ const LivePrices: React.FC = () => {
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-10">
                                     <div>
-                                        <h2 className="text-2xl font-bold text-slate-900 uppercase tracking-tighter">Current Flight Rates</h2>
-                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">Updates every few minutes</p>
+                                        <h2 className="text-2xl font-bold text-slate-900 uppercase tracking-tighter">Live Flight Rates</h2>
                                     </div>
                                     <div className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-full text-[10px] font-bold uppercase tracking-widest border border-green-100 animate-pulse">
                                         <div className="w-2 h-2 bg-green-600 rounded-full shadow-[0_0_8px_rgba(22,163,74,0.5)]"></div>
