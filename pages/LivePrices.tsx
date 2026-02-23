@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrendingUp, ArrowLeft, RefreshCcw, Plane, CheckCircle2, User, MessageCircle, TrendingDown, Minus } from 'lucide-react';
+import { TrendingUp, ArrowLeft, RefreshCcw, Plane, CheckCircle2, User, MessageCircle, TrendingDown, Minus, Route } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 
@@ -33,9 +33,9 @@ const LivePrices: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Live Ticket List */}
                     <div className="lg:col-span-2 space-y-6">
-                        <div className="bg-white rounded-[2.5rem] p-6 sm:p-10 shadow-2xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden">
+                        <div className="bg-white rounded-[2.5rem] p-4 sm:p-8 lg:p-10 shadow-2xl shadow-slate-200/50 border border-slate-100 relative">
                             <div className="relative z-10">
-                                <div className="flex items-center justify-between mb-10">
+                                <div className="flex items-center justify-between mb-10 px-2 sm:px-0">
                                     <div>
                                         <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">Live Flight Rates</h2>
                                     </div>
@@ -51,46 +51,57 @@ const LivePrices: React.FC = () => {
                                         <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Fetching Real-time Market Data...</p>
                                     </div>
                                 ) : (
-                                    <div className="space-y-4">
+                                    <div className="space-y-6">
                                         {liveTickets.length > 0 ? liveTickets.map((ticket, i) => (
-                                            <div key={ticket.id} className="group bg-white border border-slate-200 rounded-[2.5rem] p-6 lg:p-10 transition-all hover:border-blue-500 hover:shadow-2xl hover:shadow-blue-500/10">
-                                                <div className="flex flex-col xl:flex-row items-center justify-between gap-8 lg:gap-12 relative z-10">
+                                            <div key={ticket.id} className="group overflow-hidden bg-white border border-slate-100 rounded-[2.5rem] p-6 lg:p-8 transition-all hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/5">
+                                                <div className="flex flex-col xl:flex-row items-center justify-between gap-8 lg:gap-12">
 
-                                                    {/* Route & Journey Info */}
-                                                    <div className="flex flex-col sm:flex-row items-center gap-6 lg:gap-8 flex-grow w-full">
-                                                        <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-blue-600/20 shrink-0 transform group-hover:rotate-6 transition-transform duration-500">
-                                                            <Plane size={24} />
-                                                        </div>
-                                                        <div className="flex-grow text-center sm:text-left">
-                                                            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-6 mb-3">
-                                                                <span className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter uppercase whitespace-nowrap">{ticket.from}</span>
-                                                                <div className="hidden sm:flex items-center gap-2 text-blue-100">
-                                                                    <div className="w-8 h-1 bg-current rounded-full"></div>
-                                                                    <TrendingUp size={16} className="text-blue-500" />
-                                                                    <div className="w-8 h-1 bg-current rounded-full"></div>
-                                                                </div>
-                                                                <span className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter uppercase whitespace-nowrap">{ticket.to}</span>
+                                                    {/* Art Route Section */}
+                                                    <div className="flex-grow w-full xl:w-auto min-w-0">
+                                                        <div className="flex flex-col lg:flex-row items-center gap-6">
+                                                            <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-600/30 shrink-0 transform group-hover:rotate-12 transition-transform duration-500">
+                                                                <Route size={24} />
                                                             </div>
-                                                            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
-                                                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-3 py-1.5 bg-slate-100 rounded-xl">Economy Class</span>
-                                                                <span className="flex items-center gap-2 whitespace-nowrap text-blue-600 font-extrabold border border-blue-100 px-3 py-1.5 rounded-full bg-blue-50/50 text-[9px] uppercase tracking-widest">
-                                                                    <CheckCircle2 size={12} />
-                                                                    Market Verified
-                                                                </span>
+                                                            <div className="flex-grow text-center lg:text-left min-w-0">
+                                                                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-4">
+                                                                    <div className="flex flex-col min-w-0">
+                                                                        <span className="text-xs font-black text-blue-600 uppercase tracking-widest mb-1">From</span>
+                                                                        <span className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tighter uppercase truncate">{ticket.from}</span>
+                                                                    </div>
+                                                                    <div className="flex flex-col items-center justify-center px-2">
+                                                                        <div className="flex items-center gap-2 text-blue-100 mb-1">
+                                                                            <div className="w-6 lg:w-10 h-1 bg-current rounded-full"></div>
+                                                                            <Plane size={14} className="text-blue-500" />
+                                                                            <div className="w-6 lg:w-10 h-1 bg-current rounded-full"></div>
+                                                                        </div>
+                                                                        <TrendingUp size={12} className="text-blue-200" />
+                                                                    </div>
+                                                                    <div className="flex flex-col min-w-0">
+                                                                        <span className="text-xs font-black text-blue-600 uppercase tracking-widest mb-1">To</span>
+                                                                        <span className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tighter uppercase truncate">{ticket.to}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                                                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-3 py-1 bg-slate-100 rounded-lg">Economy Class</span>
+                                                                    <span className="flex items-center gap-1.5 text-green-600 font-black text-[9px] uppercase tracking-widest bg-green-50 px-3 py-1 rounded-full border border-green-100">
+                                                                        <CheckCircle2 size={10} />
+                                                                        Guaranteed Price
+                                                                    </span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    {/* Pricing Section */}
-                                                    <div className="flex flex-col sm:flex-row items-center gap-8 lg:gap-12 w-full xl:w-auto border-t xl:border-t-0 pt-8 xl:pt-0">
-                                                        <div className="text-center sm:text-right min-w-[200px]">
-                                                            <div className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Estimated Fare</div>
-                                                            <div className="text-4xl lg:text-5xl font-black text-slate-900 tracking-normal tabular-nums flex items-center justify-center sm:justify-end gap-1.5">
+                                                    {/* Art Pricing Section */}
+                                                    <div className="flex flex-col sm:flex-row items-center gap-8 w-full xl:w-auto xl:shrink-0 xl:pl-10 xl:border-l-2 xl:border-slate-50">
+                                                        <div className="text-center sm:text-right min-w-fit">
+                                                            <div className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Estimated Live Fare</div>
+                                                            <div className="text-3xl lg:text-5xl font-black text-slate-900 tracking-tight tabular-nums flex items-center justify-center sm:justify-end gap-1.5 whitespace-nowrap">
                                                                 {ticket.price_usd_min && ticket.price_usd_max ? (
                                                                     <>
                                                                         <span className="text-blue-600">$</span>
                                                                         <span>{ticket.price_usd_min}</span>
-                                                                        <span className="text-slate-300 mx-1 text-2xl">-</span>
+                                                                        <span className="text-slate-300 mx-1 text-2xl font-light">-</span>
                                                                         <span className="text-blue-600">$</span>
                                                                         <span>{ticket.price_usd_max}</span>
                                                                     </>
@@ -101,12 +112,12 @@ const LivePrices: React.FC = () => {
                                                                     </>
                                                                 )}
                                                             </div>
-                                                            <div className={`mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest border ${ticket.trend === 'down' ? 'bg-green-50 text-green-600 border-green-100' :
-                                                                    ticket.trend === 'up' ? 'bg-red-50 text-red-500 border-red-100' :
-                                                                        'bg-slate-50 text-slate-400 border-slate-100'
+                                                            <div className={`mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-sm ${ticket.trend === 'down' ? 'bg-green-50 text-green-600 border border-green-100' :
+                                                                    ticket.trend === 'up' ? 'bg-red-50 text-red-500 border border-red-100' :
+                                                                        'bg-slate-50 text-slate-400 border border-slate-100'
                                                                 }`}>
                                                                 {ticket.trend === 'down' ? <TrendingDown size={12} /> : ticket.trend === 'up' ? <TrendingUp size={12} /> : <Minus size={12} />}
-                                                                {ticket.trend === 'down' ? 'Best Price' : ticket.trend === 'up' ? 'Peak Season' : 'Stable Price'}
+                                                                {ticket.trend === 'down' ? 'Best Price' : ticket.trend === 'up' ? 'Peak Rates' : 'Stable Price'}
                                                             </div>
                                                         </div>
 
@@ -114,10 +125,10 @@ const LivePrices: React.FC = () => {
                                                             href={`https://wa.me/256783084521?text=Hello! I'm interested in the live price for ${ticket.from}-${ticket.to} at around $${ticket.price_usd_min ?? Math.round(ticket.price_ugx / 3800)}. I saw this on the website and would like to finalize my booking with an agent!`}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="flex items-center justify-center w-full sm:w-auto gap-3 px-10 py-6 bg-blue-600 hover:bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-xl shadow-blue-600/20 active:scale-95 whitespace-nowrap"
+                                                            className="flex flex-shrink-0 items-center justify-center w-full sm:w-auto gap-3 px-8 py-5 bg-gradient-to-br from-blue-600 to-blue-800 hover:from-slate-900 hover:to-slate-800 text-white rounded-[1.5rem] font-black uppercase tracking-widest text-[10px] transition-all shadow-xl shadow-blue-600/20 active:scale-95 whitespace-nowrap"
                                                         >
-                                                            Confirm Price
-                                                            <RefreshCcw size={16} />
+                                                            <span>Confirm Price</span>
+                                                            <RefreshCcw size={14} />
                                                         </a>
                                                     </div>
 
