@@ -82,18 +82,18 @@ const LivePrices: React.FC = () => {
                                                     <div className="flex flex-row sm:flex-row items-center justify-between md:justify-end gap-4 lg:gap-10 w-full md:w-auto border-t md:border-t-0 pt-6 md:pt-0">
                                                         <div className="text-left md:text-right relative group/price">
                                                             <div className="absolute -inset-2 bg-blue-50 rounded-xl opacity-0 px-4 py-8 group-hover/price:opacity-100 transition-opacity pointer-events-none"></div>
-                                                            <div className="relative text-2xl lg:text-3xl font-black text-slate-900 tracking-tighter flex items-center md:justify-end">
+                                                            <div className="relative text-2xl lg:text-3xl font-black text-slate-900 tracking-tight flex items-center md:justify-end whitespace-nowrap">
                                                                 {ticket.price_usd_min && ticket.price_usd_max ? (
                                                                     <div className="flex items-center">
-                                                                        <span className="text-blue-600 font-extrabold text-lg lg:text-xl mr-0.5">$</span>
+                                                                        <span className="text-blue-600 mr-0.5">$</span>
                                                                         <span>{ticket.price_usd_min}</span>
-                                                                        <span className="text-slate-400 font-bold mx-1.5">-</span>
-                                                                        <span className="text-blue-600 font-extrabold text-lg lg:text-xl mr-0.5">$</span>
+                                                                        <span className="text-slate-400 font-black mx-2">-</span>
+                                                                        <span className="text-blue-600 mr-0.5">$</span>
                                                                         <span>{ticket.price_usd_max}</span>
                                                                     </div>
                                                                 ) : (
                                                                     <div className="flex items-center">
-                                                                        <span className="text-blue-600 font-extrabold text-xl lg:text-2xl mr-1">$</span>
+                                                                        <span className="text-blue-600 mr-1">$</span>
                                                                         {Math.round(ticket.price_ugx / 3800)}
                                                                     </div>
                                                                 )}
