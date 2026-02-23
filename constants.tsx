@@ -80,7 +80,134 @@ export const SERVICES: Service[] = [
   }
 ];
 
-export const PACKAGES: Package[] = [];
+export const PACKAGES: Package[] = [
+  // Holiday Packages
+  {
+    id: 'h1',
+    destination: 'Maldives Crystal Waters',
+    price: 1500,
+    duration: '5 Days',
+    description: 'Experience pure bliss in overwater villas with private lagoons and sunset dinners.',
+    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800',
+    rating: 5,
+    category: 'Holiday Packages'
+  },
+  {
+    id: 'h2',
+    destination: 'Swiss Alps Ski Retreat',
+    price: 2200,
+    duration: '7 Days',
+    description: 'Breathtaking mountain views, world-class skiing, and cozy alpine chalets.',
+    image: 'https://images.unsplash.com/photo-1502901664700-f56a7d1da021?auto=format&fit=crop&q=80&w=800',
+    rating: 4.8,
+    category: 'Holiday Packages'
+  },
+  // Honeymoon Packages
+  {
+    id: 'hm1',
+    destination: 'Santorini Romance',
+    price: 3200,
+    duration: '6 Days',
+    description: 'Iconic blue domes, private infinity pools, and the world\'s most beautiful sunsets.',
+    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&q=80&w=800',
+    rating: 5,
+    category: 'Honeymoon Packages'
+  },
+  {
+    id: 'hm2',
+    destination: 'Bora Bora Luxury',
+    price: 4500,
+    duration: '5 Days',
+    description: 'The ultimate honeymoon destination with turquoise waters and unmatched privacy.',
+    image: 'https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&q=80&w=800',
+    rating: 5,
+    category: 'Honeymoon Packages'
+  },
+  // Family Packages
+  {
+    id: 'f1',
+    destination: 'Disneyland Adventure',
+    price: 3800,
+    duration: '5 Days',
+    description: 'Magical experiences for all ages with premium theme park access and themed resorts.',
+    image: 'https://images.unsplash.com/photo-1502139214982-d0ad755818d8?auto=format&fit=crop&q=80&w=800',
+    rating: 4.9,
+    category: 'Family Packages'
+  },
+  {
+    id: 'f2',
+    destination: 'Diani Beach Family Fun',
+    price: 1200,
+    duration: '4 Days',
+    description: 'White sands and turquoise waters perfect for family bonding and water sports.',
+    image: 'https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&q=80&w=800',
+    rating: 4.7,
+    category: 'Family Packages'
+  },
+  // Corporate Travel
+  {
+    id: 'c1',
+    destination: 'Dubai Tech Retreat',
+    price: 1800,
+    duration: '3 Days',
+    description: 'High-end networking events in the heart of Dubai\'s business district.',
+    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800',
+    rating: 4.5,
+    category: 'Corporate Travel'
+  },
+  {
+    id: 'c2',
+    destination: 'Singapore Business Summit',
+    price: 2500,
+    duration: '4 Days',
+    description: 'Sophisticated venues and world-class hospitality for your corporate team.',
+    image: 'https://images.unsplash.com/photo-1525625239513-35327b9c56b0?auto=format&fit=crop&q=80&w=800',
+    rating: 4.6,
+    category: 'Corporate Travel'
+  },
+  // Religious / Pilgrimage Travel
+  {
+    id: 'r1',
+    destination: 'Jerusalem Holy Land',
+    price: 2800,
+    duration: '10 Days',
+    description: 'A spiritual journey through the most sacred sites in history.',
+    image: 'https://images.unsplash.com/photo-1542820229-081e0c12af0b?auto=format&fit=crop&q=80&w=800',
+    rating: 5,
+    category: 'Religious / Pilgrimage Travel'
+  },
+  {
+    id: 'r2',
+    destination: 'Lourdes & Fatima',
+    price: 3100,
+    duration: '12 Days',
+    description: 'Guided pilgrimage to the most revered Marian shrines in Europe.',
+    image: 'https://images.unsplash.com/photo-1548183300-336306e00ed0?auto=format&fit=crop&q=80&w=800',
+    rating: 4.9,
+    category: 'Religious / Pilgrimage Travel'
+  },
+  // Safari & Adventure
+  {
+    id: 's1',
+    destination: 'Serengeti Big Five Safari',
+    price: 2400,
+    duration: '5 Days',
+    description: 'Witness the Great Migration and the majestic Big Five in their natural habitat.',
+    image: 'https://images.unsplash.com/photo-1516422317582-c4a0ebd2562d?auto=format&fit=crop&q=80&w=800',
+    rating: 5,
+    category: 'Safari & Adventure'
+  },
+  {
+    id: 's2',
+    destination: 'Bwindi Gorilla Trekking',
+    price: 1500,
+    duration: '3 Days',
+    description: 'An intimate encounter with the rare mountain gorillas in the Impenetrable Forest.',
+    image: 'https://images.unsplash.com/photo-1547407139-3c921a66005c?auto=format&fit=crop&q=80&w=800',
+    rating: 5,
+    category: 'Safari & Adventure'
+  }
+];
 
 export const BLOG_POSTS: BlogPost[] = [];
 

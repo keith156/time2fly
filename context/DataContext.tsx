@@ -91,7 +91,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         supabase.from('live_tickets').select('*').order('created_at', { ascending: false })
       ]);
 
-      if (pkgResult.data) setPackages(pkgResult.data);
+      if (pkgResult.data && pkgResult.data.length > 0) {
+        setPackages(pkgResult.data);
+      } else {
+        console.log('No packages found in database, using dummy data.');
+        const { PACKAGES } = await import('../constants');
+        setPackages(PACKAGES);
+      }
+
       if (blogResult.data) setBlogs(blogResult.data);
       if (destResult.data) setDestinations(destResult.data);
 
