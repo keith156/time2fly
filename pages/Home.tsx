@@ -312,7 +312,12 @@ const Home: React.FC = () => {
 
       {/* Partners Section */}
       <section className="py-12 bg-navy-900 relative overflow-hidden">
-        <p className="text-center text-[9px] font-bold uppercase tracking-[0.4em] text-white/30 mb-6">Trusted Partners</p>
+        <div className="max-w-3xl mx-auto px-6 text-center mb-12 relative z-20">
+          <p className="text-[11px] font-black uppercase tracking-[0.5em] text-white/40 mb-4">Trusted Partners</p>
+          <p className="text-white/60 text-sm font-medium leading-relaxed max-w-xl mx-auto uppercase tracking-widest opacity-80">
+            Trusted partnerships with leading airlines and travel providers worldwide, ensuring seamless journeys and competitive fares.
+          </p>
+        </div>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(90deg, #0f172a, transparent)' }}></div>
           <div className="absolute inset-y-0 right-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(270deg, #0f172a, transparent)' }}></div>
