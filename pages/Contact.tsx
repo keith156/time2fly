@@ -137,6 +137,11 @@ const Contact: React.FC = () => {
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Additional Details</label>
                     <textarea rows={6} className="w-full px-6 py-5 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 resize-none font-medium bg-white" placeholder="Tell us about your travel dates and destination preference..." required></textarea>
                   </div>
+                  <div className="bg-white/50 p-4 rounded-xl border border-slate-200">
+                    <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
+                      By sending this inquiry, you agree to our <a href="/#/privacy-policy" className="text-blue-600 font-bold hover:underline">Privacy Policy</a>. We collect your data solely to process your request and will never share it with unauthorized third parties.
+                    </p>
+                  </div>
                   <button type="submit" className="w-full bg-slate-900 hover:bg-amber-500 text-white font-black px-12 py-6 rounded-2xl transition-all shadow-xl hover:-translate-y-1 active:scale-95 uppercase tracking-[0.2em] text-sm">
                     Send Inquiry
                   </button>

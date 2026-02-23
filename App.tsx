@@ -15,6 +15,7 @@ import Destinations from './pages/Destinations';
 import SpecialOffers from './pages/SpecialOffers';
 import DestinationDetail from './pages/DestinationDetail';
 import LivePrices from './pages/LivePrices';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import WhatsAppButton from './components/WhatsAppButton.tsx';
@@ -117,6 +118,7 @@ const Navbar: React.FC = () => {
       case '/about': import('./pages/About'); break;
       case '/blog': import('./pages/Blog'); break;
       case '/contact': import('./pages/Contact'); break;
+      case '/privacy-policy': import('./pages/PrivacyPolicy'); break;
     }
   };
 
@@ -341,6 +343,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 border-t border-blue-700 flex flex-col items-center justify-center text-center text-white/50 text-sm font-medium gap-4">
+          <Link to="/privacy-policy" className="hover:text-amber-500 transition-colors">Privacy Policy</Link>
           <p className="text-white">© 2026 Time2Fly Tours & Travel Ltd. All rights reserved.</p>
           <Link to="/login" className="flex items-center space-x-1 opacity-20 hover:opacity-100 transition-opacity">
             <Lock size={14} />
@@ -401,6 +404,7 @@ const App: React.FC = () => {
                 <Route path="/destinations/:id" element={<DestinationDetail />} />
                 <Route path="/special-offers" element={<SpecialOffers />} />
                 <Route path="/live-prices" element={<LivePrices />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/login" element={<Login />} />
                 <Route
                   path="/admin"
