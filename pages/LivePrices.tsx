@@ -16,7 +16,7 @@ const LivePrices: React.FC = () => {
                             <CheckCircle2 size={12} />
                             <span>Human-Verified & Always Current</span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 uppercase tracking-tight leading-none mb-4">
+                        <h1 className="text-4xl md:text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-4">
                             Current Flight <span className="text-blue-600">Rates</span>
                         </h1>
                         <p className="text-slate-500 text-lg max-w-xl font-medium leading-relaxed">
@@ -37,9 +37,9 @@ const LivePrices: React.FC = () => {
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-10">
                                     <div>
-                                        <h2 className="text-2xl font-bold text-slate-900 uppercase tracking-tighter">Live Flight Rates</h2>
+                                        <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">Live Flight Rates</h2>
                                     </div>
-                                    <div className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-full text-[10px] font-bold uppercase tracking-widest border border-green-100 animate-pulse">
+                                    <div className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-full text-[10px] font-black uppercase tracking-widest border border-green-100 animate-pulse">
                                         <div className="w-2 h-2 bg-green-600 rounded-full shadow-[0_0_8px_rgba(22,163,74,0.5)]"></div>
                                         Live Now
                                     </div>
@@ -57,32 +57,32 @@ const LivePrices: React.FC = () => {
                                                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
                                                     {/* Route & Basic Info */}
-                                                    <div className="flex items-center gap-6 flex-grow min-w-0 w-full md:w-auto">
+                                                    <div className="flex items-center gap-4 lg:gap-6 flex-grow min-w-0 w-full md:w-auto">
                                                         <div className="hidden sm:flex w-12 h-12 bg-slate-50 rounded-full items-center justify-center text-slate-400 shrink-0">
                                                             <Plane size={20} />
                                                         </div>
                                                         <div className="min-w-0 flex-grow">
-                                                            <div className="flex items-center gap-3 text-lg lg:text-xl font-semibold text-slate-900 leading-tight mb-2">
-                                                                <span className="truncate max-w-[180px] sm:max-w-none">{ticket.from}-{ticket.to}</span>
+                                                            <div className="flex items-center gap-3 text-lg lg:text-xl font-black text-slate-900 leading-tight mb-2">
+                                                                <span className="truncate sm:whitespace-normal">{ticket.from}-{ticket.to}</span>
                                                             </div>
-                                                            <div className="flex items-center gap-3 text-[11px] font-medium text-slate-500">
+                                                            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] font-bold text-slate-500">
                                                                 <span className="uppercase tracking-wider">Economy</span>
-                                                                <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
-                                                                <span className="flex items-center gap-1.5 whitespace-nowrap text-blue-600 font-bold border border-blue-100 px-2.5 py-0.5 rounded-full bg-blue-50/50 transition-all group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600">
+                                                                <span className="hidden sm:block w-1 h-1 bg-slate-300 rounded-full"></span>
+                                                                <span className="flex items-center gap-1.5 whitespace-nowrap text-blue-600 font-extrabold border border-blue-100 px-2.5 py-0.5 rounded-full bg-blue-50/50 transition-all group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600">
                                                                     <CheckCircle2 size={10} className="shrink-0" />
                                                                     <span className="text-[9px] uppercase tracking-wider">Market Price</span>
                                                                 </span>
-                                                                <span className="w-1 h-1 bg-slate-200 rounded-full shrink-0"></span>
+                                                                <span className="hidden sm:block w-1 h-1 bg-slate-200 rounded-full shrink-0"></span>
                                                                 <span className="text-slate-400 whitespace-nowrap">Last update: Today</span>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     {/* Pricing Section */}
-                                                    <div className="flex flex-row md:flex-row items-center justify-between md:justify-end gap-4 lg:gap-10 w-full md:w-auto border-t md:border-t-0 pt-4 md:pt-0">
-                                                        <div className="text-left md:text-right relative group/price min-w-[120px]">
+                                                    <div className="flex flex-row sm:flex-row items-center justify-between md:justify-end gap-4 lg:gap-10 w-full md:w-auto border-t md:border-t-0 pt-6 md:pt-0">
+                                                        <div className="text-left md:text-right relative group/price">
                                                             <div className="absolute -inset-2 bg-blue-50 rounded-xl opacity-0 px-4 py-8 group-hover/price:opacity-100 transition-opacity pointer-events-none"></div>
-                                                            <div className="relative text-2xl lg:text-3xl font-bold text-slate-900 tracking-tighter flex items-center md:justify-end">
+                                                            <div className="relative text-2xl lg:text-3xl font-black text-slate-900 tracking-tighter flex items-center md:justify-end">
                                                                 {ticket.price_usd_min && ticket.price_usd_max ? (
                                                                     <div className="flex items-center">
                                                                         <span className="text-blue-600 font-extrabold text-lg lg:text-xl mr-0.5">$</span>
@@ -113,7 +113,7 @@ const LivePrices: React.FC = () => {
                                                             href={`https://wa.me/256783084521?text=Hello! I'm interested in the live price for ${ticket.from}-${ticket.to} at around $${ticket.price_usd_min ?? Math.round(ticket.price_ugx / 3800)}. I saw this on the website and would like to finalize my booking with an agent!`}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all shadow-sm active:scale-95 whitespace-nowrap"
+                                                            className="flex items-center justify-center gap-2 px-6 py-4 bg-blue-600 hover:bg-white hover:text-blue-600 border-2 border-transparent hover:border-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all shadow-xl shadow-blue-600/10 active:scale-95 whitespace-nowrap"
                                                         >
                                                             Confirm Price
                                                         </a>
