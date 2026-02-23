@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Package as PackageIcon, FileText, Plus, Edit, Trash2, LogOut, Upload, X, User, MapPin, Star, Loader2, Plane, TrendingDown, TrendingUp, Minus } from 'lucide-react';
 import { useData } from '../context/DataContext.tsx';
 import { Package, BlogPost, Destination, LiveTicket } from '../types';
+import { PACKAGE_CATEGORIES } from '../constants';
 
 const AdminDashboard: React.FC = () => {
   const {
@@ -198,6 +199,20 @@ const AdminDashboard: React.FC = () => {
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Duration</label>
                     <input type="text" value={editingPackage.duration || ''} onChange={e => setEditingPackage({ ...editingPackage, duration: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. 7 Days" required />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Category</label>
+                    <select
+                      value={editingPackage.category || ''}
+                      onChange={e => setEditingPackage({ ...editingPackage, category: e.target.value })}
+                      className="w-full px-5 py-3.5 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium"
+                      required
+                    >
+                      <option value="" disabled>Select Category</option>
+                      {PACKAGE_CATEGORIES.map(cat => (
+                        <option key={cat.name} value={cat.name}>{cat.icon} {cat.name}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Image Upload</label>
@@ -489,7 +504,7 @@ const AdminDashboard: React.FC = () => {
                     </td>
                     <td className="px-8 py-6">
                       <p className="font-black text-slate-900 uppercase tracking-tight">{pkg?.destination || 'Unnamed Package'}</p>
-                      <p className="text-sm font-bold text-amber-500">${pkg?.price || 0} • {pkg?.duration || 'TBD'}</p>
+                      <p className="text-sm font-bold text-amber-500">${pkg?.price || 0} • {pkg?.duration || 'TBD'} • {pkg?.category || 'No Category'}</p>
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">

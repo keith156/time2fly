@@ -5,6 +5,15 @@ import { Service, Package, BlogPost, Testimonial, Destination, LiveTicket } from
 
 export const APP_VERSION = '2.1-DEBUG';
 
+export const PACKAGE_CATEGORIES = [
+  { name: 'Holiday Packages', icon: '✈️' },
+  { name: 'Honeymoon Packages', icon: '💍' },
+  { name: 'Family Packages', icon: '👨‍👩‍👧‍👦' },
+  { name: 'Corporate Travel', icon: '🏢' },
+  { name: 'Religious / Pilgrimage Travel', icon: '🕌' },
+  { name: 'Safari & Adventure', icon: '🐘' }
+];
+
 export const SERVICES: Service[] = [
   {
     id: '1',

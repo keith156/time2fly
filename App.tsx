@@ -96,7 +96,19 @@ const Navbar: React.FC = () => {
         { name: 'Special Offers', path: '/special-offers' },
       ]
     },
-    { name: 'Packages', path: '/packages' },
+    {
+      name: 'Packages',
+      path: '#',
+      children: [
+        { name: 'All Packages', path: '/packages' },
+        { name: '✈️ Holiday Packages', path: '/packages?category=Holiday Packages' },
+        { name: '💍 Honeymoon Packages', path: '/packages?category=Honeymoon Packages' },
+        { name: '👨‍👩‍👧‍👦 Family Packages', path: '/packages?category=Family Packages' },
+        { name: '🏢 Corporate Travel', path: '/packages?category=Corporate Travel' },
+        { name: '🕌 Religious Travel', path: '/packages?category=Religious / Pilgrimage Travel' },
+        { name: '🐘 Safari & Adventure', path: '/packages?category=Safari & Adventure' },
+      ]
+    },
     { name: 'Blog', path: '/blog' },
     {
       name: 'Contact',

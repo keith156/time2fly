@@ -12,11 +12,14 @@ const TourPackages: React.FC = () => {
   const location = useLocation();
   const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
 
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
   // Handle deep linking from share URL and search parameter
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const pkgId = params.get('pkg');
     const searchParam = params.get('search');
+    const categoryParam = params.get('category');
 
     if (pkgId && packages.length > 0) {
       const pkg = packages.find(p => p.id === pkgId);
@@ -26,6 +29,13 @@ const TourPackages: React.FC = () => {
     if (searchParam) {
       setSearchTerm(searchParam);
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setSelectedCategory(null);
     }
   }, [location.search, packages]);
 
@@ -45,9 +55,11 @@ const TourPackages: React.FC = () => {
     });
   };
 
-  const filteredPackages = packages.filter(pkg =>
-    pkg.destination.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPackages = packages.filter(pkg => {
+    const matchesSearch = pkg.destination.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = !selectedCategory || pkg.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   if (selectedPackage) {
     return (
@@ -208,8 +220,12 @@ const TourPackages: React.FC = () => {
           <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Background" loading="lazy" />
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <span className="text-amber-500 font-black tracking-widest uppercase text-xs mb-4 block">World Expeditions</span>
-          <h1 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-none">Curated Journeys</h1>
+          <span className="text-amber-500 font-black tracking-widest uppercase text-xs mb-4 block">
+            {selectedCategory || 'World Expeditions'}
+          </span>
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
+            {selectedCategory ? `${selectedCategory}` : 'Curated Journeys'}
+          </h1>
         </div>
       </div>
 

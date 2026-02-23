@@ -17,6 +17,7 @@ export interface Package {
   rating: number;
   itinerary?: string;
   is_starred?: boolean; // Added for Special Offers
+  category?: string; // New: Added for categorization
 }
 
 export interface Destination {
