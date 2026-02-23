@@ -46,7 +46,7 @@ const Login: React.FC = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-amber-500 font-medium"
-                placeholder="T2F"
+                placeholder="Username"
                 required
               />
             </div>
@@ -70,7 +70,6 @@ const Login: React.FC = () => {
           </button>
         </form>
       </div>
-      <p className="mt-8 text-slate-400 text-sm font-medium">Use T2F / T2F@2026 to access dashboard</p>
     </div>
   );
 };
