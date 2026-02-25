@@ -60,7 +60,7 @@ const Blog: React.FC = () => {
                   <span className="text-[#0000ff] text-xs font-black uppercase tracking-[0.3em]">{selectedPost.category}</span>
                   <span className="h-[2px] w-8 bg-[#0000ff]"></span>
                 </div>
-                <h1 className="text-4xl md:text-7xl font-black text-slate-900 uppercase tracking-tighter leading-[0.85] mb-10">
+                <h1 className="font-black text-slate-900 uppercase tracking-tighter leading-[0.85] mb-10 text-5xl md:text-7xl leading-none">
                   {selectedPost.title}
                 </h1>
                 <div className="flex flex-wrap items-center justify-center gap-10 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em]">
@@ -107,7 +107,7 @@ const Blog: React.FC = () => {
                     <img src={selectedPost.image} className="w-full h-full object-cover grayscale" loading="lazy" />
                   </div>
                   <div className="relative z-10">
-                    <h3 className="text-white text-2xl font-black uppercase tracking-tighter mb-4">Inspired by this story?</h3>
+                    <h3 className="text-white font-black uppercase tracking-tighter mb-4 text-2xl md:text-3xl">Inspired by this story?</h3>
                     <p className="text-blue-100 font-medium mb-10 max-w-md mx-auto italic">Explore our custom packages to experience this destination for yourself.</p>
                     <button className="bg-white hover:bg-amber-400 hover:text-white text-[#0000ff] font-black px-12 py-5 rounded-full transition-all uppercase tracking-widest text-xs">Book the Journey</button>
                   </div>
@@ -147,7 +147,7 @@ const Blog: React.FC = () => {
           <span className="inline-block px-6 py-2 bg-[#0000ff] text-white rounded-full text-[10px] font-black uppercase tracking-[0.4em] mb-10 shadow-xl animate-fade-in-up">
             Venture Stories
           </span>
-          <h1 className="text-5xl md:text-8xl font-black text-slate-900 mb-6 tracking-tighter uppercase leading-[0.8] animate-fade-in-up">
+          <h1 className="font-black text-slate-900 mb-6 tracking-tighter uppercase leading-[0.8] animate-fade-in-up text-5xl md:text-7xl leading-none">
             THE TRAVEL <br /><span className="text-[#0000ff]">JOURNAL</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed italic animate-fade-in-up">

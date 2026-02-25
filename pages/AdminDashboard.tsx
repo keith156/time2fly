@@ -120,7 +120,7 @@ const AdminDashboard: React.FC = () => {
               <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-full h-full object-contain" />
             </div>
             <div>
-              <h1 className="text-3xl font-black uppercase tracking-tighter">Dashboard</h1>
+              <h1 className="font-black uppercase tracking-tighter text-5xl md:text-7xl leading-none">Dashboard</h1>
               <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Content Management</p>
             </div>
           </div>
@@ -183,7 +183,7 @@ const AdminDashboard: React.FC = () => {
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
             <div className="bg-white rounded-[40px] shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-slate-200">
               <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50 rounded-t-[40px]">
-                <h2 className="text-2xl font-black uppercase tracking-tighter">{editingPackage.id ? 'Edit' : 'Create'} Tour Package</h2>
+                <h2 className="font-black uppercase tracking-tighter text-4xl md:text-5xl">{editingPackage.id ? 'Edit' : 'Create'} Tour Package</h2>
                 <button onClick={() => setEditingPackage(null)} className="p-2 hover:bg-slate-200 rounded-full transition-colors"><X /></button>
               </div>
               <form onSubmit={savePackage} className="p-10 space-y-8">
@@ -273,7 +273,7 @@ const AdminDashboard: React.FC = () => {
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
             <div className="bg-white rounded-[40px] shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-slate-200">
               <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50 rounded-t-[40px]">
-                <h2 className="text-2xl font-black uppercase tracking-tighter">{editingBlog.id ? 'Edit' : 'Create'} Blog Post</h2>
+                <h2 className="font-black uppercase tracking-tighter text-4xl md:text-5xl">{editingBlog.id ? 'Edit' : 'Create'} Blog Post</h2>
                 <button onClick={() => setEditingBlog(null)} className="p-2 hover:bg-slate-200 rounded-full transition-colors"><X /></button>
               </div>
               <form onSubmit={saveBlog} className="p-10 space-y-8">
@@ -352,7 +352,7 @@ const AdminDashboard: React.FC = () => {
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
             <div className="bg-white rounded-[40px] shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-slate-200">
               <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50 rounded-t-[40px]">
-                <h2 className="text-2xl font-black uppercase tracking-tighter">{editingDest.id ? 'Edit' : 'Create'} Destination</h2>
+                <h2 className="font-black uppercase tracking-tighter text-4xl md:text-5xl">{editingDest.id ? 'Edit' : 'Create'} Destination</h2>
                 <button onClick={() => setEditingDest(null)} className="p-2 hover:bg-slate-200 rounded-full transition-colors"><X /></button>
               </div>
               <form onSubmit={saveDest} className="p-10 space-y-8">
@@ -418,7 +418,7 @@ const AdminDashboard: React.FC = () => {
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
             <div className="bg-white rounded-[40px] shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-slate-200">
               <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50 rounded-t-[40px]">
-                <h2 className="text-2xl font-black uppercase tracking-tighter">{editingTicket.id ? 'Edit' : 'Create'} Live Ticket</h2>
+                <h2 className="font-black uppercase tracking-tighter text-4xl md:text-5xl">{editingTicket.id ? 'Edit' : 'Create'} Live Ticket</h2>
                 <button onClick={() => setEditingTicket(null)} className="p-2 hover:bg-slate-200 rounded-full transition-colors"><X /></button>
               </div>
               <form onSubmit={saveTicket} className="p-10 space-y-8">

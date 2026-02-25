@@ -6,12 +6,12 @@ import { Service, Package, BlogPost, Testimonial, Destination, LiveTicket } from
 export const APP_VERSION = '2.1-DEBUG';
 
 export const PACKAGE_CATEGORIES = [
-  { name: 'Holiday Packages', icon: '✈️' },
-  { name: 'Honeymoon Packages', icon: '💍' },
-  { name: 'Family Packages', icon: '👨‍👩‍👧‍👦' },
-  { name: 'Corporate Travel', icon: '🏢' },
+  { name: 'Holiday Escapes', icon: '🏖️' },
+  { name: 'Romantic Retreats', icon: '💖' },
+  { name: 'Family Getaways', icon: '👨‍👩‍👧‍👦' },
+  { name: 'Business Travel', icon: '💼' },
   { name: 'Religious / Pilgrimage Travel', icon: '🕌' },
-  { name: 'Safari & Adventure', icon: '🐘' }
+  { name: 'Safari Adventures', icon: '🐘' }
 ];
 
 export const SERVICES: Service[] = [
@@ -90,7 +90,7 @@ export const PACKAGES: Package[] = [
     description: 'Experience pure bliss in overwater villas with private lagoons and sunset dinners.',
     image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800',
     rating: 5,
-    category: 'Holiday Packages'
+    category: 'Holiday Escapes'
   },
   {
     id: 'h2',
@@ -100,7 +100,7 @@ export const PACKAGES: Package[] = [
     description: 'Breathtaking mountain views, world-class skiing, and cozy alpine chalets.',
     image: 'https://images.unsplash.com/photo-1502901664700-f56a7d1da021?auto=format&fit=crop&q=80&w=800',
     rating: 4.8,
-    category: 'Holiday Packages'
+    category: 'Holiday Escapes'
   },
   // Honeymoon Packages
   {
@@ -111,7 +111,7 @@ export const PACKAGES: Package[] = [
     description: 'Iconic blue domes, private infinity pools, and the world\'s most beautiful sunsets.',
     image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&q=80&w=800',
     rating: 5,
-    category: 'Honeymoon Packages'
+    category: 'Romantic Retreats'
   },
   {
     id: 'hm2',
@@ -119,9 +119,9 @@ export const PACKAGES: Package[] = [
     price: 4500,
     duration: '5 Days',
     description: 'The ultimate honeymoon destination with turquoise waters and unmatched privacy.',
-    image: 'https://images.unsplash.com/photo-1505881502353-a1986add3762?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1543731068-7e0f5beff43a?auto=format&fit=crop&q=80&w=1200',
     rating: 5,
-    category: 'Honeymoon Packages'
+    category: 'Romantic Retreats'
   },
   // Family Packages
   {
@@ -132,7 +132,7 @@ export const PACKAGES: Package[] = [
     description: 'Magical experiences for all ages with premium theme park access and themed resorts.',
     image: 'https://images.unsplash.com/photo-1502139214982-d0ad755818d8?auto=format&fit=crop&q=80&w=800',
     rating: 4.9,
-    category: 'Family Packages'
+    category: 'Family Getaways'
   },
   {
     id: 'f2',
@@ -142,7 +142,7 @@ export const PACKAGES: Package[] = [
     description: 'White sands and turquoise waters perfect for family bonding and water sports.',
     image: 'https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&q=80&w=800',
     rating: 4.7,
-    category: 'Family Packages'
+    category: 'Family Getaways'
   },
   // Corporate Travel
   {
@@ -153,7 +153,7 @@ export const PACKAGES: Package[] = [
     description: 'High-end networking events in the heart of Dubai\'s business district.',
     image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800',
     rating: 4.5,
-    category: 'Corporate Travel'
+    category: 'Business Travel'
   },
   {
     id: 'c2',
@@ -163,7 +163,7 @@ export const PACKAGES: Package[] = [
     description: 'Sophisticated venues and world-class hospitality for your corporate team.',
     image: 'https://images.unsplash.com/photo-1525625239513-35327b9c56b0?auto=format&fit=crop&q=80&w=800',
     rating: 4.6,
-    category: 'Corporate Travel'
+    category: 'Business Travel'
   },
   // Religious / Pilgrimage Travel
   {
@@ -193,9 +193,9 @@ export const PACKAGES: Package[] = [
     price: 2400,
     duration: '5 Days',
     description: 'Witness the Great Migration and the majestic Big Five in their natural habitat.',
-    image: 'https://images.unsplash.com/photo-1516422317582-c4a0ebd2562d?auto=format&fit=crop&q=80&w=800',
+    image: '/assets/regal-african-safaris-gwZAmtRwxBI-unsplash.jpg',
     rating: 5,
-    category: 'Safari & Adventure'
+    category: 'Safari Adventures'
   },
   {
     id: 's2',
@@ -205,11 +205,69 @@ export const PACKAGES: Package[] = [
     description: 'An intimate encounter with the rare mountain gorillas in the Impenetrable Forest.',
     image: 'https://images.unsplash.com/photo-1547407139-3c921a66005c?auto=format&fit=crop&q=80&w=800',
     rating: 5,
-    category: 'Safari & Adventure'
+    category: 'Safari Adventures'
   }
 ];
 
-export const BLOG_POSTS: BlogPost[] = [];
+export const BLOG_POSTS: BlogPost[] = [
+  {
+    id: 'b-seo-1',
+    title: 'Why Uganda is the Ultimate Safari Destination for 2026',
+    excerpt: 'Discover why the Pearl of Africa is topping the charts for safari enthusiasts in the coming year, from mountain gorillas to the Big Five.',
+    content: `Uganda, often referred to as the "Pearl of Africa," is poised to be the premier destination for travelers in 2026. This landlocked gem offers an diversity of wildlife and landscapes that few other places on earth can match.
+
+### The Majestic Mountain Gorillas
+Bwindi Impenetrable National Park remains the best place in the world to encounter mountain gorillas in their natural habitat. With conservation efforts proving successful, 2026 offers more opportunities for intimate trekking experiences that directly support local communities.
+
+### The Big Five and Beyond
+While Murchison Falls and Queen Elizabeth National Park offer the classic Big Five experience, Uganda adds a unique twist with the tree-climbing lions of Ishasha. The dramatic Murchison Falls, where the world's longest river squeezes through a seven-meter gap, is a sensory experience you won't find anywhere else.
+
+### Sustainable and Authentic Travel
+The trend for 2026 is moving away from overcrowded tourist hotspots. Uganda's commitment to low-impact tourism and authentic community engagement makes it the perfect choice for the conscious traveler. Whether you're birdwatching in the wetlands or exploring the snow-capped Rwenzori Mountains, you're experiencing Africa at its most raw and beautiful.`,
+    image: '/assets/regal-african-safaris-gwZAmtRwxBI-unsplash.jpg',
+    date: 'February 24, 2026',
+    author: 'Time2Fly Expert',
+    category: 'Safari Adventures'
+  },
+  {
+    id: 'b-seo-2',
+    title: 'The Most Romantic Getaways in East Africa',
+    excerpt: 'From private islands in the Maldives to secluded luxury lodges in the savannah, explore the ultimate honeymoon destinations.',
+    content: `East Africa and its surrounding islands offer some of the most romantic settings on the planet. For couples looking to celebrate their union, the choices are as diverse as they are breathtaking.
+
+### The White Sands of Diani and Zanzibar
+There is nothing quite like a beach honeymoon in East Africa. The turquoise waters and powdery white sands of Diani Beach and Zanzibar provide the perfect backdrop for relaxation and romance. Sunset dhow cruises and private beach dinners under the stars are staples of the experience.
+
+### Luxury in the Wild
+For those who find romance in adventure, a luxury safari lodge offers an unparalleled experience. Imagine waking up to the sounds of the bush and enjoying a private breakfast as elephants graze in the distance. Many lodges now offer "star beds," allowing couples to sleep safely under the vast African sky.
+
+### Intimacy and Personalization
+At Time2Fly, we specialize in tailoring these journeys to each couple's specific desires. Whether it's a helicopter ride over the Victoria Nile or a private aromatherapy session in the heart of the forest, we ensure that every detail contributes to a lifetime of memories.`,
+    image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=1200',
+    date: 'February 20, 2026',
+    author: 'Romantic Consultant',
+    category: 'Romantic Retreats'
+  },
+  {
+    id: 'b-seo-3',
+    title: 'Strategies for Modern Business Travel Management',
+    excerpt: 'Optimizing corporate travel in 2026 requires a balance of technology, efficiency, and employee well-being.',
+    content: `Business travel is evolving rapidly. In 2026, corporate travel management is no longer just about booking the cheapest flight; it's about strategic optimization of time, budget, and human resources.
+
+### The Rise of "Bleisure"
+One of the most significant trends we're seeing is the integration of business and leisure travel. Companies that allow employees to extend their trips for personal exploration often see higher morale and retention. Managing this "bleisure" transition seamlessly is where an expert agency adds immense value.
+
+### Technology and Duty of Care
+In an increasingly complex global landscape, the safety of employees is paramount. Modern travel management platforms provide real-time tracking, instant alerts, and 24/7 support. This "Duty of Care" is a legal and moral obligation that businesses must prioritize.
+
+### Cost Optimization Beyond the Ticket Price
+True savings come from comprehensive policy management and exclusive corporate rates. By partnering with Time2Fly, businesses gain access to preferred status with airlines and hotels that isn't available to the general public. We don't just reduce costs; we maximize the return on your travel investment.`,
+    image: 'https://images.unsplash.com/photo-1554774853-719586f82d77?auto=format&fit=crop&q=80&w=1200',
+    date: 'February 15, 2026',
+    author: 'Corporate Lead',
+    category: 'Business Travel'
+  }
+];
 
 export const TESTIMONIALS: Testimonial[] = [
   {

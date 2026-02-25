@@ -22,7 +22,7 @@ const Destinations: React.FC = () => {
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <span className="text-amber-500 font-black tracking-widest uppercase text-xs mb-4 block">World Horizons</span>
-                    <h1 className="text-5xl md:text-7xl font-black text-white mb-8 uppercase tracking-tighter leading-none">Our Destinations</h1>
+                    <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-7xl">Our Destinations</h1>
                 </div>
             </div>
 
@@ -52,7 +52,7 @@ const Destinations: React.FC = () => {
                                             <MapPin size={16} className="mr-2" />
                                             Explore
                                         </div>
-                                        <h3 className="text-4xl font-black text-white uppercase tracking-tighter leading-none">{dest.name}</h3>
+                                        <h3 className="font-black text-white uppercase tracking-tighter leading-none text-2xl md:text-3xl">{dest.name}</h3>
                                     </div>
                                 </div>
                             </div>

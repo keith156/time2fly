@@ -102,7 +102,7 @@ const Contact: React.FC = () => {
             {/* Form */}
             <div className="lg:col-span-2">
               <div className="bg-slate-50 p-8 md:p-12 rounded-[40px] shadow-sm border border-slate-100">
-                <h3 className="text-2xl font-black mb-8 uppercase tracking-tighter">Inquiry Form</h3>
+                <h3 className="font-black mb-8 uppercase tracking-tighter text-2xl md:text-3xl">Inquiry Form</h3>
                 <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); alert('Time2Fly team will contact you shortly!'); }}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
@@ -123,7 +123,7 @@ const Contact: React.FC = () => {
                     <div className="relative">
                       <select className="w-full px-6 py-5 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 appearance-none bg-white font-medium cursor-pointer">
                         <option>Flight Ticketing</option>
-                        <option>Vacation Packages</option>
+                        <option>Vacation Adventures</option>
                         <option>Corporate Travel</option>
                         <option>Visa Consultation</option>
                         <option>Hotel Booking</option>

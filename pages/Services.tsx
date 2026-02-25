@@ -27,7 +27,7 @@ const categories = [
     services: [
       {
         icon: <Map size={28} />,
-        title: 'Tour Packages',
+        title: 'Tour Adventures',
         subtitle: 'Guided & Self-Drive',
         description:
           'Handpicked multi-day tours across Africa and beyond. Safari, cultural, and adventure packages for every budget.',
@@ -35,7 +35,7 @@ const categories = [
       },
       {
         icon: <Globe size={28} />,
-        title: 'Holiday Packages',
+        title: 'Holiday Escapes',
         subtitle: 'Beach, City & Retreat',
         description:
           'Escape to paradise with our curated holiday bundles — flights, hotels, and activities all in one seamless package.',
@@ -174,7 +174,7 @@ const ServiceCard: React.FC<{
         <p className="text-[10px] font-black uppercase tracking-[0.25em] mb-1" style={{ color: accent }}>
           {service.subtitle}
         </p>
-        <h3 className="text-xl font-black text-white uppercase tracking-tight leading-tight mb-3">
+        <h3 className="font-black text-white uppercase tracking-tight leading-tight mb-3 text-2xl md:text-3xl">
           {service.title}
         </h3>
         <p className="text-slate-400 text-sm font-medium leading-relaxed">
@@ -231,7 +231,7 @@ const Services: React.FC = () => {
         {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <span
-            className="inline-block text-[10px] font-black uppercase tracking-[0.4em] mb-6 px-4 py-2 rounded-full border"
+            className="inline-block text-xs md:text-sm font-black uppercase tracking-widest mb-6 px-4 py-2 rounded-full border"
             style={{ color: cat.accentColor, borderColor: `${cat.accentColor}44`, background: `${cat.accentColor}11` }}
           >
             {cat.tagline}
@@ -239,7 +239,7 @@ const Services: React.FC = () => {
 
           <h1
             key={activeTab}
-            className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tighter leading-none mb-6 whitespace-pre-line animate-fade-in-up"
+            className="font-black text-white uppercase tracking-tighter leading-none mb-6 whitespace-pre-line animate-fade-in-up text-5xl md:text-7xl"
           >
             {cat.headline}
           </h1>
@@ -293,7 +293,7 @@ const Services: React.FC = () => {
           <div className="flex items-center gap-4 mb-14">
             <div className="h-px flex-1 bg-white/10" />
             <span
-              className="text-[10px] font-black uppercase tracking-[0.4em] px-5 py-2 rounded-full border"
+              className="text-xs md:text-sm font-black uppercase tracking-widest px-5 py-2 rounded-full border"
               style={{ color: cat.accentColor, borderColor: `${cat.accentColor}44`, background: `${cat.accentColor}11` }}
             >
               {cat.label} Services
@@ -329,7 +329,7 @@ const Services: React.FC = () => {
               />
               <div className="relative z-10">
                 <Star size={32} style={{ color: cat.accentColor }} className="mb-6" />
-                <h3 className="text-2xl font-black text-white uppercase tracking-tighter leading-tight mb-3">
+                <h3 className="font-black text-white uppercase tracking-tighter leading-tight mb-3 text-2xl md:text-3xl">
                   Need a Custom Solution?
                 </h3>
                 <p className="text-slate-300 text-sm font-medium leading-relaxed">
@@ -380,7 +380,7 @@ const Services: React.FC = () => {
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-red-500 mb-4 block">
             Ready to Travel?
           </span>
-          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-6">
+          <h2 className="font-black text-white uppercase tracking-tighter leading-none mb-6 text-4xl md:text-5xl">
             Let's Plan Your <span className="text-red-600">Perfect Trip</span>
           </h2>
           <p className="text-slate-400 font-medium text-lg mb-10 leading-relaxed">
@@ -397,7 +397,7 @@ const Services: React.FC = () => {
               to="/packages"
               className="inline-flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 font-black px-10 py-5 rounded-full transition-all uppercase tracking-widest text-sm"
             >
-              Browse Packages
+              Browse Adventures
             </Link>
           </div>
         </div>

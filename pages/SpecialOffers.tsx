@@ -9,7 +9,7 @@ const SpecialOffers: React.FC = () => {
     const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    const starredPackages = packages.filter(pkg => pkg.is_starred);
+    const displayPackages = packages;
 
     const handleShare = (e: React.MouseEvent, pkg: Package) => {
         e.stopPropagation();
@@ -29,7 +29,7 @@ const SpecialOffers: React.FC = () => {
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <span className="text-white font-black tracking-widest uppercase text-xs mb-4 block bg-[#0000ff] w-fit mx-auto px-6 py-2 rounded-full backdrop-blur-md border border-white/20">Limited Time Access</span>
-                    <h1 className="text-5xl md:text-7xl font-black text-white mb-8 uppercase tracking-tighter leading-none">Special Offers</h1>
+                    <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-7xl">Special Offers</h1>
                     <p className="text-white/80 text-xl font-medium max-w-2xl mx-auto uppercase tracking-widest">Hand-picked premium experiences at exclusive value.</p>
                 </div>
             </div>
@@ -41,13 +41,13 @@ const SpecialOffers: React.FC = () => {
                     </div>
                 ) : (
                     <>
-                        {starredPackages.length > 0 ? (
+                        {displayPackages.length > 0 ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                                {starredPackages.map((pkg) => (
+                                {displayPackages.map((pkg) => (
                                     <div key={pkg.id} className="bg-white rounded-[48px] overflow-hidden border-2 border-red-100 shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 group flex flex-col h-full relative">
-                                        {/* Hot Badge */}
+                                        {/* Dynamic Badge */}
                                         <div className="absolute top-6 left-6 z-20 bg-red-600 text-white px-4 py-2 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-lg animate-pulse">
-                                            Hot Offer
+                                            {pkg.is_starred ? 'Exclusive Offer' : 'New Package'}
                                         </div>
 
                                         <div className="relative h-80 overflow-hidden cursor-pointer" onClick={() => navigate(`/packages?pkg=${pkg.id}`)}>
@@ -67,7 +67,7 @@ const SpecialOffers: React.FC = () => {
                                                 <Star size={14} fill="#dc2626" className="mr-2" />
                                                 Featured Experience
                                             </div>
-                                            <h3 className="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tighter leading-none">{pkg.destination}</h3>
+                                            <h3 className="font-black text-slate-900 mb-4 uppercase tracking-tighter leading-none text-2xl md:text-3xl">{pkg.destination}</h3>
                                             <p className="text-slate-500 mb-8 line-clamp-2 font-medium text-base leading-relaxed flex-grow">
                                                 {pkg.description}
                                             </p>
@@ -99,9 +99,9 @@ const SpecialOffers: React.FC = () => {
                                 <div className="w-24 h-24 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-8">
                                     <Star className="text-red-200" size={48} />
                                 </div>
-                                <h3 className="text-3xl font-black uppercase tracking-tighter text-slate-300 mb-4">No Seasonal Offers Available</h3>
+                                <h3 className="font-black uppercase tracking-tighter text-slate-300 mb-4 text-2xl md:text-3xl">No Packages Available</h3>
                                 <p className="text-slate-400 font-medium max-sm mx-auto mb-10">Our curation team is currently finalizing our next wave of exclusive travel collections. Check back soon!</p>
-                                <Link to="/packages" className="text-red-600 font-bold uppercase tracking-widest text-xs border-b-2 border-red-600 pb-1 hover:text-slate-950 hover:border-slate-950 transition-all">Explore Regular Collections</Link>
+                                <Link to="/packages" className="text-red-600 font-bold uppercase tracking-widest text-xs border-b-2 border-red-600 pb-1 hover:text-slate-950 hover:border-slate-950 transition-all">Explore Collections</Link>
                             </div>
                         )}
                     </>

@@ -27,7 +27,7 @@ const Login: React.FC = () => {
           <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl overflow-hidden p-2">
             <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-full h-full object-contain" />
           </div>
-          <h2 className="text-3xl font-black uppercase tracking-tighter">Admin Portal</h2>
+          <h2 className="font-black uppercase tracking-tighter text-4xl md:text-5xl">Admin Portal</h2>
           <p className="text-slate-400 font-medium mt-2">Access management dashboard</p>
         </div>
 

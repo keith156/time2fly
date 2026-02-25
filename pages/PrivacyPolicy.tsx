@@ -20,14 +20,14 @@ const PrivacyPolicy: React.FC = () => {
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="prose prose-slate max-w-none space-y-8">
                         <div>
-                            <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900 mb-4">1. Information We Collect</h2>
+                            <h2 className="font-black uppercase tracking-tight text-slate-900 mb-4 text-4xl md:text-5xl tracking-tighter">1. Information We Collect</h2>
                             <p className="text-slate-600 leading-relaxed">
                                 When you use our inquiry forms or contact us via WhatsApp, we may collect personal information such as your name, phone number, email address, and travel preferences. This information is necessary for us to provide you with accurate travel quotes and services.
                             </p>
                         </div>
 
                         <div>
-                            <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900 mb-4">2. How We Use Your Data</h2>
+                            <h2 className="font-black uppercase tracking-tight text-slate-900 mb-4 text-4xl md:text-5xl tracking-tighter">2. How We Use Your Data</h2>
                             <p className="text-slate-600 leading-relaxed">
                                 Your data is used solely for:
                             </p>
@@ -39,21 +39,21 @@ const PrivacyPolicy: React.FC = () => {
                         </div>
 
                         <div>
-                            <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900 mb-4">3. Data Sharing</h2>
+                            <h2 className="font-black uppercase tracking-tight text-slate-900 mb-4 text-4xl md:text-5xl tracking-tighter">3. Data Sharing</h2>
                             <p className="text-slate-600 leading-relaxed">
                                 We do not sell or rent your personal information to third parties. We only share your data with trusted partners (such as airlines or hotels) when it is required to fulfill your travel arrangements.
                             </p>
                         </div>
 
                         <div>
-                            <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900 mb-4">4. Security</h2>
+                            <h2 className="font-black uppercase tracking-tight text-slate-900 mb-4 text-4xl md:text-5xl tracking-tighter">4. Security</h2>
                             <p className="text-slate-600 leading-relaxed">
                                 We implement a variety of security measures to maintain the safety of your personal information. Our website uses standard encryption protocols to protect data during transmission.
                             </p>
                         </div>
 
                         <div>
-                            <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900 mb-4">5. Your Rights</h2>
+                            <h2 className="font-black uppercase tracking-tight text-slate-900 mb-4 text-4xl md:text-5xl tracking-tighter">5. Your Rights</h2>
                             <p className="text-slate-600 leading-relaxed">
                                 You have the right to request access to the personal information we hold about you or ask for its deletion at any time by contacting us at <strong>t2f.reservations@gmail.com</strong>.
                             </p>

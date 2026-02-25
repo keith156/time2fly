@@ -93,7 +93,7 @@ const FeatureCard: React.FC<{ icon: React.ReactNode, title: string, index: numbe
       <div className={`mb-8 w-24 h-24 rounded-[32px] bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-90 transition-all duration-700 shadow-2xl ${color}`}>
         {icon}
       </div>
-      <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter leading-tight max-w-[180px]">
+      <h3 className="font-black text-white uppercase tracking-tighter leading-tight max-w-[180px] text-2xl md:text-3xl">
         {title}
       </h3>
       <div className={`mt-6 w-16 h-1.5 ${color.replace('text', 'bg')} rounded-full opacity-50`}></div>
@@ -121,13 +121,13 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="animate-fade-in-up">
               <span className="text-red-500 font-black tracking-[0.3em] uppercase text-xs mb-4 block">Established July 2018 — Uganda</span>
-              <h1 className="text-4xl md:text-6xl font-black text-white leading-none mb-4 md:mb-6 tracking-tighter">WE ARE <br /><span className="text-red-600">TIME2FLY</span></h1>
+              <h1 className="font-black text-white leading-none mb-4 md:mb-6 tracking-tighter text-5xl md:text-7xl uppercase">WE ARE <br /><span className="text-red-600">TIME2FLY</span></h1>
               <p className="text-lg md:text-xl text-slate-300 font-medium leading-relaxed max-w-xl mb-6 md:mb-8 italic">"Explore the world, Travelling is knowledge"</p>
               <p className="text-base text-slate-300 font-medium leading-relaxed max-w-xl mb-8">
                 Time2Fly Tours & Travel Ltd is your dependable travel partner for stress-free planning and unforgettable destinations. With a commitment to professionalism, integrity, and innovation, we turn travel dreams into reality.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/packages" className="inline-flex items-center bg-red-600 hover:bg-amber-500 text-white font-black px-8 py-4 rounded-full transition-all uppercase tracking-widest text-xs whitespace-nowrap">View Our Tour Packages</Link>
+                <Link to="/packages" className="inline-flex items-center bg-red-600 hover:bg-amber-500 text-white font-black px-8 py-4 rounded-full transition-all uppercase tracking-widest text-xs whitespace-nowrap">View Our Tour Adventures</Link>
                 <div className="flex items-center space-x-3 bg-white/5 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/10">
                   <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-red-500"><Compass className="animate-spin-slow" size={20} /></div>
                   <span className="text-white text-[10px] font-black uppercase tracking-widest leading-tight">Navigating your <br /> next adventure</span>
@@ -233,7 +233,7 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-24">
             <span className="text-amber-500 font-black tracking-[0.5em] uppercase text-xs mb-6 block drop-shadow-sm">The Time2Fly Advantage</span>
-            <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-10 leading-none">Why <span className="text-red-600 underline decoration-white/20 underline-offset-[16px] decoration-4">Choose Us</span></h2>
+            <h2 className="font-black text-white uppercase tracking-tighter mb-10 leading-none text-4xl md:text-5xl">Why <span className="text-red-600 underline decoration-white/20 underline-offset-[16px] decoration-4">Choose Us</span></h2>
             <p className="text-slate-400 font-medium max-w-3xl mx-auto text-xl md:text-2xl italic leading-relaxed">"Delivering excellence in every mile, ensuring your journey is as remarkable as the destination."</p>
           </div>
 
@@ -260,7 +260,7 @@ const About: React.FC = () => {
               <div className="w-14 h-14 bg-red-600 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
                 <Target size={32} />
               </div>
-              <h3 className="text-2xl font-black text-navy-800 mb-4 uppercase tracking-tighter">Our Vision</h3>
+              <h3 className="font-black text-navy-800 mb-4 uppercase tracking-tighter text-2xl md:text-3xl">Our Vision</h3>
               <p className="text-slate-600 text-base leading-relaxed font-medium">
                 To be the most innovative travel management company throughout the region, while creating a culture of service excellence and distinction.
               </p>
@@ -269,7 +269,7 @@ const About: React.FC = () => {
               <div className="w-14 h-14 bg-navy-800 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors duration-300 group-hover:scale-110 transform">
                 <Award size={32} />
               </div>
-              <h3 className="text-2xl font-black text-navy-800 mb-4 uppercase tracking-tighter">Our Mission</h3>
+              <h3 className="font-black text-navy-800 mb-4 uppercase tracking-tighter text-2xl md:text-3xl">Our Mission</h3>
               <p className="text-slate-600 text-base leading-relaxed font-medium">
                 Our mission is to see that our clients' programmes and schedules are customized to meet their unique travel requirements and ensure a hassle-free, well organized, enjoyable & comfortable travels wherever, and anywhere in the world.
               </p>
@@ -302,11 +302,11 @@ const About: React.FC = () => {
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="py-8 md:py-10">
-            <h2 className="text-2xl md:text-4xl font-black text-white mb-4 tracking-tighter uppercase leading-none">Your Journey <br /> <span className="text-red-500">Starts Today</span></h2>
+            <h2 className="font-black text-white mb-4 tracking-tighter uppercase leading-none text-4xl md:text-5xl">Your Journey <br /> <span className="text-red-500">Starts Today</span></h2>
             <p className="text-slate-400 text-base font-medium max-w-xl mx-auto mb-8 italic uppercase tracking-widest">Explore the world, Travelling is knowledge</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link to="/contact" className="bg-red-600 hover:bg-amber-500 text-white font-black px-10 py-4 rounded-full transition-all shadow-xl uppercase tracking-widest text-xs">Get Expert Advice</Link>
-              <Link to="/packages" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-10 py-4 rounded-full font-black transition-all uppercase tracking-widest text-xs">Browse Packages</Link>
+              <Link to="/packages" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-10 py-4 rounded-full font-black transition-all uppercase tracking-widest text-xs">Browse Adventures</Link>
             </div>
           </div>
         </div>

@@ -16,6 +16,9 @@ import SpecialOffers from './pages/SpecialOffers';
 import DestinationDetail from './pages/DestinationDetail';
 import LivePrices from './pages/LivePrices';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import BestDestinations from './pages/BestDestinations';
+import LuxurySafari from './pages/LuxurySafari';
+import CorporateTravel from './pages/CorporateTravel';
 
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import WhatsAppButton from './components/WhatsAppButton.tsx';
@@ -97,16 +100,15 @@ const Navbar: React.FC = () => {
       ]
     },
     {
-      name: 'Packages',
+      name: 'Adventures',
       path: '#',
       children: [
-        { name: 'All Packages', path: '/packages' },
-        { name: '✈️ Holiday Packages', path: '/packages?category=Holiday Packages' },
-        { name: '💍 Honeymoon Packages', path: '/packages?category=Honeymoon Packages' },
-        { name: '👨‍👩‍👧‍👦 Family Packages', path: '/packages?category=Family Packages' },
-        { name: '🏢 Corporate Travel', path: '/packages?category=Corporate Travel' },
-        { name: '🕌 Religious Travel', path: '/packages?category=Religious / Pilgrimage Travel' },
-        { name: '🐘 Safari & Adventure', path: '/packages?category=Safari & Adventure' },
+        { name: 'All Adventures', path: '/packages', desc: 'Explore our full collection' },
+        { name: '🏖️ Holiday Escapes', path: '/packages?category=Holiday Escapes', desc: 'Unwind and explore' },
+        { name: '💖 Romantic Retreats', path: '/packages?category=Romantic Retreats', desc: 'Celebrate love' },
+        { name: '👨‍👩‍👧‍👦 Family Getaways', path: '/packages?category=Family Getaways', desc: 'Memories for all ages' },
+        { name: '💼 Business Travel', path: '/packages?category=Business Travel', desc: 'Efficient global mobility' },
+        { name: '🐘 Safari Adventures', path: '/packages?category=Safari Adventures', desc: 'Into the wild heart' },
       ]
     },
     { name: 'Blog', path: '/blog' },
@@ -115,8 +117,8 @@ const Navbar: React.FC = () => {
       path: '#',
       children: [
         { name: 'About Us', path: '/about' },
-        { name: 'Contact Us', path: '/contact' },
         { name: 'Services', path: '/services' },
+        { name: 'Contact Us', path: '/contact' },
       ]
     },
   ];
@@ -131,6 +133,9 @@ const Navbar: React.FC = () => {
       case '/blog': import('./pages/Blog'); break;
       case '/contact': import('./pages/Contact'); break;
       case '/privacy-policy': import('./pages/PrivacyPolicy'); break;
+      case '/best-destinations': import('./pages/BestDestinations'); break;
+      case '/luxury-safari': import('./pages/LuxurySafari'); break;
+      case '/corporate-travel': import('./pages/CorporateTravel'); break;
     }
   };
 
@@ -146,7 +151,14 @@ const Navbar: React.FC = () => {
                 className="w-full h-full object-contain scale-[1.4] transition-transform duration-300 group-hover:scale-[1.5]"
               />
             </div>
-            <span className="text-white font-black text-xl md:text-2xl tracking-tight">Time2Fly</span>
+            <div className="flex flex-col">
+              <div className="flex items-baseline leading-none drop-shadow-[-2px_2px_0px_rgba(0,0,0,1)]" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
+                <span className="text-[#0000ff] font-black text-xl md:text-2xl tracking-[0.05em] uppercase">TIME</span>
+                <span className="text-red-500 font-black text-2xl md:text-3xl tracking-[0.05em]">2</span>
+                <span className="text-[#64748b] font-black text-xl md:text-2xl tracking-[0.05em] uppercase">FLY</span>
+              </div>
+              <span className="text-white text-[9px] uppercase tracking-[0.3em] font-bold mt-0.5 opacity-90">Tours and Travel</span>
+            </div>
           </Link>
 
           <div className="flex items-center gap-2 ml-auto min-w-0">
@@ -182,18 +194,20 @@ const Navbar: React.FC = () => {
                                   }
                                   setIsOpen(false);
                                 }}
-                                className="block w-full text-left px-6 py-2.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 text-xs font-bold uppercase tracking-widest transition-all"
+                                className="block w-full text-left px-6 py-2.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all"
                               >
-                                {child.name}
+                                <span className="text-xs font-bold uppercase tracking-widest block">{child.name}</span>
+                                {child.desc && <span className="text-[9px] text-slate-400 font-medium block truncate lowercase tracking-tight mt-0.5">{child.desc}</span>}
                               </button>
                             ) : (
                               <Link
                                 key={child.name}
                                 to={child.path}
                                 onMouseEnter={() => prefetchPage(child.path)}
-                                className="block px-6 py-2.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 text-xs font-bold uppercase tracking-widest transition-all"
+                                className="block px-6 py-2.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all"
                               >
-                                {child.name}
+                                <span className="text-xs font-bold uppercase tracking-widest block">{child.name}</span>
+                                {child.desc && <span className="text-[9px] text-slate-400 font-medium block truncate lowercase tracking-tight mt-0.5">{child.desc}</span>}
                               </Link>
                             )
                           ))}
@@ -355,7 +369,12 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 border-t border-blue-700 flex flex-col items-center justify-center text-center text-white/50 text-sm font-medium gap-4">
-          <Link to="/privacy-policy" className="hover:text-amber-500 transition-colors">Privacy Policy</Link>
+          <div className="flex flex-wrap justify-center gap-6 mb-2">
+            <Link to="/best-destinations" className="hover:text-amber-500 transition-colors uppercase text-[10px] tracking-widest font-bold">Best Destinations</Link>
+            <Link to="/luxury-safari" className="hover:text-amber-500 transition-colors uppercase text-[10px] tracking-widest font-bold">Luxury Safari</Link>
+            <Link to="/corporate-travel" className="hover:text-amber-500 transition-colors uppercase text-[10px] tracking-widest font-bold">Corporate Travel</Link>
+            <Link to="/privacy-policy" className="hover:text-amber-500 transition-colors uppercase text-[10px] tracking-widest font-bold">Privacy Policy</Link>
+          </div>
           <p className="text-white">© 2026 Time2Fly Tours & Travel Ltd. All rights reserved.</p>
           <Link to="/login" className="flex items-center space-x-1 opacity-20 hover:opacity-100 transition-opacity">
             <Lock size={14} />

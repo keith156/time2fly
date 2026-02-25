@@ -108,7 +108,7 @@ const Home: React.FC = () => {
                     <Star key={i} size={18} fill={i < Math.floor(selectedPackage.rating) ? "#f59e0b" : "none"} className={i < Math.floor(selectedPackage.rating) ? "text-amber-500" : "text-white/30"} />
                   ))}
                 </div>
-                <h1 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-6">{selectedPackage.destination}</h1>
+                <h1 className="font-black text-white uppercase tracking-tighter leading-none mb-6 text-5xl md:text-7xl">{selectedPackage.destination}</h1>
                 <div className="flex flex-wrap items-center justify-center gap-8 text-white/90 text-sm font-black uppercase tracking-widest">
                   <span className="flex items-center bg-white/10 px-6 py-2 rounded-full backdrop-blur-md border border-white/20">
                     <Clock size={18} className="mr-2 text-amber-500" /> {selectedPackage.duration}
@@ -131,11 +131,11 @@ const Home: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-20">
               <div className="lg:col-span-2 space-y-16">
                 <section>
-                  <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter mb-8 border-b-4 border-amber-500 w-fit pb-2">The Experience</h2>
+                  <h2 className="font-black text-slate-900 uppercase tracking-tighter mb-8 border-b-4 border-amber-500 w-fit pb-2 text-4xl md:text-5xl">The Experience</h2>
                   <p className="text-slate-600 text-xl font-medium leading-relaxed mb-10 italic">{selectedPackage.description}</p>
                   <div className="prose prose-slate prose-xl max-w-none">
                     <div className="text-slate-700 leading-relaxed font-medium space-y-8 text-lg whitespace-pre-wrap bg-slate-50 p-10 rounded-[40px] border border-slate-100 shadow-sm">
-                      <h3 className="text-slate-900 font-black uppercase tracking-widest text-sm mb-4">Journey Breakdown</h3>
+                      <h3 className="text-slate-900 font-black uppercase tracking-widest mb-4 text-2xl md:text-3xl">Journey Breakdown</h3>
                       {selectedPackage.itinerary || "Our travel experts are finalizing the daily breakdown for this premium package. Expect a perfect blend of adventure, culture, and relaxation."}
                     </div>
                   </div>
@@ -241,7 +241,7 @@ const Home: React.FC = () => {
               </div>
             </div>
 
-            <h1 className="font-black leading-none tracking-tighter uppercase mb-4 w-full">
+            <h1 className="font-black leading-none tracking-tighter uppercase mb-4 w-full text-5xl md:text-7xl">
               {/* DISCOVER - 66px on desktop */}
               <svg
                 viewBox="0 0 520 90"
@@ -287,7 +287,7 @@ const Home: React.FC = () => {
             </h1>
 
             <div className="space-y-10">
-              <p className="text-xl md:text-2xl text-slate-100 font-light max-w-2xl mx-auto leading-relaxed uppercase tracking-widest opacity-90">
+              <p className="text-lg md:text-xl text-slate-100 font-light max-w-2xl mx-auto leading-relaxed uppercase tracking-widest opacity-90">
                 Explore the world, <span className="font-medium">Travelling is knowledge</span>
               </p>
 
@@ -313,9 +313,9 @@ const Home: React.FC = () => {
       {/* Partners Section */}
       <section className="py-12 bg-navy-900 relative overflow-hidden">
         <div className="max-w-3xl mx-auto px-6 text-center mb-12 relative z-20">
-          <p className="text-[11px] font-black uppercase tracking-[0.5em] text-white/40 mb-4">Trusted Partners</p>
-          <p className="text-white/60 text-sm font-medium leading-relaxed max-w-xl mx-auto uppercase tracking-widest opacity-80">
-            Trusted partnerships with leading airlines and travel providers worldwide, ensuring seamless journeys and competitive fares.
+          <p className="text-xs md:text-sm font-black uppercase tracking-widest text-white/40 mb-4">Our Global Partners</p>
+          <p className="text-white/60 text-sm md:text-base font-normal leading-relaxed max-w-xl mx-auto lowercase tracking-widest opacity-80">
+            trusted partnerships with leading airlines and travel providers worldwide, ensuring seamless journeys and competitive fares.
           </p>
         </div>
         <div className="relative">

@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { Package, BlogPost, Destination, LiveTicket } from '../types';
-import { DUMMY_TICKETS } from '../constants';
+import { DUMMY_TICKETS, PACKAGES, BLOG_POSTS, DESTINATIONS } from '../constants';
 import { compressImage } from '../utils/imageCompression';
 
 // Supabase Configuration
@@ -94,13 +94,22 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (pkgResult.data && pkgResult.data.length > 0) {
         setPackages(pkgResult.data);
       } else {
-        console.log('No packages found in database, using dummy data.');
-        const { PACKAGES } = await import('../constants');
+        console.log('No packages found in database, using fallback data.');
         setPackages(PACKAGES);
       }
 
-      if (blogResult.data) setBlogs(blogResult.data);
-      if (destResult.data) setDestinations(destResult.data);
+      if (blogResult.data && blogResult.data.length > 0) {
+        setBlogs(blogResult.data);
+      } else {
+        console.log('No blogs found in database, using fallback data.');
+        setBlogs(BLOG_POSTS);
+      }
+
+      if (destResult.data && destResult.data.length > 0) {
+        setDestinations(destResult.data);
+      } else {
+        setDestinations(DESTINATIONS);
+      }
 
       if (ticketResult.data && ticketResult.data.length > 0) {
         setLiveTickets(ticketResult.data);
