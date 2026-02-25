@@ -1,8 +1,167 @@
 import React from 'react';
-import { TrendingUp, ArrowLeft, RefreshCcw, Plane, CheckCircle2, User, MessageCircle, TrendingDown, Minus, ArrowRight } from 'lucide-react';
+import { ArrowLeft, RefreshCcw, Plane, CheckCircle2, User, MessageCircle, TrendingDown, TrendingUp, Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   Ticket Card – matches the provided mockup exactly
+   Desktop  : one wide row  [ photo | from/to/dates | divider | airline | divider | price | confirm ]
+   Mobile   : two rows      [ photo | from/to/dates ] + [ price | confirm ]
+───────────────────────────────────────────────────────────────────────────── */
+const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0] }> = ({ ticket }) => {
+    const priceStr = ticket.price_usd_min && ticket.price_usd_max
+        ? `$${ticket.price_usd_min} - $${ticket.price_usd_max}`
+        : `$${Math.round((ticket.price_ugx ?? 0) / 3800)}`;
+
+    const whatsappUrl = `https://wa.me/256783084521?text=Hello! I'm interested in the live flight price for ${ticket.from}-${ticket.to}${ticket.price_usd_min ? ` at around $${ticket.price_usd_min}` : ''}. I saw this on the website and would like to help finalize my booking!`;
+
+    const TrendIcon = ticket.trend === 'down'
+        ? <TrendingDown size={13} />
+        : ticket.trend === 'up'
+            ? <TrendingUp size={13} />
+            : <Minus size={13} />;
+
+    const trendColor = ticket.trend === 'down'
+        ? 'text-orange-400'
+        : ticket.trend === 'up'
+            ? 'text-red-400'
+            : 'text-slate-400';
+
+    return (
+        <div className="ticket-card rounded-2xl shadow-xl overflow-hidden border border-blue-900/40 mb-5">
+
+            {/* ── Desktop layout ──────────────────────────────────────────────── */}
+            <div className="hidden md:flex items-stretch min-h-[110px] bg-[#08155e]">
+
+                {/* City photo – fixed w */}
+                <div className="flex items-center justify-center w-[100px] shrink-0 py-4">
+                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-blue-400/30 shadow-lg">
+                        {ticket.city_image
+                            ? <img src={ticket.city_image} alt={ticket.to} className="w-full h-full object-cover" />
+                            : <div className="w-full h-full bg-blue-800/60 flex items-center justify-center text-blue-300">
+                                <Plane size={28} className="rotate-45" />
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                {/* From / To / Dates – fixed w */}
+                <div className="flex flex-col justify-center py-4 pr-4 w-[210px] shrink-0">
+                    <p className="text-blue-300 text-[11px] font-semibold tracking-wide">From {ticket.from}</p>
+                    <h3 className="text-white font-extrabold text-2xl leading-tight tracking-tight">{ticket.to}</h3>
+                    {ticket.dates && (
+                        <p className="text-blue-200 text-[12px] font-medium mt-0.5">{ticket.dates}</p>
+                    )}
+                </div>
+
+                {/* Divider */}
+                <div className="w-px bg-white/20 my-4 shrink-0" />
+
+                {/* Airline – fixed w */}
+                <div className="flex flex-col justify-center px-6 w-[200px] shrink-0">
+                    <p className="text-white font-bold text-base leading-snug">{ticket.airline || 'Airline'}</p>
+                    <p className="text-blue-200 text-[12px]">Round Trip</p>
+                    <p className="text-blue-200 text-[12px]">Economy. 1Px</p>
+                </div>
+
+                {/* Divider */}
+                <div className="w-px bg-white/20 my-4 shrink-0" />
+
+                {/* Price Range – fixed w */}
+                <div className="flex flex-col justify-center px-6 w-[200px] shrink-0">
+                    <p className="text-white font-bold text-sm">Price Range</p>
+                    <p className="text-orange-400 font-extrabold text-xl tracking-tight">{priceStr}</p>
+                    <div className={`flex items-center gap-1 text-[11px] font-semibold mt-0.5 ${trendColor}`}>
+                        {TrendIcon}
+                        <span>Trend:</span>
+                    </div>
+                </div>
+
+                {/* Divider */}
+                <div className="w-px bg-white/20 my-4 shrink-0" />
+
+                {/* Confirm – stretches remaining */}
+                <div className="flex flex-col items-center justify-center flex-1 gap-1.5 px-4">
+                    <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-7 py-2.5 bg-blue-500 hover:bg-blue-400 active:scale-95 text-white font-bold text-sm rounded-full shadow-lg shadow-blue-500/30 transition-all whitespace-nowrap"
+                    >
+                        Confirm
+                    </a>
+                    <span className="text-blue-300 text-[10px] font-medium text-center">With Travel Consultant</span>
+                </div>
+
+            </div>
+
+            {/* ── Mobile layout – white card ──────────────────────────────── */}
+            <div className="flex flex-col md:hidden bg-[#08155e]">
+
+                {/* Row 1 – photo + from/to/dates */}
+                <div className="flex items-center gap-4 p-4 pb-3">
+                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400/30 shadow-md shrink-0">
+                        {ticket.city_image
+                            ? <img src={ticket.city_image} alt={ticket.to} className="w-full h-full object-cover" />
+                            : <div className="w-full h-full bg-blue-800/60 flex items-center justify-center text-blue-300">
+                                <Plane size={22} className="rotate-45" />
+                            </div>
+                        }
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <p className="text-blue-300 text-[10px] font-semibold tracking-wide">From {ticket.from}</p>
+                        <h3 className="text-white font-extrabold text-xl leading-tight tracking-tight truncate">{ticket.to}</h3>
+                        {ticket.dates && (
+                            <p className="text-blue-200 text-[11px] font-medium">{ticket.dates}</p>
+                        )}
+                    </div>
+                </div>
+
+                {/* Horizontal divider */}
+                <div className="h-px bg-white/20 mx-4" />
+
+                {/* Row 2 – airline + price + confirm */}
+                <div className="flex items-center px-4 py-3">
+                    {/* Airline */}
+                    <div className="flex-1 min-w-0 pr-3">
+                        <p className="text-white font-bold text-sm leading-snug">{ticket.airline || 'Airline'}</p>
+                        <p className="text-blue-200 text-[11px]">Round Trip · Economy. 1Px</p>
+                    </div>
+
+                    <div className="w-px h-10 bg-white/20 shrink-0" />
+                    <div className="flex-1 min-w-0 px-3">
+                        <p className="text-white font-bold text-xs">Price Range</p>
+                        <p className="text-orange-400 font-extrabold text-base tracking-tight leading-tight">{priceStr}</p>
+                        <div className={`flex items-center gap-1 text-[10px] font-semibold ${ticket.trend === 'down' ? 'text-orange-500' :
+                            ticket.trend === 'up' ? 'text-red-500' : 'text-slate-400'
+                            }`}>
+                            {TrendIcon}
+                            <span>Trend:</span>
+                        </div>
+                    </div>
+
+                    <div className="w-px h-10 bg-white/20 shrink-0" />
+                    <div className="pl-3 flex flex-col items-center gap-1 shrink-0">
+                        <a
+                            href={whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-5 py-2 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm rounded-full shadow-md shadow-blue-500/20 transition-all whitespace-nowrap"
+                        >
+                            Confirm
+                        </a>
+                        <span className="text-blue-300 text-[9px] font-medium text-center">With Travel Consultant</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    );
+};
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Page
+───────────────────────────────────────────────────────────────────────────── */
 const LivePrices: React.FC = () => {
     const { liveTickets, loading, refreshData } = useData();
 
@@ -34,9 +193,10 @@ const LivePrices: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col xl:flex-row gap-8">
 
-                    {/* Table Container */}
-                    <div className="flex-1 bg-white rounded-3xl border border-slate-200/60 shadow-xl shadow-slate-200/50 overflow-hidden flex flex-col">
-                        <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                    {/* Cards Container */}
+                    <div className="flex-1">
+                        {/* Toolbar */}
+                        <div className="flex items-center justify-between mb-6">
                             <h2 className="font-black text-slate-900 uppercase tracking-tighter text-xl">
                                 Active Market Rates
                             </h2>
@@ -50,131 +210,20 @@ const LivePrices: React.FC = () => {
                             </button>
                         </div>
 
-                        <div className="w-full">
-                            {/* Desktop Table View */}
-                            <div className="hidden lg:block overflow-x-auto w-full">
-                                <table className="w-full text-left border-collapse min-w-full">
-                                    <thead>
-                                        <tr className="bg-slate-50/50 border-b border-slate-100/80">
-                                            <th className="py-4 px-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 w-[20%]">Departure</th>
-                                            <th className="py-4 px-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 w-[5%] block text-center"></th>
-                                            <th className="py-4 px-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 w-[20%]">Destination</th>
-                                            <th className="py-4 px-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 w-[20%]">Trend</th>
-                                            <th className="py-4 px-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-right w-[20%]">Est. Price (USD)</th>
-                                            <th className="py-4 px-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-right w-[15%]">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-slate-100">
-                                        {loading ? (
-                                            <tr>
-                                                <td colSpan={6} className="py-20 text-center">
-                                                    <RefreshCcw className="animate-spin text-blue-500 mx-auto mb-4" size={32} />
-                                                    <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">Loading incoming rates...</p>
-                                                </td>
-                                            </tr>
-                                        ) : liveTickets.length > 0 ? (
-                                            liveTickets.map((ticket) => (
-                                                <tr key={ticket.id} className="group hover:bg-blue-50/30 transition-colors">
-                                                    <td className="py-5 px-6 font-black text-slate-800 tracking-tight uppercase break-words">{ticket.from}</td>
-                                                    <td className="py-5 px-0 text-center text-slate-300 group-hover:text-blue-400 transition-colors">
-                                                        <Plane size={16} className="rotate-45 ml-2" />
-                                                    </td>
-                                                    <td className="py-5 px-6 font-black text-slate-800 tracking-tight uppercase break-words">{ticket.to}</td>
-                                                    <td className="py-5 px-6">
-                                                        <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-widest ${ticket.trend === 'down' ? 'bg-green-100 text-green-700 border border-green-200' :
-                                                                ticket.trend === 'up' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
-                                                                    'bg-slate-100 text-slate-600 border border-slate-200'
-                                                            }`}>
-                                                            {ticket.trend === 'down' ? <TrendingDown size={14} /> : ticket.trend === 'up' ? <TrendingUp size={14} /> : <Minus size={14} />}
-                                                            <span>{ticket.trend === 'down' ? 'Best' : ticket.trend === 'up' ? 'Peak' : 'Stable'}</span>
-                                                        </div>
-                                                    </td>
-                                                    <td className="py-5 px-6 text-right font-black text-xl tracking-tighter text-slate-900">
-                                                        ${ticket.price_usd_min && ticket.price_usd_max ? `${ticket.price_usd_min} - ${ticket.price_usd_max}` : Math.round(ticket.price_ugx / 3800)}
-                                                    </td>
-                                                    <td className="py-5 px-6 text-right">
-                                                        <a
-                                                            href={`https://wa.me/256783084521?text=Hello! I'm interested in the live flight price for ${ticket.from}-${ticket.to}${ticket.price_usd_min ? ` at around $${ticket.price_usd_min}` : ''}. I saw this on the website and would like to help finalize my booking!`}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="inline-block whitespace-nowrap px-4 py-2 bg-[#0000ff] hover:bg-slate-900 text-white rounded-lg font-black uppercase tracking-widest text-[10px] transition-all shadow-md shadow-blue-500/20 active:scale-95"
-                                                        >
-                                                            Confirm
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            ))
-                                        ) : (
-                                            <tr>
-                                                <td colSpan={6} className="py-20 text-center">
-                                                    <Plane className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-                                                    <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">No active routes at the moment.</p>
-                                                </td>
-                                            </tr>
-                                        )}
-                                    </tbody>
-                                </table>
+                        {/* Ticket List */}
+                        {loading ? (
+                            <div className="py-20 text-center">
+                                <RefreshCcw className="animate-spin text-blue-500 mx-auto mb-4" size={32} />
+                                <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">Loading incoming rates...</p>
                             </div>
-
-                            {/* Mobile / Tablet Card View */}
-                            <div className="block lg:hidden divide-y divide-slate-100">
-                                {loading ? (
-                                    <div className="py-20 text-center">
-                                        <RefreshCcw className="animate-spin text-blue-500 mx-auto mb-4" size={32} />
-                                        <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">Loading incoming rates...</p>
-                                    </div>
-                                ) : liveTickets.length > 0 ? (
-                                    liveTickets.map((ticket) => (
-                                        <div key={ticket.id} className="p-5 flex flex-col gap-4 bg-white hover:bg-blue-50/30 transition-colors">
-                                            {/* Route Header */}
-                                            <div className="flex items-center justify-between gap-4">
-                                                <div className="flex-1">
-                                                    <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-[9px] mb-1">From</p>
-                                                    <h3 className="font-black text-slate-900 tracking-tight uppercase text-lg sm:text-xl break-words leading-tight">{ticket.from}</h3>
-                                                </div>
-                                                <div className="flex flex-col items-center justify-center px-2">
-                                                    <Plane size={20} className="rotate-45 text-blue-400" />
-                                                </div>
-                                                <div className="flex-1 text-right">
-                                                    <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-[9px] mb-1">To</p>
-                                                    <h3 className="font-black text-slate-900 tracking-tight uppercase text-lg sm:text-xl break-words leading-tight">{ticket.to}</h3>
-                                                </div>
-                                            </div>
-
-                                            {/* Details & Actions */}
-                                            <div className="flex items-end justify-between mt-2 pt-4 border-t border-slate-100/60">
-                                                <div className="flex flex-col gap-2">
-                                                    <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-widest self-start ${ticket.trend === 'down' ? 'bg-green-100 text-green-700 border border-green-200' :
-                                                            ticket.trend === 'up' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
-                                                                'bg-slate-100 text-slate-600 border border-slate-200'
-                                                        }`}>
-                                                        {ticket.trend === 'down' ? <TrendingDown size={14} /> : ticket.trend === 'up' ? <TrendingUp size={14} /> : <Minus size={14} />}
-                                                        <span>{ticket.trend === 'down' ? 'Best' : ticket.trend === 'up' ? 'Peak' : 'Stable'}</span>
-                                                    </div>
-                                                    <div className="font-black text-2xl tracking-tighter text-slate-900">
-                                                        ${ticket.price_usd_min && ticket.price_usd_max ? `${ticket.price_usd_min} - ${ticket.price_usd_max}` : Math.round(ticket.price_ugx / 3800)}
-                                                    </div>
-                                                </div>
-
-                                                <a
-                                                    href={`https://wa.me/256783084521?text=Hello! I'm interested in the live flight price for ${ticket.from}-${ticket.to}${ticket.price_usd_min ? ` at around $${ticket.price_usd_min}` : ''}. I saw this on the website and would like to help finalize my booking!`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center justify-center h-10 px-6 bg-[#0000ff] hover:bg-slate-900 text-white rounded-xl font-black uppercase tracking-widest text-[10px] transition-all shadow-md shadow-blue-500/20 active:scale-95"
-                                                >
-                                                    Confirm
-                                                </a>
-                                            </div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <div className="py-20 text-center">
-                                        <Plane className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-                                        <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">No active routes at the moment.</p>
-                                    </div>
-                                )}
+                        ) : liveTickets.length > 0 ? (
+                            liveTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)
+                        ) : (
+                            <div className="py-20 text-center bg-white rounded-3xl border border-slate-200/60 shadow-xl">
+                                <Plane className="w-12 h-12 text-slate-200 mx-auto mb-3" />
+                                <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">No active routes at the moment.</p>
                             </div>
-                        </div>
+                        )}
                     </div>
 
                     {/* Side Info Panel */}

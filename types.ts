@@ -55,5 +55,8 @@ export interface LiveTicket {
   price_usd_min?: number;
   price_usd_max?: number;
   trend: 'up' | 'down' | 'stable';
+  city_image?: string;   // base64 or URL for the destination city photo
+  dates?: string;        // free-text date range, e.g. "Thu. Feb 26 – Sun. Mar 01"
+  airline?: string;      // carrier name, e.g. "Uganda Airlines"
   created_at?: string;
 }

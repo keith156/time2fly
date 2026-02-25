@@ -334,9 +334,9 @@ export const PARTNERS = [
 ];
 
 export const DUMMY_TICKETS: LiveTicket[] = [
-  { id: 'd1', from: 'Entebbe (EBB)', to: 'Dubai (DXB)', price_ugx: 1850000, price_usd_min: 480, price_usd_max: 520, trend: 'down' },
-  { id: 'd2', from: 'Entebbe (EBB)', to: 'Nairobi (NBO)', price_ugx: 950000, price_usd_min: 240, price_usd_max: 270, trend: 'stable' },
-  { id: 'd3', from: 'Entebbe (EBB)', to: 'Istanbul (IST)', price_ugx: 2400000, price_usd_min: 620, price_usd_max: 680, trend: 'up' },
-  { id: 'd4', from: 'Entebbe (EBB)', to: 'Johannesburg (JNB)', price_ugx: 1600000, price_usd_min: 410, price_usd_max: 450, trend: 'down' },
-  { id: 'd5', from: 'Entebbe (EBB)', to: 'London (LHR)', price_ugx: 3200000, price_usd_min: 820, price_usd_max: 890, trend: 'stable' }
+  { id: 'd1', from: 'Entebbe', to: 'Dubai', price_ugx: 1850000, price_usd_min: 480, price_usd_max: 520, trend: 'down', airline: 'Emirates', dates: 'Mon. Mar 03 – Fri. Mar 07' },
+  { id: 'd2', from: 'Entebbe', to: 'Nairobi', price_ugx: 950000, price_usd_min: 240, price_usd_max: 270, trend: 'stable', airline: 'Kenya Airways', dates: 'Thu. Mar 06 – Sun. Mar 09' },
+  { id: 'd3', from: 'Entebbe', to: 'Istanbul', price_ugx: 2400000, price_usd_min: 620, price_usd_max: 680, trend: 'up', airline: 'Turkish Airlines', dates: 'Sat. Mar 08 – Sat. Mar 15' },
+  { id: 'd4', from: 'Entebbe', to: 'Johannesburg', price_ugx: 1600000, price_usd_min: 410, price_usd_max: 450, trend: 'down', airline: 'South African Airways', dates: 'Tue. Mar 11 – Sat. Mar 15' },
+  { id: 'd5', from: 'Entebbe', to: 'London', price_ugx: 3200000, price_usd_min: 820, price_usd_max: 890, trend: 'stable', airline: 'British Airways', dates: 'Fri. Mar 14 – Fri. Mar 21' },
 ];

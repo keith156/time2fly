@@ -41,6 +41,18 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
+  const handleTicketImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setEditingTicket(prev => ({ ...prev, city_image: base64String }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const savePackage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingPackage) return;
@@ -117,7 +129,7 @@ const AdminDashboard: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
           <div className="flex items-center space-x-4">
             <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden p-2 border border-slate-100">
-              <img src="/assets/logo.png" alt="Time2Fly Logo" className="w-full h-full object-contain" />
+              <img src="/favicon.png" alt="Time2Fly Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <h1 className="font-black uppercase tracking-tighter text-5xl md:text-7xl leading-none">Dashboard</h1>
@@ -423,22 +435,36 @@ const AdminDashboard: React.FC = () => {
               </div>
               <form onSubmit={saveTicket} className="p-10 space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Origin */}
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Origin (From)</label>
                     <input type="text" value={editingTicket.from || ''} onChange={e => setEditingTicket({ ...editingTicket, from: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Entebbe" required />
                   </div>
+                  {/* Destination */}
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Destination (To)</label>
-                    <input type="text" value={editingTicket.to || ''} onChange={e => setEditingTicket({ ...editingTicket, to: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Dubai" required />
+                    <input type="text" value={editingTicket.to || ''} onChange={e => setEditingTicket({ ...editingTicket, to: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Nairobi" required />
                   </div>
+                  {/* Airline */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Airline</label>
+                    <input type="text" value={editingTicket.airline || ''} onChange={e => setEditingTicket({ ...editingTicket, airline: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Uganda Airlines" />
+                  </div>
+                  {/* Dates */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Dates (your own format)</label>
+                    <input type="text" value={editingTicket.dates || ''} onChange={e => setEditingTicket({ ...editingTicket, dates: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Thu. Feb 26 – Sun. Mar 01" />
+                  </div>
+                  {/* USD Range */}
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">USD Range ($Min - $Max)</label>
                     <div className="flex items-center gap-3">
-                      <input type="number" value={editingTicket.price_usd_min || ''} onChange={e => setEditingTicket({ ...editingTicket, price_usd_min: Number(e.target.value) })} className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Min (e.g. 250)" />
+                      <input type="number" value={editingTicket.price_usd_min || ''} onChange={e => setEditingTicket({ ...editingTicket, price_usd_min: Number(e.target.value) })} className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Min (e.g. 468)" />
                       <span className="text-slate-400">-</span>
-                      <input type="number" value={editingTicket.price_usd_max || ''} onChange={e => setEditingTicket({ ...editingTicket, price_usd_max: Number(e.target.value) })} className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Max (e.g. 280)" />
+                      <input type="number" value={editingTicket.price_usd_max || ''} onChange={e => setEditingTicket({ ...editingTicket, price_usd_max: Number(e.target.value) })} className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Max (e.g. 540)" />
                     </div>
                   </div>
+                  {/* Price Trend */}
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Price Trend</label>
                     <select
@@ -446,10 +472,29 @@ const AdminDashboard: React.FC = () => {
                       onChange={e => setEditingTicket({ ...editingTicket, trend: e.target.value as 'up' | 'down' | 'stable' })}
                       className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium"
                     >
-                      <option value="up">Trending Up (Red)</option>
-                      <option value="down">Trending Down (Green)</option>
-                      <option value="stable">Stable (Gray)</option>
+                      <option value="up">Trending Up</option>
+                      <option value="down">Trending Down</option>
+                      <option value="stable">Stable</option>
                     </select>
+                  </div>
+                  {/* City Image */}
+                  <div className="space-y-2 md:col-span-2">
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">City / Destination Image</label>
+                    <div className="relative group cursor-pointer border-2 border-dashed border-slate-200 rounded-2xl p-4 text-center hover:border-blue-500 transition-colors">
+                      {editingTicket.city_image ? (
+                        <div className="relative h-32 w-full">
+                          <img src={editingTicket.city_image} className="h-full w-full object-cover rounded-xl" alt="City" />
+                          <button type="button" onClick={() => setEditingTicket({ ...editingTicket, city_image: '' })} className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full shadow-lg"><X size={14} /></button>
+                        </div>
+                      ) : (
+                        <div className="py-4">
+                          <Upload className="mx-auto text-slate-400 mb-2" />
+                          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Click to Upload City Photo</p>
+                          <p className="text-[10px] text-slate-300 mt-1">This will appear as the circular photo on the flight card</p>
+                        </div>
+                      )}
+                      <input type="file" onChange={handleTicketImageUpload} className="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" />
+                    </div>
                   </div>
                 </div>
                 <div className="flex gap-4 pt-4">
@@ -533,9 +578,13 @@ const AdminDashboard: React.FC = () => {
                 )) : activeTab === 'tickets' ? (liveTickets || []).map(ticket => (
                   <tr key={ticket?.id || Math.random()} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-8 py-6">
-                      <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
-                        <Plane size={24} />
-                      </div>
+                      {ticket?.city_image ? (
+                        <img src={ticket.city_image} className="w-12 h-12 rounded-xl object-cover shadow-sm" alt="City" />
+                      ) : (
+                        <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                          <Plane size={24} />
+                        </div>
+                      )}
                     </td>
                     <td className="px-8 py-6">
                       <p className="font-black text-slate-900 uppercase tracking-tight">{ticket?.from} → {ticket?.to}</p>

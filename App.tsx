@@ -146,7 +146,7 @@ const Navbar: React.FC = () => {
           <Link to="/" className="flex items-center space-x-3 shrink-0 group">
             <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center shrink-0 shadow-lg overflow-hidden">
               <img
-                src="/assets/logo.png"
+                src="/favicon.png"
                 alt="Time2Fly Logo"
                 className="w-full h-full object-contain scale-[1.4] transition-transform duration-300 group-hover:scale-[1.5]"
               />
