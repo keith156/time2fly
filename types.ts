@@ -58,5 +58,6 @@ export interface LiveTicket {
   city_image?: string;   // base64 or URL for the destination city photo
   dates?: string;        // free-text date range, e.g. "Thu. Feb 26 – Sun. Mar 01"
   airline?: string;      // carrier name, e.g. "Uganda Airlines"
+  order_index?: number;
   created_at?: string;
 }

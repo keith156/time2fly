@@ -334,9 +334,14 @@ export const PARTNERS = [
 ];
 
 export const DUMMY_TICKETS: LiveTicket[] = [
-  { id: 'd1', from: 'Entebbe', to: 'Dubai', price_ugx: 1850000, price_usd_min: 480, price_usd_max: 520, trend: 'down', airline: 'Emirates', dates: 'Mon. Mar 03 – Fri. Mar 07' },
-  { id: 'd2', from: 'Entebbe', to: 'Nairobi', price_ugx: 950000, price_usd_min: 240, price_usd_max: 270, trend: 'stable', airline: 'Kenya Airways', dates: 'Thu. Mar 06 – Sun. Mar 09' },
-  { id: 'd3', from: 'Entebbe', to: 'Istanbul', price_ugx: 2400000, price_usd_min: 620, price_usd_max: 680, trend: 'up', airline: 'Turkish Airlines', dates: 'Sat. Mar 08 – Sat. Mar 15' },
-  { id: 'd4', from: 'Entebbe', to: 'Johannesburg', price_ugx: 1600000, price_usd_min: 410, price_usd_max: 450, trend: 'down', airline: 'South African Airways', dates: 'Tue. Mar 11 – Sat. Mar 15' },
-  { id: 'd5', from: 'Entebbe', to: 'London', price_ugx: 3200000, price_usd_min: 820, price_usd_max: 890, trend: 'stable', airline: 'British Airways', dates: 'Fri. Mar 14 – Fri. Mar 21' },
+  { id: 'd1', from: 'Entebbe', to: 'Nairobi', price_usd_min: 240, price_usd_max: 270, trend: 'stable', airline: 'Kenya Airways', dates: 'Thu. Mar 06 – Sun. Mar 09', order_index: 0 },
+  { id: 'd2', from: 'Entebbe', to: 'Kigali', price_usd_min: 200, price_usd_max: 230, trend: 'stable', airline: 'RwandAir', dates: 'Fri. Mar 07 – Mon. Mar 10', order_index: 1 },
+  { id: 'd3', from: 'Entebbe', to: 'Addis Ababa', price_usd_min: 300, price_usd_max: 350, trend: 'up', airline: 'Ethiopian Airlines', dates: 'Sat. Mar 08 – Wed. Mar 12', order_index: 2 },
+  { id: 'd4', from: 'Entebbe', to: 'Dubai', price_usd_min: 480, price_usd_max: 520, trend: 'down', airline: 'Emirates', dates: 'Mon. Mar 03 – Fri. Mar 07', order_index: 3 },
+  { id: 'd5', from: 'Entebbe', to: 'Doha', price_usd_min: 500, price_usd_max: 550, trend: 'stable', airline: 'Qatar Airways', dates: 'Tue. Mar 04 – Sat. Mar 08', order_index: 4 },
+  { id: 'd6', from: 'Entebbe', to: 'Istanbul', price_usd_min: 620, price_usd_max: 680, trend: 'up', airline: 'Turkish Airlines', dates: 'Sat. Mar 08 – Sat. Mar 15', order_index: 5 },
+  { id: 'd7', from: 'Entebbe', to: 'Johannesburg', price_usd_min: 410, price_usd_max: 450, trend: 'down', airline: 'South African Airways', dates: 'Tue. Mar 11 – Sat. Mar 15', order_index: 6 },
+  { id: 'd8', from: 'Entebbe', to: 'London', price_usd_min: 820, price_usd_max: 890, trend: 'stable', airline: 'British Airways', dates: 'Fri. Mar 14 – Fri. Mar 21', order_index: 7 },
+  { id: 'd9', from: 'Entebbe', to: 'Toronto', price_usd_min: 1100, price_usd_max: 1250, trend: 'up', airline: 'Brussels Airlines', dates: 'Mon. Mar 17 – Mon. Mar 24', order_index: 8 },
+  { id: 'd10', from: 'Entebbe', to: 'Mumbai', price_usd_min: 550, price_usd_max: 600, trend: 'stable', airline: 'Kenya Airways', dates: 'Wed. Mar 19 – Wed. Mar 26', order_index: 9 },
 ];

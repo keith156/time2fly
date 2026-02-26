@@ -88,7 +88,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         supabase.from('packages').select('*').order('created_at', { ascending: false }),
         supabase.from('blogs').select('*').order('created_at', { ascending: false }),
         supabase.from('destinations').select('*').order('created_at', { ascending: false }),
-        supabase.from('live_tickets').select('*').order('created_at', { ascending: false })
+        supabase.from('live_tickets').select('*').order('order_index', { ascending: true }) // Sort by order_index
       ]);
 
       if (pkgResult.data && pkgResult.data.length > 0) {
@@ -112,7 +112,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       if (ticketResult.data && ticketResult.data.length > 0) {
-        setLiveTickets(ticketResult.data);
+        // Sort tickets locally just in case some order_index values are null
+        const sortedTickets = ticketResult.data.sort((a, b) => {
+          const orderA = a.order_index ?? 999;
+          const orderB = b.order_index ?? 999;
+          return orderA - orderB;
+        });
+        setLiveTickets(sortedTickets);
       } else {
         console.log('No live tickets found in database, using dummy data.');
         setLiveTickets(DUMMY_TICKETS);
@@ -293,12 +299,20 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsUploading(true);
     try {
       const { id, ...ticketData } = ticket;
+      // Also provide a default order_index if not provided so they appear at the end
+      if (ticketData.order_index === undefined) {
+        ticketData.order_index = liveTickets.length;
+      }
+
       const { data, error } = await supabase.from('live_tickets').insert([ticketData]).select().single();
       if (error) {
         console.error('Ticket insert error:', error);
         alert(`Error saving ticket: ${error.message}. Make sure you ran the SQL migration!`);
       } else if (data) {
-        setLiveTickets(prev => [data, ...prev]);
+        setLiveTickets(prev => {
+          const newTickets = [data, ...prev];
+          return newTickets.sort((a, b) => (a.order_index ?? 999) - (b.order_index ?? 999));
+        });
       }
     } finally {
       setIsUploading(false);
@@ -314,7 +328,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         console.error('Ticket update error:', error);
         alert(`Error updating ticket: ${error.message}`);
       } else if (data) {
-        setLiveTickets(prev => prev.map(item => item.id === id ? data : item));
+        setLiveTickets(prev => {
+          let updated = prev.map(item => item.id === id ? data : item);
+          return updated.sort((a, b) => (a.order_index ?? 999) - (b.order_index ?? 999));
+        });
       }
     } finally {
       setIsUploading(false);
@@ -322,6 +339,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteLiveTicket = async (id: string) => {
+    // If it's a dummy ticket, just remove it from local state
+    if (id.startsWith('d')) {
+      setLiveTickets(prev => prev.filter(item => item.id !== id));
+      return;
+    }
+
     const { error } = await supabase.from('live_tickets').delete().eq('id', id);
     if (error) {
       console.error('Ticket delete error:', error);
