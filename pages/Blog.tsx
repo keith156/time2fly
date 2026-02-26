@@ -142,35 +142,57 @@ const Blog: React.FC = () => {
   return (
     <div className="pt-24 bg-white min-h-screen pb-32">
       {/* Mesmerizing Hero Section */}
-      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
-          <span className="inline-block px-6 py-2 bg-[#0000ff] text-white rounded-full text-[10px] font-black uppercase tracking-[0.4em] mb-10 shadow-xl animate-fade-in-up">
-            Venture Stories
-          </span>
-          <h1 className="font-black text-slate-900 mb-6 tracking-tighter uppercase leading-[0.8] animate-fade-in-up text-5xl md:text-7xl leading-none">
-            THE TRAVEL <br /><span className="text-[#0000ff]">JOURNAL</span>
+      <section className="relative h-[60vh] flex flex-col items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-white"></div>
+
+        {/* Decorative background elements */}
+        <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-100/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+
+        <div className="max-w-7xl mx-auto px-4 text-center relative z-10 flex flex-col items-center">
+          <div className="flex items-center space-x-4 mb-8 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <span className="h-[1px] w-12 bg-[#0000ff]"></span>
+            <span className="text-[#0000ff] text-xs font-black uppercase tracking-[0.5em]">Global Perspectives</span>
+            <span className="h-[1px] w-12 bg-[#0000ff]"></span>
+          </div>
+
+          <h1 className="font-black text-slate-900 mb-8 tracking-tighter uppercase leading-[0.8] animate-fade-in-up md:text-8xl text-6xl">
+            THE TRAVEL <br />
+            <span className="relative">
+              <span className="relative z-10 text-[#0000ff]">JOURNAL</span>
+              <span className="absolute -bottom-2 left-0 w-full h-4 bg-[#0000ff]/10 -rotate-1"></span>
+            </span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed italic animate-fade-in-up">
-            "Explore the world, Travelling is knowledge" — Curated insights from the heart of Uganda.
-          </p>
+
+          <div className="max-w-xl relative py-8 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <p className="text-2xl md:text-3xl text-slate-800 font-bold leading-tight italic">
+              "Explore the world, <br />
+              <span className="text-[#0000ff]">Travelling is knowledge</span>"
+            </p>
+            <div className="mt-6 flex items-center justify-center space-x-2 text-slate-400">
+              <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em]">Curated Insights from Uganda</span>
+              <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Mesmerizing Feed Grid */}
-      <div className="max-w-7xl mx-auto px-6 -mt-24 relative z-20">
+      <div className="max-w-7xl mx-auto px-6 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs.map((post, idx) => (
+          {blogs.map((post) => (
             <article
               key={post.id}
-              className={`bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-4 border border-slate-100 group flex flex-col h-full ${idx === 0 ? 'md:col-span-2 lg:col-span-2 md:flex-row' : ''}`}
+              className="bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-4 border border-slate-100 group flex flex-col h-full animate-fade-in-up"
             >
               <div
-                className={`relative overflow-hidden cursor-pointer ${idx === 0 ? 'md:w-[50%] h-[400px] md:h-auto' : 'h-[320px]'}`}
+                className="relative overflow-hidden cursor-pointer h-[280px]"
                 onClick={() => setSelectedPost(post)}
               >
                 <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" loading="lazy" />
                 <div className="absolute top-6 left-6 flex space-x-2">
-                  <span className="bg-white/20 backdrop-blur-md text-white border border-white/20 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">
+                  <span className="bg-white/20 backdrop-blur-md text-black border border-white/20 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">
                     {post.category}
                   </span>
                 </div>
@@ -181,26 +203,26 @@ const Blog: React.FC = () => {
                 </div>
               </div>
 
-              <div className={`p-10 flex flex-col justify-between ${idx === 0 ? 'md:w-[50%]' : 'flex-grow'}`}>
+              <div className="p-8 flex flex-col flex-grow">
                 <div>
-                  <div className="flex items-center space-x-4 mb-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                    <span className="flex items-center"><Calendar size={14} className="mr-1.5 text-amber-500" /> {post.date}</span>
-                    <span className="flex items-center"><User size={14} className="mr-1.5 text-amber-500" /> {post.author.split(' ')[0]}</span>
+                  <div className="flex items-center space-x-4 mb-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                    <span className="flex items-center"><Calendar size={14} className="mr-1.5 text-[#0000ff]" /> {post.date}</span>
+                    <span className="flex items-center"><User size={14} className="mr-1.5 text-[#0000ff]" /> {post.author.split(' ')[0]}</span>
                   </div>
                   <h2
-                    className={`font-black text-slate-900 mb-6 hover:text-amber-500 transition-colors cursor-pointer leading-none uppercase tracking-tighter ${idx === 0 ? 'text-2xl md:text-4xl' : 'text-2xl'}`}
+                    className="font-black text-slate-900 mb-4 hover:text-[#0000ff] transition-colors cursor-pointer leading-tight uppercase tracking-tighter text-2xl line-clamp-2 h-14"
                     onClick={() => setSelectedPost(post)}
                   >
                     {post.title}
                   </h2>
-                  <p className="text-slate-500 text-lg leading-relaxed mb-8 font-medium line-clamp-3 italic">
+                  <p className="text-slate-500 text-base leading-relaxed mb-6 font-medium line-clamp-3 italic flex-grow">
                     {post.excerpt}
                   </p>
                 </div>
-                <div className="pt-8 border-t border-slate-50 flex items-center justify-between">
+                <div className="pt-6 border-t border-slate-50 flex items-center justify-between mt-auto">
                   <button
                     onClick={() => setSelectedPost(post)}
-                    className="flex items-center text-slate-950 font-black uppercase tracking-widest text-[10px] group-hover:text-amber-500 transition-colors"
+                    className="flex items-center text-slate-950 font-black uppercase tracking-widest text-[10px] group-hover:text-[#0000ff] transition-colors"
                   >
                     Read Journal <ArrowRight size={14} className="ml-2 group-hover:translate-x-3 transition-transform" />
                   </button>
@@ -228,8 +250,8 @@ const Blog: React.FC = () => {
           <h4 className="text-3xl font-black text-slate-900 uppercase tracking-tighter mb-6">Stay in the Loop</h4>
           <p className="text-slate-500 font-medium mb-10 leading-relaxed">Subscribe to our monthly digest for exclusive travel deals, local Ugandan insights, and global adventure guides.</p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <input type="email" placeholder="Your email address" className="flex-grow px-8 py-5 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-amber-500 font-medium" />
-            <button className="bg-slate-950 hover:bg-amber-500 text-white font-black px-12 py-5 rounded-2xl transition-all uppercase tracking-widest text-xs">Join Us</button>
+            <input type="email" placeholder="Your email address" className="flex-grow px-8 py-5 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-[#0000ff] font-medium" />
+            <button className="bg-slate-950 hover:bg-[#0000ff] text-white font-black px-12 py-5 rounded-2xl transition-all uppercase tracking-widest text-xs">Join Us</button>
           </div>
         </div>
       </section>

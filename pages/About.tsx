@@ -121,7 +121,7 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="animate-fade-in-up">
               <span className="text-red-500 font-black tracking-[0.3em] uppercase text-xs mb-4 block">Established July 2018 — Uganda</span>
-              <h1 className="font-black text-white leading-none mb-4 md:mb-6 tracking-tighter text-5xl md:text-7xl uppercase">WE ARE <br /><span className="text-red-600">TIME2FLY</span></h1>
+              <h1 className="font-black text-white leading-none mb-4 md:mb-6 tracking-tighter text-5xl md:text-7xl uppercase">WE ARE <br /><span className="text-[#0000ff]">TIME</span><span className="text-red-500">2</span><span className="text-[#f7c9ab]">FLY</span></h1>
               <p className="text-lg md:text-xl text-slate-300 font-medium leading-relaxed max-w-xl mb-6 md:mb-8 italic">"Explore the world, Travelling is knowledge"</p>
               <p className="text-base text-slate-300 font-medium leading-relaxed max-w-xl mb-8">
                 Time2Fly Tours & Travel Ltd is your dependable travel partner for stress-free planning and unforgettable destinations. With a commitment to professionalism, integrity, and innovation, we turn travel dreams into reality.

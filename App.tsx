@@ -155,7 +155,7 @@ const Navbar: React.FC = () => {
               <div className="flex items-baseline leading-none drop-shadow-[-2px_2px_0px_rgba(0,0,0,1)]" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
                 <span className="text-[#0000ff] font-black text-xl md:text-2xl tracking-[0.05em] uppercase">TIME</span>
                 <span className="text-red-500 font-black text-2xl md:text-3xl tracking-[0.05em]">2</span>
-                <span className="text-[#64748b] font-black text-xl md:text-2xl tracking-[0.05em] uppercase">FLY</span>
+                <span className="text-[#f7c9ab] font-black text-xl md:text-2xl tracking-[0.05em] uppercase">FLY</span>
               </div>
               <span className="text-white text-[9px] uppercase tracking-[0.3em] font-bold mt-0.5 opacity-90">Tours and Travel</span>
             </div>
