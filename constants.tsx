@@ -342,6 +342,6 @@ export const DUMMY_TICKETS: LiveTicket[] = [
   { id: 'd6', from: 'Entebbe', to: 'Istanbul', price_usd_min: 540, price_usd_max: 600, trend: 'up', airline: 'flydubai', dates: 'Sun, Mar 1 – Sun, Mar 8', order_index: 5, city_image: '/assets/ticket-destinations/instanbul.jpg' },
   { id: 'd7', from: 'Entebbe', to: 'Johannesburg', price_usd_min: 370, price_usd_max: 420, trend: 'down', airline: 'Ethiopian Airlines', dates: 'Sun, Mar 1 – Sun, Mar 8', order_index: 6, city_image: '/assets/ticket-destinations/johannesburg.jpg' },
   { id: 'd8', from: 'Entebbe', to: 'London', price_usd_min: 760, price_usd_max: 820, trend: 'stable', airline: 'Ethiopian Airlines', dates: 'Sun, Mar 1 – Sun, Mar 8', order_index: 7, city_image: '/assets/ticket-destinations/london (1).jpg' },
-  { id: 'd9', from: 'Entebbe', to: 'Toronto', price_usd_min: 1420, price_usd_max: 1550, trend: 'up', airline: 'Kenya Airways, Air Canada', dates: 'Sun, Mar 1 – Sun, Mar 8', order_index: 8, city_image: '/assets/ticket-destinations/london (2).jpg' },
-  { id: 'd10', from: 'Entebbe', to: 'Mumbai', price_usd_min: 500, price_usd_max: 580, trend: 'stable', airline: 'Ethiopian Airlines', dates: 'Sun, Mar 1 – Sun, Mar 8', order_index: 9, city_image: '/assets/ticket-destinations/london (3).jpg' },
+  { id: 'd9', from: 'Entebbe', to: 'Toronto', price_usd_min: 1420, price_usd_max: 1550, trend: 'up', airline: 'Kenya Airways, Air Canada', dates: 'Sun, Mar 1 – Sun, Mar 8', order_index: 8, city_image: '/assets/ticket-destinations/london (3).jpg' },
+  { id: 'd10', from: 'Entebbe', to: 'Mumbai', price_usd_min: 500, price_usd_max: 580, trend: 'stable', airline: 'Ethiopian Airlines', dates: 'Sun, Mar 1 – Sun, Mar 8', order_index: 9, city_image: '/assets/ticket-destinations/london (2).jpg' },
 ];
