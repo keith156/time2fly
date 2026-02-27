@@ -157,7 +157,7 @@ const Blog: React.FC = () => {
           </div>
 
           <h1 className="font-black text-slate-900 mb-8 tracking-tighter uppercase leading-[0.8] animate-fade-in-up md:text-[66px] text-6xl">
-            THE TRAVEL <br />
+            THE TRAVEL
             <span className="relative">
               <span className="relative z-10 text-[#0000ff]">JOURNAL</span>
               <span className="absolute -bottom-2 left-0 w-full h-4 bg-[#0000ff]/10 -rotate-1"></span>
