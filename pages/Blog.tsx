@@ -160,7 +160,6 @@ const Blog: React.FC = () => {
             THE TRAVEL
             <span className="relative">
               <span className="relative z-10 text-[#0000ff]">JOURNAL</span>
-              <span className="absolute -bottom-2 left-0 w-full h-4 bg-[#0000ff]/10 -rotate-1"></span>
             </span>
           </h1>
 
