@@ -175,7 +175,7 @@ const LivePrices: React.FC = () => {
                             <CheckCircle2 size={14} className="text-blue-500" />
                             <span>Human-Verified Market Data</span>
                         </div>
-                        <h1 className="font-black text-slate-900 uppercase tracking-tighter leading-[0.9] mb-4 text-5xl md:text-7xl">
+                        <h1 className="font-black text-slate-900 uppercase tracking-tighter leading-[0.9] mb-4 text-5xl md:text-[66px]">
                             Live Flight <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-600">Rates</span>
                         </h1>
                         <p className="text-slate-500 text-base md:text-lg font-medium leading-relaxed max-w-2xl">
@@ -274,3 +274,4 @@ const LivePrices: React.FC = () => {
 };
 
 export default LivePrices;
+

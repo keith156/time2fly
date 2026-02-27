@@ -120,7 +120,7 @@ const DestinationDetail: React.FC = () => {
         return (
             <div className="pt-24 min-h-screen flex flex-col items-center justify-center bg-slate-50 px-4">
                 <Compass className="text-slate-200 mb-6" size={80} />
-                <h1 className="font-black text-slate-900 uppercase tracking-tighter mb-4 text-5xl md:text-7xl leading-none">Destination Not Found</h1>
+                <h1 className="font-black text-slate-900 uppercase tracking-tighter mb-4 text-5xl md:text-[66px] leading-none">Destination Not Found</h1>
                 <p className="text-slate-500 mb-8 max-w-md text-center">Sorry, we couldn't find the destination you're looking for.</p>
                 <button onClick={() => navigate('/destinations')} className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest text-xs">Back to Destinations</button>
             </div>
@@ -151,7 +151,7 @@ const DestinationDetail: React.FC = () => {
                             <ArrowLeft size={14} className="mr-2 group-hover:-translate-x-2 transition-transform" />
                             All Destinations
                         </button>
-                        <h1 className="font-black text-white mb-4 uppercase tracking-tighter leading-none animate-fade-in-up text-5xl md:text-7xl">
+                        <h1 className="font-black text-white mb-4 uppercase tracking-tighter leading-none animate-fade-in-up text-5xl md:text-[66px]">
                             {destination.name}
                         </h1>
                     </div>
@@ -293,3 +293,4 @@ const DestinationDetail: React.FC = () => {
 };
 
 export default DestinationDetail;
+

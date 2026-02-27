@@ -108,7 +108,7 @@ const Home: React.FC = () => {
                     <Star key={i} size={18} fill={i < Math.floor(selectedPackage.rating) ? "#f59e0b" : "none"} className={i < Math.floor(selectedPackage.rating) ? "text-amber-500" : "text-white/30"} />
                   ))}
                 </div>
-                <h1 className="font-black text-white uppercase tracking-tighter leading-none mb-6 text-5xl md:text-7xl">{selectedPackage.destination}</h1>
+                <h1 className="font-black text-white uppercase tracking-tighter leading-none mb-6 text-5xl md:text-[66px]">{selectedPackage.destination}</h1>
                 <div className="flex flex-wrap items-center justify-center gap-8 text-white/90 text-sm font-black uppercase tracking-widest">
                   <span className="flex items-center bg-white/10 px-6 py-2 rounded-full backdrop-blur-md border border-white/20">
                     <Clock size={18} className="mr-2 text-amber-500" /> {selectedPackage.duration}
@@ -241,7 +241,7 @@ const Home: React.FC = () => {
               </div>
             </div>
 
-            <h1 className="font-black leading-none tracking-tighter uppercase mb-4 w-full text-5xl md:text-7xl">
+            <h1 className="font-black leading-none tracking-tighter uppercase mb-4 w-full text-5xl md:text-[66px]">
               {/* DISCOVER - 66px on desktop */}
               <svg
                 viewBox="0 0 520 90"
@@ -412,3 +412,4 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+

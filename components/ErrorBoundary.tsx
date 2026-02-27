@@ -41,7 +41,7 @@ export class ErrorBoundary extends (Component as any)<Props, State> {
                         <div className="w-20 h-20 bg-red-50 rounded-3xl flex items-center justify-center mx-auto mb-8">
                             <AlertTriangle className="text-red-600" size={40} />
                         </div>
-                        <h1 className="font-black text-slate-900 uppercase tracking-tighter mb-4 text-5xl md:text-7xl leading-none">Something went wrong</h1>
+                        <h1 className="font-black text-slate-900 uppercase tracking-tighter mb-4 text-5xl md:text-[66px] leading-none">Something went wrong</h1>
                         <p className="text-slate-500 font-medium mb-10 leading-relaxed">
                             We encountered an unexpected error. This usually happens due to a temporary connection issue or a data sync error.
                         </p>
@@ -76,3 +76,4 @@ export class ErrorBoundary extends (Component as any)<Props, State> {
 }
 
 export default ErrorBoundary;
+

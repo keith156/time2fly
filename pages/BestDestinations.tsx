@@ -11,7 +11,7 @@ const BestDestinations: React.FC = () => {
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <span className="text-amber-500 font-black tracking-widest uppercase text-xs mb-4 block">Explorer's Guide 2026</span>
-                    <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-7xl">Best World Destinations</h1>
+                    <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-[66px]">Best World Destinations</h1>
                     <p className="text-white/80 text-xl font-medium max-w-2xl mx-auto uppercase tracking-widest">Discover the top-rated travel spots of the year, curated by our global experts.</p>
                 </div>
             </div>
@@ -51,3 +51,4 @@ const BestDestinations: React.FC = () => {
 };
 
 export default BestDestinations;
+

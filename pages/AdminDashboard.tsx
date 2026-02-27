@@ -132,7 +132,7 @@ const AdminDashboard: React.FC = () => {
               <img src="/favicon.png" alt="Time2Fly Logo" className="w-full h-full object-contain" />
             </div>
             <div>
-              <h1 className="font-black uppercase tracking-tighter text-5xl md:text-7xl leading-none">Dashboard</h1>
+              <h1 className="font-black uppercase tracking-tighter text-5xl md:text-[66px] leading-none">Dashboard</h1>
               <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Content Management</p>
             </div>
           </div>

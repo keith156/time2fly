@@ -239,7 +239,7 @@ const Services: React.FC = () => {
 
           <h1
             key={activeTab}
-            className="font-black text-white uppercase tracking-tighter leading-none mb-6 whitespace-pre-line animate-fade-in-up text-5xl md:text-7xl"
+            className="font-black text-white uppercase tracking-tighter leading-none mb-6 whitespace-pre-line animate-fade-in-up text-5xl md:text-[66px]"
           >
             {cat.headline}
           </h1>
@@ -408,3 +408,4 @@ const Services: React.FC = () => {
 };
 
 export default Services;
+

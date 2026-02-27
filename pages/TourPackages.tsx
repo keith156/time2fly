@@ -88,7 +88,7 @@ const TourPackages: React.FC = () => {
                     <Star key={i} size={18} fill={i < Math.floor(selectedPackage.rating) ? "#f59e0b" : "none"} className={i < Math.floor(selectedPackage.rating) ? "text-amber-500" : "text-white/30"} />
                   ))}
                 </div>
-                <h1 className="font-black text-white uppercase tracking-tighter leading-none mb-6 text-5xl md:text-7xl">
+                <h1 className="font-black text-white uppercase tracking-tighter leading-none mb-6 text-5xl md:text-[66px]">
                   {selectedPackage.destination}
                 </h1>
                 <div className="flex flex-wrap items-center justify-center gap-8 text-white/90 text-sm font-black uppercase tracking-widest">
@@ -237,7 +237,7 @@ const TourPackages: React.FC = () => {
           <span className="text-amber-500 font-black tracking-[0.4em] uppercase text-xs mb-6 block drop-shadow-lg">
             {selectedCategory || 'World Expeditions'}
           </span>
-          <h1 className="font-black text-white mb-6 uppercase tracking-tighter leading-none drop-shadow-2xl text-5xl md:text-7xl">
+          <h1 className="font-black text-white mb-6 uppercase tracking-tighter leading-none drop-shadow-2xl text-5xl md:text-[66px]">
             {selectedCategory ? `${selectedCategory}` : 'Curated Journeys'}
           </h1>
         </div>
@@ -549,3 +549,4 @@ const TourPackages: React.FC = () => {
 };
 
 export default TourPackages;
+

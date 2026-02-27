@@ -11,7 +11,7 @@ const LuxurySafari: React.FC = () => {
                 <div className="absolute inset-0 flex items-center justify-center p-6">
                     <div className="max-w-4xl text-center">
                         <span className="text-amber-500 font-black tracking-[0.5em] uppercase text-xs mb-6 block">Elite Expeditions</span>
-                        <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-7xl">Luxury Safari Experiences</h1>
+                        <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-[66px]">Luxury Safari Experiences</h1>
                         <p className="text-white/90 text-xl font-medium max-w-2xl mx-auto uppercase tracking-widest leading-relaxed">The wild meets the refined. Experience the heart of the savannah with unparalleled comfort.</p>
                     </div>
                 </div>
@@ -66,3 +66,4 @@ const LuxurySafari: React.FC = () => {
 };
 
 export default LuxurySafari;
+

@@ -60,7 +60,7 @@ const Blog: React.FC = () => {
                   <span className="text-[#0000ff] text-xs font-black uppercase tracking-[0.3em]">{selectedPost.category}</span>
                   <span className="h-[2px] w-8 bg-[#0000ff]"></span>
                 </div>
-                <h1 className="font-black text-slate-900 uppercase tracking-tighter leading-[0.85] mb-10 text-5xl md:text-7xl leading-none">
+                <h1 className="font-black text-slate-900 uppercase tracking-tighter leading-[0.85] mb-10 text-5xl md:text-[66px] leading-none">
                   {selectedPost.title}
                 </h1>
                 <div className="flex flex-wrap items-center justify-center gap-10 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em]">
@@ -156,7 +156,7 @@ const Blog: React.FC = () => {
             <span className="h-[1px] w-12 bg-[#0000ff]"></span>
           </div>
 
-          <h1 className="font-black text-slate-900 mb-8 tracking-tighter uppercase leading-[0.8] animate-fade-in-up md:text-8xl text-6xl">
+          <h1 className="font-black text-slate-900 mb-8 tracking-tighter uppercase leading-[0.8] animate-fade-in-up md:text-[66px] text-6xl">
             THE TRAVEL <br />
             <span className="relative">
               <span className="relative z-10 text-[#0000ff]">JOURNAL</span>
@@ -260,3 +260,4 @@ const Blog: React.FC = () => {
 };
 
 export default Blog;
+

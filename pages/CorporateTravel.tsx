@@ -11,7 +11,7 @@ const CorporateTravel: React.FC = () => {
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <span className="text-blue-500 font-black tracking-widest uppercase text-xs mb-4 block">Corporate Excellence</span>
-                    <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-7xl">Strategic Travel Solutions</h1>
+                    <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-[66px]">Strategic Travel Solutions</h1>
                     <p className="text-white/70 text-xl font-medium max-w-2xl mx-auto uppercase tracking-widest">Optimizing business travel for performance, cost, and efficiency.</p>
                 </div>
             </div>
@@ -89,3 +89,4 @@ const CorporateTravel: React.FC = () => {
 };
 
 export default CorporateTravel;
+
