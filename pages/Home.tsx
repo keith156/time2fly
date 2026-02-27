@@ -213,7 +213,7 @@ const Home: React.FC = () => {
                     dominantBaseline="middle"
                     fontFamily="Poppins, sans-serif"
                     fontWeight="900"
-                    fontSize="32"
+                    fontSize="30"
                     fill="none"
                     stroke="white"
                     strokeWidth="1.5"

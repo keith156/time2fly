@@ -369,12 +369,6 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 border-t border-blue-700 flex flex-col items-center justify-center text-center text-white/50 text-sm font-medium gap-4">
-          <div className="flex flex-wrap justify-center gap-6 mb-2">
-            <Link to="/best-destinations" className="hover:text-amber-500 transition-colors uppercase text-[10px] tracking-widest font-bold">Best Destinations</Link>
-            <Link to="/luxury-safari" className="hover:text-amber-500 transition-colors uppercase text-[10px] tracking-widest font-bold">Luxury Safari</Link>
-            <Link to="/corporate-travel" className="hover:text-amber-500 transition-colors uppercase text-[10px] tracking-widest font-bold">Corporate Travel</Link>
-            <Link to="/privacy-policy" className="hover:text-amber-500 transition-colors uppercase text-[10px] tracking-widest font-bold">Privacy Policy</Link>
-          </div>
           <p className="text-white">© 2026 Time2Fly Tours & Travel Ltd. All rights reserved.</p>
           <Link to="/login" className="flex items-center space-x-1 opacity-20 hover:opacity-100 transition-opacity">
             <Lock size={14} />

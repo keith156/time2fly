@@ -400,7 +400,7 @@ const TourPackages: React.FC = () => {
           /* Category Cards - Shown when NO category is selected */
           <div className="space-y-16">
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="font-black text-slate-900 uppercase tracking-tighter mb-4 text-4xl md:text-5xl">Explore by Experience</h2>
+              <h2 className="font-black text-slate-900 uppercase tracking-tighter mb-4 text-[30px]">Explore by Experience</h2>
               <p className="text-slate-500 font-medium text-lg italic">"Not just destinations, but journeys that define you."</p>
             </div>
 
@@ -439,10 +439,6 @@ const TourPackages: React.FC = () => {
               >
                 <ArrowLeft size={16} /> View All Categories
               </button>
-              <div className="text-right">
-                <span className="text-[10px] text-slate-400 font-black uppercase tracking-[0.3em] block mb-1">Curation Results</span>
-                <p className="text-slate-900 font-black uppercase text-sm tracking-widest">{filteredPackages.length} Destinations Found</p>
-              </div>
             </div>
 
             <div className="space-y-32">

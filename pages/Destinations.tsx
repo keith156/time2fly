@@ -66,7 +66,7 @@ const Destinations: React.FC = () => {
             <section className="py-24 bg-white border-t border-slate-100 overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
-                        <SectionTitle title="Exclusive Horizons" />
+                        <SectionTitle title="Exclusive Horizons" titleClassName="text-[30px] md:text-[30px]" />
                         <p className="text-slate-600 text-xl font-medium leading-relaxed mb-10">
                             Each destination we offer is hand-picked for its unique cultural value and natural beauty. From the misty mountains of Uganda to the shimmering skyscrapers of Dubai, we ensure every trip is a masterpiece.
                         </p>

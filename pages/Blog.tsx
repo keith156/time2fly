@@ -247,7 +247,7 @@ const Blog: React.FC = () => {
       {/* Magazine Footer Info */}
       <section className="mt-32 border-t border-slate-100 py-24 text-center">
         <div className="max-w-2xl mx-auto px-4">
-          <h4 className="text-3xl font-black text-slate-900 uppercase tracking-tighter mb-6">Stay in the Loop</h4>
+          <h4 className="text-[30px] font-black text-slate-900 uppercase tracking-tighter mb-6">Stay in the Loop</h4>
           <p className="text-slate-500 font-medium mb-10 leading-relaxed">Subscribe to our monthly digest for exclusive travel deals, local Ugandan insights, and global adventure guides.</p>
           <div className="flex flex-col sm:flex-row gap-4">
             <input type="email" placeholder="Your email address" className="flex-grow px-8 py-5 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-[#0000ff] font-medium" />

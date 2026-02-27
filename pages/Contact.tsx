@@ -26,6 +26,7 @@ const Contact: React.FC = () => {
             title="Get in Touch with Time2Fly"
             description="Our travel specialists are ready to help you plan your next adventure. Reach out to Time2Fly Tours & Travel Ltd today."
             light={true}
+            titleClassName="md:text-[66px]"
           />
         </div>
       </section>
@@ -102,7 +103,7 @@ const Contact: React.FC = () => {
             {/* Form */}
             <div className="lg:col-span-2">
               <div className="bg-slate-50 p-8 md:p-12 rounded-[40px] shadow-sm border border-slate-100">
-                <h3 className="font-black mb-8 uppercase tracking-tighter text-2xl md:text-3xl">Inquiry Form</h3>
+                <h3 className="font-black mb-8 uppercase tracking-tighter text-[30px]">Inquiry Form</h3>
                 <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); alert('Time2Fly team will contact you shortly!'); }}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
