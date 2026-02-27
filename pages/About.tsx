@@ -112,7 +112,7 @@ const About: React.FC = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] md:min-h-[70vh] flex items-center pt-24 md:pt-32 overflow-hidden bg-navy-800">
+      <section className="relative min-h-[50vh] md:min-h-[70vh] flex items-center pt-36 pb-12 md:pt-48 md:pb-24 overflow-hidden bg-navy-800">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-navy-800 via-navy-800/80 to-transparent z-10"></div>
           <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover opacity-40 scale-105" alt="Travel Hero" />
