@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, ArrowLeft, Calendar, MapPin, Clock, CreditCard, Send, Zap, Ship, GraduationCap, Car, Briefcase, ChevronDown, CheckCircle2, Compass, Share2, Search, DollarSign } from 'lucide-react';
+import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, ArrowLeft, Calendar, MapPin, Clock, CreditCard, Send, Zap, Ship, GraduationCap, Car, Briefcase, ChevronDown, CheckCircle2, Compass, Share2, Search, DollarSign, MessageCircle } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle.tsx';
 import FlightSearchBar from '../components/FlightSearchBar.tsx';
 import { SERVICES, TESTIMONIALS, PARTNERS } from '../constants.tsx';
