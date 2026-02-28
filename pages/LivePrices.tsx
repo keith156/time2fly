@@ -73,9 +73,6 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
                         {TrendIcon}
                         <span className="uppercase tracking-wider">{trendText}</span>
                     </div>
-                    <p className="text-blue-300/60 text-[9px] mt-2 leading-tight italic">
-                        Terms and Conditions apply and the fare depends on availability
-                    </p>
                 </div>
 
                 {/* Divider */}
@@ -137,9 +134,6 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
                             {TrendIcon}
                             <span className="uppercase tracking-tight">{trendText}</span>
                         </div>
-                        <p className="text-blue-300/60 text-[8px] mt-1.5 leading-tight italic">
-                            T&Cs apply. Subject to availability.
-                        </p>
                     </div>
 
                     <div className="w-px h-10 bg-white/20 shrink-0" />
@@ -219,7 +213,14 @@ const LivePrices: React.FC = () => {
                                 <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">Loading incoming rates...</p>
                             </div>
                         ) : liveTickets.length > 0 ? (
-                            liveTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)
+                            <div className="space-y-5">
+                                {liveTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)}
+                                <div className="pt-4 pb-8 text-center animate-fade-in">
+                                    <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] opacity-80 backdrop-blur-sm inline-block px-6 py-2 rounded-full border border-slate-200/50 bg-white/50 shadow-sm">
+                                        * Terms and Conditions apply and the fare depends on availability
+                                    </p>
+                                </div>
+                            </div>
                         ) : (
                             <div className="py-20 text-center bg-white rounded-3xl border border-slate-200/60 shadow-xl">
                                 <Plane className="w-12 h-12 text-slate-200 mx-auto mb-3" />
