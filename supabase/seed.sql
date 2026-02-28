@@ -1,7 +1,7 @@
 -- SEED DATA FOR LIVE TICKETS
 -- Run this in your Supabase SQL Editor to populate the table with initial flights.
 
-INSERT INTO live_tickets (from, "to", price_usd_min, price_usd_max, trend, airline, dates, order_index, city_image)
+INSERT INTO live_tickets ("from", "to", price_usd_min, price_usd_max, trend, airline, dates, order_index, city_image)
 VALUES 
 ('Entebbe', 'Nairobi', 410, 450, 'stable', 'Uganda Airlines', 'Sun, Mar 1 – Sun, Mar 8', 0, 'https://images.unsplash.com/photo-1583037189850-1921ae73293c?auto=format&fit=crop&q=80&w=800'),
 ('Entebbe', 'Kigali', 380, 420, 'stable', 'Kenya Airways', 'Sun, Mar 1 – Sun, Mar 8', 1, 'https://images.unsplash.com/photo-1589196720078-4ea7464010e9?auto=format&fit=crop&q=80&w=800'),
