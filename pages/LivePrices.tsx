@@ -16,16 +16,14 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
     const whatsappUrl = `https://wa.me/256783084521?text=Hello! I'm interested in the live flight price for ${ticket.from}-${ticket.to}${ticket.price_usd_min ? ` at around $${ticket.price_usd_min}` : ''}. I saw this on the website and would like to help finalize my booking!`;
 
     const TrendIcon = ticket.trend === 'down'
-        ? <TrendingDown size={13} />
+        ? <TrendingDown size={14} className="text-emerald-400" />
         : ticket.trend === 'up'
-            ? <TrendingUp size={13} />
-            : <Minus size={13} />;
+            ? <TrendingUp size={14} className="text-rose-400" />
+            : <div className="w-2 h-2 rounded-full bg-slate-400" />;
 
-    const trendColor = ticket.trend === 'down'
-        ? 'text-orange-400'
-        : ticket.trend === 'up'
-            ? 'text-red-400'
-            : 'text-slate-400';
+    const trendText = ticket.trend === 'down' ? 'Price Drooping' : ticket.trend === 'up' ? 'Price Rising' : 'Stable Price';
+    const trendBg = ticket.trend === 'down' ? 'bg-emerald-500/10' : ticket.trend === 'up' ? 'bg-rose-500/10' : 'bg-slate-500/10';
+    const trendColor = ticket.trend === 'down' ? 'text-emerald-400' : ticket.trend === 'up' ? 'text-rose-400' : 'text-slate-400';
 
     return (
         <div className="ticket-card rounded-2xl shadow-xl overflow-hidden border border-blue-900/40 mb-5">
@@ -69,11 +67,11 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
 
                 {/* Price Range – fixed w */}
                 <div className="flex flex-col justify-center px-6 w-[200px] shrink-0">
-                    <p className="text-white font-bold text-sm">Price Range</p>
+                    <p className="text-white font-bold text-sm">Target Price</p>
                     <p className="text-orange-400 font-extrabold text-xl tracking-tight">{priceStr}</p>
-                    <div className={`flex items-center gap-1 text-[11px] font-semibold mt-0.5 ${trendColor}`}>
+                    <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold mt-1.5 ${trendBg} ${trendColor} border border-white/10`}>
                         {TrendIcon}
-                        <span>Trend:</span>
+                        <span className="uppercase tracking-wider">{trendText}</span>
                     </div>
                 </div>
 
@@ -130,13 +128,11 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
 
                     <div className="w-px h-10 bg-white/20 shrink-0" />
                     <div className="flex-1 min-w-0 px-3">
-                        <p className="text-white font-bold text-xs">Price Range</p>
+                        <p className="text-white font-bold text-xs">Target Price</p>
                         <p className="text-orange-400 font-extrabold text-base tracking-tight leading-tight">{priceStr}</p>
-                        <div className={`flex items-center gap-1 text-[10px] font-semibold ${ticket.trend === 'down' ? 'text-orange-500' :
-                            ticket.trend === 'up' ? 'text-red-500' : 'text-slate-400'
-                            }`}>
+                        <div className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold mt-1 ${trendBg} ${trendColor} border border-white/5`}>
                             {TrendIcon}
-                            <span>Trend:</span>
+                            <span className="uppercase tracking-tight">{trendText}</span>
                         </div>
                     </div>
 

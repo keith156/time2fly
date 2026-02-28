@@ -5,6 +5,9 @@
 -- If the table doesn't have the 'order_index' column, run this:
 ALTER TABLE live_tickets ADD COLUMN IF NOT EXISTS order_index INTEGER;
 
+-- To clear all tickets and start fresh (if you see duplicates):
+-- TRUNCATE TABLE live_tickets;
+
 -- Optional: If you also need to create the table from scratch:
 /*
 CREATE TABLE IF NOT EXISTS live_tickets (
