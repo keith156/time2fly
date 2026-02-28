@@ -84,49 +84,67 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const fetchInitialData = async () => {
     try {
       setLoading(true);
+
+      // Fetch each table individually to handle failures separately and avoid all-or-nothing errors
       const [pkgResult, blogResult, destResult, ticketResult] = await Promise.all([
         supabase.from('packages').select('*').order('created_at', { ascending: false }),
         supabase.from('blogs').select('*').order('created_at', { ascending: false }),
         supabase.from('destinations').select('*').order('created_at', { ascending: false }),
-        supabase.from('live_tickets').select('*').order('order_index', { ascending: true }) // Sort by order_index
+        supabase.from('live_tickets').select('*').order('order_index', { ascending: true })
       ]);
 
-      if (pkgResult.data && pkgResult.data.length > 0) {
+      // Packages
+      if (pkgResult.error) {
+        console.error('Error fetching packages:', pkgResult.error);
+        setPackages(PACKAGES); // Fallback
+      } else if (pkgResult.data && pkgResult.data.length > 0) {
         setPackages(pkgResult.data);
       } else {
-        console.log('No packages found in database, using fallback data.');
         setPackages(PACKAGES);
       }
 
-      if (blogResult.data && blogResult.data.length > 0) {
+      // Blogs
+      if (blogResult.error) {
+        console.error('Error fetching blogs:', blogResult.error);
+        setBlogs(BLOG_POSTS); // Fallback
+      } else if (blogResult.data && blogResult.data.length > 0) {
         setBlogs(blogResult.data);
       } else {
-        console.log('No blogs found in database, using fallback data.');
         setBlogs(BLOG_POSTS);
       }
 
-      if (destResult.data && destResult.data.length > 0) {
+      // Destinations
+      if (destResult.error) {
+        console.error('Error fetching destinations:', destResult.error);
+        setDestinations(DESTINATIONS); // Fallback
+      } else if (destResult.data && destResult.data.length > 0) {
         setDestinations(destResult.data);
       } else {
         setDestinations(DESTINATIONS);
       }
 
-      if (ticketResult.data && ticketResult.data.length > 0) {
-        // Sort tickets locally just in case some order_index values are null
-        const sortedTickets = ticketResult.data.sort((a, b) => {
+      // Live Tickets
+      if (ticketResult.error) {
+        console.error('Error fetching tickets:', ticketResult.error);
+        setLiveTickets(DUMMY_TICKETS); // Fallback
+      } else if (ticketResult.data && ticketResult.data.length > 0) {
+        const sortedTickets = [...ticketResult.data].sort((a, b) => {
           const orderA = a.order_index ?? 999;
           const orderB = b.order_index ?? 999;
           return orderA - orderB;
         });
         setLiveTickets(sortedTickets);
       } else {
-        console.log('No live tickets found in database, using dummy data.');
         setLiveTickets(DUMMY_TICKETS);
       }
 
       setLastUpdated(new Date().toISOString());
     } catch (err) {
-      console.error('Supabase fetch error:', err);
+      console.error('Unexpected Supabase fetch error:', err);
+      // Ensure we still have some data in extreme failure cases
+      if (packages.length === 0) setPackages(PACKAGES);
+      if (blogs.length === 0) setBlogs(BLOG_POSTS);
+      if (liveTickets.length === 0) setLiveTickets(DUMMY_TICKETS);
     } finally {
       setLoading(false);
     }
