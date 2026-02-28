@@ -66,13 +66,16 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
                 <div className="w-px bg-white/20 my-4 shrink-0" />
 
                 {/* Price Range – fixed w */}
-                <div className="flex flex-col justify-center px-6 w-[200px] shrink-0">
+                <div className="flex flex-col justify-center px-6 w-[230px] shrink-0">
                     <p className="text-white font-bold text-sm">Target Price</p>
                     <p className="text-orange-400 font-extrabold text-xl tracking-tight">{priceStr}</p>
-                    <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold mt-1.5 ${trendBg} ${trendColor} border border-white/10`}>
+                    <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold mt-1.5 ${trendBg} ${trendColor} border border-white/10 w-fit`}>
                         {TrendIcon}
                         <span className="uppercase tracking-wider">{trendText}</span>
                     </div>
+                    <p className="text-blue-300/60 text-[9px] mt-2 leading-tight italic">
+                        Terms and Conditions apply and the fare depends on availability
+                    </p>
                 </div>
 
                 {/* Divider */}
@@ -134,6 +137,9 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
                             {TrendIcon}
                             <span className="uppercase tracking-tight">{trendText}</span>
                         </div>
+                        <p className="text-blue-300/60 text-[8px] mt-1.5 leading-tight italic">
+                            T&Cs apply. Subject to availability.
+                        </p>
                     </div>
 
                     <div className="w-px h-10 bg-white/20 shrink-0" />

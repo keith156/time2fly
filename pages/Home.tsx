@@ -13,7 +13,7 @@ const IconMap: Record<string, any> = {
 };
 
 const AirlineLiverySeparator: React.FC = () => (
-  <div className="w-full bg-white py-12 overflow-hidden flex items-center justify-center">
+  <div className="w-full bg-white section-spacing overflow-hidden flex items-center justify-center">
     <img
       src="/assets/office-separator.png"
       alt="Time2Fly Office Information"
@@ -197,7 +197,7 @@ const Home: React.FC = () => {
         </div>
 
 
-        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-16 md:pt-20">
+        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
           <div className="animate-fade-in-up space-y-12">
             <div className="flex flex-col items-center gap-6">
               <div className="flex flex-col items-center">
@@ -291,11 +291,20 @@ const Home: React.FC = () => {
                 Explore the world, <span className="font-medium">Travelling is knowledge</span>
               </p>
 
-              <div className="flex justify-center">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/live-prices" className="group relative bg-red-600 hover:bg-amber-500 text-white px-8 py-4 rounded-full font-black transition-all duration-300 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] uppercase tracking-[0.2em] text-xs flex items-center gap-3 overflow-hidden">
                   <span className="relative z-10">view flight prices</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
                 </Link>
+                <a
+                  href="https://whatsapp.com/channel/0029Vb5vvKl7oQhdDuZo9n0K"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white rounded-full font-black uppercase tracking-[0.2em] text-xs transition-all active:scale-95 group"
+                >
+                  <MessageCircle size={16} className="text-green-400 group-hover:scale-110 transition-transform" />
+                  WhatsApp Channel
+                </a>
               </div>
 
               <div className="flex items-center justify-center space-x-2 opacity-70 hover:opacity-100 transition-opacity pb-8">
@@ -311,7 +320,7 @@ const Home: React.FC = () => {
       <FlightSearchBar />
 
       {/* Partners Section */}
-      <section className="py-12 bg-navy-900 relative overflow-hidden">
+      <section className="section-spacing bg-navy-900 relative overflow-hidden">
         <div className="max-w-3xl mx-auto px-6 text-center mb-12 relative z-20">
           <p className="text-xs md:text-sm font-black uppercase tracking-widest text-white/40 mb-4">Our Global Partners</p>
           <p className="text-white/60 text-sm md:text-base font-normal leading-relaxed max-w-xl mx-auto lowercase tracking-widest opacity-80">
@@ -364,7 +373,7 @@ const Home: React.FC = () => {
 
 
       {/* Testimonials */}
-      < section className="py-16 bg-navy-900 relative overflow-hidden" >
+      <section className="section-spacing bg-navy-900 relative overflow-hidden" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center">
           <SectionTitle title="Voices of Our Travellers" light={true} />
         </div>
