@@ -50,10 +50,10 @@ const AnimatedStat: React.FC<{ value: number, label: string, icon: React.ReactNo
       <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 text-red-600 shadow-sm border border-slate-100 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
         {icon}
       </div>
-      <h4 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">
+      <h4 className="text-h3 text-slate-900 mb-2">
         {count}{suffix}
       </h4>
-      <p className="text-slate-400 font-black uppercase tracking-widest text-[10px]">{label}</p>
+      <p className="text-caption text-slate-400">{label}</p>
     </div>
   );
 };
@@ -84,7 +84,7 @@ const FeatureCard: React.FC<{ icon: React.ReactNode, title: string, index: numbe
     <div
       ref={cardRef}
       style={{ transitionDelay: `${index * 150}ms` }}
-      className={`group p-10 rounded-[48px] bg-white/5 border border-white/10 backdrop-blur-md hover:grayscale hover:opacity-40 transition-all duration-700 flex flex-col items-center text-center relative overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+      className={`group p-8 rounded-[48px] bg-white/5 border border-white/10 backdrop-blur-md hover:grayscale hover:opacity-40 transition-all duration-700 flex flex-col items-center text-center relative overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
         }`}
     >
       {/* Dynamic Glow Background */}
@@ -93,7 +93,7 @@ const FeatureCard: React.FC<{ icon: React.ReactNode, title: string, index: numbe
       <div className={`mb-8 w-24 h-24 rounded-[32px] bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-90 transition-all duration-700 shadow-2xl ${color}`}>
         {icon}
       </div>
-      <h3 className="font-black text-white uppercase tracking-tighter leading-tight max-w-[180px] text-2xl md:text-3xl">
+      <h3 className="text-h3 text-white max-w-[180px]">
         {title}
       </h3>
       <div className={`mt-6 w-16 h-1.5 ${color.replace('text', 'bg')} rounded-full opacity-50`}></div>
@@ -112,7 +112,7 @@ const About: React.FC = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] md:min-h-[70vh] flex items-center pt-36 pb-12 md:pt-48 md:pb-24 overflow-hidden bg-navy-800">
+      <section className="relative flex items-center pt-36 md:pt-44 section-spacing overflow-hidden bg-navy-800">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-navy-800 via-navy-800/80 to-transparent z-10"></div>
           <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover opacity-40 scale-105" alt="Travel Hero" />
@@ -120,10 +120,10 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="animate-fade-in-up">
-              <span className="text-red-500 font-black tracking-[0.3em] uppercase text-xs mb-4 block">Established July 2018 — Uganda</span>
-              <h1 className="font-black text-white leading-none mb-4 md:mb-6 tracking-tighter text-5xl md:text-[66px] uppercase">WE ARE <br /><span className="text-[#0000ff]">TIME</span><span className="text-red-500">2</span><span className="text-[#f7c9ab]">FLY</span></h1>
-              <p className="text-lg md:text-xl text-slate-300 font-medium leading-relaxed max-w-xl mb-6 md:mb-8 italic">"Explore the world, Travelling is knowledge"</p>
-              <p className="text-base text-slate-300 font-medium leading-relaxed max-w-xl mb-8">
+              <span className="text-caption text-red-500 mb-4 block">Established July 2018 — Uganda</span>
+              <h1 className="text-h1 text-white mb-4 md:mb-6">WE ARE <br /><span className="text-[#0000ff]">TIME</span><span className="text-red-500">2</span><span className="text-[#f7c9ab]">FLY</span></h1>
+              <p className="text-body-lg text-slate-300 mb-6 md:mb-8 italic">"Explore the world, Travelling is knowledge"</p>
+              <p className="text-body text-slate-300 mb-8">
                 Time2Fly Tours & Travel Ltd is your dependable travel partner for stress-free planning and unforgettable destinations. With a commitment to professionalism, integrity, and innovation, we turn travel dreams into reality.
               </p>
               <div className="flex flex-wrap gap-4">
@@ -146,7 +146,7 @@ const About: React.FC = () => {
       </section>
 
       {/* About Us Description */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="section-spacing bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
@@ -155,7 +155,7 @@ const About: React.FC = () => {
           </div>
 
           {/* Main grid: images left, text right */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
             {/* Left: 3 tall oval images side by side */}
             <div className="flex items-stretch justify-center lg:justify-start gap-4">
@@ -172,10 +172,10 @@ const About: React.FC = () => {
 
             {/* Right: text content */}
             <div className="flex flex-col justify-start space-y-6">
-              <p className="text-slate-600 text-lg font-medium leading-relaxed border-l-4 border-red-600 pl-6 py-1">
+              <p className="text-body-lg text-slate-600 border-l-4 border-red-600 pl-6 py-1">
                 Time2Fly Tours and Travel Limited is a locally owned independent travel agency registered under the companies act of Uganda, incorporated in July 2018.
               </p>
-              <p className="text-slate-700 font-medium">
+              <p className="text-body text-slate-700">
                 At Time2Fly, our success is built on three guiding principles that shape every journey we plan.
               </p>
 
@@ -185,7 +185,7 @@ const About: React.FC = () => {
                   <Briefcase size={20} className="text-white" />
                 </div>
                 <div>
-                  <h4 className="font-black text-slate-900 text-base uppercase tracking-tight mb-1">Professionalism</h4>
+                  <h4 className="text-caption text-slate-900 mb-1">Professionalism</h4>
                   <p className="text-slate-500 text-sm leading-relaxed">
                     We deliver seamless, well-organized travel experiences with attention to detail at every stage — from consultation to return flight. Experienced consultants, prompt responses, structured itineraries, and reliable partner networks.
                   </p>
@@ -198,7 +198,7 @@ const About: React.FC = () => {
                   <Handshake size={20} className="text-white" />
                 </div>
                 <div>
-                  <h4 className="font-black text-slate-900 text-base uppercase tracking-tight mb-1">Integrity</h4>
+                  <h4 className="text-caption text-slate-900 mb-1">Integrity</h4>
                   <p className="text-slate-500 text-sm leading-relaxed">
                     We operate with honesty and transparency. Clear quotations with no hidden charges, accurate travel information, and genuine advice tailored to your needs. Your trust is our greatest asset.
                   </p>
@@ -213,7 +213,7 @@ const About: React.FC = () => {
               <Lightbulb size={20} className="text-white" />
             </div>
             <div>
-              <h4 className="font-black text-slate-900 text-base uppercase tracking-tight mb-1">Innovation</h4>
+              <h4 className="text-caption text-slate-900 mb-1">Innovation</h4>
               <p className="text-slate-500 text-sm leading-relaxed">
                 We embrace modern travel solutions, using digital booking tools, flexible payment options, and customized itineraries that reflect emerging trends—ensuring seamless, smart, and personalized travel experiences for every journey.
               </p>
@@ -225,19 +225,19 @@ const About: React.FC = () => {
 
 
       {/* Why Choose Us */}
-      <section className="py-24 bg-slate-950 relative overflow-hidden">
+      <section className="section-spacing bg-slate-950 relative overflow-hidden">
         {/* Background Accents */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[150px] translate-y-1/2 -translate-x-1/2"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-24">
-            <span className="text-amber-500 font-black tracking-[0.5em] uppercase text-xs mb-6 block drop-shadow-sm">The Time2Fly Advantage</span>
-            <h2 className="font-black text-white uppercase tracking-tighter mb-10 leading-none text-4xl md:text-5xl">Why <span className="text-red-600 underline decoration-white/20 underline-offset-[16px] decoration-4">Choose Us</span></h2>
-            <p className="text-slate-400 font-medium max-w-3xl mx-auto text-xl md:text-2xl italic leading-relaxed">"Delivering excellence in every mile, ensuring your journey is as remarkable as the destination."</p>
+            <span className="text-caption text-amber-500 mb-6 block drop-shadow-sm">The Time2Fly Advantage</span>
+            <h2 className="text-h2 text-white mb-10">Why <span className="text-red-600 underline decoration-white/20 underline-offset-[16px] decoration-4">Choose Us</span></h2>
+            <p className="text-body-lg text-slate-400 max-w-3xl mx-auto italic">"Delivering excellence in every mile, ensuring your journey is as remarkable as the destination."</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {[
               { icon: <Headset size={40} />, title: "24/7 customer support", color: "text-amber-500", glow: "bg-amber-500/20" },
               { icon: <Gem size={40} />, title: "competitive pricing", color: "text-red-500", glow: "bg-red-500/20" },
@@ -253,7 +253,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Vision & Mission */}
-      < section className="py-12 md:py-20 bg-slate-50" >
+      <section className="section-spacing bg-slate-50" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             <div className="bg-white p-8 md:p-10 rounded-[30px] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
@@ -279,7 +279,7 @@ const About: React.FC = () => {
       </section >
 
       {/* Global Impact Stats - Updated with Counting Animation */}
-      < section className="py-10 md:py-16 bg-white relative overflow-hidden border-y border-slate-50" >
+      <section className="section-spacing bg-white relative overflow-hidden border-y border-slate-50" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
@@ -296,7 +296,7 @@ const About: React.FC = () => {
       </section >
 
       {/* Final CTA */}
-      < section className="py-10 md:py-16 bg-navy-800 relative overflow-hidden text-center" >
+      <section className="section-spacing bg-navy-800 relative overflow-hidden text-center" >
         <div className="absolute inset-0 opacity-20 z-0">
           <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="CTA" />
         </div>

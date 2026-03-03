@@ -1,0 +1,6 @@
+qr menu app that enables a resturant owner to 
+create a menu and add or remove menu items
+and to create tables and enables a user to scan
+the qr code at his table, make an order and the 
+order received by the resturant owner including the 
+table ordered from 

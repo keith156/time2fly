@@ -162,19 +162,19 @@ const LivePrices: React.FC = () => {
     const { liveTickets, loading, refreshData } = useData();
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] pt-32 pb-20 font-sans selection:bg-blue-100">
+        <div className="min-h-screen bg-[#f8fafc] pt-28 pb-16 font-sans selection:bg-blue-100">
             {/* Header / Hero Section */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div className="max-w-3xl">
                         <div className="inline-flex items-center gap-2 text-blue-600 font-bold uppercase tracking-[0.2em] text-[10px] mb-4 bg-blue-50/80 backdrop-blur-sm px-4 py-1.5 rounded-full border border-blue-100/50 shadow-sm">
                             <CheckCircle2 size={14} className="text-blue-500" />
                             <span>Human-Verified Market Data</span>
                         </div>
-                        <h1 className="font-black text-slate-900 uppercase tracking-tighter leading-[0.9] mb-4 text-5xl md:text-[66px]">
+                        <h1 className="text-h1 text-slate-900 mb-4">
                             Live Flight <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-600">Rates</span>
                         </h1>
-                        <p className="text-slate-500 text-base md:text-lg font-medium leading-relaxed max-w-2xl">
+                        <p className="text-body-lg text-slate-500 max-w-2xl">
                             Direct from Entebbe. Real-time market prices verified by our professional travel agents.
                         </p>
                     </div>
@@ -193,7 +193,7 @@ const LivePrices: React.FC = () => {
                     <div className="flex-1">
                         {/* Toolbar */}
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="font-black text-slate-900 uppercase tracking-tighter text-xl">
+                            <h2 className="text-h3 text-slate-900">
                                 Active Market Rates
                             </h2>
                             <button
@@ -213,7 +213,7 @@ const LivePrices: React.FC = () => {
                                 <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">Loading incoming rates...</p>
                             </div>
                         ) : liveTickets.length > 0 ? (
-                            <div className="space-y-5">
+                            <div className="space-y-4">
                                 {liveTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)}
                                 <div className="pt-4 pb-8 text-center animate-fade-in">
                                     <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] opacity-80 backdrop-blur-sm inline-block px-6 py-2 rounded-full border border-slate-200/50 bg-white/50 shadow-sm">
@@ -235,8 +235,8 @@ const LivePrices: React.FC = () => {
                             <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                             <div className="relative z-10">
                                 <User className="text-blue-400 mb-4" size={28} />
-                                <h3 className="font-black uppercase tracking-tighter text-2xl mb-4">Our Edge</h3>
-                                <p className="text-slate-400 text-sm leading-relaxed mb-6 font-medium">
+                                <h3 className="text-h3 text-white mb-4">Our Edge</h3>
+                                <p className="text-body text-slate-400 mb-6">
                                     Verified by <span className="text-white font-bold">real travel agents</span>. We find deals that automated bots completely miss.
                                 </p>
                                 <div className="space-y-3">
@@ -256,8 +256,8 @@ const LivePrices: React.FC = () => {
                             <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
                             <div className="relative z-10">
                                 <MessageCircle size={24} className="mb-4 text-white/90" />
-                                <h3 className="font-black uppercase tracking-tighter text-xl mb-3">Custom Booking?</h3>
-                                <p className="text-blue-100 text-xs font-medium mb-6">Let our experts craft the perfect journey, stress-free.</p>
+                                <h3 className="text-h4 text-white mb-3">Custom Booking?</h3>
+                                <p className="text-body text-blue-100 mb-6">Let our experts craft the perfect journey, stress-free.</p>
                                 <a
                                     href="https://wa.me/256783084521"
                                     target="_blank"

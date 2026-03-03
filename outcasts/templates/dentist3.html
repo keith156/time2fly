@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dentist — Header</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --space-xs:6px; --space-sm:12px; --space-md:20px; --space-lg:36px;
+      --radius:14px; --primary:#1f6feb; --primary-900:#123e8b; --glass-bg: rgba(255,255,255,0.48);
+      --glass-border: rgba(255,255,255,0.45); --shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    html,body{height:100%;}
+    body{margin:0;font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:#f7fbff;color:#07324a;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+    .container{max-width:1200px;margin:0 auto;padding:0 var(--space-md);}
+    .glass{background:var(--glass-bg);border:1px solid var(--glass-border);box-shadow:var(--shadow);backdrop-filter:blur(8px) saturate(120%);border-radius:var(--radius);}
+
+    /* Header */
+    .site-header{position:sticky;top:0;z-index:1200;padding:calc(var(--space-sm)+4px) 0;}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);}
+    .site-logo{display:flex;align-items:center;gap:10px;color:var(--primary-900);font-weight:700;text-decoration:none;font-size:1.05rem}
+    .site-logo svg{display:block}
+
+    /* Navigation */
+    .nav{display:flex;align-items:center;gap:var(--space-md)}
+    .nav-links{display:flex;gap:var(--space-md);list-style:none;margin:0;padding:0}
+    .nav-link{display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:500;color:var(--primary-900);transition:all 160ms ease}
+    .nav-link:hover,.nav-link:focus{background:rgba(31,111,235,0.08);color:var(--primary);transform:translateY(-2px);}
+
+    /* Buttons */
+    .btn-ghost{padding:8px 14px;border-radius:10px;border:1px solid rgba(31,111,235,0.12);background:transparent;color:var(--primary-900);text-decoration:none;font-weight:700}
+
+    /* Mobile toggle */
+    .nav-toggle{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:transparent;border:1px solid rgba(7,50,74,0.04);cursor:pointer}
+    .nav-toggle svg{width:22px;height:22px}
+
+    /* Mobile panel */
+    .mobile-nav-panel{position:absolute;left:0;right:0;top:calc(100% + 8px);padding:var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm);opacity:0;pointer-events:none;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(248,252,255,0.95));box-shadow:0 12px 40px rgba(8,44,83,0.06);transform:translateY(-6px);transition:opacity 200ms ease, transform 200ms ease}
+    .mobile-nav-panel.is-open{opacity:1;pointer-events:auto;transform:none}
+    .mobile-nav-panel .nav-link{display:block;padding:12px 14px;border-radius:10px}
+
+    /* Responsive */
+    @media (min-width:900px){
+      .nav-toggle{display:none}
+      .mobile-nav-panel{position:static;opacity:1;pointer-events:auto;background:transparent;box-shadow:none;padding:0;flex-direction:row;gap:var(--space-md)}
+      .mobile-nav-panel .nav-link{padding:8px 10px}
+    }
+
+    /* Accessibility */
+    .nav-link:focus-visible{outline:none;box-shadow:0 0 0 4px rgba(31,111,235,0.12)}
+
+    /* HERO */
+    .hero{min-height:72vh;display:flex;align-items:center;justify-content:center;position:relative;padding:var(--space-lg) 0;background-image: url('https://images.unsplash.com/photo-1550831107-1553da8c8464?auto=format&fit=crop&w=1600&q=60');background-size:cover;background-position:center center;border-radius:12px;}
+    .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.06), rgba(10,50,82,0.06));mix-blend-mode:multiply;z-index:0}
+    .hero-card{position:relative;z-index:1;max-width:1100px;width:100%;padding:var(--space-md);display:flex;gap:var(--space-md);align-items:center;justify-content:center}
+    .hero-card .glass{display:flex;gap:var(--space-md);flex-direction:column;align-items:center;padding:32px;border-radius:16px}
+    .hero-grid{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
+    .hero-icon{width:86px;height:86px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.90));border:1px solid rgba(255,255,255,0.6);box-shadow:0 8px 20px rgba(0,0,0,0.06)}
+    .hero-title{font-size:2.1rem;font-weight:700;color:var(--primary-900);margin:0}
+    .hero-subtitle{margin:0;color:#093544;max-width:60ch}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
+    /* Buttons */
+    .btn-primary{background:linear-gradient(90deg,var(--primary),#6fb1ff);color:#fff;padding:10px 16px;border-radius:12px;text-decoration:none;font-weight:700;border:0;box-shadow:0 12px 30px rgba(31,111,235,0.15)}
+    .btn-primary:hover{transform:translateY(-3px)}
+    .btn-chat{padding:10px 16px;border-radius:12px;text-decoration:none;font-weight:700;border:0;background:linear-gradient(90deg,#e3fae9,#bff5cf);color:#0b5f38;box-shadow:0 8px 20px rgba(18,140,126,0.08)}
+    .btn-chat:hover{transform:translateY(-3px)}
+
+    @media(min-width:900px){
+      .hero-card{flex-direction:row;padding:48px}
+      .hero-grid{align-items:flex-start;text-align:left}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header glass" role="banner">
+    <div class="container header-inner">
+      <a class="site-logo" href="#" aria-label="DentalCraft Home">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2c1.5 0 3 1 4 3.2 1 2 2 3.5 2 6 0 4-2.5 7-6 8-3.5-1-6-4-6-8 0-2.5 1-4 2-6C9 3 10.5 2 12 2z" stroke="var(--primary-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        DentalCraft
+      </a>
+
+      <nav class="nav" aria-label="Main Navigation">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-navigation" aria-label="Toggle navigation">
+          <svg viewBox="0 0 100 80" width="24" height="20" aria-hidden="true" focusable="false"><rect width="100" height="8" rx="8" fill="var(--primary-900)"></rect><rect y="30" width="100" height="8" rx="8" fill="var(--primary-900)"></rect><rect y="60" width="100" height="8" rx="8" fill="var(--primary-900)"></rect></svg>
+        </button>
+
+        <div id="site-navigation" class="mobile-nav-panel" role="menubar">
+          <ul class="nav-links">
+            <li><a class="nav-link" role="menuitem" href="#home">Home</a></li>
+            <li><a class="nav-link" role="menuitem" href="#about">About</a></li>
+            <li><a class="nav-link" role="menuitem" href="#services">Services</a></li>
+            <li><a class="nav-link" role="menuitem" href="#treatments">Treatments</a></li>
+            <li><a class="nav-link" role="menuitem" href="#gallery">Gallery</a></li>
+            <li><a class="nav-link" role="menuitem" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Hero - DentalCare">
+      <div class="container hero-card">
+        <div class="glass hero-grid">
+          <div class="hero-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" aria-hidden="true"><path d="M12 2c1.6 0 3.2 1.1 4.2 3.5.9 2 2 3.2 2 5 0 3-2.2 5.6-5.2 6.2-3-.6-5.1-3.2-5.1-6.2 0-1.8 1-3 2-5C8.8 3.1 10.4 2 12 2z" stroke="var(--primary-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="hero-content">
+            <h1 class="hero-title">Bright smiles, brighter futures</h1>
+            <p class="hero-subtitle">Gentle, expert dental care in a calm modern environment. We restore confidence one smile at a time.</p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn-primary">Book Appointment</a>
+              <a href="#chat" class="btn-chat">Chat Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function(){
+      const toggle = document.querySelector('.nav-toggle');
+      const panel = document.getElementById('site-navigation');
+      if(!toggle || !panel) return;
+      toggle.addEventListener('click', () => {
+        const isOpen = panel.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      panel.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', ()=>{
+        if(panel.classList.contains('is-open')){
+          panel.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded','false');
+        }
+      }));
+    })();
+  </script>
+</body>
+</html>

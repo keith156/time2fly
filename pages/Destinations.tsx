@@ -21,8 +21,8 @@ const Destinations: React.FC = () => {
                     <div className="absolute inset-0 bg-slate-950/65" />
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <span className="text-amber-500 font-black tracking-widest uppercase text-xs mb-4 block">World Horizons</span>
-                    <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-[66px]">Our Destinations</h1>
+                    <span className="text-caption text-amber-500 mb-4 block">World Horizons</span>
+                    <h1 className="text-h1 text-white mb-8">Our Destinations</h1>
                 </div>
             </div>
 
@@ -52,7 +52,7 @@ const Destinations: React.FC = () => {
                                             <MapPin size={16} className="mr-2" />
                                             Explore
                                         </div>
-                                        <h3 className="font-black text-white uppercase tracking-tighter leading-none text-2xl md:text-3xl">{dest.name}</h3>
+                                        <h3 className="text-h3 text-white">{dest.name}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -67,15 +67,15 @@ const Destinations: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
                         <SectionTitle title="Exclusive Horizons" titleClassName="text-[30px] md:text-[30px]" />
-                        <p className="text-slate-600 text-xl font-medium leading-relaxed mb-10">
+                        <p className="text-body-lg text-slate-600 mb-10">
                             Each destination we offer is hand-picked for its unique cultural value and natural beauty. From the misty mountains of Uganda to the shimmering skyscrapers of Dubai, we ensure every trip is a masterpiece.
                         </p>
                         <div className="space-y-6">
                             <div className="flex items-center gap-6 p-6 rounded-3xl bg-slate-50 border border-slate-100 transition-all hover:bg-white hover:shadow-xl group">
                                 <div className="w-14 h-14 bg-amber-500 rounded-2xl flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform"><Globe size={28} /></div>
                                 <div>
-                                    <h4 className="font-black uppercase tracking-tight">Global Network</h4>
-                                    <p className="text-slate-500 text-sm font-medium">Partners across 40+ countries.</p>
+                                    <h4 className="text-h4 text-slate-900">Global Network</h4>
+                                    <p className="text-body text-slate-500">Partners across 40+ countries.</p>
                                 </div>
                             </div>
                         </div>

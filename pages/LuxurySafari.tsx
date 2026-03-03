@@ -10,19 +10,21 @@ const LuxurySafari: React.FC = () => {
                 <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
                 <div className="absolute inset-0 flex items-center justify-center p-6">
                     <div className="max-w-4xl text-center">
-                        <span className="text-amber-500 font-black tracking-[0.5em] uppercase text-xs mb-6 block">Elite Expeditions</span>
-                        <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-[66px]">Luxury Safari Experiences</h1>
-                        <p className="text-white/90 text-xl font-medium max-w-2xl mx-auto uppercase tracking-widest leading-relaxed">The wild meets the refined. Experience the heart of the savannah with unparalleled comfort.</p>
+                        <span className="text-caption text-amber-500 mb-6 block">Elite Expeditions</span>
+                        <h1 className="text-h1 text-white mb-8">Luxury Safari Experiences</h1>
+                        <p className="text-body-lg text-white/90 max-w-2xl mx-auto uppercase tracking-widest leading-relaxed">The wild meets the refined. Experience the heart of the savannah with unparalleled comfort.</p>
                     </div>
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 py-24">
+            <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32 items-center">
                     <div className="space-y-8">
-                        <div className="inline-block px-4 py-2 bg-amber-100 rounded-full text-amber-900 font-black text-[10px] uppercase tracking-widest">Premium Selection</div>
-                        <h2 className="font-black text-slate-900 uppercase tracking-tighter leading-tight text-4xl md:text-5xl">Mastering the Art of the Savannah</h2>
-                        <p className="text-slate-600 text-lg leading-relaxed font-medium">Our luxury safaris are designed for the discerning traveler who seeks an intimate encounter with nature without compromising on style or service. Stay in exclusive lodges, enjoy gourmet dining under the stars, and let our expert trackers lead you to the most incredible wildlife moments.</p>
+                        <div className="space-y-8">
+                            <div className="inline-block px-4 py-2 bg-amber-100 rounded-full text-amber-900 text-caption">Premium Selection</div>
+                            <h2 className="text-h2 text-slate-900 border-b-4 border-amber-500 w-fit pb-2">Mastering the Art of the Savannah</h2>
+                            <p className="text-body-lg text-slate-600">Our luxury safaris are designed for the discerning traveler who seeks an intimate encounter with nature without compromising on style or service. Stay in exclusive lodges, enjoy gourmet dining under the stars, and let our expert trackers lead you to the most incredible wildlife moments.</p>
+                        </div>
                         <div className="flex flex-wrap gap-4">
                             <span className="flex items-center gap-2 px-6 py-3 bg-white rounded-2xl shadow-sm border border-slate-100 text-slate-900 font-bold uppercase text-xs">
                                 <Shield size={16} className="text-amber-500" /> Private Trackers
@@ -44,18 +46,18 @@ const LuxurySafari: React.FC = () => {
                     <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                         <div className="space-y-4">
                             <Map className="mx-auto text-amber-500" size={40} />
-                            <h3 className="font-black uppercase tracking-tight text-2xl md:text-3xl">Iconic Routes</h3>
-                            <p className="text-white/60 text-sm">Pathways through the Serengeti, Masai Mara, and Bwindi.</p>
+                            <h3 className="text-h3 text-white">Iconic Routes</h3>
+                            <p className="text-body text-white/60">Pathways through the Serengeti, Masai Mara, and Bwindi.</p>
                         </div>
                         <div className="space-y-4">
                             <Clock className="mx-auto text-amber-500" size={40} />
-                            <h3 className="font-black uppercase tracking-tight text-2xl md:text-3xl">Perfect Timing</h3>
-                            <p className="text-white/60 text-sm">We plan your visit to coincide with the Great Migration.</p>
+                            <h3 className="text-h3 text-white">Perfect Timing</h3>
+                            <p className="text-body text-white/60">We plan your visit to coincide with the Great Migration.</p>
                         </div>
                         <div className="space-y-4">
                             <Link to="/contact" className="h-full flex flex-col items-center justify-center p-8 bg-amber-500 hover:bg-white hover:text-slate-950 transition-all rounded-[32px] group">
-                                <span className="text-2xl font-black uppercase tracking-tighter mb-2">Inquire Now</span>
-                                <span className="text-xs font-bold uppercase tracking-widest opacity-60">Custom Itineraries</span>
+                                <span className="text-h3 text-white mb-2 group-hover:text-slate-950 transition-colors">Inquire Now</span>
+                                <span className="text-caption text-white/60 group-hover:text-slate-950/60 transition-colors">Custom Itineraries</span>
                             </Link>
                         </div>
                     </div>

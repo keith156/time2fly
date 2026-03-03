@@ -60,7 +60,7 @@ const Blog: React.FC = () => {
                   <span className="text-[#0000ff] text-xs font-black uppercase tracking-[0.3em]">{selectedPost.category}</span>
                   <span className="h-[2px] w-8 bg-[#0000ff]"></span>
                 </div>
-                <h1 className="font-black text-slate-900 uppercase tracking-tighter leading-[0.85] mb-10 text-5xl md:text-[66px] leading-none">
+                <h1 className="text-h1 text-slate-900 mb-10">
                   {selectedPost.title}
                 </h1>
                 <div className="flex flex-wrap items-center justify-center gap-10 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em]">
@@ -87,11 +87,11 @@ const Blog: React.FC = () => {
               {/* Main Content Area */}
               <div className="lg:col-span-8 lg:col-start-2">
                 <div className="prose prose-slate prose-2xl max-w-none">
-                  <p className="text-slate-900 font-bold text-2xl md:text-3xl mb-16 leading-tight italic">
+                  <p className="text-h4 text-slate-900 mb-16 italic">
                     "{selectedPost.excerpt}"
                   </p>
 
-                  <div className="text-slate-700 leading-relaxed font-medium space-y-10 text-lg md:text-xl whitespace-pre-wrap">
+                  <div className="text-body-lg text-slate-700 space-y-10 whitespace-pre-wrap">
                     {selectedPost.content || `
                       Traveling the world isn't just about seeing new places; it's about shifting your perspective. At Time2Fly, we believe every journey should be as unique as the traveler embarking on it.
 
@@ -107,8 +107,8 @@ const Blog: React.FC = () => {
                     <img src={selectedPost.image} className="w-full h-full object-cover grayscale" loading="lazy" />
                   </div>
                   <div className="relative z-10">
-                    <h3 className="text-white font-black uppercase tracking-tighter mb-4 text-2xl md:text-3xl">Inspired by this story?</h3>
-                    <p className="text-blue-100 font-medium mb-10 max-w-md mx-auto italic">Explore our custom packages to experience this destination for yourself.</p>
+                    <h3 className="text-h3 text-white mb-4">Inspired by this story?</h3>
+                    <p className="text-body-lg text-blue-100 mb-10 max-w-md mx-auto italic">Explore our custom packages to experience this destination for yourself.</p>
                     <button className="bg-white hover:bg-amber-400 hover:text-white text-[#0000ff] font-black px-12 py-5 rounded-full transition-all uppercase tracking-widest text-xs">Book the Journey</button>
                   </div>
                 </div>
@@ -118,14 +118,14 @@ const Blog: React.FC = () => {
               <div className="lg:col-span-3">
                 <div className="sticky top-32 space-y-12">
                   <div className="p-8 bg-slate-50 rounded-[40px] border border-slate-100">
-                    <h4 className="text-[10px] font-black text-amber-600 uppercase tracking-widest mb-6">About the Author</h4>
+                    <h4 className="text-caption text-amber-600 mb-6">About the Author</h4>
                     <div className="flex items-center space-x-4 mb-6">
                       <div className="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center font-black text-amber-500 text-xl shadow-lg">
                         {selectedPost.author.charAt(0)}
                       </div>
                       <div>
-                        <p className="text-slate-900 font-black uppercase tracking-tight">{selectedPost.author}</p>
-                        <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Travel Expert</p>
+                        <p className="text-body text-slate-900 font-black">{selectedPost.author}</p>
+                        <p className="text-caption text-slate-400">Travel Expert</p>
                       </div>
                     </div>
                     <p className="text-slate-500 text-sm font-medium leading-relaxed">Dedicated to uncovering the world's most authentic experiences since 2018.</p>
@@ -140,7 +140,7 @@ const Blog: React.FC = () => {
   }
 
   return (
-    <div className="pt-24 bg-white min-h-screen pb-32">
+    <div className="pt-24 bg-white pb-0">
       {/* Mesmerizing Hero Section */}
       <section className="relative h-[60vh] flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-white"></div>
@@ -156,7 +156,7 @@ const Blog: React.FC = () => {
             <span className="h-[1px] w-12 bg-[#0000ff]"></span>
           </div>
 
-          <h1 className="font-black text-slate-900 mb-8 tracking-tighter uppercase leading-[0.8] animate-fade-in-up md:text-[66px] text-6xl">
+          <h1 className="text-h1 text-slate-900 mb-8 animate-fade-in-up">
             THE TRAVEL
             <span className="relative">
               <span className="relative z-10 text-[#0000ff]">JOURNAL</span>
@@ -164,7 +164,7 @@ const Blog: React.FC = () => {
           </h1>
 
           <div className="max-w-xl relative py-8 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <p className="text-2xl md:text-3xl text-slate-800 font-bold leading-tight italic">
+            <p className="text-h3 text-slate-800 italic">
               "Explore the world, <br />
               <span className="text-[#0000ff]">Travelling is knowledge</span>"
             </p>
@@ -209,12 +209,12 @@ const Blog: React.FC = () => {
                     <span className="flex items-center"><User size={14} className="mr-1.5 text-[#0000ff]" /> {post.author.split(' ')[0]}</span>
                   </div>
                   <h2
-                    className="font-black text-slate-900 mb-4 hover:text-[#0000ff] transition-colors cursor-pointer leading-tight uppercase tracking-tighter text-2xl line-clamp-2 h-14"
+                    className="text-h3 text-slate-900 mb-4 hover:text-[#0000ff] transition-colors cursor-pointer line-clamp-2 h-14"
                     onClick={() => setSelectedPost(post)}
                   >
                     {post.title}
                   </h2>
-                  <p className="text-slate-500 text-base leading-relaxed mb-6 font-medium line-clamp-3 italic flex-grow">
+                  <p className="text-body text-slate-500 mb-6 line-clamp-3 italic flex-grow">
                     {post.excerpt}
                   </p>
                 </div>
@@ -244,13 +244,13 @@ const Blog: React.FC = () => {
       </div>
 
       {/* Magazine Footer Info */}
-      <section className="mt-32 border-t border-slate-100 py-24 text-center">
+      <section className="mt-4 border-t border-slate-100 py-12 text-center">
         <div className="max-w-2xl mx-auto px-4">
-          <h4 className="text-[30px] font-black text-slate-900 uppercase tracking-tighter mb-6">Stay in the Loop</h4>
-          <p className="text-slate-500 font-medium mb-10 leading-relaxed">Subscribe to our monthly digest for exclusive travel deals, local Ugandan insights, and global adventure guides.</p>
+          <h4 className="text-h3 text-slate-900 uppercase tracking-tighter mb-4">Stay in the Loop</h4>
+          <p className="text-body text-slate-500 mb-8">Subscribe to our monthly digest for exclusive travel deals, local Ugandan insights, and global adventure guides.</p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <input type="email" placeholder="Your email address" className="flex-grow px-8 py-5 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-[#0000ff] font-medium" />
-            <button className="bg-slate-950 hover:bg-[#0000ff] text-white font-black px-12 py-5 rounded-2xl transition-all uppercase tracking-widest text-xs">Join Us</button>
+            <input type="email" placeholder="Your email address" className="flex-grow px-8 py-4 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-[#0000ff] font-medium" />
+            <button className="bg-slate-950 hover:bg-[#0000ff] text-white font-black px-12 py-4 rounded-2xl transition-all uppercase tracking-widest text-xs">Join Us</button>
           </div>
         </div>
       </section>

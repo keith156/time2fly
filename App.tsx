@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search, RefreshCcw, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import ReactGA from 'react-ga4';
 import Home from './pages/Home';
 import About from './pages/About';
 import TourPackages from './pages/TourPackages';
@@ -23,6 +24,9 @@ import CorporateTravel from './pages/CorporateTravel';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import WhatsAppButton from './components/WhatsAppButton.tsx';
 import { DataProvider, useData } from './context/DataContext';
+
+// Initialize Google Analytics 4
+ReactGA.initialize('G-FBJ3BGE9E0');
 
 const Navbar: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -324,10 +328,10 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#0000ff] text-white py-8 border-t-4 border-red-600">
+    <footer className="bg-[#0000ff] text-white section-spacing border-t-4 border-red-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center mb-8 px-4 text-center">
-          <h3 className="font-bold mb-6 text-amber-500 uppercase tracking-widest text-xs max-w-2xl leading-relaxed">
+        <div className="flex flex-col items-center mb-4 px-4 text-center">
+          <h3 className="font-bold mb-4 text-amber-500 uppercase tracking-widest text-xs max-w-2xl leading-relaxed">
             For inquiries, support, or additional details, our team is happy to assist you. please Get In Touch With Us
           </h3>
           <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 text-white font-medium">
@@ -351,7 +355,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Social Media - Centered Row */}
-        <div className="flex justify-center flex-wrap gap-4 mb-8">
+        <div className="flex justify-center flex-wrap gap-4 mb-4">
           <a href="https://www.facebook.com/timetofly.ug/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-blue-600 transition-all hover:-translate-y-1 text-white border border-white/10" title="Facebook"><Facebook size={20} /></a>
           <a href="https://x.com/time2fly06/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="X (Twitter)"><Twitter size={20} /></a>
           <a href="https://www.instagram.com/time2fly06/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-pink-600 transition-all hover:-translate-y-1 text-white border border-white/10" title="Instagram"><Instagram size={20} /></a>
@@ -368,7 +372,7 @@ const Footer: React.FC = () => {
           <a href="https://www.tiktok.com/@time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="TikTok"><Music2 size={20} /></a>
         </div>
 
-        <div className="pt-8 border-t border-blue-700 flex flex-col items-center justify-center text-center text-white/50 text-sm font-medium gap-4">
+        <div className="pt-6 border-t border-blue-700 flex flex-col items-center justify-center text-center text-white/50 text-sm font-medium gap-4">
           <p className="text-white">© 2026 Time2Fly Tours & Travel Ltd. All rights reserved.</p>
           <Link to="/login" className="flex items-center space-x-1 opacity-20 hover:opacity-100 transition-opacity">
             <Lock size={14} />
@@ -409,11 +413,21 @@ const App: React.FC = () => {
     return null;
   };
 
+  // Fires a GA4 pageview on every route change
+  const RouteTracker = () => {
+    const location = useLocation();
+    useEffect(() => {
+      ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search, title: document.title });
+    }, [location]);
+    return null;
+  };
+
   return (
     <DataProvider>
       <ErrorBoundary>
         <HashRouter>
           <ScrollToTop />
+          <RouteTracker />
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow">
@@ -431,14 +445,16 @@ const App: React.FC = () => {
                 <Route path="/live-prices" element={<LivePrices />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/login" element={<Login />} />
-                <Route
-                  path="/admin"
+                <Route path="/admin"
                   element={
                     <ProtectedRoute>
                       <AdminDashboard />
                     </ProtectedRoute>
                   }
                 />
+                <Route path="/best-destinations" element={<BestDestinations />} />
+                <Route path="/luxury-safari" element={<LuxurySafari />} />
+                <Route path="/corporate-travel" element={<CorporateTravel />} />
               </Routes>
 
             </main>

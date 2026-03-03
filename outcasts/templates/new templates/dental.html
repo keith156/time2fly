@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dental Clinic</title>
+
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f1f5f9;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      margin: 0.75rem;
+
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ===== LOGO ===== */
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0f172a;
+      text-decoration: none;
+    }
+
+    /* ===== NAV LINKS ===== */
+    .nav-links {
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      padding-top: 1.25rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 1rem;
+      color: #0f172a;
+      padding: 0.5rem 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: #2563eb;
+    }
+
+    /* ===== CTA BUTTON ===== */
+    .nav-links .cta a {
+      background: #2563eb;
+      color: #ffffff;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 600;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .nav-links .cta a:hover {
+      background: #1e40af;
+    }
+
+    /* ===== HAMBURGER ===== */
+    .menu-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      width: 26px;
+      height: 3px;
+      background: #0f172a;
+      border-radius: 3px;
+      transition: transform 0.3s ease;
+    }
+
+    /* ===== MOBILE MENU OPEN ===== */
+    .nav-links.open {
+      display: flex;
+    }
+
+    /* ===== DESKTOP ===== */
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+        padding-top: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="nav-container" aria-label="Main navigation">
+    <a href="#" class="logo">SmileCare Dental</a>
+
+    <button
+      class="menu-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="primary-menu"
+      onclick="toggleMenu(this)"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul id="primary-menu" class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li class="cta"><a href="#appointment">Book Appointment</a></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  function toggleMenu(button) {
+    const menu = document.getElementById("primary-menu");
+    const expanded = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", !expanded);
+    menu.classList.toggle("open");
+  }
+</script>
+
+</body>
+</html>
+
+    </header>
+
+    <hero> 
+
+        <style>
+  /* ===== HERO WITH BACKGROUND IMAGE ===== */
+  .hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+
+    background-image: url("benyamin-bohlouli-LQ698TTvGpA-unsplash.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Dark overlay for readability */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    z-index: 1;
+  }
+
+  .hero-card {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    width: 100%;
+    padding: 2.75rem 1.75rem;
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 1.75rem;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.1rem, 5vw, 3.2rem);
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: #334155;
+    max-width: 680px;
+    margin: 0 auto 2.25rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 0.9rem 1.9rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    min-width: 230px;
+    text-align: center;
+  }
+
+  .btn-primary:hover {
+    background: #1e40af;
+  }
+
+  .btn-secondary {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .btn-secondary:hover {
+    text-decoration: underline;
+  }
+
+  /* ===== DESKTOP ===== */
+  @media (min-width: 768px) {
+    .hero {
+      padding: 4rem 2rem;
+    }
+
+    .hero-actions {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+</style>
+
+<section id="home" class="hero" role="banner">
+  <div class="hero-card">
+    <h1>Trusted Dentist in Kampala</h1>
+
+    <p>
+      Gentle, modern dental care in Kampala for individuals and families.
+      We combine advanced technology with a caring approach to give you
+      a healthy, confident smile.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#appointment" class="btn-primary">Book Appointment</a>
+      <a href="tel:+256700000000" class="btn-secondary">Call Now</a>
+    </div>
+  </div>
+</section>
+
+</hero>
+
+<about>
+   <section class="about-section">
+
+    <div class="header-content">
+        <h2>Our Commitment to Your Smile</h2>
+        <p>
+            Welcome to **[Clinic Name]**, where cutting-edge dental technology meets compassionate care. For years, we've dedicated ourselves to ensuring every patient leaves with a healthy, confident smile. Our team of experienced professionals provides a full spectrum of dental services, focused on your comfort and lasting oral health.
+        </p>
+    </div>
+
+    <div class="counter-grid">
+
+        <div class="counter-box">
+            <i class="fas fa-smile icon"></i>
+            <span class="count-number" data-target="9500">0</span>
+            <span class="count-label">Smiles Created</span>
+        </div>
+
+        <div class="counter-box">
+            <i class="fas fa-calendar-alt icon"></i>
+            <span class="count-number" data-target="15">0</span>
+            <span class="count-label">Years of Experience</span>
+        </div>
+
+        <div class="counter-box">
+            <i class="fas fa-user-friends icon"></i>
+            <span class="count-number" data-target="28">0</span>
+            <span class="count-label">Dedicated Employees</span>
+        </div>
+
+        <div class="counter-box">
+            <i class="fas fa-tooth icon"></i>
+            <span class="count-number" data-target="7400">0</span>
+            <span class="count-label">Happy Patients</span>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* =======================================
+       1. BASE STYLES & COLOR SCHEME (BLUE)
+       ======================================= */
+    :root {
+        --primary-color: #1a73e8; /* Vibrant Blue */
+        --secondary-color: #4285f4; /* Lighter Blue */
+        --text-color: #333;
+        --light-bg: #f5f5f5;
+        --white: #ffffff;
+        --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Note: If you already have a body style, only copy the styles specific to 
+       .about-section and below */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--light-bg);
+        color: var(--text-color);
+    }
+
+    .about-section {
+        padding: 60px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* =======================================
+       2. DESCRIPTION & TITLE STYLES
+       ======================================= */
+    .header-content {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .header-content h2 {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    .header-content p {
+        font-size: 1.1rem;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* =======================================
+       3. COUNTER GRID & ANIMATION STYLES
+       ======================================= */
+    .counter-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+    }
+
+    .counter-box {
+        background-color: var(--white);
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: var(--box-shadow);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        border-top: 5px solid var(--secondary-color);
+    }
+
+    .counter-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .counter-box .icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .counter-box .count-number {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        line-height: 1;
+    }
+
+    .counter-box .count-label {
+        margin-top: 10px;
+        font-size: 1rem;
+        color: var(--text-color);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    /* =======================================
+       4. MOBILE RESPONSIVENESS
+       ======================================= */
+    @media (max-width: 768px) {
+        .about-section {
+            padding: 40px 15px;
+        }
+
+        .header-content h2 {
+            font-size: 2rem;
+        }
+
+        .header-content p {
+            font-size: 1rem;
+        }
+
+        .counter-box {
+            padding: 25px;
+        }
+
+        .counter-box .count-number {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+
+<script>
+    const counters = document.querySelectorAll('.count-number');
+    const speed = 200; // The lower the number, the faster the count
+
+    const animateCounter = (counter) => {
+        const target = +counter.getAttribute('data-target');
+        let count = 0;
+        const step = target > 1000 ? target / speed / 10 : target / speed;
+        
+        const updateCount = () => {
+            count += step;
+
+            if (count < target) {
+                // Display the integer part of the count, formatted with commas
+                counter.innerText = Math.ceil(count).toLocaleString();
+                setTimeout(updateCount, 1);
+            } else {
+                // Ensure the final number is the exact target, formatted with commas
+                counter.innerText = target.toLocaleString();
+            }
+        };
+        
+        updateCount();
+    };
+
+    // Observer to run the animation only when the element is visible (Intersection Observer)
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                // Stop observing once the animation has run
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5 // Trigger when 50% of the element is visible
+    });
+
+    counters.forEach(counter => {
+        observer.observe(counter);
+    });
+</script>
+
+</about>
+
+<services>
+    <style>
+  /* ===== SERVICES SECTION ===== */
+  .services {
+    padding: 4rem 1rem;
+    display: flex;
+    justify-content: center;
+    background: #f8fafc;
+  }
+
+  .services-container {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .service-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 1.5rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+  }
+
+  .service-icon {
+    font-size: 3rem;
+    color: #2563eb;
+    margin-bottom: 1rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-card p {
+    font-size: 1rem;
+    color: #334155;
+    line-height: 1.6;
+  }
+
+  /* ===== DESKTOP GRID ===== */
+  @media (min-width: 768px) {
+    .services-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-container {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
+
+<section id="services" class="services">
+  <div class="services-container">
+    <div class="service-card">
+      <div class="service-icon">🦷</div>
+      <h3>General Dentistry</h3>
+      <p>Comprehensive check-ups, fillings, and preventive care for a healthy smile.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">✨</div>
+      <h3>Cosmetic Dentistry</h3>
+      <p>Teeth whitening, veneers, and smile makeovers to boost confidence.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🪥</div>
+      <h3>Teeth Cleaning</h3>
+      <p>Professional cleaning and polishing for optimal oral hygiene.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>Emergency Dental Care</h3>
+      <p>Fast, compassionate care for dental emergencies in Kampala.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">👶</div>
+      <h3>Pediatric Dentistry</h3>
+      <p>Gentle dental care tailored for children and young patients.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🦷</div>
+      <h3>Orthodontics</h3>
+      <p>Braces and aligners to straighten teeth and improve bite alignment.</p>
+    </div>
+  </div>
+</section>
+
+</services>
+
+<testimonials>
+    <style>
+  /* ===== TESTIMONIALS SECTION ===== */
+  .testimonials {
+    padding: 4rem 1rem;
+    background: #f1f5f9;
+    overflow: hidden;
+  }
+
+  .testimonials h2 {
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 3rem;
+  }
+
+  .testimonial-track {
+    display: flex;
+    gap: 2rem;
+    animation: scroll 20s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .testimonial-card {
+    min-width: 280px;
+    max-width: 320px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 1.5rem;
+    padding: 1.75rem 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .testimonial-stars {
+    color: #facc15;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .testimonial-text {
+    font-size: 0.95rem;
+    color: #334155;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-name {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  /* DESKTOP ADJUSTMENTS */
+  @media (min-width: 768px) {
+    .testimonial-track {
+      gap: 2.5rem;
+    }
+
+    .testimonial-card {
+      min-width: 300px;
+    }
+  }
+</style>
+
+<section id="testimonials" class="testimonials">
+  <h2>What Our Patients Say</h2>
+  <div class="testimonial-track" id="testimonial-track">
+    <!-- Card 1 -->
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">
+        Dr. John and his team made my dental cleaning comfortable and easy. Highly recommend!
+      </p>
+      <div class="testimonial-name">Sarah K.</div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">
+        Best dentist in Kampala! The staff is friendly, and I love my new smile.
+      </p>
+      <div class="testimonial-name">Michael L.</div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">
+        Emergency visit was handled quickly and painlessly. Very professional.
+      </p>
+      <div class="testimonial-name">Grace N.</div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">
+        My kids actually enjoy visiting the dentist here! Gentle and caring team.
+      </p>
+      <div class="testimonial-name">James T.</div>
+    </div>
+
+    <!-- Duplicate cards for infinite scroll -->
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">
+        Dr. John and his team made my dental cleaning comfortable and easy. Highly recommend!
+      </p>
+      <div class="testimonial-name">Sarah K.</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">
+        Best dentist in Kampala! The staff is friendly, and I love my new smile.
+      </p>
+      <div class="testimonial-name">Michael L.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Optional: Smooth pause on hover
+  const track = document.getElementById('testimonial-track');
+  track.addEventListener('mouseenter', () => {
+    track.style.animationPlayState = 'paused';
+  });
+  track.addEventListener('mouseleave', () => {
+    track.style.animationPlayState = 'running';
+  });
+</script>
+
+</testimonials>
+
+<contact>
+<style>
+  /* ===== STATIC CONTACT SECTION ===== */
+  .contact {
+    padding: 4rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f8fafc;
+  }
+
+  .contact-card {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2.5rem 2rem;
+
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 2rem;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .contact h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact p {
+    font-size: 1rem;
+    color: #334155;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact a {
+    color: #2563eb;
+  }
+
+  .contact iframe {
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+    border: 0;
+    border-radius: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  /* DESKTOP LAYOUT */
+  @media(min-width:768px){
+    .contact-card {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+
+<section id="contact" class="contact">
+  <div class="contact-card">
+    <h2>Contact & Visit Us</h2>
+    <p><strong>Address:</strong> 123 Smile Street, Kampala, Uganda</p>
+    <p><strong>Phone:</strong> <a href="tel:+256700000000">+256 700 000 000</a></p>
+    <p><strong>Email:</strong> <a href="mailto:info@smilecare.ug">info@smilecare.ug</a></p>
+    <p><strong>Office Hours:</strong> Mon-Sat: 8:00am – 12:00pm</p>
+
+    <!-- Google Maps Embed -->
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.5000000000005!2d32.5825!3d0.3476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbd0000000000%3A0x123456789abcdef!2sSmileCare%20Dental!5e0!3m2!1sen!2sug!4v0000000000000"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+</contact>
+
+<footer>
+    <style>
+  /* ===== SIMPLE FOOTER ===== */
+  .footer {
+    padding: 3rem 1rem;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    max-width: 1200px;
+    margin: 2rem auto;
+    text-align: center;
+  }
+
+  .footer h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 1rem;
+  }
+
+  .footer p {
+    font-size: 1rem;
+    color: #334155;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer a {
+    color: #2563eb;
+    text-decoration: none;
+  }
+
+  .footer iframe {
+    width: 100%;
+    max-width: 600px;
+    height: 250px;
+    border: 0;
+    border-radius: 1rem;
+    margin: 1rem 0 0;
+  }
+</style>
+
+
+
+</footer>
+
+
+</body>
+</html>

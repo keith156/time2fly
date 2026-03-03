@@ -120,7 +120,7 @@ const DestinationDetail: React.FC = () => {
         return (
             <div className="pt-24 min-h-screen flex flex-col items-center justify-center bg-slate-50 px-4">
                 <Compass className="text-slate-200 mb-6" size={80} />
-                <h1 className="font-black text-slate-900 uppercase tracking-tighter mb-4 text-5xl md:text-[66px] leading-none">Destination Not Found</h1>
+                <h1 className="text-h1 text-slate-900">Destination Not Found</h1>
                 <p className="text-slate-500 mb-8 max-w-md text-center">Sorry, we couldn't find the destination you're looking for.</p>
                 <button onClick={() => navigate('/destinations')} className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest text-xs">Back to Destinations</button>
             </div>
@@ -151,7 +151,7 @@ const DestinationDetail: React.FC = () => {
                             <ArrowLeft size={14} className="mr-2 group-hover:-translate-x-2 transition-transform" />
                             All Destinations
                         </button>
-                        <h1 className="font-black text-white mb-4 uppercase tracking-tighter leading-none animate-fade-in-up text-5xl md:text-[66px]">
+                        <h1 className="text-h1 text-white mb-4 animate-fade-in-up">
                             {destination.name}
                         </h1>
                     </div>
@@ -200,7 +200,7 @@ const DestinationDetail: React.FC = () => {
                                     <div className="w-12 h-12 bg-amber-500 text-white rounded-xl flex items-center justify-center mb-4 shadow-xl shadow-amber-500/30">
                                         {getIcon(item.title)}
                                     </div>
-                                    <h4 className="text-2xl md:text-2xl font-black text-white uppercase tracking-tighter mb-3 leading-tight">{item.title}</h4>
+                                    <h4 className="text-h3 text-white mb-3">{item.title}</h4>
                                     <p className="text-slate-100/90 text-sm font-medium leading-relaxed line-clamp-3 text-left">
                                         {item.content}
                                     </p>
@@ -212,14 +212,14 @@ const DestinationDetail: React.FC = () => {
             )}
 
             {/* Main Content Area */}
-            <section className="py-24 px-6 bg-slate-50 overflow-hidden">
+            <section className="py-12 md:py-16 px-6 bg-slate-50 overflow-hidden">
                 <div className="max-w-4xl mx-auto bg-white p-12 md:p-24 rounded-[60px] shadow-sm border border-slate-100">
                     <div className="prose prose-lg max-w-none">
                         <div className="flex items-center gap-4 mb-12">
                             <div className="h-[2px] w-12 bg-amber-500"></div>
-                            <p className="text-slate-900 font-black uppercase tracking-[0.2em] text-xs">Deep Dive: {destination.name}</p>
+                            <p className="text-caption text-slate-900">Deep Dive: {destination.name}</p>
                         </div>
-                        <div className="text-slate-600 text-xl font-medium leading-relaxed whitespace-pre-wrap selection:bg-amber-100">
+                        <div className="text-body-lg text-slate-600 whitespace-pre-wrap selection:bg-amber-100">
                             {renderFormattedText(mainContent) || "More information about this destination will be available soon."}
                         </div>
                     </div>
@@ -251,7 +251,7 @@ const DestinationDetail: React.FC = () => {
                                             <Ticket size={14} className="mr-2" />
                                             Selected Voyage
                                         </div>
-                                        <h3 className="font-black text-slate-900 uppercase tracking-tighter mb-4 text-2xl md:text-3xl">{pkg.destination}</h3>
+                                        <h3 className="text-h3 text-slate-900 mb-4">{pkg.destination}</h3>
                                         <div className="flex items-center justify-between pt-6 border-t border-slate-50">
                                             <div className="flex items-baseline">
                                                 <span className="text-sm font-bold text-slate-400 mr-1">$</span>
@@ -276,7 +276,7 @@ const DestinationDetail: React.FC = () => {
                         <img src={destination.image} className="w-full h-full object-cover" alt="" />
                     </div>
                     <div className="relative z-10">
-                        <h2 className="font-black text-white px-4 mb-8 uppercase tracking-tighter leading-none text-4xl md:text-5xl">
+                        <h2 className="text-h2 text-white mb-8">
                             Ready to <span className="text-amber-500">Visit {destination.name}</span>?
                         </h2>
                         <Link

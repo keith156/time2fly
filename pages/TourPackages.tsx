@@ -76,19 +76,12 @@ const TourPackages: React.FC = () => {
             <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
             <div className="absolute inset-0 flex items-center justify-center p-6">
               <div className="max-w-4xl w-full text-center">
-                <button
-                  onClick={() => setSelectedPackage(null)}
-                  className="mb-8 inline-flex items-center text-amber-400 font-black uppercase tracking-widest text-xs hover:text-white transition-colors group"
-                >
-                  <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-2 transition-transform" />
-                  Back to Destinations
-                </button>
                 <div className="flex items-center justify-center space-x-2 mb-6">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={18} fill={i < Math.floor(selectedPackage.rating) ? "#f59e0b" : "none"} className={i < Math.floor(selectedPackage.rating) ? "text-amber-500" : "text-white/30"} />
                   ))}
                 </div>
-                <h1 className="font-black text-white uppercase tracking-tighter leading-none mb-6 text-5xl md:text-[66px]">
+                <h1 className="text-h1 text-white mb-6">
                   {selectedPackage.destination}
                 </h1>
                 <div className="flex flex-wrap items-center justify-center gap-8 text-white/90 text-sm font-black uppercase tracking-widest">
@@ -111,18 +104,18 @@ const TourPackages: React.FC = () => {
           </div>
 
           {/* Main Content Layout */}
-          <div className="max-w-7xl mx-auto px-6 py-24">
+          <div className="max-w-7xl mx-auto px-6 section-spacing">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-20">
               {/* Left Column: Details & Itinerary */}
               <div className="lg:col-span-2 space-y-16">
                 <section>
-                  <h2 className="font-black text-slate-900 uppercase tracking-tighter mb-8 border-b-4 border-amber-500 w-fit pb-2 text-4xl md:text-5xl">The Experience</h2>
-                  <p className="text-slate-600 text-2xl font-medium leading-relaxed mb-10 italic">
+                  <h2 className="text-h2 text-slate-900 mb-8 border-b-4 border-amber-500 w-fit pb-2">The Experience</h2>
+                  <p className="text-body-lg text-slate-600 mb-10 italic">
                     {selectedPackage.description}
                   </p>
                   <div className="prose prose-slate prose-xl max-w-none">
                     <div className="text-slate-700 leading-relaxed font-medium space-y-8 text-lg whitespace-pre-wrap bg-slate-50 p-10 rounded-[40px] border border-slate-100 shadow-sm">
-                      <h3 className="text-slate-900 font-black uppercase tracking-widest mb-4 text-2xl md:text-3xl">Detailed Itinerary</h3>
+                      <h3 className="text-h3 text-slate-900 mb-4">Detailed Itinerary</h3>
                       {selectedPackage.itinerary || `
                         Day 1: Arrival & Welcome Dinner
                         Upon your arrival at the airport, our representative will greet you and transfer you to your premium hotel. Spend the afternoon at leisure before a gourmet welcome dinner.
@@ -152,17 +145,17 @@ const TourPackages: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
                     <Shield className="text-amber-500 mb-4" size={32} />
-                    <h4 className="font-black uppercase tracking-tight mb-2">Full Insurance</h4>
+                    <h4 className="text-caption text-slate-900 mb-2">Full Insurance</h4>
                     <p className="text-slate-500 text-sm font-medium">Comprehensive travel coverage included.</p>
                   </div>
                   <div className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
                     <CreditCard className="text-amber-500 mb-4" size={32} />
-                    <h4 className="font-black uppercase tracking-tight mb-2">Best Price</h4>
+                    <h4 className="text-caption text-slate-900 mb-2">Best Price</h4>
                     <p className="text-slate-500 text-sm font-medium">Guaranteed value for luxury services.</p>
                   </div>
                   <div className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
                     <Send className="text-amber-500 mb-4" size={32} />
-                    <h4 className="font-black uppercase tracking-tight mb-2">Expert Guide</h4>
+                    <h4 className="text-caption text-slate-900 mb-2">Expert Guide</h4>
                     <p className="text-slate-500 text-sm font-medium">Certified multilingual local experts.</p>
                   </div>
                 </div>
@@ -171,11 +164,11 @@ const TourPackages: React.FC = () => {
               {/* Right Column: Booking Card */}
               <div className="lg:col-span-1">
                 <div className="sticky top-28 bg-slate-950 text-white rounded-[40px] p-10 shadow-2xl border border-white/10">
-                  <span className="text-amber-500 font-black uppercase tracking-widest text-[10px] block mb-4">Premium Package</span>
+                  <span className="text-caption text-amber-500 block mb-4">Premium Package</span>
                   <div className="mb-8">
                     <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-1">Starting From</p>
                     <div className="flex items-baseline">
-                      <span className="text-5xl font-black text-white tracking-tighter">${selectedPackage.price}</span>
+                      <span className="text-h1 text-white">{selectedPackage.price}</span>
                       <span className="text-slate-400 font-bold text-sm ml-2">/ Guest</span>
                     </div>
                   </div>
@@ -228,7 +221,7 @@ const TourPackages: React.FC = () => {
 
   return (
     <div className="pt-24 min-h-screen bg-slate-50">
-      <div className="bg-slate-950 py-24 px-4 relative overflow-hidden h-[400px] flex items-center justify-center">
+      <div className="bg-slate-950 pt-32 section-spacing px-4 relative overflow-hidden h-auto min-h-[400px] flex items-center justify-center">
         <div className="absolute inset-0 opacity-40 pointer-events-none">
           <img src={getCategoryBanner(selectedCategory)} className="w-full h-full object-cover transition-all duration-[2000ms]" alt="Background" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/60" />
@@ -237,7 +230,7 @@ const TourPackages: React.FC = () => {
           <span className="text-amber-500 font-black tracking-[0.4em] uppercase text-xs mb-6 block drop-shadow-lg">
             {selectedCategory || 'World Expeditions'}
           </span>
-          <h1 className="font-black text-white mb-6 uppercase tracking-tighter leading-none drop-shadow-2xl text-5xl md:text-[66px]">
+          <h1 className="text-h1 text-white mb-6">
             {selectedCategory ? `${selectedCategory}` : 'Curated Journeys'}
           </h1>
         </div>
@@ -245,13 +238,13 @@ const TourPackages: React.FC = () => {
 
       {/* Category Breakdown Section (Shown when a category IS selected) */}
       {selectedCategory && (
-        <div className="bg-white py-16 lg:py-24 border-b border-slate-100 overflow-hidden">
+        <div className="bg-white pt-16 pb-4 md:pt-24 md:pb-6 border-b border-slate-100 overflow-hidden">
           <div className="max-w-7xl mx-auto px-6">
             <div className={`grid grid-cols-1 ${selectedCategory === 'Safari Adventures' || selectedCategory === 'Religious / Pilgrimage Travel' ? 'lg:grid-cols-1 gap-16' : 'lg:grid-cols-2 gap-12 lg:gap-20'} items-center`}>
 
               {/* Text Content */}
               <div className={`${selectedCategory === 'Safari Adventures' ? 'lg:w-2/3 mx-auto text-center' : ''}`}>
-                <h2 className={`text-4xl lg:text-5xl font-black text-slate-900 uppercase tracking-tighter mb-8 ${selectedCategory === 'Safari Adventures' ? 'mx-auto' : ''}`}>{selectedCategory}</h2>
+                <h2 className={`text-h2 text-slate-900 mb-8 ${selectedCategory === 'Safari Adventures' ? 'mx-auto text-center' : ''}`}>{selectedCategory}</h2>
                 <div className={`space-y-6 text-slate-600 font-medium leading-relaxed text-lg ${selectedCategory === 'Safari Adventures' ? 'text-justify lg:text-center' : ''}`}>
                   {selectedCategory === 'Holiday Escapes' && (
                     <>
@@ -395,13 +388,13 @@ const TourPackages: React.FC = () => {
       )}
 
       {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto px-6 py-24">
+      <div className={`max-w-7xl mx-auto px-6 ${selectedCategory ? 'pb-24 pt-4' : 'section-spacing'}`}>
         {!selectedCategory ? (
           /* Category Cards - Shown when NO category is selected */
-          <div className="space-y-16">
+          <div className="space-y-12">
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="font-black text-slate-900 uppercase tracking-tighter mb-4 text-[30px]">Explore by Experience</h2>
-              <p className="text-slate-500 font-medium text-lg italic">"Not just destinations, but journeys that define you."</p>
+              <h2 className="text-h2 text-slate-900 mb-4">Explore by Experience</h2>
+              <p className="text-body-lg text-slate-500 italic">"Not just destinations, but journeys that define you."</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -421,8 +414,8 @@ const TourPackages: React.FC = () => {
                   <img src={cat.img} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                   <div className="absolute inset-0 p-10 flex flex-col justify-end items-center text-center">
-                    <h3 className="font-black text-white uppercase tracking-tighter mb-2 transform group-hover:-translate-y-2 transition-transform duration-500 text-2xl md:text-3xl">{cat.name}</h3>
-                    <p className="text-white/60 font-medium text-sm tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:-translate-y-2">{cat.desc}</p>
+                    <h3 className="text-h3 text-white mb-2 transform group-hover:-translate-y-2 transition-transform duration-500">{cat.name}</h3>
+                    <p className="text-caption text-white/60 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:-translate-y-2">{cat.desc}</p>
                     <div className="mt-6 w-12 h-1 bg-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></div>
                   </div>
                 </div>
@@ -431,17 +424,8 @@ const TourPackages: React.FC = () => {
           </div>
         ) : (
           /* Filtered Packages View - Shown when a category IS selected */
-          <div className="space-y-12">
-            <div className="flex items-center justify-between border-b-2 border-slate-100 pb-8">
-              <button
-                onClick={() => setSelectedCategory(null)}
-                className="flex items-center gap-2 text-slate-400 font-black uppercase tracking-widest text-xs hover:text-[#0000ff] transition-colors"
-              >
-                <ArrowLeft size={16} /> View All Categories
-              </button>
-            </div>
-
-            <div className="space-y-32">
+          <div className="">
+            <div className="space-y-20">
               {filteredPackages.map((pkg, idx) => {
                 const isEven = idx % 2 === 0;
                 const isThird = idx % 3 === 0;
@@ -455,7 +439,7 @@ const TourPackages: React.FC = () => {
                 ];
 
                 return (
-                  <div key={pkg.id} className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-20 items-center`}>
+                  <div key={pkg.id} className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-10 lg:gap-16 items-center`}>
 
                     {/* Image Column - heavily customized based on index */}
                     <div className="w-full lg:w-1/2 relative group">

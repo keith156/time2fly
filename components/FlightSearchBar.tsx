@@ -291,11 +291,11 @@ const FlightSearchBar: React.FC = () => {
     const panelCls = "bg-slate-900 border border-white/10 rounded-2xl shadow-2xl shadow-black/60";
 
     return (
-        <section id="flight-search" style={{ backgroundColor: '#000033' }} className="py-6 px-4 scroll-mt-24">
-            <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-6">
+        <section id="flight-search" style={{ backgroundColor: '#000033' }} className="py-4 px-4 scroll-mt-24">
+            <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-5">
 
                 {/* Heading */}
-                <div className="flex items-center gap-2 mb-5">
+                <div className="flex items-center gap-2 mb-3">
                     <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
                         <Plane size={16} className="text-white" />
                     </div>
@@ -304,7 +304,7 @@ const FlightSearchBar: React.FC = () => {
                 </div>
 
                 {/* Controls row */}
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-5 pb-4 border-b border-slate-100">
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-4 pb-3 border-b border-slate-100">
 
                     {/* Trip type */}
                     <div className="relative">

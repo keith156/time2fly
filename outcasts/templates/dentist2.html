@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Dentist - Header Demo</title>
+	<!-- Poppins Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--space-xs: 6px;
+			--space-sm: 12px;
+			--space-md: 20px;
+			--space-lg: 36px;
+			--radius: 14px;
+			--color-bg: #f7fbff;
+			--color-white: #ffffff;
+			--primary: #1f6feb; /* dentist blue */
+			--primary-900: #123e8b;
+			--glass-bg: rgba(255,255,255,0.48);
+			--glass-border: rgba(255,255,255,0.45);
+			--shadow: 0 8px 30px rgba(18,62,139,0.08);
+		}
+
+		/* Global layout + typography */
+		html,body { height:100%; }
+		body {
+			margin:0;
+			font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+			background: linear-gradient(180deg, var(--color-bg) 0%, #eaf4ff 100%);
+			color: #07324a;
+			-webkit-font-smoothing:antialiased;
+			-moz-osx-font-smoothing:grayscale;
+			line-height:1.35;
+			overflow-x: hidden;
+		}
+
+		.container {
+			width:100%;
+			max-width:1200px;
+			margin:0 auto;
+			padding:0 var(--space-md);
+		}
+
+		/* Glassmorphism helper */
+		.glass {
+			background: var(--glass-bg);
+			border: 1px solid var(--glass-border);
+			box-shadow: var(--shadow);
+			backdrop-filter: blur(8px) saturate(120%);
+			border-radius: var(--radius);
+		}
+
+		/* Header */
+		.site-header {
+			width:100%;
+			position:sticky;
+			top:0;
+			z-index:1200;
+			padding: calc(var(--space-sm) + 4px) 0;
+			display:flex;
+			align-items:center;
+			transition: all 250ms ease;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		.header-inner {
+			display:flex;
+			align-items:center;
+			justify-content:space-between;
+			gap: var(--space-md);
+			width:100%;
+		}
+
+		.site-logo {
+			display:flex;
+			align-items:center;
+			gap: 10px;
+		}
+
+		/* ABOUT SECTION */
+			opacity: 0;
+			pointer-events:none;
+			transition:opacity 180ms ease, transform 180ms ease;
+			border-radius: 12px;
+			background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(248,252,255,0.9));
+			box-shadow: 0 14px 40px rgba(8,44,83,0.06);
+		}
+
+		.mobile-nav-panel.is-open {
+			transform:none;
+			opacity: 1;
+			pointer-events:auto;
+		}
+
+		.mobile-nav-panel .nav-link {
+			width:100%;
+			display:inline-flex;
+			padding:12px 16px;
+			border-radius:10px;
+		}
+
+		/* Desktop layout adjustments */
+		@media (min-width: 900px) {
+			.site-header { padding: calc(var(--space-sm) + 6px) 0; }
+			.nav-toggle { display:none; }
+			.mobile-nav-panel { position:static; opacity: 1; transform:none; pointer-events:auto; background:transparent; box-shadow:none; padding:0; gap:0; flex-direction:row; align-items:center; }
+			.mobile-nav-panel .nav-link { padding:8px 12px; }
+		}
+
+		/* Accessibility focus styles */
+		.nav-link:focus-visible { box-shadow: 0 0 0 3px rgba(31,111,235,0.12); }
+			/* Hero styles */
+			.hero {
+				min-height: 68vh;
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				position:relative;
+				padding: var(--space-lg) 0; /* outer spacing preserved */
+				background-image: url('benyamin-bohlouli-LQ698TTvGpA-unsplash.jpg');
+				background-size: cover; /* ensures image covers the full hero region */
+				background-position: center center;
+				background-repeat: no-repeat;
+			/* Full-bleed: override container centering so background reaches screen edges */
+			left: 50%;
+			right: 50%;
+			margin-left: -50vw;
+			margin-right: -50vw;
+			width: 100vw;
+			.hero-card {
+				position:relative;
+				z-index:1;
+				width:100%;
+				max-width: 980px;
+				margin: 0 auto;
+				padding: var(--space-lg);
+				display:flex;
+				align-items:center;
+				gap: var(--space-md);
+				justify-content:center;
+			}
+
+			.hero-panel {
+				flex:1 1 520px;
+				display:flex;
+				align-items:center;
+				justify-content:center;
+			}
+
+			.hero-card .glass {
+				padding: var(--space-lg);
+				display:flex;
+				flex-direction:column;
+				align-items:center;
+				gap: var(--space-sm);
+				text-align:center;
+			}
+
+			.hero-title {
+				font-size:1.9rem;
+				font-weight:700;
+				color: var(--primary-900);
+				margin:0 0 6px 0;
+			}
+
+			.hero-subtitle {
+				font-size:1rem;
+				color: #093544;
+				margin:0 0 var(--space-md) 0;
+				max-width: 52ch;
+			}
+
+.hero-actions { display:flex; gap: var(--space-sm); align-items:center; }
+
+		.btn-primary {
+			background: linear-gradient(90deg, var(--primary) 0%, #6fb1ff 100%);
+			color:#fff;
+			border:0;
+			padding: 10px 16px;
+			border-radius:10px;
+			text-decoration:none;
+			font-weight:600;
+			box-shadow: 0 10px 30px rgba(31,111,235,0.15);
+		}
+
+		.btn-primary:hover { transform: translateY(-3px); }
+
+		.hero-icon {
+			width:82px;
+			height:82px;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+			border-radius: 50%;
+			border:1px solid rgba(255,255,255,0.7);
+			box-shadow: 0 8px 20px rgba(18,62,139,0.08);
+		}
+
+		.hero-icon svg { width:44px; height:44px; }
+
+		/* WhatsApp-style rectangular button (text-only) with animated green gradient */
+		.btn-whatsapp-rect {
+			display:inline-flex;
+			align-items:center;
+			justify-content:center;
+			padding: 10px 14px;
+			border-radius: 12px;
+			color: #fff;
+			font-weight: 700;
+			border: 0;
+			text-decoration: none;
+			background: linear-gradient(90deg,#bff5da 0%, #88e0a6 50%, #25D366 100%);
+			background-size: 200% 200%;
+			box-shadow: 0 10px 30px rgba(37,211,102,0.12);
+			transition: transform 160ms ease, box-shadow 160ms ease;
+			animation: gradientShift 6s linear infinite;
+		}
+
+		@keyframes gradientShift {
+			0% { background-position: 0% 50%; }
+			50% { background-position: 100% 50%; }
+			100% { background-position: 0% 50%; }
+		}
+
+		.btn-whatsapp-rect:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(37,211,102,0.18); }
+
+		/* Small label not needed; text is inside the button */
+		.btn-whatsapp-label { display:none; }
+
+
+		@media (min-width:900px) {
+			.btn-whatsapp-label { display:none; }
+		}
+
+			/* Desktop layout */
+			@media (min-width:900px) {
+				.hero-card { display:flex; align-items:center; justify-content:space-between; gap:40px; }
+				.hero-panel { align-items:flex-start; justify-content:flex-start; }
+				.hero-card .glass { align-items:flex-start; text-align:left; }
+				.hero-title { font-size:2.6rem; }
+				.hero-subtitle { font-size:1.05rem; }
+			}
+
+			/* ABOUT SECTION */
+			.about-section { padding: var(--space-lg) 0; }\n\n\t\t\t.about-card {\n\t\t\t\tdisplay:flex;\n\t\t\t\tflex-direction:column;\n\t\t\t\tgap: var(--space-lg);\n\t\t\t\talign-items:center;\n\t\t\t\tpadding: 22px;\n\t\t\t\tborder-radius: 18px;\n\t\t\t\tbackground: linear-gradient(135deg, rgba(255,255,255,0.62), rgba(255,255,255,0.06));\n\t\t\t\tborder: 1px solid rgba(255,255,255,0.45);\n\t\t\t\tbox-shadow: 0 10px 30px rgba(14,30,37,0.06);\n\t\t\t\toverflow: hidden;\n\t\t\t\tposition: relative;\n\t\t\t}\n\n\t\t\t.about-card::before {\n\t\t\t\tcontent: "";\n\t\t\t\tposition: absolute;\n\t\t\t\tright: -120px;\n\t\t\t\ttop: -60px;\n\t\t\t\twidth: 320px;\n\t\t\t\theight: 320px;\n\t\t\t\tbackground: radial-gradient(circle at 30% 30%, rgba(108,64,255,0.12), transparent 35%), radial-gradient(circle at 70% 70%, rgba(31,111,235,0.06), transparent 20%);\n\t\t\t\tfilter: blur(30px);\n\t\t\t\tpointer-events: none;\n\t\t\t\tz-index: 0;\n\t\t\t}\n\n\t\t\t.about-card > * { position: relative; z-index: 2; }\n\n\t\t\t.about-image { width:100%; max-width: 480px; border-radius: 14px; overflow:hidden; box-shadow: 0 6px 30px rgba(12,24,40,0.06); }\n\t\t\t.about-image img { width:100%; height:100%; display:block; object-fit:cover; transition: transform 300ms ease; }\n\t\t\t.about-image:hover img { transform: scale(1.05); }\n\n\t\t\t.about-content { flex:1; display:flex; flex-direction:column; gap:14px; align-items:flex-start; text-align:left; }\n\n\t\t\t.about-headline { font-size:1.7rem; color:var(--primary-900); margin-bottom:6px; }\n\n\t\t\t.about-intro { color:#093544; font-size:1rem; max-width:64ch; line-height:1.6; }\n\n\t\t\t.about-features { display:grid; grid-template-columns:1fr; gap:12px; width:100%; margin-top:12px; }\n\n\t\t\t.feature-card { display:flex; gap:12px; align-items:center; padding:12px; border-radius:12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }\n\n\t\t\t.feature-icon { width:46px; height:46px; display:flex; align-items:center; justify-content:center; border-radius:10px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); color:#fff; }\n\n\t\t\t.stats-grid { display:grid; grid-template-columns: 1fr; gap:12px; width:100%; margin-top: var(--space-md); }\n\n\t\t\t.stat-card { display:flex; gap: 12px; align-items:center; padding: 12px; border-radius:12px; background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); }\n\n\t\t\t.stat-icon { width:48px; height:48px; display:flex; align-items:center; justify-content:center; border-radius:10px; background: rgba(255,255,255,0.96); border: 1px solid rgba(255,255,255,0.6); color:var(--primary-900); }\n\n\t\t\t.stat-number { font-weight:800; color:var(--primary-900); font-size:1.4rem; }\n\n\t\t\t.stat-label { color:#234b56; font-size:0.95rem; }\n\n\t\t\t.hero-actions { margin-top: var(--space-md); display:flex; gap:var(--space-sm); }\n\n\t\t\t@media (min-width:900px) {\n\t\t\t\tabout-card { flex-direction: row; align-items:center; gap: var(--space-lg); padding: 32px; }\n\t\t\t\tabout-image { max-width:540px; }\n\t\t\t\tabout-features { grid-template-columns: repeat(2, 1fr); }\n\t\t\t\tstats-grid { grid-template-columns: repeat(3, 1fr); }\n\t\t\t}
+
+	</style>
+</head>
+<body>
+
+	<header class="site-header glass">
+		<div class="container header-inner">
+			<a href="#" class="site-logo" aria-label="Dentist Logo">
+				<!-- Simple tooth-ish logo with line style-->
+				<svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+					<path d="M12 2c1.5 0 3 1 4 3.2 1 2 2 3.5 2 6 0 4-2.5 7-6 8-3.5-1-6-4-6-8 0-2.5 1-4 2-6C9 3 10.5 2 12 2z" stroke="var(--primary-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+				DentalCraft
+			</a>
+
+			<div class="nav">
+				<button class="nav-toggle" aria-controls="site-navigation" aria-expanded="false" aria-label="Toggle navigation">
+					<svg viewBox="0 0 100 80" width="24" height="20" aria-hidden="true" focusable="false">
+						<rect width="100" height="8" rx="8" fill="var(--primary-900)"></rect>
+						<rect y="30" width="100" height="8" rx="8" fill="var(--primary-900)"></rect>
+						<rect y="60" width="100" height="8" rx="8" fill="var(--primary-900)"></rect>
+					</svg>
+				</button>
+
+				<nav id="site-navigation" class="mobile-nav-panel">
+					<ul class="nav-links" role="menubar" aria-label="Main navigation">
+						<li role="none"><a role="menuitem" class="nav-link" href="#home">Home</a></li>
+						<li role="none"><a role="menuitem" class="nav-link" href="#about">About</a></li>
+						<li role="none"><a role="menuitem" class="nav-link" href="#services">Services</a></li>
+						<li role="none"><a role="menuitem" class="nav-link" href="#treatments">Treatments</a></li>
+						<li role="none"><a role="menuitem" class="nav-link" href="#gallery">Gallery</a></li>
+						<li role="none"><a role="menuitem" class="nav-link" href="#contact">Contact</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+
+  <main class="container content-section">
+		<section class="hero" aria-label="Hero - Best dental care">
+			<div class="hero-card">
+				<div class="hero-icon">
+					<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+						<path d="M12 2c1.5 0 3 1 4 3.2 1 2 2 3.5 2 6 0 4-2.5 7-6 8-3.5-1-6-4-6-8 0-2.5 1-4 2-6C9 3 10.5 2 12 2z" stroke="var(--primary-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</div>
+
+				<div class="hero-panel">
+					<div class="glass">
+						<h1 class="hero-title">Bright Smiles, Healthy Lives</h1>
+						<p class="hero-subtitle">Experienced dental care in a gentle, modern environment. We restore smiles and confidence with trusted treatments and compassionate care.</p>
+						<div class="hero-actions">
+							<a href="#contact" class="btn-primary">Book Appointment</a>
+							<a href="https://wa.me/" class="btn-whatsapp-rect" target="_blank" rel="noopener" aria-label="Chat Now">Chat Now</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ABOUT SECTION -->
+			<section id="about" class="about-section container" aria-labelledby="about-headline">
+				<div class="about-card glass" role="region">
+					<div class="about-image" aria-hidden="true">
+						<img src="https://images.unsplash.com/photo-1579370318442-9aab5ca19b6f?auto=format&fit=crop&w=1200&q=60" alt="Dental team smiling in modern clinic"/>
+					</div>
+					<div class="about-content">
+						<h2 id="about-headline" class="about-headline">Gentle Care, Brilliant Smiles</h2>
+						<p class="about-intro">At DentalCraft we combine modern dentistry with a warm, patient-centered approach. Our team uses advanced techniques and a gentle touch to help you maintain healthy, confident smiles.</p>
+						<div class="about-features">
+							<div class="feature-card glass">
+								<div class="feature-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M12 2c1.5 0 3 1 4 3.2 1 2 2 3.5 2 6 0 4-2.5 7-6 8-3.5-1-6-4-6-8 0-2.5 1-4 2-6z" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+								</div>
+								<div>
+									<strong>Comfort-Focused</strong>
+									<div class="small">Patient comfort & clear communication on every visit.</div>
+								</div>
+							</div>
+							<div class="feature-card glass">
+								<div class="feature-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM2 20a8 8 0 0116 0H2z" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+								</div>
+								<div>
+									<strong>Advanced Treatments</strong>
+									<div class="small">Cosmetic & restorative care using modern techniques.</div>
+								</div>
+							</div>
+						</div>
+						<div class="stats-grid">
+							<div class="stat-card glass">
+								<div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M12 2v8l6 6" stroke="var(--primary-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+								<div>
+									<div class="stat-number" data-target="10" data-suffix="+">0</div>
+									<div class="stat-label">Years of Care</div>
+								</div>
+							</div>
+							<div class="stat-card glass">
+								<div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM2 20a8 8 0 0116 0H2z" stroke="var(--primary-900)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+								<div>
+									<div class="stat-number" data-target="2000" data-suffix="+">0</div>
+									<div class="stat-label">Happy Patients</div>
+								</div>
+							</div>
+							<div class="stat-card glass">
+								<div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M4 7h16M6 21V7a2 2 0 012-2h8a2 2 0 012 2v14" stroke="var(--primary-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+								<div>
+									<div class="stat-number" data-target="5">0</div>
+									<div class="stat-label">Dental Specialists</div>
+								</div>
+							</div>
+						</div>
+						<div class="hero-actions">
+							<a href="#contact" class="btn-primary">Book Appointment</a>
+							<a class="btn-ghost" href="#services">Our Services</a>
+				</div>
+			</div>
+		</section>
+
+		<section aria-labelledby="demo-headline" class="mt-lg">
+			<h2 id="demo-headline">Header Demo (Dentist)</h2>
+			<p>Use this header and hero as a starting point for your dentist website. The Poppins font, blue/white palette, and glassmorphism are global design rules.</p>
+		</section>
+	</main>
+
+	<script>
+		(function () {
+			const navToggle = document.querySelector('.nav-toggle');
+			const navPanel = document.querySelector('.mobile-nav-panel');
+			const navLinks = document.querySelectorAll('.nav-link');
+
+			if (!navToggle || !navPanel) return;
+
+			navToggle.addEventListener('click', function () {
+				const isOpen = navPanel.classList.toggle('is-open');
+				navToggle.setAttribute('aria-expanded', String(isOpen));
+			});
+
+			// Close panel when a nav link is clicked (mobile only)
+			navLinks.forEach(link => link.addEventListener('click', () => {
+				if (navPanel.classList.contains('is-open')) {
+					navPanel.classList.remove('is-open');
+					navToggle.setAttribute('aria-expanded', 'false');
+				}
+			}));
+		
+		  // Animate stat counters when in view
+		  const statEls = document.querySelectorAll('.stat-number');
+		  function animateStat(el, duration = 1400) {
+			const target = parseInt(el.getAttribute('data-target') || '0', 10);
+			const suffix = el.getAttribute('data-suffix') || '';
+			let start = 0;
+			const startTime = performance.now();
+			function step(now) {
+				const progress = Math.min((now - startTime) / duration, 1);
+				const value = Math.round(progress * target);
+				el.textContent = value + suffix;
+				if (progress < 1) requestAnimationFrame(step);
+			}
+			requestAnimationFrame(step);
+		  }
+
+		  const aboutSection = document.querySelector('.about-section');
+		  if (aboutSection && statEls.length) {
+			const obs = new IntersectionObserver((entries, observer) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						statEls.forEach(el => animateStat(el));
+						observer.disconnect();
+					}
+				});
+			}, { threshold: 0.3 });
+			obs.observe(aboutSection);
+		  }
+		})();
+	</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

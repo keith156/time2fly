@@ -144,7 +144,7 @@ const ServiceCard: React.FC<{
         transitionDelay: `${index * 80}ms`,
         borderColor: 'rgba(255,255,255,0.08)',
       }}
-      className={`group relative bg-white/5 backdrop-blur-sm border rounded-[32px] p-8 flex flex-col gap-5 overflow-hidden transition-all duration-700 hover:bg-white/10 hover:scale-[1.02] hover:shadow-2xl cursor-default
+      className={`group relative bg-white/5 backdrop-blur-sm border rounded-[32px] p-6 flex flex-col gap-5 overflow-hidden transition-all duration-700 hover:bg-white/10 hover:scale-[1.02] hover:shadow-2xl cursor-default
         ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       {/* Hover glow */}
@@ -171,13 +171,13 @@ const ServiceCard: React.FC<{
 
       {/* Text */}
       <div className="flex-1">
-        <p className="text-[10px] font-black uppercase tracking-[0.25em] mb-1" style={{ color: accent }}>
+        <p className="text-caption mb-1" style={{ color: accent }}>
           {service.subtitle}
         </p>
-        <h3 className="font-black text-white uppercase tracking-tight leading-tight mb-3 text-2xl md:text-3xl">
+        <h3 className="text-h3 text-white mb-3">
           {service.title}
         </h3>
-        <p className="text-slate-400 text-sm font-medium leading-relaxed">
+        <p className="text-body text-slate-400">
           {service.description}
         </p>
       </div>
@@ -205,7 +205,7 @@ const Services: React.FC = () => {
     <div className="min-h-screen bg-[#0a0a0f]">
 
       {/* ── Hero / Tab Switcher ─────────────────────────────────────────── */}
-      <section className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden pt-24 pb-0">
+      <section className="relative min-h-[55vh] flex flex-col items-center justify-center overflow-hidden pt-28 pb-0">
 
         {/* Animated background image — fades between tabs */}
         {categories.map(c => (
@@ -231,7 +231,7 @@ const Services: React.FC = () => {
         {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <span
-            className="inline-block text-xs md:text-sm font-black uppercase tracking-widest mb-6 px-4 py-2 rounded-full border"
+            className="text-caption mb-6 px-4 py-2 rounded-full border inline-block"
             style={{ color: cat.accentColor, borderColor: `${cat.accentColor}44`, background: `${cat.accentColor}11` }}
           >
             {cat.tagline}
@@ -239,12 +239,12 @@ const Services: React.FC = () => {
 
           <h1
             key={activeTab}
-            className="font-black text-white uppercase tracking-tighter leading-none mb-6 whitespace-pre-line animate-fade-in-up text-5xl md:text-[66px]"
+            className="text-h1 text-white mb-6 whitespace-pre-line animate-fade-in-up"
           >
             {cat.headline}
           </h1>
 
-          <p className="text-slate-300 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed mb-12">
+          <p className="text-body-lg text-slate-300 max-w-2xl mx-auto mb-12">
             {cat.description}
           </p>
 
@@ -276,7 +276,7 @@ const Services: React.FC = () => {
 
       {/* ── Services Grid ───────────────────────────────────────────────── */}
       <section
-        className="py-24 relative"
+        className="section-spacing relative"
         style={{ background: 'linear-gradient(to bottom, #0a0a0f, #00001a, #0a0a0f)' }}
       >
         {/* Blue ambient base */}
@@ -348,7 +348,7 @@ const Services: React.FC = () => {
       </section>
 
       {/* ── Switch Category Banner ──────────────────────────────────────── */}
-      <section className="py-16" style={{ borderTop: '1px solid rgba(0,0,255,0.2)', background: 'rgba(0,0,255,0.04)' }}>
+      <section className="section-spacing" style={{ borderTop: '1px solid rgba(0,0,255,0.2)', background: 'rgba(0,0,255,0.04)' }}>
         <div className="max-w-5xl mx-auto px-6 text-center">
           {(() => {
             const other = categories.find(c => c.id !== activeTab)!;
@@ -373,17 +373,17 @@ const Services: React.FC = () => {
       </section>
 
       {/* ── Final CTA ───────────────────────────────────────────────────── */}
-      <section className="py-24 relative overflow-hidden" style={{ borderTop: '1px solid rgba(0,0,255,0.2)' }}>
+      <section className="section-spacing relative overflow-hidden" style={{ borderTop: '1px solid rgba(0,0,255,0.2)' }}>
         {/* Blue + red dual glow */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(0,0,255,0.12) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(230,57,70,0.1) 0%, transparent 60%)' }} />
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-red-500 mb-4 block">
+          <span className="text-caption text-red-500 mb-4 block">
             Ready to Travel?
           </span>
-          <h2 className="font-black text-white uppercase tracking-tighter leading-none mb-6 text-4xl md:text-5xl">
+          <h2 className="text-h2 text-white mb-6">
             Let's Plan Your <span className="text-red-600">Perfect Trip</span>
           </h2>
-          <p className="text-slate-400 font-medium text-lg mb-10 leading-relaxed">
+          <p className="text-body-lg text-slate-400 mb-10">
             Whether it's a weekend getaway or a month-long expedition — our team is ready to make it happen.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

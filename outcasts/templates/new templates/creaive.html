@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Liquid Pour Animation — Keith</title>
+		<style>
+			:root{
+				--size: 320px;
+				--bg: #0f1724;
+				--glass: rgba(255,255,255,0.08);
+				--liquid1: #39a9db;
+				--liquid2: #1b7fb3;
+				--text: #ffffff;
+			}
+			html,body{height:100%;}
+			body{
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				margin:0;
+				background: linear-gradient(180deg,#071426 0%, #0f1724 100%);
+				font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+				color:var(--text);
+			}
+			.wrap{
+				width:var(--size);
+				max-width:92vw;
+				padding:32px;
+				box-sizing:border-box;
+			}
+			.card{
+				background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+				padding:20px;
+				border-radius:22px;
+				box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+			}
+			.scene{
+				display:flex;
+				justify-content:center;
+				position:relative;
+			}
+			svg{ display:block; width:100%; height:auto; }
+			.name{
+				position:absolute;
+				left:50%;
+				top:50%;
+				transform:translate(-50%,-50%);
+				font-size:36px;
+				font-weight:700;
+				letter-spacing:1px;
+				pointer-events:none;
+				z-index:10;
+				text-transform:capitalize;
+			}
+			.droplet{
+				position:absolute;
+				left:50%;
+				transform:translateX(-50%);
+				width:16px;
+				height:16px;
+				border-radius:50%;
+				background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7), rgba(255,255,255,0.15)), linear-gradient(180deg,var(--liquid1),var(--liquid2));
+				box-shadow:0 6px 18px rgba(0,0,0,0.35);
+				z-index:12;
+			}
+			@media (max-width:420px){
+				.name{font-size:22px}
+				:root{--size:260px}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="card">
+				<div class="scene">
+					<div class="droplet" id="droplet" aria-hidden="true"></div>
+					<div class="name" aria-hidden="false">keith</div>
+					<svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" id="svg">
+						<defs>
+							<clipPath id="circleClip">
+								<circle cx="160" cy="160" r="140" />
+							</clipPath>
+							<linearGradient id="liquidGradient" x1="0" x2="0" y1="0" y2="1">
+								<stop offset="0%" stop-color="#5ad0f0" stop-opacity="1" />
+								<stop offset="100%" stop-color="#1370b6" stop-opacity="1" />
+							</linearGradient>
+						</defs>
+
+						<!-- Circle outline glass -->
+						<g>
+							<circle cx="160" cy="160" r="140" fill="transparent" stroke="rgba(255,255,255,0.06)" stroke-width="6" />
+						</g>
+
+						<!-- Liquid group clipped to the circle -->
+						<g clip-path="url(#circleClip)">
+							<rect id="bgRect" x="0" y="0" width="320" height="320" fill="none" />
+							<g id="liquidGroup">
+								<path id="wave1" fill="url(#liquidGradient)" opacity="0.95"></path>
+								<path id="wave2" fill="url(#liquidGradient)" opacity="0.9"></path>
+							</g>
+						</g>
+
+						<!-- subtle highlight on glass -->
+						<g>
+							<path d="M40,70 C120,10 200,10 280,70" stroke="rgba(255,255,255,0.06)" stroke-width="5" fill="none" stroke-linecap="round" />
+						</g>
+					</svg>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// Liquid wave animation by generating a sine path
+			const svg = document.getElementById('svg');
+			const wave1 = document.getElementById('wave1');
+			const wave2 = document.getElementById('wave2');
+			const droplet = document.getElementById('droplet');
+			const nameEl = document.querySelector('.name');
+
+			const width = 320;
+			const height = 320;
+			const circleRadius = 140; // used to compute fill limit inside circle
+			const left = 0;
+			const top = 0;
+
+			let phase = 0;
+			let phase2 = 2.3;
+			let amplitude = 10; // px
+			let amplitude2 = 6;
+			let frequency = 0.02; // wave frequency
+
+			let fillLevel = 0.02; // 0..1
+			const targetFill = 0.76; // aim to reach this level
+			const pouring = true;
+
+			// For droplet loop
+			let pouringInterval = 650; // ms
+
+			// Convert fill percentage into pixel y inside the svg coordinate
+			function fillToY(fill){
+				// Since circle is centered at 160, and radius 140, the bottom y is 160+140 = 300
+				const bottom = 160 + circleRadius; // 300
+				const topY = 160 - circleRadius; // 20
+				return bottom - (bottom - topY) * fill;
+			}
+
+			// Build a path string for a sine wave across the width, anchored to the fill Y and closed at the bottom
+			function buildWavePath(phase, amp, freq, fillY, invert){
+				const points = [];
+				const step = 8; // px per sample
+				for(let x=0;x<=width;x+=step){
+					const k = x * freq;
+					const y = fillY + Math.sin(k + phase) * amp * (invert ? -1 : 1);
+					points.push({x,y});
+				}
+				// Build path: Start from left bottom, up to first point, across sine to right, then down to bottom and close
+				let d = `M ${width} ${height}`; // bottom-right
+				d += ` L ${points[points.length-1].x} ${points[points.length-1].y}`;
+				for(let i=points.length-1;i>=0;i--){
+					d += ` L ${points[i].x} ${points[i].y}`;
+				}
+				d += ` L ${0} ${height} Z`;
+				return d;
+			}
+
+			// Animation frame update
+			function update(){
+				phase += 0.06;
+				phase2 += 0.03;
+				// gently approach target fill
+				if(fillLevel < targetFill){
+					fillLevel += 0.0009; // slow auto fill baseline
+				}
+				// compute fillY
+				const fillY = fillToY(fillLevel);
+
+				// Set waves
+				const d1 = buildWavePath(phase, amplitude, frequency, fillY, false);
+				const d2 = buildWavePath(phase2, amplitude2, frequency*1.1, fillY+4, true);
+				wave1.setAttribute('d', d1);
+				wave2.setAttribute('d', d2);
+
+				// Dropper position (visual) — top center, falls to top of wave
+				const dropCenterX = svg.getBoundingClientRect().left + svg.clientWidth * 0.5;
+				// We'll update droplet transform using relative coordinates from wrapper
+				const wrapperRect = svg.getBoundingClientRect();
+				// knob: set droplet left to center of svg
+				droplet.style.left = (wrapperRect.left + wrapperRect.width/2) + 'px';
+
+				requestAnimationFrame(update);
+			}
+
+			// Create a loop to animate the droplet falling and increasing liquid level a bit
+			async function dropLoop(){
+				while(fillLevel < targetFill){
+					await spawnDrop();
+					// Wait some time between drops
+					await new Promise(r => setTimeout(r, pouringInterval));
+				}
+			}
+
+			function spawnDrop(){
+				return new Promise((resolve)=>{
+					const wrapRect = svg.getBoundingClientRect();
+					const startY = wrapRect.top - 30; // above the circle
+					const endY = wrapRect.top + fillToY(fillLevel) - 12; // above the wave
+					droplet.style.transform = 'translateX(-50%) translateY(0)';
+					droplet.style.left = (wrapRect.left + wrapRect.width/2) + 'px';
+					droplet.style.top = (startY) + 'px';
+					droplet.style.opacity = 1;
+
+					// Fall animation using Web Animations API
+					const fall = droplet.animate([
+						{transform: 'translateX(-50%) translateY(0)', top: startY + 'px', offset:0},
+						{transform: 'translateX(-50%) translateY(0)', top: endY + 'px', offset:1}
+					], {
+						duration: 550,
+						easing: 'cubic-bezier(.15,.82,.25,1)'
+					});
+					fall.onfinish = ()=>{
+						// small splash (scale) effect
+						droplet.animate([
+							{transform: 'translateX(-50%) translateY(0) scale(1)'},
+							{transform: 'translateX(-50%) translateY(0) scale(0.9)'},
+							{transform: 'translateX(-50%) translateY(0) scale(1)'}
+						], {duration:180, easing:'ease-out'});
+						// Increment fill by small amount
+						fillLevel = Math.min(1, fillLevel + 0.025 + Math.random() * 0.02);
+						// hide droplet briefly
+						droplet.style.opacity = 0.0;
+						resolve();
+					};
+				});
+			}
+
+			// Initialize
+			function init(){
+				// Set initial wave shapes (offscreen) to avoid flash
+				update();
+				dropLoop();
+			}
+
+			window.addEventListener('load', init);
+		</script>
+	</body>
+</html>

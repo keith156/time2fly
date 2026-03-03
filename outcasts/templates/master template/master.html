@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[BUSINESS NAME]</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6c40ff; /* core purple */
+      --primary-light: #a685ff;
+      --gradient: linear-gradient(135deg, #6c40ff, #a685ff);
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --dark: #1a1a1a;
+      --light: #fff;
+      --card-bg: rgba(255, 255, 255, 0.65);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f3f3f7;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* GLASS CARD */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.1);
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(18px);
+      z-index: 1000;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    header .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    header nav a {
+      margin-left: 35px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--dark);
+      transition: 0.3s;
+    }
+
+    header nav a:hover {
+      color: var(--primary);
+    }
+
+    /* HERO */
+    .hero {
+      height: 95vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 40px;
+      background-image: url('[HERO BACKGROUND]');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 800px;
+      text-align: center;
+      color: #fff;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+    }
+
+    .hero-sub {
+      font-size: 1.4rem;
+      margin-bottom: 35px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .btn {
+      padding: 15px 35px;
+      border-radius: 12px;
+      background: var(--gradient);
+      color: #fff;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    /* SECTION STANDARD */
+    section {
+      padding: 120px 70px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 70px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    /* ABOUT */
+    .about-container {
+      display: flex;
+      gap: 50px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .about-img {
+      width: 45%;
+      min-width: 320px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .about-img img {
+      width: 100%;
+      display: block;
+    }
+
+    .about-text {
+      width: 45%;
+      min-width: 320px;
+      font-size: 1.15rem;
+      line-height: 1.9;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 35px;
+    }
+
+    .service-card {
+      padding: 35px;
+      border-radius: 20px;
+      text-align: center;
+      background: var(--card-bg);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+    }
+
+    .service-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    /* PROCESS */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 35px;
+    }
+
+    .process-step {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .step-num {
+      font-size: 3rem;
+      font-weight: 700;
+      opacity: 0.2;
+      margin-bottom: 10px;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .portfolio-item {
+      height: 220px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(15px);
+    }
+
+    /* CONTACT */
+    .contact-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+
+    iframe {
+      width: 100%;
+      height: 350px;
+      border-radius: 20px;
+      border: 0;
+    }
+
+    footer {
+      padding: 60px;
+      text-align: center;
+      background: #1a1a1a;
+      color: #fff;
+      margin-top: 80px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h2 class="logo">[BUSINESS NAME]</h2>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">[HERO TITLE]</h1>
+      <p class="hero-sub">[HERO SUBTEXT]</p>
+      <button class="btn">[CTA BUTTON]</button>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-title">About Us</h2>
+    <div class="about-container">
+      <div class="about-img">
+        <img src="[ABOUT IMAGE]" alt="">
+      </div>
+      <div class="about-text">
+        [ABOUT TEXT]
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <h2 class="section-title">Our Services</h2>
+
+    <div class="services-grid">
+      <div class="service-card">[SERVICE 1]</div>
+      <div class="service-card">[SERVICE 2]</div>
+      <div class="service-card">[SERVICE 3]</div>
+      <div class="service-card">[SERVICE 4]</div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <h2 class="section-title">Our Process</h2>
+
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <h3>[STEP 1 TITLE]</h3>
+        <p>[STEP 1 TEXT]</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <h3>[STEP 2 TITLE]</h3>
+        <p>[STEP 2 TEXT]</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <h3>[STEP 3 TITLE]</h3>
+        <p>[STEP 3 TEXT]</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <h3>[STEP 4 TITLE]</h3>
+        <p>[STEP 4 TEXT]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <h2 class="section-title">Portfolio</h2>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-item"></div>
+      <div class="portfolio-item"></div>
+      <div class="portfolio-item"></div>
+      <div class="portfolio-item"></div>
+      <div class="portfolio-item"></div>
+      <div class="portfolio-item"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="section-title">Contact Us</h2>
+
+    <div class="contact-wrapper glass">
+      <p><strong>Phone:</strong> [PHONE]</p>
+      <p><strong>Email:</strong> [EMAIL]</p>
+      <p><strong>Address:</strong> [ADDRESS]</p>
+
+      <iframe src="[GOOGLE MAP EMBED]" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <footer>
+    © [YEAR] [BUSINESS NAME]. All rights reserved.
+  </footer>
+
+</body>
+</html>

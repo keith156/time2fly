@@ -100,15 +100,12 @@ const Home: React.FC = () => {
             <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
             <div className="absolute inset-0 flex items-center justify-center p-6">
               <div className="max-w-4xl w-full text-center">
-                <button onClick={() => setSelectedPackage(null)} className="mb-8 inline-flex items-center text-amber-400 font-black uppercase tracking-widest text-xs hover:text-white transition-colors group">
-                  <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-2 transition-transform" /> Back to Discoveries
-                </button>
                 <div className="flex items-center justify-center space-x-2 mb-6">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={18} fill={i < Math.floor(selectedPackage.rating) ? "#f59e0b" : "none"} className={i < Math.floor(selectedPackage.rating) ? "text-amber-500" : "text-white/30"} />
                   ))}
                 </div>
-                <h1 className="font-black text-white uppercase tracking-tighter leading-none mb-6 text-5xl md:text-[66px]">{selectedPackage.destination}</h1>
+                <h1 className="text-h1 text-white mb-6">{selectedPackage.destination}</h1>
                 <div className="flex flex-wrap items-center justify-center gap-8 text-white/90 text-sm font-black uppercase tracking-widest">
                   <span className="flex items-center bg-white/10 px-6 py-2 rounded-full backdrop-blur-md border border-white/20">
                     <Clock size={18} className="mr-2 text-amber-500" /> {selectedPackage.duration}
@@ -127,15 +124,15 @@ const Home: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="max-w-7xl mx-auto px-6 py-24">
+          <div className="max-w-7xl mx-auto px-6 pb-24 pt-0">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-20">
               <div className="lg:col-span-2 space-y-16">
                 <section>
-                  <h2 className="font-black text-slate-900 uppercase tracking-tighter mb-8 border-b-4 border-amber-500 w-fit pb-2 text-4xl md:text-5xl">The Experience</h2>
-                  <p className="text-slate-600 text-xl font-medium leading-relaxed mb-10 italic">{selectedPackage.description}</p>
+                  <h2 className="text-h2 text-slate-900 mb-8 border-b-4 border-amber-500 w-fit pb-2">The Experience</h2>
+                  <p className="text-body-lg mb-10 italic">{selectedPackage.description}</p>
                   <div className="prose prose-slate prose-xl max-w-none">
                     <div className="text-slate-700 leading-relaxed font-medium space-y-8 text-lg whitespace-pre-wrap bg-slate-50 p-10 rounded-[40px] border border-slate-100 shadow-sm">
-                      <h3 className="text-slate-900 font-black uppercase tracking-widest mb-4 text-2xl md:text-3xl">Journey Breakdown</h3>
+                      <h3 className="text-h3 text-slate-900 mb-4">Journey Breakdown</h3>
                       {selectedPackage.itinerary || "Our travel experts are finalizing the daily breakdown for this premium package. Expect a perfect blend of adventure, culture, and relaxation."}
                     </div>
                   </div>
@@ -143,15 +140,15 @@ const Home: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm text-center">
                     <Shield className="text-amber-500 mb-4 mx-auto" size={32} />
-                    <h4 className="font-black uppercase tracking-tight mb-2">Secure</h4>
+                    <h4 className="text-caption text-slate-900 mb-2">Secure</h4>
                   </div>
                   <div className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm text-center">
                     <CreditCard className="text-amber-500 mb-4 mx-auto" size={32} />
-                    <h4 className="font-black uppercase tracking-tight mb-2">Value</h4>
+                    <h4 className="text-caption text-slate-900 mb-2">Value</h4>
                   </div>
                   <div className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm text-center">
                     <Send className="text-amber-500 mb-4 mx-auto" size={32} />
-                    <h4 className="font-black uppercase tracking-tight mb-2">Expert</h4>
+                    <h4 className="text-caption text-slate-900 mb-2">Expert</h4>
                   </div>
                 </div>
               </div>
@@ -160,7 +157,7 @@ const Home: React.FC = () => {
                   <div className="mb-8">
                     <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-1">Total Package</p>
                     <div className="flex items-baseline">
-                      <span className="text-5xl font-black text-white tracking-tighter">${selectedPackage.price}</span>
+                      <span className="text-h1 text-white">{selectedPackage.price}</span>
                       <span className="text-slate-400 font-bold text-sm ml-2">/ p.p</span>
                     </div>
                   </div>
@@ -178,7 +175,7 @@ const Home: React.FC = () => {
   return (
     <div>
       {/* Redesigned Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <video
             autoPlay={true}
@@ -197,8 +194,8 @@ const Home: React.FC = () => {
         </div>
 
 
-        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-24 md:pt-32">
-          <div className="animate-fade-in-up space-y-12">
+        <div className="max-w-4xl mx-auto px-6 relative z-20 w-full text-center pt-20 md:pt-24">
+          <div className="animate-fade-in-up space-y-8">
             <div className="flex flex-col items-center gap-6">
               <div className="flex flex-col items-center">
                 <svg
@@ -286,7 +283,7 @@ const Home: React.FC = () => {
               </svg>
             </h1>
 
-            <div className="space-y-10">
+            <div className="space-y-6">
               <p className="text-lg md:text-xl text-slate-100 font-light max-w-2xl mx-auto leading-relaxed uppercase tracking-widest opacity-90">
                 Explore the world, <span className="font-medium">Travelling is knowledge</span>
               </p>

@@ -23,18 +23,18 @@ const SpecialOffers: React.FC = () => {
     return (
         <div className="pt-24 min-h-screen bg-slate-50">
             {/* Premium Header */}
-            <div className="bg-red-600 py-24 px-4 relative overflow-hidden">
+            <div className="bg-red-600 py-16 px-4 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center scale-150">
                     <Star size={400} fill="white" className="text-white" />
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <span className="text-white font-black tracking-widest uppercase text-xs mb-4 block bg-[#0000ff] w-fit mx-auto px-6 py-2 rounded-full backdrop-blur-md border border-white/20">Limited Time Access</span>
-                    <h1 className="font-black text-white mb-8 uppercase tracking-tighter leading-none text-5xl md:text-[66px]">Special Offers</h1>
-                    <p className="text-white/80 text-xl font-medium max-w-2xl mx-auto uppercase tracking-widest">Hand-picked premium experiences at exclusive value.</p>
+                    <h1 className="text-h1 text-white mb-8">Special Offers</h1>
+                    <p className="text-body-lg text-white/80 max-w-2xl mx-auto">Hand-picked premium experiences at exclusive value.</p>
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 {loading ? (
                     <div className="flex justify-center py-20">
                         <div className="animate-spin rounded-full h-12 w-12 border-4 border-red-600 border-t-transparent"></div>
@@ -42,7 +42,7 @@ const SpecialOffers: React.FC = () => {
                 ) : (
                     <>
                         {displayPackages.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {displayPackages.map((pkg) => (
                                     <div key={pkg.id} className="bg-white rounded-[48px] overflow-hidden border-2 border-red-100 shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 group flex flex-col h-full relative">
                                         {/* Dynamic Badge */}
@@ -62,13 +62,13 @@ const SpecialOffers: React.FC = () => {
                                             </div>
                                         </div>
 
-                                        <div className="p-10 flex-grow flex flex-col">
+                                        <div className="p-8 flex-grow flex flex-col">
                                             <div className="flex items-center text-red-600 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
                                                 <Star size={14} fill="#dc2626" className="mr-2" />
                                                 Featured Experience
                                             </div>
-                                            <h3 className="font-black text-slate-900 mb-4 uppercase tracking-tighter leading-none text-2xl md:text-3xl">{pkg.destination}</h3>
-                                            <p className="text-slate-500 mb-8 line-clamp-2 font-medium text-base leading-relaxed flex-grow">
+                                            <h3 className="text-h3 text-slate-900 mb-4">{pkg.destination}</h3>
+                                            <p className="text-body text-slate-500 mb-8 line-clamp-2 flex-grow">
                                                 {pkg.description}
                                             </p>
 
@@ -99,8 +99,8 @@ const SpecialOffers: React.FC = () => {
                                 <div className="w-24 h-24 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-8">
                                     <Star className="text-red-200" size={48} />
                                 </div>
-                                <h3 className="font-black uppercase tracking-tighter text-slate-300 mb-4 text-2xl md:text-3xl">No Packages Available</h3>
-                                <p className="text-slate-400 font-medium max-sm mx-auto mb-10">Our curation team is currently finalizing our next wave of exclusive travel collections. Check back soon!</p>
+                                <h3 className="text-h3 text-slate-300 mb-4">No Packages Available</h3>
+                                <p className="text-body text-slate-400 mb-10">Our curation team is currently finalizing our next wave of exclusive travel collections. Check back soon!</p>
                                 <Link to="/packages" className="text-red-600 font-bold uppercase tracking-widest text-xs border-b-2 border-red-600 pb-1 hover:text-slate-950 hover:border-slate-950 transition-all">Explore Collections</Link>
                             </div>
                         )}
@@ -114,22 +114,22 @@ const SpecialOffers: React.FC = () => {
                     <div className="flex items-center gap-6">
                         <Shield size={40} className="text-red-600 shrink-0" />
                         <div>
-                            <h4 className="font-black uppercase tracking-tight text-sm">Secure Booking</h4>
-                            <p className="text-slate-500 text-xs font-medium">Encrypted verified reservations.</p>
+                            <h4 className="text-h4 text-slate-900">Secure Booking</h4>
+                            <p className="text-body text-slate-500">Encrypted verified reservations.</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-6">
                         <CreditCard size={40} className="text-red-600 shrink-0" />
                         <div>
-                            <h4 className="font-black uppercase tracking-tight text-sm">Flexible Payment</h4>
-                            <p className="text-slate-500 text-xs font-medium">Multiple ways to confirm your seat.</p>
+                            <h4 className="text-h4 text-slate-900">Flexible Payment</h4>
+                            <p className="text-body text-slate-500">Multiple ways to confirm your seat.</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-6">
                         <Send size={40} className="text-red-600 shrink-0" />
                         <div>
-                            <h4 className="font-black uppercase tracking-tight text-sm">Fast Support</h4>
-                            <p className="text-slate-500 text-xs font-medium">24/7 priority concierge service.</p>
+                            <h4 className="text-h4 text-slate-900">Fast Support</h4>
+                            <p className="text-body text-slate-500">24/7 priority concierge service.</p>
                         </div>
                     </div>
                 </div>

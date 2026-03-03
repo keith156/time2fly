@@ -12,7 +12,7 @@ const Contact: React.FC = () => {
   return (
     <div className="pt-24 min-h-screen bg-white">
       {/* Header */}
-      <section className="bg-slate-950 py-32 text-white relative overflow-hidden">
+      <section className="bg-slate-950 pt-24 section-spacing text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <img
             src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&q=80&w=2000"
@@ -31,9 +31,9 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="section-spacing">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Contact Info */}
             <div className="lg:col-span-1 space-y-8">
               <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex items-start space-x-6 hover:shadow-xl transition-all group">
@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
                   <Mail size={24} />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold mb-1">Email Us</h4>
+                  <h4 className="text-h4 text-slate-900 mb-1">Email Us</h4>
                   <p className="text-slate-500 mb-2">Bookings & Support</p>
                   <p className="text-blue-600 font-bold">t2f.reservations@gmail.com</p>
                 </div>
@@ -52,7 +52,7 @@ const Contact: React.FC = () => {
                   <Phone size={24} />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold mb-1">Call Us</h4>
+                  <h4 className="text-h4 text-slate-900 mb-1">Call Us</h4>
                   <p className="text-slate-500 mb-2">Mon - Sat: 8am - 7pm</p>
                   <div className="flex flex-col text-blue-600 font-bold">
                     <span>+256 759 243 331</span>
@@ -66,7 +66,7 @@ const Contact: React.FC = () => {
                   <MessageSquare size={24} />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold mb-1 text-green-900">WhatsApp</h4>
+                  <h4 className="text-h4 text-green-900 mb-1">WhatsApp</h4>
                   <p className="text-green-700 mb-2">Instant Chat</p>
                   <a href={whatsAppUrl} target="_blank" rel="noopener noreferrer" className="text-green-600 font-black flex items-center">
                     {whatsAppNumber}
@@ -79,7 +79,7 @@ const Contact: React.FC = () => {
                   <MapPin size={24} />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold mb-1">Our Location</h4>
+                  <h4 className="text-h4 text-slate-900 mb-1">Our Location</h4>
                   <p className="text-slate-500 mb-2">Visit our Office</p>
                   <p className="text-blue-600 font-bold">Kampala, Uganda</p>
                   <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center text-amber-600 font-black text-xs uppercase tracking-widest hover:text-slate-900 transition-colors">
@@ -90,7 +90,7 @@ const Contact: React.FC = () => {
 
               {/* Social Media Shortcuts */}
               <div className="pt-8">
-                <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 ml-2">Follow our Journey</p>
+                <p className="text-caption text-slate-400 mb-6 ml-2">Follow our Journey</p>
                 <div className="grid grid-cols-4 gap-4">
                   <a href="https://www.facebook.com/timetofly.ug/" target="_blank" rel="noopener noreferrer" className="bg-slate-50 p-4 rounded-2xl flex justify-center hover:bg-blue-600 hover:text-white transition-all"><Facebook size={20} /></a>
                   <a href="https://www.instagram.com/time2fly06/" target="_blank" rel="noopener noreferrer" className="bg-slate-50 p-4 rounded-2xl flex justify-center hover:bg-pink-600 hover:text-white transition-all"><Instagram size={20} /></a>
@@ -102,27 +102,27 @@ const Contact: React.FC = () => {
 
             {/* Form */}
             <div className="lg:col-span-2">
-              <div className="bg-slate-50 p-8 md:p-12 rounded-[40px] shadow-sm border border-slate-100">
-                <h3 className="font-black mb-8 uppercase tracking-tighter text-[30px]">Inquiry Form</h3>
-                <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); alert('Time2Fly team will contact you shortly!'); }}>
+              <div className="bg-slate-50 p-6 md:p-8 rounded-[40px] shadow-sm border border-slate-100">
+                <h3 className="text-h3 text-slate-900 mb-8">Inquiry Form</h3>
+                <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert('Time2Fly team will contact you shortly!'); }}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
-                      <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Full Name</label>
-                      <input type="text" className="w-full px-6 py-5 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="e.g. John Doe" required />
+                      <label className="text-caption text-slate-500 ml-1">Full Name</label>
+                      <input type="text" className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="e.g. John Doe" required />
                     </div>
                     <div className="space-y-3">
-                      <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Phone Number</label>
-                      <input type="tel" className="w-full px-6 py-5 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="e.g. +256..." required />
+                      <label className="text-caption text-slate-500 ml-1">Phone Number</label>
+                      <input type="tel" className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="e.g. +256..." required />
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Email Address</label>
-                    <input type="email" className="w-full px-6 py-5 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="john@example.com" required />
+                    <label className="text-caption text-slate-500 ml-1">Email Address</label>
+                    <input type="email" className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="john@example.com" required />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Primary Interest</label>
+                    <label className="text-caption text-slate-500 ml-1">Primary Interest</label>
                     <div className="relative">
-                      <select className="w-full px-6 py-5 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 appearance-none bg-white font-medium cursor-pointer">
+                      <select className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 appearance-none bg-white font-medium cursor-pointer">
                         <option>Flight Ticketing</option>
                         <option>Vacation Adventures</option>
                         <option>Corporate Travel</option>
@@ -135,15 +135,15 @@ const Contact: React.FC = () => {
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Additional Details</label>
-                    <textarea rows={6} className="w-full px-6 py-5 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 resize-none font-medium bg-white" placeholder="Tell us about your travel dates and destination preference..." required></textarea>
+                    <label className="text-caption text-slate-500 ml-1">Additional Details</label>
+                    <textarea rows={6} className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 resize-none font-medium bg-white" placeholder="Tell us about your travel dates and destination preference..." required></textarea>
                   </div>
                   <div className="bg-white/50 p-4 rounded-xl border border-slate-200">
                     <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
                       By sending this inquiry, you agree to our <a href="/#/privacy-policy" className="text-blue-600 font-bold hover:underline">Privacy Policy</a>. We collect your data solely to process your request and will never share it with unauthorized third parties.
                     </p>
                   </div>
-                  <button type="submit" className="w-full bg-slate-900 hover:bg-amber-500 text-white font-black px-12 py-6 rounded-2xl transition-all shadow-xl hover:-translate-y-1 active:scale-95 uppercase tracking-[0.2em] text-sm">
+                  <button type="submit" className="w-full bg-slate-900 hover:bg-amber-500 text-white font-black px-12 py-4 rounded-2xl transition-all shadow-xl hover:-translate-y-1 active:scale-95 uppercase tracking-[0.2em] text-sm">
                     Send Inquiry
                   </button>
                 </form>

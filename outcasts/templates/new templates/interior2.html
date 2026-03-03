@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KK Interiors - A nice place for u to live</title>
+</head>
+<body>
+    <!-- HEADER -->
+<header class="site-header">
+  <div class="logo">kk <span>interiors</span>
+    <div class="logo-tag">A nice place for u to live</div>
+  </div>
+
+  <nav class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#testimonials">Testimonials</a>
+    
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<style>
+  /* Global Reset */
+  :root{ --accent1: #1e90ff; --accent2: #6fc1ff; --accent-grad: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);} 
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+  }
+
+  /* Sticky Modern Header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: 18px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #eaeaea;
+    z-index: 1000;
+  }
+
+  /* Logo Style */
+  .logo {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    letter-spacing: 0.5px;
+  }
+
+  .logo-tag { font-size: 0.75rem; color: #444; margin-top:2px; }
+
+  .logo span {
+    color: var(--accent1); /* soft modern blue accent */
+  }
+
+  /* Navigation */
+  .nav-links {
+    display: flex;
+    gap: 30px;
+  }
+
+  /* tiny-nav removed (no testimonial names shown in header) */
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #333;
+    transition: 0.3s ease;
+    position: relative;
+  }
+
+  /* Modern underline hover effect */
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--accent1);
+    border-radius: 2px;
+    transition: 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .nav-links a:hover {
+    color: var(--accent1);
+  }
+
+  /* Responsive for smaller screens */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none; /* simple mobile fallback — can add hamburger if you want */
+    }
+  }
+</style>
+<!--HEADER-->
+
+
+<!-- HERO -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- HERO SECTION -->
+<section id="home" class="hero">
+  <div class="hero-content">
+    <h1>kk interiors — A nice place for u to live</h1>
+    <p>Modern, glassmorphic interior design focused on space planning, color & material selection, lighting, and styling.</p>
+
+    <div class="hero-buttons">
+      <a href="tel:+256787618537" class="btn call-btn">Call Us</a>
+      <a href="#chat" class="btn chat-btn">Chat with Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="services" class="services">
+  <div class="services-container glass">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card glass">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="7" width="18" height="12" rx="2"></rect>
+            <path d="M3 11h18"></path>
+          </svg>
+        </div>
+        <h4>Space Planning</h4>
+        <p>Optimized layouts for function and flow.</p>
+      </div>
+
+      <div class="service-card glass">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="3"></circle>
+            <path d="M5 21v-2a7 7 0 0 1 14 0v2"></path>
+          </svg>
+        </div>
+        <h4>Concept & Theme</h4>
+        <p>Unique concepts shaped around your taste.</p>
+      </div>
+
+      <div class="service-card glass">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v6"></path>
+            <path d="M5 9h14"></path>
+            <path d="M12 8v14"></path>
+          </svg>
+        </div>
+        <h4>Color & Materials</h4>
+        <p>Thoughtful palettes and material selection.</p>
+      </div>
+
+      <div class="service-card glass">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="12" width="18" height="7" rx="2"></rect>
+            <path d="M7 12V8h10v4"></path>
+          </svg>
+        </div>
+        <h4>Furniture Selection</h4>
+        <p>Choose pieces that balance aesthetics and comfort.</p>
+      </div>
+
+      <div class="service-card glass">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v6"></path>
+            <circle cx="12" cy="15" r="3"></circle>
+          </svg>
+        </div>
+        <h4>Lighting Design</h4>
+        <p>Ambience through layered light strategies.</p>
+      </div>
+
+      <div class="service-card glass">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a6 6 0 0 0 6 6v2h8v-2a6 6 0 0 0 6-6v-4z"></path>
+          </svg>
+        </div>
+        <h4>Project Coordination</h4>
+        <p>Seamless management from start to finish.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+  * {
+    font-family: "Poppins", sans-serif;
+  }
+
+  /* Hero Section */
+  .hero {
+    height: 100vh;
+    width: 100%;
+    background-image: url('spacejoy-9M66C_w_ToM-unsplash.jpg'); /* Replace with your background */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    padding: 0 20px;
+    position: relative;
+  }
+
+  /* Dark overlay */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(0px);
+  }
+
+  /* Hero Content */
+  .hero-content {
+    position: relative;
+    color: #fff;
+    max-width: 800px;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 35px;
+    opacity: 0.95;
+  }
+
+  /* Buttons */
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: 0.3s ease;
+    font-weight: 600;
+  }
+
+  .call-btn {
+    background: var(--accent1);
+    color: #fff;
+  }
+
+  .call-btn:hover {
+    background: var(--accent2);
+  }
+
+  .chat-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid #fff;
+    color: #fff;
+  }
+
+  .chat-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.3rem;
+    }
+    .hero p {
+      font-size: 1rem;
+    }
+  }
+</style>
+<!-- HERO -->
+<style>
+  .services {
+    padding: 60px 25px;
+    background: linear-gradient(180deg, rgba(240,248,255,0.8), rgba(255,255,255,0.6));
+  }
+  .services-container { max-width: 1100px; margin: auto; padding: 30px; border-radius: 20px; display:block; }
+  .services-container h2 { font-size: 2rem; margin-bottom: 12px; color: #222 }
+  .services-grid { display: grid; gap: 18px; grid-template-columns: 1fr; }
+  .service-card { padding: 18px; border-radius: 14px; display: flex; gap: 12px; align-items: center; border: 1px solid rgba(255,255,255,0.35); }
+  .service-icon { width:48px; height:48px; display:grid; place-items:center; border-radius:10px; background: rgba(255,255,255,0.06); }
+  .service-card h4 { margin:0; font-size:1.05rem; color:#222; }
+  .service-card p { margin:0; font-size:0.95rem; color:#333; opacity:0.9; }
+  @media(min-width:700px){ .services-grid { grid-template-columns: repeat(3,1fr); } }
+</style>
+   
+<ABOUT SECTION>
+<!-- GOOGLE FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- ABOUT SECTION -->
+<section class="about">
+  <div class="about-container">
+
+    <!-- LEFT CONTENT -->
+    <div class="about-text glass">
+      <h2>About kk interiors</h2>
+      <p>
+        We specialize in crafting elegant, functional spaces that reflect personality and sophistication. 
+        With 23 years of experience, we’ve completed 500+ projects and have 250+ satisfied clients.
+      </p>
+
+      <!-- Stats -->
+      <div class="stats">
+
+        <!-- Projects -->
+        <div class="stat-card glass">
+          <div class="icon">
+            <!-- Floor Plan Icon -->
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent1)" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+          <h3><span class="count" data-target="500">0</span>+</h3>
+          <p>Finished Projects</p>
+        </div>
+
+        <!-- Team -->
+        <div class="stat-card glass">
+          <div class="icon">
+            <!-- Designer Icon -->
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent1)" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="7" r="4"/>
+              <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/>
+            </svg>
+          </div>
+          <h3><span class="count" data-target="23">0</span></h3>
+          <p>Years in Business</p>
+        </div>
+
+        <!-- Clients -->
+        <div class="stat-card glass">
+          <div class="icon">
+            <!-- Lighting Icon -->
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent1)" stroke-width="2" stroke-linecap="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v6a6 6 0 0 0 6 6v3h4v-3a6 6 0 0 0 6-6V8z"/>
+              <line x1="12" y1="22" x2="12" y2="22"/>
+            </svg>
+          </div>
+          <h3><span class="count" data-target="250">0</span>+</h3>
+          <p>Satisfied Clients</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="about-image">
+      <img src="spacejoy-9M66C_w_ToM-unsplash.jpg" alt="Interior Design">
+
+      <!-- FLOATING GLASS ICONS -->
+      <div class="floating glass one">
+        <!-- Furniture Icon -->
+        <svg width="40" height="40" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+          <rect x="3" y="12" width="18" height="8" rx="2"/>
+          <path d="M7 12V6h10v6"/>
+        </svg>
+      </div>
+
+      <div class="floating glass two">
+        <!-- Ruler Icon -->
+        <svg width="40" height="40" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+          <path d="M3 18l12-12 3 3L6 21H3z"/>
+        </svg>
+      </div>
+
+      <div class="floating glass three">
+        <!-- Lamp Icon -->
+        <svg width="40" height="40" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+          <path d="M12 2l7 10H5L12 2z"/>
+          <path d="M9 12v6h6v-6"/>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  * { font-family: "Poppins", sans-serif; }
+
+  .about {
+    padding: 80px 25px;
+    background: #eee;
+  }
+
+  .about-container {
+    display: flex;
+    gap: 50px;
+    max-width: 1200px;
+    margin: auto;
+    align-items: center;
+    flex-direction: column; /* mobile first */
+  }
+
+  /* GLASS STYLE */
+  .glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  .about-text {
+    padding: 40px;
+    flex: 1;
+  }
+
+  .about-text h2 {
+    font-size: 2.4rem;
+    margin-bottom: 15px;
+  }
+
+  .about-text p {
+    color: #444;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .stat-card {
+    padding: 25px;
+    text-align: center;
+  }
+
+  .icon {
+    margin-bottom: 10px;
+  }
+
+  .stat-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .stat-card p {
+    color: #555;
+  }
+
+  /* RIGHT IMAGE */
+  .about-image {
+    position: relative;
+    flex: 1;
+    width: 100%;
+  }
+
+  .about-image img {
+    width: 100%;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  }
+
+  /* FLOATING ICONS */
+  .floating {
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 14px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .one { top: 20px; right: 20px; animation-delay: 0s; }
+  .two { bottom: 40px; left: -20px; animation-delay: 1s; }
+  .three { top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 2s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  /* Large screens */
+  @media (min-width: 900px) {
+    .about-container { flex-direction: row; }
+    .stats { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+
+<!-- COUNT-UP JS -->
+<script>
+  const counters = document.querySelectorAll('.count');
+  counters.forEach(counter => {
+    const update = () => {
+      const target = +counter.getAttribute("data-target");
+      const current = +counter.innerText;
+      const inc = target / 80;
+      if (current < target) {
+        counter.innerText = Math.ceil(current + inc);
+        setTimeout(update, 20);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    update();
+  });
+</script>
+
+
+</ABOUT>
+
+
+
+<!--portofolio-->
+<!-- PORTFOLIO SECTION -->
+<section class="portfolio">
+  <h2 class="section-title">Our Portfolio</h2>
+
+  <div class="portfolio-grid">
+
+    <!-- Project Cards (Placeholder blocks) -->
+    <div class="portfolio-item"></div>
+    <div class="portfolio-item tall"></div>
+    <div class="portfolio-item"></div>
+    <div class="portfolio-item wide"></div>
+    <div class="portfolio-item"></div>
+    <div class="portfolio-item tall"></div>
+    <div class="portfolio-item"></div>
+    <div class="portfolio-item wide"></div>
+
+  </div>
+</section>
+
+<style>
+  * {
+    font-family: "Poppins", sans-serif;
+  }
+
+  .portfolio {
+    padding: 80px 25px;
+    background: #f5f5f5;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
+
+  /* Mobile-first grid */
+  .portfolio-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr;
+  }
+
+  /* Placeholder Card */
+  .portfolio-item {
+    background: rgba(200, 200, 200, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    height: 220px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    /* soft gradient glass look */
+    background: linear-gradient(
+      to bottom right,
+      rgba(170, 170, 170, 0.35),
+      rgba(140, 140, 140, 0.15)
+    );
+    box-shadow: 
+      0 8px 30px rgba(0, 0, 0, 0.08),
+      inset 0 1px 5px rgba(255, 255, 255, 0.4);
+
+    transition: 0.4s ease;
+  }
+
+  /* Hover effect */
+  .portfolio-item:hover {
+    transform: scale(1.03);
+    box-shadow:
+      0 12px 35px rgba(0, 0, 0, 0.2),
+      inset 0 1px 6px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Special sizes for modern grid look */
+  .portfolio-item.tall {
+    height: 400px;
+  }
+
+  .portfolio-item.wide {
+    height: 220px;
+  }
+
+  /* Larger screens */
+  @media (min-width: 600px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Desktop screens: modern asymmetrical grid */
+  @media (min-width: 1000px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-flow: dense;
+    }
+
+    /* Make grid interesting */
+    .portfolio-item.tall {
+      grid-row: span 2;
+    }
+
+    .portfolio-item.wide {
+      grid-column: span 2;
+    }
+  }
+</style>
+
+<style>
+  .testimonials { padding: 60px 25px; background: #f9fbff; }
+  .testimonials .section-title { text-align:center; margin-bottom: 30px; }
+  .testimonials-wrap { max-width: 1100px; margin: auto; overflow: hidden; }
+  .testimonials-track { display:flex; gap: 18px; align-items:center; will-change: transform; }
+  .testimonials-track.marquee { animation: marquee 28s linear infinite; }
+  .testimonial-card { width: 320px; flex: 0 0 320px; padding: 22px; border-radius: 16px; background: rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.5); box-shadow: 0 12px 30px rgba(0,0,0,0.06); color:#000; }
+  .testimonial-card h4{ margin-bottom:8px; color:var(--accent1); }
+  .testimonial-card p{ color: #000; opacity: 0.9; }
+  @media(max-width:860px){ .testimonial-card{ width:260px; flex: 0 0 260px; } }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+</style>
+
+<script>
+  window.addEventListener('load', function(){
+    const track = document.getElementById('testimonials-track');
+    if(!track) return;
+    // Duplicate content to create a seamless loop
+    const html = track.innerHTML;
+    track.innerHTML = html + html;
+    // Activate marquee animation class
+    track.classList.add('marquee');
+    // Optional: pause animation on hover
+    track.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+    track.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
+  });
+</script>
+
+<!--portofolio-->
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials">
+  <h2 class="section-title">Client Testimonials</h2>
+  <div class="testimonials-wrap">
+    <div class="testimonials-track" id="testimonials-track">
+      <div class="testimonial-card glass" id="test-keith-josh">
+        <h4>Keith Josh</h4>
+        <p>KK Interiors completely transformed our living area. Modern and inviting — they delivered on time and exceeded our expectations.</p>
+      </div>
+      <div class="testimonial-card glass" id="test-nalexy">
+        <h4>Nalexy</h4>
+        <p>Excellent space planning and attention to detail. The lighting design makes our place warm and comfortable.</p>
+      </div>
+      <div class="testimonial-card glass" id="test-bosco">
+        <h4>Bosco</h4>
+        <p>Great communication through the whole project. From concept to completion they were professional and creative.</p>
+      </div>
+      <div class="testimonial-card glass" id="test-otim">
+        <h4>Otim</h4>
+        <p>Furniture selection and placement were spot on — the best part is how functional and stylish the layout is now.</p>
+      </div>
+      <div class="testimonial-card glass" id="test-lemi">
+        <h4>Lemi</h4>
+        <p>Would recommend KK Interiors to anyone. They understood our taste and created a beautiful, practical home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<PROCESS>
+    <section class="process">
+  <div class="process-container">
+
+    <h2 class="process-title">Our Creative Process</h2>
+    <div class="process-note glass" style="margin: 12px auto 20px; max-width:800px; padding:18px;">
+      <strong>How We Start:</strong>
+      <p>We talk, we talk to about design cause other inteior designs talk yet its important</p>
+    </div>
+    <p class="process-subtitle">A seamless journey from concept to completion</p>
+
+    <div class="process-grid">
+
+      <!-- Step 1 -->
+      <div class="process-card solid-purple fade-in">
+        <div class="step-bubble">01</div>
+        <div class="icon">
+          <svg width="50" height="50" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9 18h6M10 22h4"/>
+          </svg>
+        </div>
+        <h3>Initial Consultation</h3>
+        <p>We explore your vision, goals, and inspiration to establish the foundation of your dream space.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="process-card solid-purple fade-in" style="animation-delay: .2s;">
+        <div class="step-bubble">02</div>
+        <div class="icon">
+          <svg width="50" height="50" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M9 21V9"/>
+          </svg>
+        </div>
+        <h3>Concept & Planning</h3>
+        <p>We develop the layout, mood boards, and functional direction to match your lifestyle and taste.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="process-card solid-purple fade-in" style="animation-delay: .4s;">
+        <div class="step-bubble">03</div>
+        <div class="icon">
+          <svg width="50" height="50" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <path d="M21 12a9 9 0 1 1-9-9"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
+        <h3>Design Development</h3>
+        <p>We finalize colors, textures, lighting, and furniture selections for a cohesive look.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="process-card solid-purple fade-in" style="animation-delay: .6s;">
+        <div class="step-bubble">04</div>
+        <div class="icon">
+          <svg width="50" height="50" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/>
+          </svg>
+        </div>
+        <h3>Execution & Styling</h3>
+        <p>We bring everything to life with precision, quality craftsmanship, and finishing touches.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .process {
+    padding: 100px 25px;
+    background: #f8f8fb; /* Light airy background */
+  }
+
+  .process-title {
+    text-align: center;
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-family: "Poppins", sans-serif;
+    color: #222;
+  }
+
+  .process-subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+  }
+
+  .process-note p { color: #fff; opacity: 0.95; margin:6px 0 0; }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+  }
+
+  /* Solid purple process cards */
+  .solid-purple {
+    border-radius: 25px;
+    padding: 40px 30px;
+    text-align: center;
+    color: #fff;
+    background: var(--accent1); /* Solid blue */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+  }
+
+  /* Step bubble */
+  .step-bubble {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: var(--accent1);
+    border: 1px solid rgba(255,255,255,0.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .icon { margin: 25px 0; }
+
+  .process-card h3 {
+    font-size: 1.45rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .process-card p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  /* Fade animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(35px);
+    animation: fadeUp 0.9s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (min-width: 900px) {
+    .process-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
+
+</PROCESS>
+
+
+<CONTACT>
+    <!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="contact-container glass">
+
+    <div class="contact-info">
+      <h2>Get In Touch</h2>
+      <p>Have a project in mind? Let’s talk about your ideas and how we can bring them to life.</p>
+
+      <div class="info-block">
+        <strong>📍 Location:</strong> 13 Namagembe Close
+      </div>
+      <div class="info-block">
+        <strong>☎️ Phone:</strong> +256787618537 / +256777568893
+      </div>
+      <div class="info-block">
+        <strong>WhatsApp:</strong> +256 787618537
+      </div>
+      <div class="info-block">
+        <strong>✉️ Email:</strong> hello@interiordesign.com
+      </div>
+    </div>
+
+    <form class="contact-form glass">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+  </div>
+
+  <!-- GOOGLE MAP -->
+  <div class="map-container glass">
+    <iframe
+      src="https://www.google.com/maps?q=13%20Namagembe%20Close&output=embed"
+      width="100%" height="350"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<style>
+  * {
+    font-family: "Poppins", sans-serif;
+  }
+
+  .contact-section {
+    padding: 80px 20px;
+    background: #f8f8fb;
+    text-align: center;
+  }
+
+  .contact-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px;
+    border-radius: 25px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.25);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  }
+
+  .contact-info {
+    text-align: left;
+    color: #222;
+  }
+
+  .contact-info h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .contact-info p {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    color: #444;
+  }
+
+  .info-block {
+    margin: 8px 0;
+    font-size: 1rem;
+    color: #555;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    color: #222;
+    outline: none;
+    resize: none;
+  }
+
+  .contact-form textarea {
+    min-height: 120px;
+  }
+
+  .contact-form button {
+    padding: 12px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    background: var(--accent1);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .contact-form button:hover {
+    background: var(--accent2);
+  }
+
+  .map-container {
+    margin-top: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.4);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+  }
+
+  @media (min-width: 900px) {
+    .contact-container {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .contact-info,
+    .contact-form {
+      flex: 1;
+    }
+
+    .contact-info {
+      padding-right: 20px;
+    }
+  }
+</style>
+
+</CONTACT>
+    
+<FOOTER>
+    <!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container glass">
+
+    <!-- Footer top -->
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>kk interiors</h2>
+        <p>A nice place for u to live — Modern, glassmorphic interiors.</p>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact</h3>
+        <p>📍 13 Namagembe Close</p>
+        <p>☎️ +256787618537 / +256777568893</p>
+        <p>WhatsApp: +256 787618537</p>
+        <p>✉️ hello@interiordesign.com</p>
+      </div>
+
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/facebook-new.png"/></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/instagram-new.png"/></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/twitter.png"/></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/pinterest.png"/></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer bottom -->
+    <div class="footer-bottom">
+      <p>© 2025 kk interiors. All rights reserved.</p>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 60px 20px 20px;
+    background: #f8f8fb;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px;
+    border-radius: 25px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.25);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    color: #fff;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer h2, .footer h3 {
+    font-family: "Poppins", sans-serif;
+    color: #222;
+  }
+
+  .footer-brand h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .footer-brand p {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links ul li {
+    margin: 8px 0;
+  }
+
+  .footer-links ul li a {
+    color: #555;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  .footer-links ul li a:hover {
+    color: var(--accent1);
+  }
+
+  .footer-contact p {
+    margin: 8px 0;
+    color: #555;
+  }
+
+  .footer-social .social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .footer-social .social-icons a img {
+    filter: brightness(0) invert(1);
+    width: 24px;
+    height: 24px;
+    transition: 0.3s;
+  }
+
+  .footer-social .social-icons a img:hover {
+    filter: brightness(0) invert(0.6) sepia(1) saturate(500%) hue-rotate(270deg);
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    color: #555;
+    font-size: 0.9rem;
+  }
+
+  /* Desktop layout */
+  @media (min-width: 900px) {
+    .footer-top {
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .footer-brand, .footer-links, .footer-contact, .footer-social {
+      flex: 1;
+      min-width: 200px;
+    }
+  }
+</style>
+
+</FOOTER>
+
+<!-- Floating Chat Button -->
+<a href="#chat" class="floating-chat" aria-label="Chat with us">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+  <span class="sr-only">Chat with us</span>
+</a>
+
+<style>
+  .floating-chat {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-grad);
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(139,92,246,0.25);
+    z-index: 2000;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .floating-chat:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(139,92,246,0.32);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+</body>
+</html>
