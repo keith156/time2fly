@@ -59,5 +59,6 @@ export interface LiveTicket {
   dates?: string;        // free-text date range, e.g. "Thu. Feb 26 – Sun. Mar 01"
   airline?: string;      // carrier name, e.g. "Uganda Airlines"
   order_index?: number;
+  is_available?: boolean;
   created_at?: string;
 }

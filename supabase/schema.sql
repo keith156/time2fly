@@ -4,6 +4,8 @@
 -- This table stores live flight rates.
 -- If the table doesn't have the 'order_index' column, run this:
 ALTER TABLE live_tickets ADD COLUMN IF NOT EXISTS order_index INTEGER;
+-- For the Availability feature:
+ALTER TABLE live_tickets ADD COLUMN IF NOT EXISTS is_available BOOLEAN DEFAULT TRUE;
 
 -- To clear all tickets and start fresh (if you see duplicates):
 -- TRUNCATE TABLE live_tickets;
@@ -22,6 +24,7 @@ CREATE TABLE IF NOT EXISTS live_tickets (
   dates TEXT,
   airline TEXT,
   order_index INTEGER,
+  is_available BOOLEAN DEFAULT TRUE,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 */

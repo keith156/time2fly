@@ -24,9 +24,10 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
     const trendText = ticket.trend === 'down' ? 'Price Drooping' : ticket.trend === 'up' ? 'Price Rising' : 'Stable Price';
     const trendBg = ticket.trend === 'down' ? 'bg-emerald-500/10' : ticket.trend === 'up' ? 'bg-rose-500/10' : 'bg-slate-500/10';
     const trendColor = ticket.trend === 'down' ? 'text-emerald-400' : ticket.trend === 'up' ? 'text-rose-400' : 'text-slate-400';
+    const isAvailable = ticket.is_available !== false;
 
     return (
-        <div className="ticket-card rounded-2xl shadow-xl overflow-hidden border border-blue-900/40 mb-5">
+        <div className={`ticket-card rounded-2xl shadow-xl overflow-hidden border border-blue-900/40 mb-5 transition-all ${!isAvailable ? 'opacity-70 grayscale-[0.3]' : ''}`}>
 
             {/* ── Desktop layout ──────────────────────────────────────────────── */}
             <div className="hidden md:flex items-stretch min-h-[110px] bg-[#08155e]">
@@ -68,11 +69,19 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
                 {/* Price Range – fixed w */}
                 <div className="flex flex-col justify-center px-6 w-[230px] shrink-0">
                     <p className="text-white font-bold text-sm">Target Price</p>
-                    <p className="text-orange-400 font-extrabold text-xl tracking-tight">{priceStr}</p>
-                    <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold mt-1.5 ${trendBg} ${trendColor} border border-white/10 w-fit`}>
-                        {TrendIcon}
-                        <span className="uppercase tracking-wider">{trendText}</span>
-                    </div>
+                    {isAvailable ? (
+                        <>
+                            <p className="text-orange-400 font-extrabold text-xl tracking-tight">{priceStr}</p>
+                            <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold mt-1.5 ${trendBg} ${trendColor} border border-white/10 w-fit`}>
+                                {TrendIcon}
+                                <span className="uppercase tracking-wider">{trendText}</span>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="mt-1">
+                            <p className="text-rose-400 font-black text-sm uppercase tracking-wider leading-tight">No Flights<br />Available</p>
+                        </div>
+                    )}
                 </div>
 
                 {/* Divider */}
@@ -80,15 +89,26 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
 
                 {/* Confirm – stretches remaining */}
                 <div className="flex flex-col items-center justify-center flex-1 gap-1.5 px-4">
-                    <a
-                        href={whatsappUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-7 py-2.5 bg-blue-500 hover:bg-blue-400 active:scale-95 text-white font-bold text-sm rounded-full shadow-lg shadow-blue-500/30 transition-all whitespace-nowrap"
-                    >
-                        Confirm
-                    </a>
-                    <span className="text-blue-300 text-[10px] font-medium text-center">With Travel Consultant</span>
+                    {isAvailable ? (
+                        <>
+                            <a
+                                href={whatsappUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-7 py-2.5 bg-blue-500 hover:bg-blue-400 active:scale-95 text-white font-bold text-sm rounded-full shadow-lg shadow-blue-500/30 transition-all whitespace-nowrap"
+                            >
+                                Confirm
+                            </a>
+                            <span className="text-blue-300 text-[10px] font-medium text-center">With Travel Consultant</span>
+                        </>
+                    ) : (
+                        <button
+                            disabled
+                            className="px-7 py-2.5 bg-slate-700 text-slate-400 font-bold text-sm rounded-full cursor-not-allowed whitespace-nowrap"
+                        >
+                            Sold Out
+                        </button>
+                    )}
                 </div>
 
             </div>
@@ -129,24 +149,41 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
                     <div className="w-px h-10 bg-white/20 shrink-0" />
                     <div className="flex-1 min-w-0 px-3">
                         <p className="text-white font-bold text-xs">Target Price</p>
-                        <p className="text-orange-400 font-extrabold text-base tracking-tight leading-tight">{priceStr}</p>
-                        <div className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold mt-1 ${trendBg} ${trendColor} border border-white/5`}>
-                            {TrendIcon}
-                            <span className="uppercase tracking-tight">{trendText}</span>
-                        </div>
+                        {isAvailable ? (
+                            <>
+                                <p className="text-orange-400 font-extrabold text-base tracking-tight leading-tight">{priceStr}</p>
+                                <div className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold mt-1 ${trendBg} ${trendColor} border border-white/5`}>
+                                    {TrendIcon}
+                                    <span className="uppercase tracking-tight">{trendText}</span>
+                                </div>
+                            </>
+                        ) : (
+                            <p className="text-rose-400 font-black text-xs uppercase tracking-tight leading-tight mt-0.5">Not Available</p>
+                        )}
                     </div>
 
                     <div className="w-px h-10 bg-white/20 shrink-0" />
                     <div className="pl-3 flex flex-col items-center gap-1 shrink-0">
-                        <a
-                            href={whatsappUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-5 py-2 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm rounded-full shadow-md shadow-blue-500/20 transition-all whitespace-nowrap"
-                        >
-                            Confirm
-                        </a>
-                        <span className="text-blue-300 text-[9px] font-medium text-center">With Travel Consultant</span>
+                        {isAvailable ? (
+                            <>
+                                <a
+                                    href={whatsappUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-5 py-2 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm rounded-full shadow-md shadow-blue-500/20 transition-all whitespace-nowrap"
+                                >
+                                    Confirm
+                                </a>
+                                <span className="text-blue-300 text-[9px] font-medium text-center">With Travel Consultant</span>
+                            </>
+                        ) : (
+                            <button
+                                disabled
+                                className="px-5 py-2 bg-slate-700 text-slate-400 font-bold text-xs rounded-full cursor-not-allowed whitespace-nowrap"
+                            >
+                                Sold Out
+                            </button>
+                        )}
                     </div>
                 </div>
 

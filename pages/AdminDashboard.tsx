@@ -477,6 +477,22 @@ const AdminDashboard: React.FC = () => {
                       <option value="stable">Stable</option>
                     </select>
                   </div>
+                  {/* Availability Toggle */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Availability</label>
+                    <div className="flex items-center gap-4 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200">
+                      <span className={`text-xs font-bold uppercase tracking-widest ${editingTicket.is_available !== false ? 'text-green-600' : 'text-red-500'}`}>
+                        {editingTicket.is_available !== false ? 'Flights Available' : 'No Flights Available'}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setEditingTicket({ ...editingTicket, is_available: editingTicket.is_available === false ? true : false })}
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${editingTicket.is_available !== false ? 'bg-green-500' : 'bg-slate-300'}`}
+                      >
+                        <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${editingTicket.is_available !== false ? 'translate-x-6' : 'translate-x-1'}`} />
+                      </button>
+                    </div>
+                  </div>
                   {/* City Image */}
                   <div className="space-y-2 md:col-span-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">City / Destination Image</label>
@@ -596,6 +612,9 @@ const AdminDashboard: React.FC = () => {
                           {ticket?.trend === 'down' ? <TrendingDown size={10} /> : ticket?.trend === 'up' ? <TrendingUp size={10} /> : <Minus size={10} />}
                           {ticket?.trend}
                         </div>
+                        {ticket.is_available === false && (
+                          <div className="px-2 py-0.5 bg-red-100 text-red-600 text-[10px] font-black uppercase rounded-full">Unavailable</div>
+                        )}
                       </div>
                     </td>
                     <td className="px-8 py-6 text-right">
