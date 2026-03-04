@@ -95,19 +95,23 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       // Packages
       const realPackages = pkgResult.data || [];
-      setPackages([...realPackages, ...PACKAGES]);
+      const dummyPackages = PACKAGES.filter(dummy => !realPackages.some(real => real.destination === dummy.destination));
+      setPackages([...realPackages, ...dummyPackages]);
 
       // Blogs
       const realBlogs = blogResult.data || [];
-      setBlogs([...realBlogs, ...BLOG_POSTS]);
+      const dummyBlogs = BLOG_POSTS.filter(dummy => !realBlogs.some(real => real.title === dummy.title));
+      setBlogs([...realBlogs, ...dummyBlogs]);
 
       // Destinations
       const realDestinations = destResult.data || [];
-      setDestinations([...realDestinations, ...DESTINATIONS]);
+      const dummyDestinations = DESTINATIONS.filter(dummy => !realDestinations.some(real => real.name === dummy.name));
+      setDestinations([...realDestinations, ...dummyDestinations]);
 
       // Live Tickets
       const realTickets = ticketResult.data || [];
-      const combinedTickets = [...realTickets, ...DUMMY_TICKETS];
+      const dummyTickets = DUMMY_TICKETS.filter(dummy => !realTickets.some(real => real.from === dummy.from && real.to === dummy.to));
+      const combinedTickets = [...realTickets, ...dummyTickets];
       const sortedTickets = combinedTickets.sort((a, b) => {
         const orderA = a.order_index ?? 999;
         const orderB = b.order_index ?? 999;
