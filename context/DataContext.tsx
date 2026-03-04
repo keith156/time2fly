@@ -156,13 +156,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const uploadImage = async (base64: string, folder: string) => {
     try {
-      const compressed = await compressImage(base64);
+      const blob = (await compressImage(base64)) as Blob;
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.jpg`;
       const filePath = `${folder}/${fileName}`;
-
-      // Convert base64 to Blob
-      const response = await fetch(compressed);
-      const blob = await response.blob();
 
       const { data, error } = await supabase.storage
         .from('images')
@@ -175,8 +171,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .getPublicUrl(filePath);
 
       return publicUrl;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Image upload failed:', error);
+      alert(`Image upload failed: ${error.message || 'Unknown error'}`);
       throw error;
     }
   };
@@ -190,9 +187,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase.from('packages').insert([pkgData]).select().single();
       if (error) {
         console.error('Package insert error:', error);
+        alert(`Error saving package: ${error.message}`);
       } else if (data) {
         setPackages(prev => [data, ...prev]);
       }
+    } catch (err: any) {
+      console.error('Package save failed:', err);
+      alert(`Failed to save package: ${err.message || 'Unknown error'}`);
     } finally {
       setIsUploading(false);
     }
@@ -208,9 +209,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase.from('packages').update(updatedPkg).eq('id', pkg.id).select().single();
       if (error) {
         console.error('Package update error:', error);
+        alert(`Error updating package: ${error.message}`);
       } else if (data) {
         setPackages(prev => prev.map(item => item.id === pkg.id ? data : item));
       }
+    } catch (err: any) {
+      console.error('Package update failed:', err);
+      alert(`Failed to update package: ${err.message || 'Unknown error'}`);
     } finally {
       setIsUploading(false);
     }
@@ -234,9 +239,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase.from('blogs').insert([blogData]).select().single();
       if (error) {
         console.error('Blog insert error:', error);
+        alert(`Error saving blog: ${error.message}`);
       } else if (data) {
         setBlogs(prev => [data, ...prev]);
       }
+    } catch (err: any) {
+      console.error('Blog save failed:', err);
+      alert(`Failed to save blog: ${err.message || 'Unknown error'}`);
     } finally {
       setIsUploading(false);
     }
@@ -252,9 +261,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase.from('blogs').update(updatedBlog).eq('id', blog.id).select().single();
       if (error) {
         console.error('Blog update error:', error);
+        alert(`Error updating blog: ${error.message}`);
       } else if (data) {
         setBlogs(prev => prev.map(item => item.id === blog.id ? data : item));
       }
+    } catch (err: any) {
+      console.error('Blog update failed:', err);
+      alert(`Failed to update blog: ${err.message || 'Unknown error'}`);
     } finally {
       setIsUploading(false);
     }
@@ -278,9 +291,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase.from('destinations').insert([destData]).select().single();
       if (error) {
         console.error('Destination insert error:', error);
+        alert(`Error saving destination: ${error.message}`);
       } else if (data) {
         setDestinations(prev => [data, ...prev]);
       }
+    } catch (err: any) {
+      console.error('Destination save failed:', err);
+      alert(`Failed to save destination: ${err.message || 'Unknown error'}`);
     } finally {
       setIsUploading(false);
     }
@@ -296,9 +313,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase.from('destinations').update(updatedDest).eq('id', dest.id).select().single();
       if (error) {
         console.error('Destination update error:', error);
+        alert(`Error updating destination: ${error.message}`);
       } else if (data) {
         setDestinations(prev => prev.map(item => item.id === dest.id ? data : item));
       }
+    } catch (err: any) {
+      console.error('Destination update failed:', err);
+      alert(`Failed to update destination: ${err.message || 'Unknown error'}`);
     } finally {
       setIsUploading(false);
     }
@@ -317,6 +338,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsUploading(true);
     try {
       const { id, ...ticketData } = ticket;
+
+      // Handle image upload if provided
+      if (ticketData.city_image && ticketData.city_image.startsWith('data:')) {
+        ticketData.city_image = await uploadImage(ticketData.city_image, 'tickets');
+      }
+
       // Also provide a default order_index if not provided so they appear at the end
       if (ticketData.order_index === undefined) {
         ticketData.order_index = liveTickets.length;
@@ -332,6 +359,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           return newTickets.sort((a, b) => (a.order_index ?? 999) - (b.order_index ?? 999));
         });
       }
+    } catch (err: any) {
+      console.error('Ticket save failed:', err);
+      alert(`Failed to save ticket: ${err.message || 'Unknown error'}`);
     } finally {
       setIsUploading(false);
     }
@@ -341,6 +371,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsUploading(true);
     try {
       const { id, ...updateData } = ticket;
+
+      // Handle image upload if provided and it's a new base64 string
+      if (updateData.city_image && updateData.city_image.startsWith('data:')) {
+        updateData.city_image = await uploadImage(updateData.city_image, 'tickets');
+      }
+
       const { data, error } = await supabase.from('live_tickets').update(updateData).eq('id', id).select().single();
       if (error) {
         console.error('Ticket update error:', error);
@@ -351,6 +387,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           return updated.sort((a, b) => (a.order_index ?? 999) - (b.order_index ?? 999));
         });
       }
+    } catch (err: any) {
+      console.error('Ticket update failed:', err);
+      alert(`Failed to update ticket: ${err.message || 'Unknown error'}`);
     } finally {
       setIsUploading(false);
     }

@@ -209,7 +209,7 @@ const Blog: React.FC = () => {
                     <span className="flex items-center"><User size={14} className="mr-1.5 text-[#0000ff]" /> {post.author.split(' ')[0]}</span>
                   </div>
                   <h2
-                    className="text-h3 text-slate-900 mb-4 hover:text-[#0000ff] transition-colors cursor-pointer line-clamp-2 h-14"
+                    className="text-h3 text-slate-900 mb-4 hover:text-[#0000ff] transition-colors cursor-pointer line-clamp-2 h-20"
                     onClick={() => setSelectedPost(post)}
                   >
                     {post.title}

@@ -7,6 +7,19 @@ ALTER TABLE live_tickets ADD COLUMN IF NOT EXISTS order_index INTEGER;
 -- For the Availability feature:
 ALTER TABLE live_tickets ADD COLUMN IF NOT EXISTS is_available BOOLEAN DEFAULT TRUE;
 
+-- STORAGE SETUP
+-- Run these in your Supabase SQL Editor to ensure images can be uploaded and viewed.
+-- 1. Create the bucket if it doesn't exist
+-- INSERT INTO storage.buckets (id, name, public) 
+-- VALUES ('images', 'images', true)
+-- ON CONFLICT (id) DO NOTHING;
+
+-- 2. Allow public access to the bucket
+-- CREATE POLICY "Public Access" ON storage.objects FOR SELECT USING (bucket_id = 'images');
+-- CREATE POLICY "Authenticated Upload" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'images');
+-- CREATE POLICY "Authenticated Update" ON storage.objects FOR UPDATE USING (bucket_id = 'images');
+-- CREATE POLICY "Authenticated Delete" ON storage.objects FOR DELETE USING (bucket_id = 'images');
+
 -- To clear all tickets and start fresh (if you see duplicates):
 -- TRUNCATE TABLE live_tickets;
 
