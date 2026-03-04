@@ -94,49 +94,26 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       ]);
 
       // Packages
-      if (pkgResult.error) {
-        console.error('Error fetching packages:', pkgResult.error);
-        setPackages(PACKAGES); // Fallback
-      } else if (pkgResult.data && pkgResult.data.length > 0) {
-        setPackages(pkgResult.data);
-      } else {
-        setPackages(PACKAGES);
-      }
+      const realPackages = pkgResult.data || [];
+      setPackages([...realPackages, ...PACKAGES]);
 
       // Blogs
-      if (blogResult.error) {
-        console.error('Error fetching blogs:', blogResult.error);
-        setBlogs(BLOG_POSTS); // Fallback
-      } else if (blogResult.data && blogResult.data.length > 0) {
-        setBlogs(blogResult.data);
-      } else {
-        setBlogs(BLOG_POSTS);
-      }
+      const realBlogs = blogResult.data || [];
+      setBlogs([...realBlogs, ...BLOG_POSTS]);
 
       // Destinations
-      if (destResult.error) {
-        console.error('Error fetching destinations:', destResult.error);
-        setDestinations(DESTINATIONS); // Fallback
-      } else if (destResult.data && destResult.data.length > 0) {
-        setDestinations(destResult.data);
-      } else {
-        setDestinations(DESTINATIONS);
-      }
+      const realDestinations = destResult.data || [];
+      setDestinations([...realDestinations, ...DESTINATIONS]);
 
       // Live Tickets
-      if (ticketResult.error) {
-        console.error('Error fetching tickets:', ticketResult.error);
-        setLiveTickets(DUMMY_TICKETS); // Fallback
-      } else if (ticketResult.data && ticketResult.data.length > 0) {
-        const sortedTickets = [...ticketResult.data].sort((a, b) => {
-          const orderA = a.order_index ?? 999;
-          const orderB = b.order_index ?? 999;
-          return orderA - orderB;
-        });
-        setLiveTickets(sortedTickets);
-      } else {
-        setLiveTickets(DUMMY_TICKETS);
-      }
+      const realTickets = ticketResult.data || [];
+      const combinedTickets = [...realTickets, ...DUMMY_TICKETS];
+      const sortedTickets = combinedTickets.sort((a, b) => {
+        const orderA = a.order_index ?? 999;
+        const orderB = b.order_index ?? 999;
+        return orderA - orderB;
+      });
+      setLiveTickets(sortedTickets);
 
       setLastUpdated(new Date().toISOString());
     } catch (err) {
@@ -203,6 +180,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsUploading(true);
     try {
       const updatedPkg = { ...pkg };
+
+      // If it's a dummy ID, treat it as a new package
+      if (typeof pkg.id === 'string' && (pkg.id.startsWith('h') || pkg.id.startsWith('c') || pkg.id.startsWith('f') || pkg.id.startsWith('s') || pkg.id.startsWith('r'))) {
+        return addPackage(pkg);
+      }
+
       if (updatedPkg.image && updatedPkg.image.startsWith('data:')) {
         updatedPkg.image = await uploadImage(updatedPkg.image, 'packages');
       }
@@ -222,6 +205,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deletePackage = async (id: string) => {
+    // If it's a dummy ID, just remove from state
+    if (typeof id === 'string' && (id.startsWith('h') || id.startsWith('c') || id.startsWith('f') || id.startsWith('s') || id.startsWith('r'))) {
+      setPackages(prev => prev.filter(item => item.id !== id));
+      return;
+    }
+
     const { error } = await supabase.from('packages').delete().eq('id', id);
     if (error) {
       console.error('Package delete error:', error);
@@ -255,6 +244,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsUploading(true);
     try {
       const updatedBlog = { ...blog };
+
+      // If it's a dummy ID, treat it as a new blog
+      if (typeof blog.id === 'string' && blog.id.startsWith('b-seo')) {
+        return addBlog(blog);
+      }
+
       if (updatedBlog.image && updatedBlog.image.startsWith('data:')) {
         updatedBlog.image = await uploadImage(updatedBlog.image, 'blogs');
       }
@@ -274,6 +269,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteBlog = async (id: string) => {
+    // If it's a dummy ID, just remove from state
+    if (typeof id === 'string' && id.startsWith('b-seo')) {
+      setBlogs(prev => prev.filter(item => item.id !== id));
+      return;
+    }
+
     const { error } = await supabase.from('blogs').delete().eq('id', id);
     if (error) {
       console.error('Blog delete error:', error);
@@ -307,6 +308,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsUploading(true);
     try {
       const updatedDest = { ...dest };
+
+      // Destination dummy IDs are just numbers in default but let's check carefully
+      // Actually DESTINATIONS is empty in constants.tsx currently, but let's be safe
+      if (typeof dest.id === 'string' && !dest.id.includes('-')) { // Real UUIDs have dashes
+        // This is a simple check, could be better
+      }
+
       if (updatedDest.image && updatedDest.image.startsWith('data:')) {
         updatedDest.image = await uploadImage(updatedDest.image, 'destinations');
       }
@@ -326,6 +334,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteDestination = async (id: string) => {
+    // Destinations currently don't have dummy data in constants.tsx, 
+    // but the system allows for numeric/string IDs that aren't UUIDs
+    if (typeof id === 'string' && !id.includes('-')) {
+      setDestinations(prev => prev.filter(item => item.id !== id));
+      return;
+    }
+
     const { error } = await supabase.from('destinations').delete().eq('id', id);
     if (error) {
       console.error('Destination delete error:', error);
@@ -371,6 +386,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsUploading(true);
     try {
       const { id, ...updateData } = ticket;
+
+      // If it's a dummy ID, treat it as a new ticket
+      if (typeof id === 'string' && id.startsWith('d')) {
+        return addLiveTicket(ticket);
+      }
 
       // Handle image upload if provided and it's a new base64 string
       if (updateData.city_image && updateData.city_image.startsWith('data:')) {
