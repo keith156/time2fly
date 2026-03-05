@@ -328,7 +328,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#0000ff] text-white section-spacing border-t-4 border-red-600">
+    <footer className="bg-[#000033] text-white section-spacing border-t-4 border-red-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center mb-4 px-4 text-center">
           <h3 className="font-bold mb-4 text-amber-500 uppercase tracking-widest text-xs max-w-2xl leading-relaxed">

@@ -391,13 +391,14 @@ const TourPackages: React.FC = () => {
       <div className={`max-w-7xl mx-auto px-6 ${selectedCategory ? 'pb-24 pt-4' : 'section-spacing'}`}>
         {!selectedCategory ? (
           /* Category Cards - Shown when NO category is selected */
-          <div className="space-y-12">
+          <div className="space-y-16">
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-h2 text-slate-900 mb-4">Explore by Experience</h2>
+              <h2 className="text-h2 text-slate-900 mb-4 uppercase tracking-tighter">Explore by Experience</h2>
+              <div className="h-1 w-20 bg-red-600 mx-auto mb-6"></div>
               <p className="text-body-lg text-slate-500 italic">"Not just destinations, but journeys that define you."</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {[
                 { name: 'Holiday Escapes', img: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80&w=800', desc: 'Where Every Moment is a Celebration' },
                 { name: 'Romantic Retreats', img: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&q=80&w=800', desc: 'The Masterclass of Romantic Privacy' },
@@ -409,120 +410,26 @@ const TourPackages: React.FC = () => {
                 <div
                   key={cat.name}
                   onClick={() => setSelectedCategory(cat.name)}
-                  className="group relative h-[400px] overflow-hidden rounded-[48px] cursor-pointer shadow-xl hover:shadow-[#0000ff15] transition-all duration-700"
+                  className="group relative h-[450px] overflow-hidden rounded-[40px] cursor-pointer shadow-2xl transition-all duration-700 hover:shadow-[0_0_50px_rgba(255,0,0,0.3)] hover:border-red-500/30 border border-transparent"
                 >
-                  <img src={cat.img} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-                  <div className="absolute inset-0 p-10 flex flex-col justify-end items-center text-center">
-                    <h3 className="text-h3 text-white mb-2 transform group-hover:-translate-y-2 transition-transform duration-500">{cat.name}</h3>
-                    <p className="text-caption text-white/60 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:-translate-y-2">{cat.desc}</p>
-                    <div className="mt-6 w-12 h-1 bg-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></div>
+                  <img src={cat.img} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" />
+
+                  {/* Glassmorphism Overlay */}
+                  <div className="absolute inset-x-4 bottom-4 p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[32px] transform translate-y-2 group-hover:translate-y-0 transition-all duration-500 shadow-2xl flex flex-col items-center text-center">
+                    <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-tighter drop-shadow-md">{cat.name}</h3>
+                    <p className="text-[11px] font-bold text-white/70 uppercase tracking-[0.2em] max-w-[200px] leading-relaxed mb-4">{cat.desc}</p>
+                    <div className="flex items-center gap-2 text-white font-black text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                      Explore Experience <ArrowRight size={14} className="text-red-500" />
+                    </div>
                   </div>
+
+                  {/* Red accent glow in corner */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/20 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
                 </div>
               ))}
             </div>
           </div>
-        ) : (
-          /* Filtered Packages View - Shown when a category IS selected */
-          <div className="">
-            <div className="space-y-20">
-              {filteredPackages.map((pkg, idx) => {
-                const isEven = idx % 2 === 0;
-                const isThird = idx % 3 === 0;
-
-                // Creating dynamic 'breakdown' highlights based on package info
-                const highlights = [
-                  { icon: <Clock size={16} />, text: `${pkg.duration} Carefully Planned` },
-                  { icon: <Star size={16} />, text: `Top Rated Experience: ${pkg.rating}/5` },
-                  { icon: <Shield size={16} />, text: 'Includes Premium Support' },
-                  { icon: <Compass size={16} />, text: 'Tailored specifically for this category' }
-                ];
-
-                return (
-                  <div key={pkg.id} className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-10 lg:gap-16 items-center`}>
-
-                    {/* Image Column - heavily customized based on index */}
-                    <div className="w-full lg:w-1/2 relative group">
-                      {/* Decorative background blob */}
-                      <div className={`absolute -inset-4 bg-gradient-to-tr ${isEven ? 'from-amber-200/40 to-[#0000ff]/10' : 'from-[#0000ff]/20 to-red-200/40'} rounded-[60px] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000`}></div>
-
-                      <div className={`relative w-full aspect-[4/5] overflow-hidden ${isThird ? 'rounded-[100px] rounded-br-sm' : isEven ? 'rounded-[40px]' : 'rounded-full'} border-[8px] border-white shadow-2xl`}>
-                        <img
-                          src={pkg.image}
-                          alt={pkg.destination}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-60"></div>
-
-                        {/* Custom price tag on image */}
-                        <div className={`absolute bottom-8 ${isEven ? 'left-8' : 'right-8'} bg-white/90 backdrop-blur-md px-6 py-4 rounded-3xl shadow-2xl border border-white/50`}>
-                          <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-1">Starting From</p>
-                          <p className="text-3xl font-black text-slate-900 tracking-tighter">${pkg.price}</p>
-                        </div>
-                      </div>
-
-                      {/* Floating accent elements */}
-                      <div className={`absolute ${isEven ? '-right-6 top-1/4' : '-left-6 bottom-1/4'} w-24 h-24 bg-${isThird ? 'amber' : 'blue'}-500/10 rounded-full blur-xl mix-blend-multiply pointer-events-none`}></div>
-                    </div>
-
-                    {/* Text / Breakdown Column */}
-                    <div className="w-full lg:w-1/2 flex flex-col justify-center">
-                      <div className="flex items-center gap-4 mb-6">
-                        <span className="text-amber-500 font-black text-[10px] uppercase tracking-[0.3em] bg-amber-50 px-4 py-2 rounded-full border border-amber-100">
-                          {pkg.category}
-                        </span>
-                        <div className="h-[2px] w-12 bg-slate-200"></div>
-                      </div>
-
-                      <h3 className="font-black text-slate-900 mb-8 uppercase tracking-tighter leading-[0.9] hover:text-[#0000ff] cursor-pointer transition-colors text-2xl md:text-3xl" onClick={() => setSelectedPackage(pkg)}>
-                        {pkg.destination}
-                      </h3>
-
-                      <div className="relative pl-8 border-l-4 border-slate-100 mb-10">
-                        <div className="absolute left-[-14px] top-2 w-6 h-6 bg-white rounded-full border-4 border-[#0000ff]"></div>
-                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-3">The Experience</h4>
-                        <p className="text-slate-600 font-medium text-lg leading-relaxed italic">
-                          "{pkg.description}"
-                        </p>
-                      </div>
-
-                      <div className="bg-slate-50 border border-slate-100 rounded-[32px] p-8 mb-10 relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-amber-100/50 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
-                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-6 relative z-10 flex items-center">
-                          <Activity size={16} className="mr-2 text-[#0000ff]" /> The Breakdown
-                        </h4>
-                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
-                          {highlights.map((item, i) => (
-                            <li key={i} className="flex items-start text-sm font-bold text-slate-600">
-                              <span className="text-amber-500 mr-3 mt-0.5">{item.icon}</span>
-                              <span className="leading-snug">{item.text}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="flex flex-col sm:flex-row gap-4">
-                        <button
-                          onClick={() => setSelectedPackage(pkg)}
-                          className="flex-1 bg-[#0000ff] hover:bg-slate-900 text-white py-5 rounded-[24px] font-black uppercase tracking-widest text-xs transition-colors shadow-lg shadow-[#0000ff]/20 flex justify-center items-center"
-                        >
-                          Explore Details <ArrowRight size={16} className="ml-2" />
-                        </button>
-                        <Link
-                          to="/contact"
-                          className="flex-1 bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-200 py-5 rounded-[24px] font-black uppercase tracking-widest text-xs transition-colors text-center flex justify-center items-center"
-                        >
-                          Book Voyage
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

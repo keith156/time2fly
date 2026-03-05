@@ -133,20 +133,20 @@ const DatePickerDropdown: React.FC<DatePickerProps> = ({ value, onChange, minDat
                 ref={triggerRef}
                 type="button"
                 onClick={() => setOpen(o => !o)}
-                className="w-full flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-300 focus:border-blue-500 focus:bg-white transition-all text-left"
+                className="w-full flex items-center gap-3 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus:border-white/30 focus:ring-4 focus:ring-white/10 transition-all text-left min-w-0 backdrop-blur-sm"
             >
-                <Calendar size={14} className="text-blue-400 shrink-0" />
+                <Calendar size={16} className="text-blue-400 shrink-0" />
                 <div className="flex flex-col min-w-0 flex-1">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{label}</span>
-                    <span className={`text-sm font-semibold truncate ${displayValue ? 'text-slate-800' : 'text-slate-400'}`}>
+                    <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">{label}</span>
+                    <span className={`text-[15px] font-bold truncate ${displayValue ? 'text-white' : 'text-white/40'}`}>
                         {displayValue || 'Select date'}
                     </span>
                 </div>
-                <ChevronDown size={13} className={`text-slate-300 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
+                <ChevronDown size={14} className={`text-white/30 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
             </button>
 
             <DropdownPortal anchorRef={triggerRef as React.RefObject<HTMLElement>} open={open}>
-                <div ref={panelRef} className="bg-slate-900 border border-white/10 rounded-2xl shadow-2xl shadow-black/60 p-4 w-[300px]">
+                <div ref={panelRef} className="bg-[#000033]/90 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-4 w-[300px]">
                     <div className="flex items-center justify-between mb-4">
                         <button type="button" onClick={prevMonth} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 text-white/60 hover:text-white transition-colors">
                             <ChevronLeft size={16} />
@@ -288,23 +288,26 @@ const FlightSearchBar: React.FC = () => {
     };
 
     // Shared dropdown panel styles
-    const panelCls = "bg-slate-900 border border-white/10 rounded-2xl shadow-2xl shadow-black/60";
+    const panelCls = "bg-[#000033]/90 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]";
 
     return (
-        <section id="flight-search" style={{ backgroundColor: '#000033' }} className="py-4 px-4 scroll-mt-24">
-            <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-5">
+        <section id="flight-search" className="py-8 px-4 scroll-mt-24 border-b border-white/5 relative overflow-hidden" style={{ backgroundColor: '#000033' }}>
+            {/* Ambient glows behind the glass container */}
+            <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#0000ff]/30 rounded-full blur-[120px] mix-blend-screen pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
+
+            <div className="max-w-5xl mx-auto bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[32px] md:rounded-[40px] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] p-6 md:p-8 relative z-10 transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,0,0,0.4)] hover:border-red-500/30 group">
 
                 {/* Heading */}
-                <div className="flex items-center gap-2 mb-3">
-                    <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
-                        <Plane size={16} className="text-white" />
+                <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 bg-white/10 border border-white/20 rounded-[14px] flex items-center justify-center shadow-lg backdrop-blur-md">
+                        <Plane size={20} className="text-white" />
                     </div>
-                    <h2 className="font-black text-slate-800 uppercase tracking-widest text-[30px]">BOOK FLIGHT</h2>
-                    <span className="ml-auto text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden sm:block">Book via WhatsApp</span>
+                    <h2 className="font-black text-white uppercase tracking-widest text-[28px] md:text-[32px] leading-none">BOOK FLIGHT</h2>
+                    <span className="ml-auto text-[10px] font-bold text-white/40 uppercase tracking-widest hidden sm:block">Book via WhatsApp</span>
                 </div>
 
                 {/* Controls row */}
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-4 pb-3 border-b border-slate-100">
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-6 pb-5 border-b border-white/10">
 
                     {/* Trip type */}
                     <div className="relative">
@@ -312,11 +315,11 @@ const FlightSearchBar: React.FC = () => {
                             ref={tripBtnRef}
                             type="button"
                             onClick={() => { setShowTripMenu(p => !p); setShowCabinMenu(false); setShowPassengers(false); }}
-                            className="flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors"
+                            className="flex items-center gap-1.5 text-sm font-semibold text-white/70 hover:text-white transition-colors"
                         >
                             <ArrowLeftRight size={14} />
                             {tripType}
-                            <ChevronDown size={13} className={`transition-transform ${showTripMenu ? 'rotate-180' : ''}`} />
+                            <ChevronDown size={13} className={`transition-transform text-white/40 ${showTripMenu ? 'rotate-180' : ''}`} />
                         </button>
                         <DropdownPortal anchorRef={tripBtnRef as React.RefObject<HTMLElement>} open={showTripMenu}>
                             <div ref={tripPanelRef} className={`${panelCls} min-w-[150px] overflow-hidden`}>
@@ -338,11 +341,11 @@ const FlightSearchBar: React.FC = () => {
                             ref={paxBtnRef}
                             type="button"
                             onClick={() => { setShowPassengers(p => !p); setShowTripMenu(false); setShowCabinMenu(false); }}
-                            className="flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors"
+                            className="flex items-center gap-1.5 text-sm font-semibold text-white/70 hover:text-white transition-colors"
                         >
                             <Users size={14} />
                             {totalPax} passenger{totalPax !== 1 ? 's' : ''}
-                            <ChevronDown size={13} className={`transition-transform ${showPassengers ? 'rotate-180' : ''}`} />
+                            <ChevronDown size={13} className={`transition-transform text-white/40 ${showPassengers ? 'rotate-180' : ''}`} />
                         </button>
                         <DropdownPortal anchorRef={paxBtnRef as React.RefObject<HTMLElement>} open={showPassengers}>
                             <div ref={paxPanelRef} className={`${panelCls} w-72 p-4`}>
@@ -364,10 +367,10 @@ const FlightSearchBar: React.FC = () => {
                             ref={cabinBtnRef}
                             type="button"
                             onClick={() => { setShowCabinMenu(p => !p); setShowTripMenu(false); setShowPassengers(false); }}
-                            className="flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors"
+                            className="flex items-center gap-1.5 text-sm font-semibold text-white/70 hover:text-white transition-colors"
                         >
                             {cabin}
-                            <ChevronDown size={13} className={`transition-transform ${showCabinMenu ? 'rotate-180' : ''}`} />
+                            <ChevronDown size={13} className={`transition-transform text-white/40 ${showCabinMenu ? 'rotate-180' : ''}`} />
                         </button>
                         <DropdownPortal anchorRef={cabinBtnRef as React.RefObject<HTMLElement>} open={showCabinMenu}>
                             <div ref={cabinPanelRef} className={`${panelCls} min-w-[180px] overflow-hidden`}>
@@ -385,28 +388,28 @@ const FlightSearchBar: React.FC = () => {
                 </div>
 
                 {/* Search row */}
-                <div className="flex flex-col md:flex-row items-stretch gap-2">
+                <div className="flex flex-col md:flex-row items-stretch gap-3">
 
                     {/* From */}
-                    <div className="flex items-center gap-2 flex-1 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-300 focus-within:border-blue-500 focus-within:bg-white transition-all min-w-0">
-                        <div className="w-2.5 h-2.5 rounded-full border-2 border-blue-400 shrink-0" />
+                    <div className="flex items-center gap-3 flex-1 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus-within:border-white/30 focus-within:ring-4 focus-within:ring-white/10 transition-all min-w-0 backdrop-blur-sm">
+                        <div className="w-3 h-3 rounded-full border-[2.5px] border-blue-400 shrink-0" />
                         <div className="flex flex-col min-w-0 flex-1">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">From</span>
-                            <input value={from} onChange={e => setFrom(e.target.value)} className="flex-1 bg-transparent text-sm text-slate-800 placeholder-slate-400 outline-none font-semibold min-w-0" placeholder="Origin city or airport" />
+                            <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-0.5">From</span>
+                            <input value={from} onChange={e => setFrom(e.target.value)} className="flex-1 bg-transparent text-[15px] text-white placeholder-white/30 outline-none font-bold min-w-0" placeholder="Origin city or airport" />
                         </div>
                     </div>
 
                     {/* Swap */}
-                    <button type="button" onClick={swapLocations} className="hidden md:flex self-center shrink-0 p-2 rounded-full border border-slate-200 text-slate-400 hover:text-blue-600 hover:border-blue-300 hover:bg-blue-50 transition-all" title="Swap">
+                    <button type="button" onClick={swapLocations} className="hidden md:flex self-center shrink-0 p-2.5 rounded-full border border-white/20 text-white/60 hover:text-white hover:border-white/40 hover:bg-white/10 transition-all z-10 -mx-6 bg-[#000033] shadow-sm backdrop-blur-md" title="Swap">
                         <ArrowLeftRight size={14} />
                     </button>
 
                     {/* To */}
-                    <div className="flex items-center gap-2 flex-1 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-300 focus-within:border-blue-500 focus-within:bg-white transition-all min-w-0">
-                        <MapPin size={14} className="text-blue-400 shrink-0" />
+                    <div className="flex items-center gap-3 flex-1 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus-within:border-white/30 focus-within:ring-4 focus-within:ring-white/10 transition-all min-w-0 md:ml-3 backdrop-blur-sm">
+                        <MapPin size={16} className="text-blue-400 shrink-0" />
                         <div className="flex flex-col min-w-0 flex-1">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">To</span>
-                            <input value={to} onChange={e => setTo(e.target.value)} className="flex-1 bg-transparent text-sm text-slate-800 placeholder-slate-400 outline-none font-semibold min-w-0" placeholder="Destination city or airport" />
+                            <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-0.5">To</span>
+                            <input value={to} onChange={e => setTo(e.target.value)} className="flex-1 bg-transparent text-[15px] text-white placeholder-white/30 outline-none font-bold min-w-0" placeholder="Destination city or airport" />
                         </div>
                     </div>
 
@@ -417,14 +420,14 @@ const FlightSearchBar: React.FC = () => {
                     )}
 
                     {/* Explore button */}
-                    <button type="button" onClick={handleExplore} className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-black px-7 py-3 rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 transition-all duration-200 text-sm uppercase tracking-wide shrink-0 mt-1 md:mt-0">
-                        <Search size={16} />
+                    <button type="button" onClick={handleExplore} className="flex items-center justify-center gap-2 bg-[#0000ff] hover:bg-blue-600 active:scale-95 text-white font-black px-8 py-4 rounded-2xl shadow-[0_4px_20px_rgba(0,0,255,0.4)] hover:shadow-[0_4px_25px_rgba(0,0,255,0.6)] border border-white/20 transition-all duration-300 text-[13px] uppercase tracking-widest shrink-0 mt-2 md:mt-0 md:ml-1">
+                        <Search size={18} />
                         <span>REQUEST QUOTE</span>
                     </button>
                 </div>
 
                 {/* Mobile swap */}
-                <button type="button" onClick={swapLocations} className="md:hidden flex items-center gap-2 mt-3 text-xs text-slate-400 hover:text-blue-600 font-semibold transition-colors">
+                <button type="button" onClick={swapLocations} className="md:hidden flex items-center justify-center gap-2 mt-4 text-xs text-white/60 hover:text-white font-bold transition-colors w-full border border-white/10 rounded-xl py-3 bg-white/5 backdrop-blur-sm">
                     <ArrowLeftRight size={13} />
                     Swap origin &amp; destination
                 </button>

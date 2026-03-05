@@ -55,7 +55,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .on('postgres_changes', { event: '*', schema: 'public', table }, (payload) => {
           console.log(`Real-time update for ${table}:`, payload.eventType);
           if (payload.eventType === 'INSERT') {
-            setter(prev => [payload.new, ...prev]);
+            if (table === 'destinations') {
+              setter(prev => [...prev, payload.new]);
+            } else {
+              setter(prev => [payload.new, ...prev]);
+            }
           } else if (payload.eventType === 'UPDATE') {
             setter(prev => prev.map(item => item.id === payload.new.id ? payload.new : item));
           } else if (payload.eventType === 'DELETE') {
@@ -89,7 +93,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const [pkgResult, blogResult, destResult, ticketResult] = await Promise.all([
         supabase.from('packages').select('*').order('created_at', { ascending: false }),
         supabase.from('blogs').select('*').order('created_at', { ascending: false }),
-        supabase.from('destinations').select('*').order('created_at', { ascending: false }),
+        supabase.from('destinations').select('*').order('created_at', { ascending: true }),
         supabase.from('live_tickets').select('*').order('order_index', { ascending: true })
       ]);
 
@@ -298,7 +302,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         console.error('Destination insert error:', error);
         alert(`Error saving destination: ${error.message}`);
       } else if (data) {
-        setDestinations(prev => [data, ...prev]);
+        setDestinations(prev => [...prev, data]);
       }
     } catch (err: any) {
       console.error('Destination save failed:', err);
