@@ -133,7 +133,7 @@ const DatePickerDropdown: React.FC<DatePickerProps> = ({ value, onChange, minDat
                 ref={triggerRef}
                 type="button"
                 onClick={() => setOpen(o => !o)}
-                className="w-full flex items-center gap-3 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus:border-white/30 focus:ring-4 focus:ring-white/10 transition-all text-left min-w-0 backdrop-blur-sm"
+                className="w-full flex items-center gap-3 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus:border-white/30 focus:ring-4 focus:ring-white/10 transition-all text-left min-w-0 backdrop-blur-sm premium-float-shadow"
             >
                 <Calendar size={16} className="text-blue-400 shrink-0" />
                 <div className="flex flex-col min-w-0 flex-1">
@@ -391,7 +391,7 @@ const FlightSearchBar: React.FC = () => {
                 <div className="flex flex-col md:flex-row items-stretch gap-3">
 
                     {/* From */}
-                    <div className="flex items-center gap-3 flex-1 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus-within:border-white/30 focus-within:ring-4 focus-within:ring-white/10 transition-all min-w-0 backdrop-blur-sm">
+                    <div className="flex items-center gap-3 flex-1 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus-within:border-white/30 focus-within:ring-4 focus-within:ring-white/10 transition-all min-w-0 backdrop-blur-sm premium-float-shadow">
                         <div className="w-3 h-3 rounded-full border-[2.5px] border-blue-400 shrink-0" />
                         <div className="flex flex-col min-w-0 flex-1">
                             <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-0.5">From</span>
@@ -405,7 +405,7 @@ const FlightSearchBar: React.FC = () => {
                     </button>
 
                     {/* To */}
-                    <div className="flex items-center gap-3 flex-1 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus-within:border-white/30 focus-within:ring-4 focus-within:ring-white/10 transition-all min-w-0 md:ml-3 backdrop-blur-sm">
+                    <div className="flex items-center gap-3 flex-1 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus-within:border-white/30 focus-within:ring-4 focus-within:ring-white/10 transition-all min-w-0 md:ml-3 backdrop-blur-sm premium-float-shadow">
                         <MapPin size={16} className="text-blue-400 shrink-0" />
                         <div className="flex flex-col min-w-0 flex-1">
                             <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-0.5">To</span>

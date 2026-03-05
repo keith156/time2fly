@@ -351,3 +351,10 @@ section {
   animation: svg-write-loop 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   animation-delay: 4.5s;
 }
+
+/* Premium Floating Shadow for UI elements on dark backgrounds */
+.premium-float-shadow {
+  box-shadow: 0 10px 40px -10px rgba(255, 255, 255, 0.15),
+    0 0 20px -5px rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
