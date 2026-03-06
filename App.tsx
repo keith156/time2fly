@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search, RefreshCcw, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import ReactGA from 'react-ga4';
 import Home from './pages/Home';
 import About from './pages/About';
 import TourPackages from './pages/TourPackages';
@@ -25,8 +24,13 @@ import ErrorBoundary from './components/ErrorBoundary.tsx';
 import WhatsAppButton from './components/WhatsAppButton.tsx';
 import { DataProvider, useData } from './context/DataContext';
 
-// Initialize Google Analytics 4
-ReactGA.initialize('G-FBJ3BGE9E0');
+
+// Type definition for Google Analytics gtag function
+declare global {
+  interface Window {
+    gtag: (command: string, ...args: any[]) => void;
+  }
+}
 
 const Navbar: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -417,7 +421,12 @@ const App: React.FC = () => {
   const RouteTracker = () => {
     const location = useLocation();
     useEffect(() => {
-      ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search, title: document.title });
+      if (typeof window.gtag === 'function') {
+        window.gtag('config', 'G-FBJ3BGE9E0', {
+          page_path: location.pathname + location.search,
+          page_title: document.title
+        });
+      }
     }, [location]);
     return null;
   };
