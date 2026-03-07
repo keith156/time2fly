@@ -227,7 +227,7 @@ const TourPackages: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/60" />
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10 animate-fade-in-up">
-          <span className="text-amber-500 font-black tracking-[0.4em] uppercase text-xs mb-6 block drop-shadow-lg">
+          <span className="text-amber-500 font-black tracking-[0.4em] uppercase text-[14px] mb-6 block drop-shadow-lg">
             {selectedCategory || 'World Expeditions'}
           </span>
           <h1 className="text-h1 text-white mb-6">
@@ -248,7 +248,7 @@ const TourPackages: React.FC = () => {
                 <div className={`space-y-6 text-slate-600 font-medium leading-relaxed text-lg ${selectedCategory === 'Safari Adventures' ? 'text-justify lg:text-center' : ''}`}>
                   {selectedCategory === 'Holiday Escapes' && (
                     <>
-                      <p className="text-blue-600 font-black uppercase tracking-[0.3em] text-xs mb-4">Escape the Ordinary</p>
+                      <p className="text-blue-600 font-black uppercase tracking-[0.3em] text-[14px] mb-4">Escape the Ordinary</p>
                       <p>Unwind, explore, and recharge with carefully designed leisure experiences tailored for relaxation and discovery. Our Holiday Escapes blend comfort, culture, and unforgettable scenery into seamless travel moments.</p>
                       <ul className="space-y-4 pt-6">
                         <li className="flex items-center gap-4 group"><div className="w-10 h-[2px] bg-blue-600 transition-all group-hover:w-16"></div> <span className="font-black uppercase tracking-widest text-xs">Beach & Island Retreats – Zanzibar, Seychelles, Maldives</span></li>
@@ -260,7 +260,7 @@ const TourPackages: React.FC = () => {
                   )}
                   {selectedCategory === 'Romantic Retreats' && (
                     <>
-                      <p className="text-red-500 font-black uppercase tracking-[0.3em] text-xs mb-4">The Beginning of Forever</p>
+                      <p className="text-red-500 font-black uppercase tracking-[0.3em] text-[14px] mb-4">The Beginning of Forever</p>
                       <p>Celebrate love in unforgettable settings designed for intimacy, elegance, and shared experiences. Our Romantic Retreats are thoughtfully curated to create magical moments for couples at every stage of their journey together.</p>
                       <ul className="space-y-4 pt-6">
                         <li className="flex items-center gap-4 group"><div className="w-10 h-[2px] bg-red-500 transition-all group-hover:w-16"></div> <span className="font-black uppercase tracking-widest text-xs">Honeymoon Experiences – Exotic destinations for newlyweds</span></li>
@@ -271,7 +271,7 @@ const TourPackages: React.FC = () => {
                   )}
                   {selectedCategory === 'Family Getaways' && (
                     <>
-                      <p className="text-blue-400 font-black uppercase tracking-[0.3em] text-xs mb-4">Building a Shared Legacy</p>
+                      <p className="text-blue-400 font-black uppercase tracking-[0.3em] text-[14px] mb-4">Building a Shared Legacy</p>
                       <p>Create lasting memories with experiences designed for comfort, connection, and fun for all ages. Our Family Getaways combine relaxation, adventure, and child-friendly experiences to ensure every member of the family enjoys the journey.</p>
                       <ul className="space-y-4 pt-6">
                         <li className="flex items-center gap-4 group"><div className="w-10 h-[2px] bg-blue-400 transition-all group-hover:w-16"></div> <span className="font-black uppercase tracking-widest text-xs">Family-Friendly Resorts with Kids' Activities</span></li>
@@ -282,7 +282,7 @@ const TourPackages: React.FC = () => {
                   )}
                   {selectedCategory === 'Business Travel' && (
                     <>
-                      <p className="text-slate-900 font-black uppercase tracking-[0.3em] text-xs mb-4">Business at the Speed of Flight</p>
+                      <p className="text-slate-900 font-black uppercase tracking-[0.3em] text-[14px] mb-4">Business at the Speed of Flight</p>
                       <p>Efficient, reliable, and professionally managed travel solutions designed to support your corporate goals. Our Business Travel services ensure seamless coordination, comfort, and punctuality for executives and teams on the move.</p>
                       <ul className="space-y-4 pt-6">
                         <li className="flex items-center gap-4 group"><div className="w-10 h-[2px] bg-slate-900 transition-all group-hover:w-16"></div> <span className="font-black uppercase tracking-widest text-xs">Flight Management – Economy, Business & First-Class</span></li>
@@ -306,7 +306,7 @@ const TourPackages: React.FC = () => {
                   )}
                   {selectedCategory === 'Safari Adventures' && (
                     <>
-                      <p className="text-green-600 font-black uppercase tracking-[0.3em] text-xs mb-4">The Earth's Primal Heartbeat</p>
+                      <p className="text-green-600 font-black uppercase tracking-[0.3em] text-[14px] mb-4">The Earth's Primal Heartbeat</p>
                       <p>Connect with the raw beauty of the wild through expertly guided expeditions. Our Safari Adventures offer intimate wildlife encounters and luxury in the heart of nature.</p>
                       <ul className="space-y-4 pt-6">
                         <li className="flex items-center gap-4 group"><div className="w-10 h-[2px] bg-green-600 transition-all group-hover:w-16"></div> <span className="font-black uppercase tracking-widest text-xs">Big Five Safaris – Serengeti, Kruger & Murchison Falls</span></li>
@@ -417,8 +417,8 @@ const TourPackages: React.FC = () => {
                   {/* Glassmorphism Overlay */}
                   <div className="absolute inset-x-4 bottom-4 p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[32px] transform translate-y-2 group-hover:translate-y-0 transition-all duration-500 shadow-2xl flex flex-col items-center text-center">
                     <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-tighter drop-shadow-md">{cat.name}</h3>
-                    <p className="text-[11px] font-bold text-white/70 uppercase tracking-[0.2em] max-w-[200px] leading-relaxed mb-4">{cat.desc}</p>
-                    <div className="flex items-center gap-2 text-white font-black text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                    <p className="text-[14px] font-bold text-white/70 uppercase tracking-[0.2em] max-w-[200px] leading-relaxed mb-4">{cat.desc}</p>
+                    <div className="flex items-center gap-2 text-white font-black text-[14px] uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
                       Explore Experience <ArrowRight size={14} className="text-red-500" />
                     </div>
                   </div>

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, ArrowLeft, Calendar, MapPin, Clock, CreditCard, Send, Zap, Ship, GraduationCap, Car, Briefcase, ChevronDown, CheckCircle2, Compass, Share2, Search, DollarSign, MessageCircle } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle.tsx';
 import FlightSearchBar from '../components/FlightSearchBar.tsx';
@@ -23,17 +23,21 @@ const AirlineLiverySeparator: React.FC = () => (
 );
 
 const Home: React.FC = () => {
+  const location = useLocation();
   const { packages } = useData();
   const [activeServiceIdx, setActiveServiceIdx] = useState(0);
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
 
-
   useEffect(() => {
-    const serviceTimer = setInterval(() => {
-      setActiveServiceIdx((prev) => (prev + 1) % SERVICES.length);
-    }, 5000);
-    return () => clearInterval(serviceTimer);
-  }, []);
+    if (location.hash === '#flight-search') {
+      const element = document.getElementById('flight-search');
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location]);
 
   const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
 
@@ -220,16 +224,16 @@ const Home: React.FC = () => {
                   </text>
                 </svg>
                 <div className="flex bg-navy-900/40 backdrop-blur-md p-1 rounded-full border border-white/10 shadow-2xl scale-110">
-                  <button
-                    onClick={() => document.getElementById('flight-search')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-black text-[11px] uppercase tracking-widest transition-all shadow-lg shadow-blue-600/20 active:scale-95"
+                  <Link
+                    to="/#flight-search"
+                    className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-black text-[14px] uppercase tracking-widest transition-all shadow-lg shadow-blue-600/20 active:scale-95"
                   >
                     <Plane size={14} />
                     Ticket
-                  </button>
+                  </Link>
                   <Link
                     to="/packages"
-                    className="flex items-center gap-2 px-6 py-2.5 text-white/60 hover:text-white rounded-full font-black text-[11px] uppercase tracking-widest transition-all hover:bg-white/5 active:scale-95"
+                    className="flex items-center gap-2 px-6 py-2.5 text-white/60 hover:text-white rounded-full font-black text-[14px] uppercase tracking-widest transition-all hover:bg-white/5 active:scale-95"
                   >
                     <Star size={14} />
                     Tour
@@ -306,7 +310,7 @@ const Home: React.FC = () => {
 
               <div className="flex items-center justify-center space-x-2 opacity-70 hover:opacity-100 transition-opacity pb-8">
                 <CheckCircle2 className="text-white" size={16} />
-                <span className="text-white text-[10px] font-bold uppercase tracking-widest">Verified Agency</span>
+                <span className="text-white text-[14px] font-bold uppercase tracking-widest">Verified Agency</span>
               </div>
             </div>
           </div>
@@ -319,7 +323,7 @@ const Home: React.FC = () => {
       {/* Partners Section */}
       <section className="section-spacing bg-navy-900 relative overflow-hidden">
         <div className="max-w-3xl mx-auto px-6 text-center mb-12 relative z-20">
-          <p className="text-xs md:text-sm font-black uppercase tracking-widest text-white/40 mb-4">Our Global Partners</p>
+          <p className="text-[14px] font-black uppercase tracking-widest text-white/40 mb-4">Our Global Partners</p>
           <p className="text-white/60 text-sm md:text-base font-normal leading-relaxed max-w-xl mx-auto lowercase tracking-widest opacity-80">
             trusted partnerships with leading airlines and travel providers worldwide, ensuring seamless journeys and competitive fares.
           </p>
@@ -407,7 +411,7 @@ const Home: React.FC = () => {
           </div>
         </div>
         <div className="mt-10 text-center">
-          <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-xs">Trusted by thousands of explorers since 2018</p>
+          <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-[14px]">Trusted by thousands of explorers since 2018</p>
         </div>
       </section >
 

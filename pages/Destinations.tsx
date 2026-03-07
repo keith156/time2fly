@@ -21,7 +21,7 @@ const Destinations: React.FC = () => {
                     <div className="absolute inset-0 bg-slate-950/65" />
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <span className="text-caption text-amber-500 mb-4 block">World Horizons</span>
+                    <span className="text-[14px] font-black uppercase tracking-widest text-amber-500 mb-4 block">World Horizons</span>
                     <h1 className="text-h1 text-white mb-8">Our Destinations</h1>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, RefreshCcw, Plane, CheckCircle2, User, MessageCircle, TrendingDown, TrendingUp, Minus } from 'lucide-react';
+import { ArrowLeft, RefreshCcw, Plane, CheckCircle2, User, MessageCircle, TrendingDown, TrendingUp, Minus, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 
@@ -99,7 +99,7 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
                             >
                                 Confirm
                             </a>
-                            <span className="text-blue-300 text-[10px] font-medium text-center">With Travel Consultant</span>
+                            <span className="text-blue-300 text-[12px] font-medium text-center">With Travel Consultant</span>
                         </>
                     ) : (
                         <button
@@ -174,7 +174,7 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
                                 >
                                     Confirm
                                 </a>
-                                <span className="text-blue-300 text-[9px] font-medium text-center">With Travel Consultant</span>
+                                <span className="text-blue-300 text-[12px] font-medium text-center">With Travel Consultant</span>
                             </>
                         ) : (
                             <button
@@ -249,19 +249,50 @@ const LivePrices: React.FC = () => {
                                 <RefreshCcw className="animate-spin text-blue-500 mx-auto mb-4" size={32} />
                                 <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">Loading incoming rates...</p>
                             </div>
-                        ) : liveTickets.length > 0 ? (
-                            <div className="space-y-4">
-                                {liveTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)}
-                                <div className="pt-4 pb-8 text-center animate-fade-in">
-                                    <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] opacity-80 backdrop-blur-sm inline-block px-6 py-2 rounded-full border border-slate-200/50 bg-white/50 shadow-sm">
-                                        * Terms and Conditions apply and the fare depends on availability
-                                    </p>
-                                </div>
-                            </div>
                         ) : (
-                            <div className="py-20 text-center bg-white rounded-3xl border border-slate-200/60 shadow-xl">
-                                <Plane className="w-12 h-12 text-slate-200 mx-auto mb-3" />
-                                <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">No active routes at the moment.</p>
+                            <div className="space-y-4">
+                                {liveTickets.length > 0 ? (
+                                    <>
+                                        {liveTickets.map(ticket => <TicketCard key={ticket.id} ticket={ticket} />)}
+                                        <div className="pt-4 pb-8 text-center animate-fade-in">
+                                            <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] opacity-80 backdrop-blur-sm inline-block px-6 py-2 rounded-full border border-slate-200/50 bg-white/50 shadow-sm">
+                                                * Terms and Conditions apply and the fare depends on availability
+                                            </p>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className="py-20 text-center bg-white rounded-3xl border border-slate-200/60 shadow-xl mb-8">
+                                        <Plane className="w-12 h-12 text-slate-200 mx-auto mb-3" />
+                                        <p className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">No active routes at the moment.</p>
+                                    </div>
+                                )}
+
+                                {/* Creative CTA for Flight Search Widget */}
+                                <div className="bg-gradient-to-br from-blue-900 to-indigo-950 rounded-[40px] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden group">
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-700"></div>
+                                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-red-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+                                    <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                                        <div className="max-w-md">
+                                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-blue-300 mb-6 border border-white/5">
+                                                <Zap size={14} className="fill-current" />
+                                                <span>Free Service</span>
+                                            </div>
+                                            <h3 className="text-3xl md:text-4xl font-black mb-4 leading-tight uppercase tracking-tighter">
+                                                Didn't See Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Flight?</span>
+                                            </h3>
+                                            <p className="text-blue-100/80 text-lg font-medium leading-relaxed">
+                                                Dont worry. You can search any route worldwide using our live booking widget below. It's completely free to use!
+                                            </p>
+                                        </div>
+                                        <Link
+                                            to="/#flight-search"
+                                            className="px-10 py-5 bg-white text-blue-900 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-blue-50 transition-all shadow-xl hover:shadow-2xl active:scale-95 shrink-0 flex items-center justify-center"
+                                        >
+                                            Search Any Flight
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </div>
@@ -293,8 +324,8 @@ const LivePrices: React.FC = () => {
                             <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
                             <div className="relative z-10">
                                 <MessageCircle size={24} className="mb-4 text-white/90" />
-                                <h3 className="text-h4 text-white mb-3">Custom Booking?</h3>
-                                <p className="text-body text-blue-100 mb-6">Let our experts craft the perfect journey, stress-free.</p>
+                                <h3 className="text-h4 text-white mb-3 uppercase tracking-widest">CUSTOM BOOKING?</h3>
+                                <p className="!text-white text-[14px] font-medium leading-relaxed mb-6">Let our travel experts craft the perfect journey for you-completely stress-free. At Time2fly Tours & Travel Ltd, we provide personalized travel planning tailored to your preferences,schedule,and budget.</p>
                                 <a
                                     href="https://wa.me/256783084521"
                                     target="_blank"

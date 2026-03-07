@@ -353,7 +353,7 @@ const Footer: React.FC = () => {
             </div>
             <div className="flex items-center space-x-3">
               <Mail size={18} className="text-amber-500 flex-shrink-0" />
-              <span>t2f.reservations@gmail.com</span>
+              <span>info@time2flytnt.com</span>
             </div>
           </div>
         </div>

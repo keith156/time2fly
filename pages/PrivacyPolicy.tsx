@@ -55,7 +55,7 @@ const PrivacyPolicy: React.FC = () => {
                         <div>
                             <h2 className="font-black uppercase tracking-tight text-slate-900 mb-4 text-4xl md:text-5xl tracking-tighter">5. Your Rights</h2>
                             <p className="text-body text-slate-600">
-                                You have the right to request access to the personal information we hold about you or ask for its deletion at any time by contacting us at <strong>t2f.reservations@gmail.com</strong>.
+                                You have the right to request access to the personal information we hold about you or ask for its deletion at any time by contacting us at <strong>info@time2flytnt.com</strong>.
                             </p>
                         </div>
 

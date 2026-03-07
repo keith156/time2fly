@@ -43,7 +43,7 @@ const Contact: React.FC = () => {
                 <div>
                   <h4 className="text-h4 text-slate-900 mb-1">Email Us</h4>
                   <p className="text-slate-500 mb-2">Bookings & Support</p>
-                  <p className="text-blue-600 font-bold">t2f.reservations@gmail.com</p>
+                  <p className="text-blue-600 font-bold">info@time2flytnt.com</p>
                 </div>
               </div>
 
