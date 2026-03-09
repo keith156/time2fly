@@ -60,7 +60,7 @@ const Blog: React.FC = () => {
                   <span className="text-[#0000ff] text-xs font-black uppercase tracking-[0.3em]">{selectedPost.category}</span>
                   <span className="h-[2px] w-8 bg-[#0000ff]"></span>
                 </div>
-                <h1 className="text-h1 text-slate-900 mb-10">
+                <h1 className="text-h2 text-slate-900 mb-10">
                   {selectedPost.title}
                 </h1>
                 <div className="flex flex-wrap items-center justify-center gap-10 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em]">
@@ -209,7 +209,7 @@ const Blog: React.FC = () => {
                     <span className="flex items-center"><User size={14} className="mr-1.5 text-[#0000ff]" /> {post.author.split(' ')[0]}</span>
                   </div>
                   <h2
-                    className="text-h3 text-slate-900 mb-4 hover:text-[#0000ff] transition-colors cursor-pointer line-clamp-2 h-20"
+                    className="text-h4 text-slate-900 mb-4 hover:text-[#0000ff] transition-colors cursor-pointer line-clamp-2"
                     onClick={() => setSelectedPost(post)}
                   >
                     {post.title}
