@@ -211,61 +211,61 @@ export const PACKAGES: Package[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    id: 'b-seo-1',
-    title: 'Why Uganda is the Ultimate Safari Destination for 2026',
-    excerpt: 'Discover why the Pearl of Africa is topping the charts for safari enthusiasts in the coming year, from mountain gorillas to the Big Five.',
-    content: `Uganda, often referred to as the "Pearl of Africa," is poised to be the premier destination for travelers in 2026. This landlocked gem offers an diversity of wildlife and landscapes that few other places on earth can match.
+    id: 'b-cairo-1',
+    title: 'Ancient Wonders: A Journey Through Cairo',
+    excerpt: 'Step back in time to explore the majestic Giza Pyramids and the vibrant streets of Egypt\'s historic capital.',
+    content: `Cairo, the "City of a Thousand Minarets," is a mesmerizing blend of ancient history and modern chaos. As the heart of Egypt, it offers an unparalleled journey through time, from the remnants of the Pharaohs to the vibrant culture of the Middle East.
 
-### The Majestic Mountain Gorillas
-Bwindi Impenetrable National Park remains the best place in the world to encounter mountain gorillas in their natural habitat. With conservation efforts proving successful, 2026 offers more opportunities for intimate trekking experiences that directly support local communities.
+### The Great Pyramids of Giza
+No visit to Cairo is complete without witnessing the last remaining wonder of the ancient world. Standing before the Great Pyramid of Khufu is a humbling experience. For a truly premium experience, we recommend a private sunset desert tour on horseback, offering a golden view of the pyramids far from the crowds.
 
-### The Big Five and Beyond
-While Murchison Falls and Queen Elizabeth National Park offer the classic Big Five experience, Uganda adds a unique twist with the tree-climbing lions of Ishasha. The dramatic Murchison Falls, where the world's longest river squeezes through a seven-meter gap, is a sensory experience you won't find anywhere else.
+### The Grand Egyptian Museum
+The newly opened Grand Egyptian Museum is a masterpiece of modern architecture housing the world's most extensive collection of Pharaonic antiquities. The Tutankhamun gallery, with its gold masks and intricate treasures, is a highlight that demands a guided expert tour to fully appreciate.
 
-### Sustainable and Authentic Travel
-The trend for 2026 is moving away from overcrowded tourist hotspots. Uganda's commitment to low-impact tourism and authentic community engagement makes it the perfect choice for the conscious traveler. Whether you're birdwatching in the wetlands or exploring the snow-capped Rwenzori Mountains, you're experiencing Africa at its most raw and beautiful.`,
-    image: '/assets/regal-african-safaris-gwZAmtRwxBI-unsplash.jpg',
-    date: 'February 24, 2026',
+### Khan el-Khalili and Islamic Cairo
+Lose yourself in the labyrinthine alleys of the Khan el-Khalili bazaar. The scent of spices, the glint of hammered copper, and the call to prayer create an atmosphere that hasn't changed for centuries. Stop at the historic El Fishawy cafe for a traditional mint tea and watch the world go by.`,
+    image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&q=80&w=1200',
+    date: 'March 9, 2026',
     author: 'Time2Fly Expert',
-    category: 'Safari Adventures'
+    category: 'Cultural Explorer'
   },
   {
-    id: 'b-seo-2',
-    title: 'The Most Romantic Getaways in East Africa',
-    excerpt: 'From private islands in the Maldives to secluded luxury lodges in the savannah, explore the ultimate honeymoon destinations.',
-    content: `East Africa and its surrounding islands offer some of the most romantic settings on the planet. For couples looking to celebrate their union, the choices are as diverse as they are breathtaking.
+    id: 'b-bangkok-1',
+    title: 'The Pulsing Heart of Thailand: Bangkok Unveiled',
+    excerpt: 'From golden temples to world-class street food, discover why Bangkok remains the world\'s most visited city.',
+    content: `Bangkok is a sensory explosion. It's a city where ancient tradition meets futuristic innovation, where quiet saffron-robed monks walk alongside bustling skyscrapers. It is a destination that rewards the curious and the adventurous.
 
-### The White Sands of Diani and Zanzibar
-There is nothing quite like a beach honeymoon in East Africa. The turquoise waters and powdery white sands of Diani Beach and Zanzibar provide the perfect backdrop for relaxation and romance. Sunset dhow cruises and private beach dinners under the stars are staples of the experience.
+### Temples of Gold
+The Grand Palace and Wat Phra Kaew (Temple of the Emerald Buddha) are the spiritual heart of Thailand. The intricate architecture and dazzling gold leaf are breathtaking. For a quieter encounter, visit Wat Arun at sunrise, when the first light reflects off its porcelain-encrusted spires across the Chao Phraya River.
 
-### Luxury in the Wild
-For those who find romance in adventure, a luxury safari lodge offers an unparalleled experience. Imagine waking up to the sounds of the bush and enjoying a private breakfast as elephants graze in the distance. Many lodges now offer "star beds," allowing couples to sleep safely under the vast African sky.
+### A Culinary Capital
+Bangkok is arguably the street food capital of the world. From Michelin-starred roadside stalls like Jay Fai to the buzzing night markets of Sukhumvit, the flavors are bold and unforgettable. We specialize in arranging private "Chef-led" food tours that take you deep into the local neighborhoods to find the city's hidden culinary gems.
 
-### Intimacy and Personalization
-At Time2Fly, we specialize in tailoring these journeys to each couple's specific desires. Whether it's a helicopter ride over the Victoria Nile or a private aromatherapy session in the heart of the forest, we ensure that every detail contributes to a lifetime of memories.`,
-    image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=1200',
-    date: 'February 20, 2026',
-    author: 'Romantic Consultant',
-    category: 'Romantic Retreats'
+### Nightlife and Shopping
+As the sun sets, Bangkok transforms. Experience the city from a new perspective at one of its many world-famous rooftop bars, like Lebua or Octave. For shoppers, the city offers everything from the vast Chatuchak Weekend Market to the ultra-luxury malls of Siam Paragon.`,
+    image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&q=80&w=1200',
+    date: 'March 8, 2026',
+    author: 'Time2Fly Expert',
+    category: 'Cultural Explorer'
   },
   {
-    id: 'b-seo-3',
-    title: 'Strategies for Modern Business Travel Management',
-    excerpt: 'Optimizing corporate travel in 2026 requires a balance of technology, efficiency, and employee well-being.',
-    content: `Business travel is evolving rapidly. In 2026, corporate travel management is no longer just about booking the cheapest flight; it's about strategic optimization of time, budget, and human resources.
+    id: 'b-bali-1',
+    title: 'Bali Bliss: Finding Serenity in the Island of Gods',
+    excerpt: 'Uncover the spiritual heart of Indonesia, from the lush terraces of Ubud to the pristine beaches of Uluwatu.',
+    content: `Bali is more than just a destination; it's a state of mind. Known for its forested volcanic mountains, iconic rice paddies, and coral reefs, the "Island of the Gods" offers a unique blend of spiritual tranquility and coastal luxury.
 
-### The Rise of "Bleisure"
-One of the most significant trends we're seeing is the integration of business and leisure travel. Companies that allow employees to extend their trips for personal exploration often see higher morale and retention. Managing this "bleisure" transition seamlessly is where an expert agency adds immense value.
+### Cultural Ubud
+Ubud is the cultural and spiritual center of Bali. Surrounded by emerald-green rice terraces and misty jungles, it's the perfect place for a wellness retreat. Visit the Sacred Monkey Forest Sanctuary or take a traditional Balinese cooking class to connect with the local heritage.
 
-### Technology and Duty of Care
-In an increasingly complex global landscape, the safety of employees is paramount. Modern travel management platforms provide real-time tracking, instant alerts, and 24/7 support. This "Duty of Care" is a legal and moral obligation that businesses must prioritize.
+### Majestic Uluwatu
+Perched on high cliffs overlooking the Indian Ocean, Uluwatu offers some of Bali's most dramatic scenery. The Uluwatu Temple is a stunning site, especially during the traditional Kecak Fire Dance at sunset. For surfers and beach lovers, the hidden coves below the cliffs are paradise.
 
-### Cost Optimization Beyond the Ticket Price
-True savings come from comprehensive policy management and exclusive corporate rates. By partnering with Time2Fly, businesses gain access to preferred status with airlines and hotels that isn't available to the general public. We don't just reduce costs; we maximize the return on your travel investment.`,
-    image: 'https://images.unsplash.com/photo-1554774853-719586f82d77?auto=format&fit=crop&q=80&w=1200',
-    date: 'February 15, 2026',
-    author: 'Corporate Lead',
-    category: 'Business Travel'
+### Luxury and Wellness
+Bali is famous for its world-class spa and wellness industry. From private flower baths in jungle villas to high-end holistic healing centers, we can curate a personalized wellness itinerary that rejuvenates both body and soul.`,
+    image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=1200',
+    date: 'March 7, 2026',
+    author: 'Time2Fly Expert',
+    category: 'Holiday Escapes'
   }
 ];
 
