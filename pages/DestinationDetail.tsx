@@ -201,7 +201,7 @@ const DestinationDetail: React.FC = () => {
                                         {getIcon(item.title)}
                                     </div>
                                     <h4 className="text-h3 text-white mb-3">{item.title}</h4>
-                                    <p className="text-slate-100/90 text-sm font-medium leading-relaxed line-clamp-3 text-left">
+                                    <p className="text-slate-100/90 text-sm font-medium leading-relaxed text-left">
                                         {item.content}
                                     </p>
                                 </div>

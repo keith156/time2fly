@@ -18,35 +18,35 @@ export const SERVICES: Service[] = [
   {
     id: '1',
     title: 'Reservations',
-    description: 'Local, regional, and international flight and accommodation bookings tailored to your itinerary.',
+    description: 'Our dedicated reservations team provides seamless booking services for local, regional, and international travel. We specialize in tailoring flight itineraries and luxury accommodation to match your unique schedule and preferences, ensuring a stress-free start to your journey.',
     icon: 'Plane',
     image: 'https://images.unsplash.com/photo-1540553016722-983e48a2cd10?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '2',
     title: '24h Emergency Reservations',
-    description: 'Round-the-clock support for urgent travel changes and last-minute bookings wherever you are.',
+    description: 'Travel with peace of mind knowing our 24/7 emergency support team is always just a call away. Whether it\'s a last-minute flight change, an urgent hotel rebooking, or unexpected transit assistance, we provide immediate solutions whenever and wherever you need them.',
     icon: 'Clock',
     image: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '3',
     title: 'Adventure Sports',
-    description: 'Thrilling water rafting and bungee jumping experiences at world-famous locations.',
+    description: 'For the thrill-seekers, we offer heart-pounding adventure sports at world-renowned locations. From world-class white water rafting on the Nile to bungee jumping in majestic gorges, we arrange safe, high-octane experiences guided by certified professionals.',
     icon: 'Zap',
     image: '/assets/adventure-sports.jpg'
   },
   {
     id: '4',
     title: 'Wildlife Tracking',
-    description: 'Exclusive Gorilla and Chimpanzee tracking expeditions in the heart of the pearl of Africa.',
+    description: 'Embark on an extraordinary journey into the wild for an intimate encounter with nature\'s giants. We provide exclusive permits and expert-led tracking expeditions for Mountain Gorillas and Chimpanzees in the lush, biodiverse forests of Uganda, the Pearl of Africa.',
     icon: 'Compass',
     image: 'https://images.unsplash.com/photo-1547407139-3c921a66005c?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '5',
     title: 'Visa Advice & Assistance',
-    description: 'Expert guidance through complex visa requirements and documentation for smooth international travel.',
+    description: 'Navigating international travel requirements can be complex. Our visa experts offer personalized advice and end-to-end assistance with documentation, interview preparation, and protocol, ensuring a smooth and successful application process for your global destinations.',
     icon: 'Globe',
     image: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&q=80&w=800'
   },
@@ -87,7 +87,7 @@ export const PACKAGES: Package[] = [
     destination: 'Maldives Crystal Waters',
     price: 1500,
     duration: '5 Days',
-    description: 'Experience pure bliss in overwater villas with private lagoons and sunset dinners.',
+    description: 'Surrender to the serene beauty of the Maldives. Stay in luxurious overwater villas with direct access to private lagoons, enjoy candlelight sunset dinners on the sand, and experience world-class snorkeling in crystal-clear turquoise waters.',
     image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800',
     rating: 5,
     category: 'Holiday Escapes'
@@ -97,7 +97,7 @@ export const PACKAGES: Package[] = [
     destination: 'Swiss Alps Ski Retreat',
     price: 2200,
     duration: '7 Days',
-    description: 'Breathtaking mountain views, world-class skiing, and cozy alpine chalets.',
+    description: 'Escape to the majestic peaks of the Swiss Alps for the ultimate winter experience. Enjoy world-class skiing on pristine slopes, breathtaking panoramic mountain views, and cozy evenings in traditional high-end alpine chalets with premium amenities.',
     image: 'https://images.unsplash.com/photo-1502901664700-f56a7d1da021?auto=format&fit=crop&q=80&w=800',
     rating: 4.8,
     category: 'Holiday Escapes'
@@ -108,7 +108,7 @@ export const PACKAGES: Package[] = [
     destination: 'Santorini Romance',
     price: 3200,
     duration: '6 Days',
-    description: 'Iconic blue domes, private infinity pools, and the world\'s most beautiful sunsets.',
+    description: 'Experience the magic of Santorini with its iconic blue-domed churches and whitewashed villages. Relax in your private infinity pool overlooking the caldera and witness what are widely considered the world\'s most breathtaking sunsets.',
     image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&q=80&w=800',
     rating: 5,
     category: 'Romantic Retreats'
@@ -192,7 +192,7 @@ export const PACKAGES: Package[] = [
     destination: 'Serengeti Big Five Safari',
     price: 2400,
     duration: '5 Days',
-    description: 'Witness the Great Migration and the majestic Big Five in their natural habitat.',
+    description: 'Journey into the heart of the wild to witness nature\'s most spectacular show. Our expert-led safaris take you through the Serengeti and Murchison Falls to witness the Great Migration and the majestic Big Five—Lion, Leopard, Elephant, Buffalo, and Rhino—in their untouched habitat.',
     image: '/assets/regal-african-safaris-gwZAmtRwxBI-unsplash.jpg',
     rating: 5,
     category: 'Safari Adventures'

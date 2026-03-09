@@ -32,17 +32,17 @@ const BestDestinations: React.FC = () => {
                     <div className="bg-white p-10 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl transition-all">
                         <Star className="text-amber-500 mb-6" size={32} />
                         <h3 className="text-h3 text-slate-900 mb-4">Top Rated</h3>
-                        <p className="text-body text-slate-500">Destinations with the highest traveler satisfation and premium services.</p>
+                        <p className="text-body text-slate-500">Discover destinations that consistently earn the highest marks from our global travelers. From the impeccable service of Dubai's luxury towers to the pristine hospitality of the Swiss Alps, these locations are vetted for excellence, ensuring every moment of your journey is premium and worry-free.</p>
                     </div>
                     <div className="bg-white p-10 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl transition-all">
                         <Compass className="text-blue-500 mb-6" size={32} />
                         <h3 className="text-h3 text-slate-900 mb-4">Unique Culture</h3>
-                        <p className="text-body text-slate-500">Immersive experiences into local traditions, food, and history.</p>
+                        <p className="text-body text-slate-500">Go beyond the tourist trails and immerse yourself in the rich tapestry of local traditions, music, and flavors. Whether it's the 50+ vibrant ethnic groups of Uganda, the ancient history of Jerusalem, or the modern fusion of Singapore, we connect you with authentic experiences that broaden your horizons.</p>
                     </div>
                     <div className="bg-white p-10 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl transition-all">
                         <Globe className="text-green-500 mb-6" size={32} />
                         <h3 className="text-h3 text-slate-900 mb-4">Sustainable Travel</h3>
-                        <p className="text-body text-slate-500">Eco-friendly destinations focusing on conservation and local impact.</p>
+                        <p className="text-body text-slate-500">Travel with purpose. We prioritize eco-conscious destinations that focus on conservation and community empowerment. Experience the majestic mountain gorillas in Bwindi or the protected lagoons of the Maldives, knowing your visit directly supports the preservation of our planet's most precious wonders.</p>
                     </div>
                 </div>
             </div>
