@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search, RefreshCcw, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -432,47 +433,49 @@ const App: React.FC = () => {
   };
 
   return (
-    <DataProvider>
-      <ErrorBoundary>
-        <HashRouter>
-          <ScrollToTop />
-          <RouteTracker />
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-grow">
+    <HelmetProvider>
+      <DataProvider>
+        <ErrorBoundary>
+          <HashRouter>
+            <ScrollToTop />
+            <RouteTracker />
+            <div className="flex flex-col min-h-screen">
+              <Navbar />
+              <main className="flex-grow">
 
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/packages" element={<TourPackages />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/destinations" element={<Destinations />} />
-                <Route path="/destinations/:id" element={<DestinationDetail />} />
-                <Route path="/special-offers" element={<SpecialOffers />} />
-                <Route path="/live-prices" element={<LivePrices />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/admin"
-                  element={
-                    <ProtectedRoute>
-                      <AdminDashboard />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/best-destinations" element={<BestDestinations />} />
-                <Route path="/luxury-safari" element={<LuxurySafari />} />
-                <Route path="/corporate-travel" element={<CorporateTravel />} />
-              </Routes>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/packages" element={<TourPackages />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/destinations" element={<Destinations />} />
+                  <Route path="/destinations/:id" element={<DestinationDetail />} />
+                  <Route path="/special-offers" element={<SpecialOffers />} />
+                  <Route path="/live-prices" element={<LivePrices />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/admin"
+                    element={
+                      <ProtectedRoute>
+                        <AdminDashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/best-destinations" element={<BestDestinations />} />
+                  <Route path="/luxury-safari" element={<LuxurySafari />} />
+                  <Route path="/corporate-travel" element={<CorporateTravel />} />
+                </Routes>
 
-            </main>
-            <WhatsAppButton />
-            <Footer />
-          </div>
-        </HashRouter>
-      </ErrorBoundary>
-    </DataProvider>
+              </main>
+              <WhatsAppButton />
+              <Footer />
+            </div>
+          </HashRouter>
+        </ErrorBoundary>
+      </DataProvider>
+    </HelmetProvider>
   );
 };
 

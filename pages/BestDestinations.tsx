@@ -1,10 +1,16 @@
 import React from 'react';
 import { Star, MapPin, Globe, Compass } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO.tsx';
 
 const BestDestinations: React.FC = () => {
     return (
         <div className="pt-24 min-h-screen bg-slate-50">
+            <SEO
+                title="Best Destinations 2026 | Time2Fly Tours"
+                description="Discover the top-rated travel spots of the year, curated by our global experts. Explore hidden gems and sustainable travel options."
+                url="https://time2flytnt.com/#/best-destinations"
+            />
             <div className="bg-blue-900 py-24 px-4 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20 pointer-events-none">
                     <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Best Destinations" />

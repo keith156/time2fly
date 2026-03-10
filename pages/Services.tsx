@@ -6,6 +6,7 @@ import {
   Plane, Shield, FileCheck, BookOpen,
   ArrowRight, CheckCircle, ChevronRight, Star
 } from 'lucide-react';
+import SEO from '../components/SEO.tsx';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -203,7 +204,11 @@ const Services: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
-
+      <SEO
+        title="Our Services | Time2Fly Tours & Travel Ltd"
+        description="Explore our range of travel services including guided tours, holiday escapes, educational trips, hotel reservations, and seamless travel logistics."
+        url="https://time2flytnt.com/#/services"
+      />
       {/* ── Hero / Tab Switcher ─────────────────────────────────────────── */}
       <section className="relative min-h-[55vh] flex flex-col items-center justify-center overflow-hidden pt-28 pb-0">
 

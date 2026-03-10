@@ -3,6 +3,7 @@ import { Star, Clock, MapPin, ArrowLeft, Calendar, Share2, Shield, CreditCard, S
 import { useData } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
 import { Link, useLocation } from 'react-router-dom';
+import SEO from '../components/SEO.tsx';
 
 const TourPackages: React.FC = () => {
   const { packages, loading } = useData();
@@ -64,12 +65,20 @@ const TourPackages: React.FC = () => {
   if (selectedPackage) {
     return (
       <div className="pt-20 bg-white min-h-screen">
+        <SEO
+          title={`${selectedPackage.destination} | Time2Fly Tours`}
+          description={selectedPackage.description}
+          url={`https://time2flytnt.com/#/packages?pkg=${selectedPackage.id}`}
+          image={selectedPackage.image}
+        />
         <article className="animate-fade-in-up">
           {/* Hero Section */}
           <div className="relative h-[65vh] min-h-[500px] w-full overflow-hidden">
             <img
               src={selectedPackage.image}
               alt={selectedPackage.destination}
+              width={800}
+              height={600}
               className="w-full h-full object-cover"
               fetchPriority="high"
             />
@@ -221,9 +230,14 @@ const TourPackages: React.FC = () => {
 
   return (
     <div className="pt-24 min-h-screen bg-slate-50">
+      <SEO
+        title={selectedCategory ? `${selectedCategory} | Time2Fly Tours` : "Tour Packages & Adventures | Time2Fly Tours"}
+        description={selectedCategory ? `Explore our curated ${selectedCategory} packages for your next adventure.` : "Browse our collection of curated tour packages, from safari adventures to romantic retreats and family getaways."}
+        url={selectedCategory ? `https://time2flytnt.com/#/packages?category=${encodeURIComponent(selectedCategory)}` : "https://time2flytnt.com/#/packages"}
+      />
       <div className="bg-slate-950 pt-32 section-spacing px-4 relative overflow-hidden h-auto min-h-[400px] flex items-center justify-center">
         <div className="absolute inset-0 opacity-40 pointer-events-none">
-          <img src={getCategoryBanner(selectedCategory)} className="w-full h-full object-cover transition-all duration-[2000ms]" alt="Background" loading="lazy" />
+          <img src={getCategoryBanner(selectedCategory)} width={1200} height={400} className="w-full h-full object-cover transition-all duration-[2000ms]" alt="Background" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/60" />
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10 animate-fade-in-up">
@@ -323,29 +337,29 @@ const TourPackages: React.FC = () => {
               <div className="relative w-full h-full min-h-[400px]">
                 {selectedCategory === 'Holiday Escapes' && (
                   <div className="relative w-full h-[500px]">
-                    <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80&w=800" className="absolute top-0 right-0 w-3/4 h-[300px] object-cover rounded-[40px] shadow-2xl z-10 hover:z-30 hover:scale-105 transition-all duration-500" alt="Holiday Beach" />
-                    <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?auto=format&fit=crop&q=80&w=800" className="absolute bottom-0 left-0 w-2/3 h-[250px] object-cover rounded-[40px] border-8 border-white shadow-2xl z-20 hover:scale-105 transition-all duration-500" alt="Holiday City" />
+                    <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80&w=800" width={600} height={300} className="absolute top-0 right-0 w-3/4 h-[300px] object-cover rounded-[40px] shadow-2xl z-10 hover:z-30 hover:scale-105 transition-all duration-500" alt="Holiday Beach" loading="lazy" />
+                    <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?auto=format&fit=crop&q=80&w=800" width={530} height={250} className="absolute bottom-0 left-0 w-2/3 h-[250px] object-cover rounded-[40px] border-8 border-white shadow-2xl z-20 hover:scale-105 transition-all duration-500" alt="Holiday City" loading="lazy" />
                     <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl -z-10"></div>
                   </div>
                 )}
 
                 {selectedCategory === 'Romantic Retreats' && (
                   <div className="flex gap-4 h-[500px] p-4 bg-red-50/50 rounded-full border border-red-100">
-                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=600" className="w-1/2 h-full object-cover rounded-l-full rounded-r-3xl shadow-lg hover:w-3/5 transition-all duration-700" alt="Romantic Dinner" />
-                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=600" className="w-1/2 h-full object-cover rounded-r-full rounded-l-3xl shadow-lg hover:w-3/5 transition-all duration-700" alt="Couple on Beach" />
+                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=600" width={300} height={500} className="w-1/2 h-full object-cover rounded-l-full rounded-r-3xl shadow-lg hover:w-3/5 transition-all duration-700" alt="Romantic Dinner" loading="lazy" />
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=600" width={300} height={500} className="w-1/2 h-full object-cover rounded-r-full rounded-l-3xl shadow-lg hover:w-3/5 transition-all duration-700" alt="Couple on Beach" loading="lazy" />
                   </div>
                 )}
 
                 {selectedCategory === 'Family Getaways' && (
                   <div className="relative w-full h-[500px]">
                     <div className="absolute top-0 left-10 w-48 h-56 p-3 bg-white shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-300 z-20">
-                      <img src="https://images.unsplash.com/photo-1502139214982-d0ad755818d8?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover" alt="Family Safari" />
+                      <img src="https://images.unsplash.com/photo-1502139214982-d0ad755818d8?auto=format&fit=crop&q=80&w=400" width={400} height={400} className="w-full h-full object-cover" alt="Family Safari" loading="lazy" />
                     </div>
                     <div className="absolute top-20 right-0 w-64 h-48 p-3 bg-white shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300 z-10">
-                      <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=600" className="w-full h-full object-cover" alt="Family Beach" />
+                      <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=600" width={400} height={400} className="w-full h-full object-cover" alt="Family Beach" loading="lazy" />
                     </div>
                     <div className="absolute bottom-10 left-1/4 w-56 h-64 p-3 bg-white shadow-2xl transform shadow-blue-900/10 rotate-3 hover:rotate-0 transition-transform duration-300 z-30">
-                      <img src="https://images.unsplash.com/photo-1540479859555-17af45c78602?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Family Walking" />
+                      <img src="https://images.unsplash.com/photo-1540479859555-17af45c78602?auto=format&fit=crop&q=80&w=800" width={400} height={400} className="w-full h-full object-cover" alt="Family Walking" loading="lazy" />
                     </div>
                   </div>
                 )}
@@ -412,7 +426,7 @@ const TourPackages: React.FC = () => {
                   onClick={() => setSelectedCategory(cat.name)}
                   className="group relative h-[450px] overflow-hidden rounded-[40px] cursor-pointer shadow-2xl transition-all duration-700 hover:shadow-[0_0_50px_rgba(255,0,0,0.3)] hover:border-red-500/30 border border-transparent"
                 >
-                  <img src={cat.img} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" />
+                  <img src={cat.img} alt={cat.name} width={400} height={450} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" loading="lazy" />
 
                   {/* Glassmorphism Overlay */}
                   <div className="absolute inset-x-4 bottom-4 p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[32px] transform translate-y-2 group-hover:translate-y-0 transition-all duration-500 shadow-2xl flex flex-col items-center text-center">

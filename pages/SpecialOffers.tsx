@@ -3,6 +3,7 @@ import { Star, Clock, MapPin, Share2, ArrowRight, Shield, CreditCard, Send, Sear
 import { useData } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
 import { Link, useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO.tsx';
 
 const SpecialOffers: React.FC = () => {
     const { packages, loading } = useData();
@@ -22,6 +23,11 @@ const SpecialOffers: React.FC = () => {
 
     return (
         <div className="pt-24 min-h-screen bg-slate-50">
+            <SEO
+                title="Special Offers & Exclusive Travel Deals | Time2Fly Tours"
+                description="Unlock exclusive perks and discover hand-picked premium travel experiences at exceptional value."
+                url="https://time2flytnt.com/#/special-offers"
+            />
             {/* Premium Header */}
             <div className="bg-red-600 py-16 px-4 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center scale-150">

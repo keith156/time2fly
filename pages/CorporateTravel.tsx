@@ -1,10 +1,16 @@
 import React from 'react';
 import { Briefcase, Globe, Shield, Zap, TrendingUp, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO.tsx';
 
 const CorporateTravel: React.FC = () => {
     return (
         <div className="pt-24 min-h-screen bg-slate-50">
+            <SEO
+                title="Corporate Travel Solutions | Time2Fly Tours"
+                description="Optimizing business travel for performance, cost, and efficiency. Enjoy exclusive corporate rates and 24/7 global support."
+                url="https://time2flytnt.com/#/corporate-travel"
+            />
             <div className="bg-slate-900 py-24 px-4 relative">
                 <div className="absolute inset-0 opacity-10 flex items-center justify-center overflow-hidden">
                     <Briefcase size={600} className="text-white" />

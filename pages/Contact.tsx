@@ -2,6 +2,7 @@
 import React from 'react';
 import { Mail, Phone, MapPin, MessageSquare, Clock, Instagram, Facebook, Music2, Linkedin, ExternalLink } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle.tsx';
+import SEO from '../components/SEO.tsx';
 
 const Contact: React.FC = () => {
   const phoneNumber = "+256 759 243 331";
@@ -11,6 +12,11 @@ const Contact: React.FC = () => {
 
   return (
     <div className="pt-24 min-h-screen bg-white">
+      <SEO
+        title="Contact Us | Time2Fly Tours & Travel Ltd"
+        description="Get in touch with Time2Fly Tours & Travel Ltd. Our travel specialists are ready to help you plan your next adventure from our Kampala office."
+        url="https://time2flytnt.com/#/contact"
+      />
       {/* Header */}
       <section className="bg-slate-950 pt-24 section-spacing text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">

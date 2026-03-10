@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Compass, Ticket, Zap, Globe, Users, Waves, Bird, Trees, Binoculars } from 'lucide-react';
 import { useData } from '../context/DataContext.tsx';
 import SectionTitle from '../components/SectionTitle.tsx';
+import SEO from '../components/SEO.tsx';
 
 const DestinationDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -131,12 +132,21 @@ const DestinationDetail: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-white pb-24">
+            <SEO
+                title={`${destination.name} | Time2Fly Tours`}
+                description={`Discover the heart of ${destination.name}. Explore curated experiences, itineraries, and exclusive travel packages.`}
+                url={`https://time2flytnt.com/#/destinations/${destination.id}`}
+                image={destination.image}
+            />
             {/* Hero Section */}
             <section className="relative h-[70vh] min-h-[500px] overflow-hidden bg-slate-900">
                 <img
                     src={destination.image}
                     alt={destination.name}
+                    width={1200}
+                    height={600}
                     className="w-full h-full object-cover"
+                    fetchPriority="high"
                     onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop";
                     }}
@@ -182,6 +192,8 @@ const DestinationDetail: React.FC = () => {
                                 <div className="absolute inset-0 bg-slate-900">
                                     <img
                                         src={getBgImage(item.title)}
+                                        width={400}
+                                        height={450}
                                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]"
                                         alt={item.title}
                                         loading="lazy"
@@ -241,7 +253,7 @@ const DestinationDetail: React.FC = () => {
                                     className="bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group border border-slate-100"
                                 >
                                     <div className="h-64 overflow-hidden relative">
-                                        <img src={pkg.image} alt={pkg.destination} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                        <img src={pkg.image} alt={pkg.destination} width={400} height={250} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
                                         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-900 border border-white/20 shadow-lg">
                                             {pkg.duration}
                                         </div>
@@ -273,7 +285,7 @@ const DestinationDetail: React.FC = () => {
             <section className="py-24 px-4 overflow-hidden">
                 <div className="max-w-5xl mx-auto bg-slate-950 rounded-[60px] p-12 md:p-24 text-center relative">
                     <div className="absolute top-0 left-0 w-full h-full opacity-10">
-                        <img src={destination.image} className="w-full h-full object-cover" alt="" />
+                        <img src={destination.image} width={1000} height={400} className="w-full h-full object-cover" alt="" loading="lazy" />
                     </div>
                     <div className="relative z-10">
                         <h2 className="text-h2 text-white mb-8">

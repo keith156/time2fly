@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, User, ArrowRight, ArrowLeft, Share2, Bookmark, Clock, ChevronRight, Hash, Eye } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import { BlogPost } from '../types';
+import SEO from '../components/SEO.tsx';
 
 const Blog: React.FC = () => {
   const { blogs, loading } = useData();
@@ -28,6 +29,12 @@ const Blog: React.FC = () => {
   if (selectedPost) {
     return (
       <div className="pt-20 bg-white min-h-screen">
+        <SEO
+          title={`${selectedPost.title} | Time2Fly Blog`}
+          description={selectedPost.excerpt}
+          url={`https://time2flytnt.com/#/blog`}
+          image={selectedPost.image}
+        />
         {/* Reading Progress Bar */}
         <div
           className="fixed top-0 left-0 h-1.5 bg-amber-500 z-[60] transition-all duration-300"
@@ -141,6 +148,11 @@ const Blog: React.FC = () => {
 
   return (
     <div className="pt-24 bg-white pb-0">
+      <SEO
+        title="Travel Journal & Insights | Time2Fly Tours & Travel Ltd"
+        description="Read our latest travel guides, tips, and inspiring stories from around the globe to help plan your next adventure."
+        url="https://time2flytnt.com/#/blog"
+      />
       {/* Mesmerizing Hero Section */}
       <section className="relative h-[60vh] flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-white"></div>

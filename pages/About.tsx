@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import SectionTitle from '../components/SectionTitle.tsx';
 import { Shield, Target, Award, Users, Plane, Globe, Compass, Heart, ArrowRight, Headset, Gem, Zap, Palette, Briefcase, Handshake, Lightbulb } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO.tsx';
 
 // Added React.FC type to handle the 'key' prop correctly when this component is used in a map
 const AnimatedStat: React.FC<{ value: number, label: string, icon: React.ReactNode, suffix: string }> = ({ value, label, icon, suffix }) => {
@@ -111,6 +112,11 @@ const About: React.FC = () => {
 
   return (
     <div className="bg-white">
+      <SEO
+        title="About Us | Time2Fly Tours & Travel Ltd"
+        description="Learn about Time2Fly Tours and Travel Limited, a locally owned independent travel agency in Uganda offering professional and reliable travel experiences."
+        url="https://time2flytnt.com/#/about"
+      />
       {/* Hero Section */}
       <section className="relative flex items-center pt-36 md:pt-44 section-spacing overflow-hidden bg-navy-800">
         <div className="absolute inset-0 z-0">
@@ -137,7 +143,7 @@ const About: React.FC = () => {
             <div className="relative mt-12 lg:mt-0 max-w-md mx-auto">
               <div className="relative z-10 rounded-[32px] overflow-hidden border-2 border-white/10 shadow-2xl">
                 <div className="w-full h-full max-h-[450px] bg-slate-800">
-                  <img src="/assets/ceo_final.jpeg" className="w-full h-full object-cover" alt="Director" />
+                  <img src="/assets/ceo_final.jpeg" width={600} height={450} className="w-full h-full object-cover" alt="Director" loading="lazy" />
                 </div>
               </div>
             </div>
@@ -160,13 +166,13 @@ const About: React.FC = () => {
             {/* Left: 3 tall oval images side by side */}
             <div className="flex items-stretch justify-center lg:justify-start gap-4">
               <div className="flex-1 max-w-[160px] h-[420px] rounded-[80px] overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100">
-                <img src="/assets/about_pics (3).jpg" alt="About 1" className="w-full h-full object-cover" />
+                <img src="/assets/about_pics (3).jpg" alt="About 1" width={160} height={420} className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="flex-1 max-w-[160px] h-[420px] rounded-[80px] overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100 mt-24">
-                <img src="/assets/about_pics (2).jpg" alt="About 2" className="w-full h-full object-cover" />
+                <img src="/assets/about_pics (2).jpg" alt="About 2" width={160} height={420} className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="flex-1 max-w-[160px] h-[420px] rounded-[80px] overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100">
-                <img src="/assets/about_pics (1).jpg" alt="About 3" className="w-full h-full object-cover" />
+                <img src="/assets/about_pics (1).jpg" alt="About 3" width={160} height={420} className="w-full h-full object-cover" loading="lazy" />
               </div>
             </div>
 

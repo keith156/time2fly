@@ -3,6 +3,7 @@ import { MapPin, Globe, ArrowRight, Compass } from 'lucide-react';
 import { useData } from '../context/DataContext.tsx';
 import SectionTitle from '../components/SectionTitle.tsx';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO.tsx';
 
 const Destinations: React.FC = () => {
     const { destinations, loading } = useData();
@@ -10,13 +11,21 @@ const Destinations: React.FC = () => {
 
     return (
         <div className="pt-24 min-h-screen bg-slate-50">
+            <SEO
+                title="Global Destinations | Time2Fly Tours"
+                description="Explore our hand-picked global destinations, from the misty mountains of Uganda to the shimmering skyscrapers of Dubai."
+                url="https://time2flytnt.com/#/destinations"
+            />
             {/* Hero Header */}
             <div className="bg-slate-950 py-24 px-4 relative overflow-hidden">
                 <div className="absolute inset-0">
                     <img
                         src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&q=80&w=2000"
+                        width={1200}
+                        height={400}
                         className="w-full h-full object-cover"
                         alt="Destinations Background"
+                        fetchPriority="high"
                     />
                     <div className="absolute inset-0 bg-slate-950/65" />
                 </div>
@@ -43,6 +52,8 @@ const Destinations: React.FC = () => {
                                     <img
                                         src={dest.image}
                                         alt={dest.name}
+                                        width={400}
+                                        height={400}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                                         loading="lazy"
                                     />
@@ -82,7 +93,7 @@ const Destinations: React.FC = () => {
                     </div>
                     <div className="relative">
                         <div className="aspect-square rounded-[60px] overflow-hidden shadow-2xl">
-                            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=1000" className="w-full h-full object-cover" alt="Travel Insight" />
+                            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=1000" width={500} height={500} className="w-full h-full object-cover" alt="Travel Insight" loading="lazy" />
                         </div>
                     </div>
                 </div>

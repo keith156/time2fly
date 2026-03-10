@@ -1,10 +1,16 @@
 import React from 'react';
 import { Shield, Sparkles, Map, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO.tsx';
 
 const LuxurySafari: React.FC = () => {
     return (
         <div className="pt-24 min-h-screen bg-[#fafaf5]">
+            <SEO
+                title="Luxury Safari Experiences | Time2Fly Tours"
+                description="Experience the heart of the savannah with unparalleled comfort. Stay in exclusive 5-star lodges with private trackers on our luxury safaris."
+                url="https://time2flytnt.com/#/luxury-safari"
+            />
             <div className="h-[70vh] relative overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1516422317582-c4a0ebd2562d?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Luxury Safari" />
                 <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>

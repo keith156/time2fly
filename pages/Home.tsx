@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, ArrowLeft, Calendar, MapPin, Clock, CreditCard, Send, Zap, Ship, GraduationCap, Car, Briefcase, ChevronDown, CheckCircle2, Compass, Share2, Search, DollarSign, MessageCircle } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle.tsx';
 import FlightSearchBar from '../components/FlightSearchBar.tsx';
+import SEO from '../components/SEO.tsx';
 import { SERVICES, TESTIMONIALS, PARTNERS } from '../constants.tsx';
 import { useData } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
@@ -17,7 +18,10 @@ const AirlineLiverySeparator: React.FC = () => (
     <img
       src="/assets/office-separator.png"
       alt="Time2Fly Office Information"
+      width={1280}
+      height={320}
       className="w-full max-w-7xl h-auto"
+      loading="lazy"
     />
   </div>
 );
@@ -100,7 +104,7 @@ const Home: React.FC = () => {
       <div className="pt-20 bg-white min-h-screen">
         <article className="animate-fade-in-up">
           <div className="relative h-[65vh] min-h-[500px] w-full overflow-hidden">
-            <img src={selectedPackage.image} alt={selectedPackage.destination} className="w-full h-full object-cover" loading="lazy" />
+            <img src={selectedPackage.image} alt={selectedPackage.destination} width={800} height={600} className="w-full h-full object-cover" loading="lazy" fetchPriority="high" />
             <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
             <div className="absolute inset-0 flex items-center justify-center p-6">
               <div className="max-w-4xl w-full text-center">
@@ -178,6 +182,7 @@ const Home: React.FC = () => {
 
   return (
     <div>
+      <SEO />
       {/* Redesigned Hero Section */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -338,6 +343,8 @@ const Home: React.FC = () => {
                   <img
                     src={partner.logo}
                     alt={partner.name}
+                    width={260}
+                    height={130}
                     className="h-full w-full object-contain opacity-85 hover:opacity-100 transition-opacity duration-300"
                     loading="lazy"
                     style={{ transform: `scale(${partner.scale || 1})` }}
@@ -353,6 +360,8 @@ const Home: React.FC = () => {
                   <img
                     src={partner.logo}
                     alt={partner.name}
+                    width={260}
+                    height={130}
                     className="h-full w-full object-contain opacity-85 hover:opacity-100 transition-opacity duration-300"
                     loading="lazy"
                     style={{ transform: `scale(${partner.scale || 1})` }}
@@ -398,9 +407,9 @@ const Home: React.FC = () => {
                     </div>
                     <div className="text-slate-700 font-serif text-6xl opacity-20 transition-all duration-300 group-hover:text-amber-500/20 group-hover:scale-110">"</div>
                   </div>
-                  <p className="text-slate-100 font-medium italic mb-8 leading-relaxed whitespace-normal text-base">"{t.review}"</p>
+                  <p data-nosnippet className="text-slate-100 font-medium italic mb-8 leading-relaxed whitespace-normal text-base">"{t.review}"</p>
                   <div className="mt-auto pt-6 border-t border-white/10 flex items-center gap-4">
-                    <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full border-2 border-amber-500 object-cover shadow-lg" loading="lazy" />
+                    <img src={t.avatar} alt={t.name} width={48} height={48} className="w-12 h-12 rounded-full border-2 border-amber-500 object-cover shadow-lg" loading="lazy" />
                     <div>
                       <h4 className="text-white font-semibold uppercase tracking-tight text-base">{t.name}</h4>
                     </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft, RefreshCcw, Plane, CheckCircle2, User, MessageCircle, TrendingDown, TrendingUp, Minus, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
+import SEO from '../components/SEO.tsx';
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Ticket Card – matches the provided mockup exactly
@@ -200,6 +201,11 @@ const LivePrices: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-[#f8fafc] pt-28 pb-16 font-sans selection:bg-blue-100">
+            <SEO
+                title="Live Flight Prices & Offers | Time2Fly Tours"
+                description="Check real-time market flight prices verified by our professional travel agents. Book your flights directly from our Kampala office."
+                url="https://time2flytnt.com/#/live-prices"
+            />
             {/* Header / Hero Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
