@@ -222,7 +222,12 @@ const Services: React.FC = () => {
             <img
               src={c.bgImage}
               alt={c.label}
+              width={1920}
+              height={600}
               className="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
             />
             <div
               className="absolute inset-0"

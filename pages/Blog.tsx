@@ -47,9 +47,13 @@ const Blog: React.FC = () => {
             <img
               src={selectedPost.image}
               alt={selectedPost.title}
+              width={1600}
+              height={900}
               className="w-full h-full object-cover transition-transform duration-[10000ms] ease-linear scale-110"
               style={{ transform: 'scale(1)' }}
               onLoad={(e) => (e.currentTarget.style.transform = 'scale(1.2)')}
+              loading="eager"
+              decoding="async"
               fetchPriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent"></div>
@@ -111,7 +115,7 @@ const Blog: React.FC = () => {
 
                 <div className="mt-24 p-12 bg-gradient-to-br from-[#0000ff] to-blue-700 rounded-[60px] relative overflow-hidden text-center group shadow-2xl shadow-blue-200">
                   <div className="absolute inset-0 opacity-10 transition-transform duration-[5000ms] group-hover:scale-110">
-                    <img src={selectedPost.image} className="w-full h-full object-cover grayscale" loading="lazy" />
+                    <img src={selectedPost.image} width={600} height={400} className="w-full h-full object-cover grayscale" loading="lazy" decoding="async" />
                   </div>
                   <div className="relative z-10">
                     <h3 className="text-h3 text-white mb-4">Inspired by this story?</h3>
@@ -201,7 +205,15 @@ const Blog: React.FC = () => {
                 className="relative overflow-hidden cursor-pointer h-[280px]"
                 onClick={() => setSelectedPost(post)}
               >
-                <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" loading="lazy" />
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  width={400}
+                  height={280}
+                  className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="absolute top-6 left-6 flex space-x-2">
                   <span className="bg-white/20 backdrop-blur-md text-black border border-white/20 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">
                     {post.category}

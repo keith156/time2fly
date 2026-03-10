@@ -22,8 +22,13 @@ const Contact: React.FC = () => {
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <img
             src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&q=80&w=2000"
+            width={1920}
+            height={600}
             className="w-full h-full object-cover"
             alt="Contact background"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
           />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -164,8 +169,12 @@ const Contact: React.FC = () => {
         <div className="absolute inset-0 bg-slate-200 overflow-hidden cursor-pointer" onClick={() => window.open(mapsUrl, '_blank')}>
           <img
             src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=2000"
+            width={1200}
+            height={400}
             className="w-full h-full object-cover grayscale opacity-50"
             alt="Map location placeholder"
+            loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="bg-slate-950 p-8 rounded-[32px] shadow-2xl border border-slate-800 text-center animate-bounce hover:bg-amber-500 transition-colors">

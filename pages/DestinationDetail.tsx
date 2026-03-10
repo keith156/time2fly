@@ -143,9 +143,11 @@ const DestinationDetail: React.FC = () => {
                 <img
                     src={destination.image}
                     alt={destination.name}
-                    width={1200}
-                    height={600}
+                    width={1920}
+                    height={1080}
                     className="w-full h-full object-cover"
+                    loading="eager"
+                    decoding="async"
                     fetchPriority="high"
                     onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop";
@@ -197,6 +199,7 @@ const DestinationDetail: React.FC = () => {
                                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]"
                                         alt={item.title}
                                         loading="lazy"
+                                        decoding="async"
                                         onError={(e) => {
                                             (e.currentTarget as HTMLImageElement).src = "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800&auto=format&fit=crop";
                                         }}
@@ -253,7 +256,7 @@ const DestinationDetail: React.FC = () => {
                                     className="bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group border border-slate-100"
                                 >
                                     <div className="h-64 overflow-hidden relative">
-                                        <img src={pkg.image} alt={pkg.destination} width={400} height={250} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                                        <img src={pkg.image} alt={pkg.destination} width={400} height={256} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
                                         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-900 border border-white/20 shadow-lg">
                                             {pkg.duration}
                                         </div>
@@ -285,7 +288,7 @@ const DestinationDetail: React.FC = () => {
             <section className="py-24 px-4 overflow-hidden">
                 <div className="max-w-5xl mx-auto bg-slate-950 rounded-[60px] p-12 md:p-24 text-center relative">
                     <div className="absolute top-0 left-0 w-full h-full opacity-10">
-                        <img src={destination.image} width={1000} height={400} className="w-full h-full object-cover" alt="" loading="lazy" />
+                        <img src={destination.image} width={1000} height={400} className="w-full h-full object-cover" alt="" loading="lazy" decoding="async" />
                     </div>
                     <div className="relative z-10">
                         <h2 className="text-h2 text-white mb-8">

@@ -12,7 +12,16 @@ const LuxurySafari: React.FC = () => {
                 url="https://time2flytnt.com/#/luxury-safari"
             />
             <div className="h-[70vh] relative overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1516422317582-c4a0ebd2562d?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Luxury Safari" />
+                <img
+                    src="https://images.unsplash.com/photo-1516422317582-c4a0ebd2562d?auto=format&fit=crop&q=80&w=2000"
+                    width={1920}
+                    height={1080}
+                    className="w-full h-full object-cover"
+                    alt="Luxury Safari"
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
+                />
                 <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
                 <div className="absolute inset-0 flex items-center justify-center p-6">
                     <div className="max-w-4xl text-center">
@@ -42,7 +51,15 @@ const LuxurySafari: React.FC = () => {
                     </div>
                     <div className="relative">
                         <div className="aspect-[4/5] rounded-[60px] overflow-hidden shadow-2xl relative z-10">
-                            <img src="https://images.unsplash.com/photo-1547407139-3c921a66005c?auto=format&fit=crop&q=80&w=1000" className="w-full h-full object-cover" alt="Safari Detail" />
+                            <img
+                                src="https://images.unsplash.com/photo-1547407139-3c921a66005c?auto=format&fit=crop&q=80&w=1000"
+                                width={500}
+                                height={625}
+                                className="w-full h-full object-cover"
+                                alt="Safari Detail"
+                                loading="lazy"
+                                decoding="async"
+                            />
                         </div>
                         <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl -z-10"></div>
                     </div>

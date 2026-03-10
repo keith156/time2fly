@@ -21,10 +21,12 @@ const Destinations: React.FC = () => {
                 <div className="absolute inset-0">
                     <img
                         src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&q=80&w=2000"
-                        width={1200}
-                        height={400}
+                        width={1920}
+                        height={600}
                         className="w-full h-full object-cover"
                         alt="Destinations Background"
+                        loading="eager"
+                        decoding="async"
                         fetchPriority="high"
                     />
                     <div className="absolute inset-0 bg-slate-950/65" />
@@ -56,6 +58,7 @@ const Destinations: React.FC = () => {
                                         height={400}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                                         loading="lazy"
+                                        decoding="async"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
                                     <div className="absolute bottom-10 left-10">
@@ -93,7 +96,7 @@ const Destinations: React.FC = () => {
                     </div>
                     <div className="relative">
                         <div className="aspect-square rounded-[60px] overflow-hidden shadow-2xl">
-                            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=1000" width={500} height={500} className="w-full h-full object-cover" alt="Travel Insight" loading="lazy" />
+                            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=1000" width={500} height={500} className="w-full h-full object-cover" alt="Travel Insight" loading="lazy" decoding="async" />
                         </div>
                     </div>
                 </div>

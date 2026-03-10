@@ -57,7 +57,15 @@ const SpecialOffers: React.FC = () => {
                                         </div>
 
                                         <div className="relative h-80 overflow-hidden cursor-pointer" onClick={() => navigate(`/packages?pkg=${pkg.id}`)}>
-                                            <img src={pkg.image} alt={pkg.destination} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" loading="lazy" />
+                                            <img
+                                                src={pkg.image}
+                                                alt={pkg.destination}
+                                                width={400}
+                                                height={320}
+                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
                                             <div className="absolute top-6 right-6 flex space-x-2 z-20">
                                                 <button onClick={(e) => handleShare(e, pkg)} className="bg-white/90 backdrop-blur-md w-10 h-10 rounded-full text-slate-900 hover:text-blue-600 shadow-xl transition-all flex items-center justify-center">
                                                     {copyFeedback === pkg.id ? <span className="text-[10px] font-black uppercase">Link</span> : <Share2 size={16} />}

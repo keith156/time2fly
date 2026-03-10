@@ -4,22 +4,22 @@ import { HelmetProvider } from 'react-helmet-async';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search, RefreshCcw, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Home from './pages/Home';
-import About from './pages/About';
-import TourPackages from './pages/TourPackages';
-import Services from './pages/Services';
-import Blog from './pages/Blog';
-import Contact from './pages/Contact';
-import Login from './pages/Login';
-import AdminDashboard from './pages/AdminDashboard';
-import Destinations from './pages/Destinations';
-import SpecialOffers from './pages/SpecialOffers';
-import DestinationDetail from './pages/DestinationDetail';
-import LivePrices from './pages/LivePrices';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import BestDestinations from './pages/BestDestinations';
-import LuxurySafari from './pages/LuxurySafari';
-import CorporateTravel from './pages/CorporateTravel';
+const Home = React.lazy(() => import('./pages/Home'));
+const About = React.lazy(() => import('./pages/About'));
+const TourPackages = React.lazy(() => import('./pages/TourPackages'));
+const Services = React.lazy(() => import('./pages/Services'));
+const Blog = React.lazy(() => import('./pages/Blog'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+const Login = React.lazy(() => import('./pages/Login'));
+const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
+const Destinations = React.lazy(() => import('./pages/Destinations'));
+const SpecialOffers = React.lazy(() => import('./pages/SpecialOffers'));
+const DestinationDetail = React.lazy(() => import('./pages/DestinationDetail'));
+const LivePrices = React.lazy(() => import('./pages/LivePrices'));
+const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
+const BestDestinations = React.lazy(() => import('./pages/BestDestinations'));
+const LuxurySafari = React.lazy(() => import('./pages/LuxurySafari'));
+const CorporateTravel = React.lazy(() => import('./pages/CorporateTravel'));
 
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import WhatsAppButton from './components/WhatsAppButton.tsx';
@@ -132,7 +132,10 @@ const Navbar: React.FC = () => {
     },
   ];
 
+  // Prefetching is now handled naturally by the browser or can be explicitly added if needed,
+  // but removing the manual static prefetch function as it was redundant with lazy loading.
   const prefetchPage = (path: string) => {
+    // Dynamic import to trigger prefetch
     switch (path) {
       case '/destinations': import('./pages/Destinations'); break;
       case '/packages': import('./pages/TourPackages'); break;
@@ -443,30 +446,36 @@ const App: React.FC = () => {
               <Navbar />
               <main className="flex-grow">
 
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/services" element={<Services />} />
-                  <Route path="/packages" element={<TourPackages />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/destinations" element={<Destinations />} />
-                  <Route path="/destinations/:id" element={<DestinationDetail />} />
-                  <Route path="/special-offers" element={<SpecialOffers />} />
-                  <Route path="/live-prices" element={<LivePrices />} />
-                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/admin"
-                    element={
-                      <ProtectedRoute>
-                        <AdminDashboard />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route path="/best-destinations" element={<BestDestinations />} />
-                  <Route path="/luxury-safari" element={<LuxurySafari />} />
-                  <Route path="/corporate-travel" element={<CorporateTravel />} />
-                </Routes>
+                <React.Suspense fallback={
+                  <div className="flex items-center justify-center min-h-[60vh]">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-600"></div>
+                  </div>
+                }>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/packages" element={<TourPackages />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/destinations" element={<Destinations />} />
+                    <Route path="/destinations/:id" element={<DestinationDetail />} />
+                    <Route path="/special-offers" element={<SpecialOffers />} />
+                    <Route path="/live-prices" element={<LivePrices />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/admin"
+                      element={
+                        <ProtectedRoute>
+                          <AdminDashboard />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route path="/best-destinations" element={<BestDestinations />} />
+                    <Route path="/luxury-safari" element={<LuxurySafari />} />
+                    <Route path="/corporate-travel" element={<CorporateTravel />} />
+                  </Routes>
+                </React.Suspense>
 
               </main>
               <WhatsAppButton />

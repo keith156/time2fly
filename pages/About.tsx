@@ -121,7 +121,16 @@ const About: React.FC = () => {
       <section className="relative flex items-center pt-36 md:pt-44 section-spacing overflow-hidden bg-navy-800">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-navy-800 via-navy-800/80 to-transparent z-10"></div>
-          <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover opacity-40 scale-105" alt="Travel Hero" />
+          <img
+            src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=2000"
+            width={1920}
+            height={600}
+            className="w-full h-full object-cover opacity-40 scale-105"
+            alt="Travel Hero"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -143,7 +152,15 @@ const About: React.FC = () => {
             <div className="relative mt-12 lg:mt-0 max-w-md mx-auto">
               <div className="relative z-10 rounded-[32px] overflow-hidden border-2 border-white/10 shadow-2xl">
                 <div className="w-full h-full max-h-[450px] bg-slate-800">
-                  <img src="/assets/ceo_final.jpeg" width={600} height={450} className="w-full h-full object-cover" alt="Director" loading="lazy" />
+                  <img
+                    src="/assets/ceo_final.jpeg"
+                    width={600}
+                    height={450}
+                    className="w-full h-full object-cover"
+                    alt="Director"
+                    loading="eager"
+                    decoding="async"
+                  />
                 </div>
               </div>
             </div>
@@ -166,13 +183,13 @@ const About: React.FC = () => {
             {/* Left: 3 tall oval images side by side */}
             <div className="flex items-stretch justify-center lg:justify-start gap-4">
               <div className="flex-1 max-w-[160px] h-[420px] rounded-[80px] overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100">
-                <img src="/assets/about_pics (3).jpg" alt="About 1" width={160} height={420} className="w-full h-full object-cover" loading="lazy" />
+                <img src="/assets/about_pics (3).jpg" alt="About 1" width={160} height={420} className="w-full h-full object-cover" loading="lazy" decoding="async" />
               </div>
               <div className="flex-1 max-w-[160px] h-[420px] rounded-[80px] overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100 mt-24">
-                <img src="/assets/about_pics (2).jpg" alt="About 2" width={160} height={420} className="w-full h-full object-cover" loading="lazy" />
+                <img src="/assets/about_pics (2).jpg" alt="About 2" width={160} height={420} className="w-full h-full object-cover" loading="lazy" decoding="async" />
               </div>
               <div className="flex-1 max-w-[160px] h-[420px] rounded-[80px] overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100">
-                <img src="/assets/about_pics (1).jpg" alt="About 3" width={160} height={420} className="w-full h-full object-cover" loading="lazy" />
+                <img src="/assets/about_pics (1).jpg" alt="About 3" width={160} height={420} className="w-full h-full object-cover" loading="lazy" decoding="async" />
               </div>
             </div>
 

@@ -22,6 +22,7 @@ const AirlineLiverySeparator: React.FC = () => (
       height={320}
       className="w-full max-w-7xl h-auto"
       loading="lazy"
+      decoding="async"
     />
   </div>
 );
@@ -104,7 +105,16 @@ const Home: React.FC = () => {
       <div className="pt-20 bg-white min-h-screen">
         <article className="animate-fade-in-up">
           <div className="relative h-[65vh] min-h-[500px] w-full overflow-hidden">
-            <img src={selectedPackage.image} alt={selectedPackage.destination} width={800} height={600} className="w-full h-full object-cover" loading="lazy" fetchPriority="high" />
+            <img
+              src={selectedPackage.image}
+              alt={selectedPackage.destination}
+              width={1600}
+              height={900}
+              className="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
             <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
             <div className="absolute inset-0 flex items-center justify-center p-6">
               <div className="max-w-4xl w-full text-center">
@@ -192,6 +202,7 @@ const Home: React.FC = () => {
             muted={true}
             playsInline={true}
             preload="auto"
+            poster="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?auto=format&fit=crop&q=80&w=2000"
             key="/assets/WhatsApp%20Video%202026-02-18%20at%202.04.02%20PM%20(1).mp4"
             className="w-full h-full object-cover scale-105"
             onEnded={(e) => e.currentTarget.play()}

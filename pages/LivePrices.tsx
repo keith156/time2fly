@@ -37,7 +37,7 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
                 <div className="flex items-center justify-center w-[100px] shrink-0 py-4">
                     <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-blue-400/30 shadow-lg">
                         {ticket.city_image
-                            ? <img src={ticket.city_image} alt={ticket.to} className="w-full h-full object-cover" />
+                            ? <img src={ticket.city_image} alt={ticket.to} width={80} height={80} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             : <div className="w-full h-full bg-blue-800/60 flex items-center justify-center text-blue-300">
                                 <Plane size={28} className="rotate-45" />
                             </div>
@@ -121,7 +121,7 @@ const TicketCard: React.FC<{ ticket: ReturnType<typeof useData>['liveTickets'][0
                 <div className="flex items-center gap-4 p-4 pb-3">
                     <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400/30 shadow-md shrink-0">
                         {ticket.city_image
-                            ? <img src={ticket.city_image} alt={ticket.to} className="w-full h-full object-cover" />
+                            ? <img src={ticket.city_image} alt={ticket.to} width={64} height={64} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             : <div className="w-full h-full bg-blue-800/60 flex items-center justify-center text-blue-300">
                                 <Plane size={22} className="rotate-45" />
                             </div>

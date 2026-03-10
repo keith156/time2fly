@@ -77,9 +77,11 @@ const TourPackages: React.FC = () => {
             <img
               src={selectedPackage.image}
               alt={selectedPackage.destination}
-              width={800}
-              height={600}
+              width={1600}
+              height={900}
               className="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
               fetchPriority="high"
             />
             <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
@@ -237,7 +239,16 @@ const TourPackages: React.FC = () => {
       />
       <div className="bg-slate-950 pt-32 section-spacing px-4 relative overflow-hidden h-auto min-h-[400px] flex items-center justify-center">
         <div className="absolute inset-0 opacity-40 pointer-events-none">
-          <img src={getCategoryBanner(selectedCategory)} width={1200} height={400} className="w-full h-full object-cover transition-all duration-[2000ms]" alt="Background" loading="lazy" />
+          <img
+            src={getCategoryBanner(selectedCategory)}
+            width={1920}
+            height={600}
+            className="w-full h-full object-cover transition-all duration-[2000ms]"
+            alt="Background"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/60" />
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10 animate-fade-in-up">
@@ -337,47 +348,55 @@ const TourPackages: React.FC = () => {
               <div className="relative w-full h-full min-h-[400px]">
                 {selectedCategory === 'Holiday Escapes' && (
                   <div className="relative w-full h-[500px]">
-                    <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80&w=800" width={600} height={300} className="absolute top-0 right-0 w-3/4 h-[300px] object-cover rounded-[40px] shadow-2xl z-10 hover:z-30 hover:scale-105 transition-all duration-500" alt="Holiday Beach" loading="lazy" />
-                    <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?auto=format&fit=crop&q=80&w=800" width={530} height={250} className="absolute bottom-0 left-0 w-2/3 h-[250px] object-cover rounded-[40px] border-8 border-white shadow-2xl z-20 hover:scale-105 transition-all duration-500" alt="Holiday City" loading="lazy" />
+                    <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80&w=800" width={600} height={500} className="absolute top-0 right-0 w-3/4 h-[300px] object-cover rounded-[40px] shadow-2xl z-10 hover:z-30 hover:scale-105 transition-all duration-500" alt="Holiday Beach" loading="lazy" decoding="async" />
+                    <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?auto=format&fit=crop&q=80&w=800" width={530} height={400} className="absolute bottom-0 left-0 w-2/3 h-[250px] object-cover rounded-[40px] border-8 border-white shadow-2xl z-20 hover:scale-105 transition-all duration-500" alt="Holiday City" loading="lazy" decoding="async" />
                     <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl -z-10"></div>
                   </div>
                 )}
 
                 {selectedCategory === 'Romantic Retreats' && (
                   <div className="flex gap-4 h-[500px] p-4 bg-red-50/50 rounded-full border border-red-100">
-                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=600" width={300} height={500} className="w-1/2 h-full object-cover rounded-l-full rounded-r-3xl shadow-lg hover:w-3/5 transition-all duration-700" alt="Romantic Dinner" loading="lazy" />
-                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=600" width={300} height={500} className="w-1/2 h-full object-cover rounded-r-full rounded-l-3xl shadow-lg hover:w-3/5 transition-all duration-700" alt="Couple on Beach" loading="lazy" />
+                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=600" width={300} height={500} className="w-1/2 h-full object-cover rounded-l-full rounded-r-3xl shadow-lg hover:w-3/5 transition-all duration-700" alt="Romantic Dinner" loading="lazy" decoding="async" />
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=600" width={300} height={500} className="w-1/2 h-full object-cover rounded-r-full rounded-l-3xl shadow-lg hover:w-3/5 transition-all duration-700" alt="Couple on Beach" loading="lazy" decoding="async" />
                   </div>
                 )}
 
                 {selectedCategory === 'Family Getaways' && (
                   <div className="relative w-full h-[500px]">
                     <div className="absolute top-0 left-10 w-48 h-56 p-3 bg-white shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-300 z-20">
-                      <img src="https://images.unsplash.com/photo-1502139214982-d0ad755818d8?auto=format&fit=crop&q=80&w=400" width={400} height={400} className="w-full h-full object-cover" alt="Family Safari" loading="lazy" />
+                      <img src="https://images.unsplash.com/photo-1502139214982-d0ad755818d8?auto=format&fit=crop&q=80&w=400" width={400} height={500} className="w-full h-full object-cover" alt="Family Safari" loading="lazy" decoding="async" />
                     </div>
                     <div className="absolute top-20 right-0 w-64 h-48 p-3 bg-white shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300 z-10">
                       <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=600" width={400} height={400} className="w-full h-full object-cover" alt="Family Beach" loading="lazy" />
                     </div>
                     <div className="absolute bottom-10 left-1/4 w-56 h-64 p-3 bg-white shadow-2xl transform shadow-blue-900/10 rotate-3 hover:rotate-0 transition-transform duration-300 z-30">
-                      <img src="https://images.unsplash.com/photo-1540479859555-17af45c78602?auto=format&fit=crop&q=80&w=800" width={400} height={400} className="w-full h-full object-cover" alt="Family Walking" loading="lazy" />
+                      <img src="https://images.unsplash.com/photo-1540479859555-17af45c78602?auto=format&fit=crop&q=80&w=800" width={400} height={600} className="w-full h-full object-cover" alt="Family Walking" loading="lazy" decoding="async" />
                     </div>
                   </div>
                 )}
 
                 {selectedCategory === 'Business Travel' && (
                   <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[500px]">
-                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=600" className="w-full h-full object-cover rounded-tl-[60px] rounded-br-[20px]" alt="Corporate Plane" />
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=600" width={300} height={300} className="w-full h-full object-cover rounded-tl-[60px] rounded-br-[20px]" alt="Corporate Plane" loading="lazy" decoding="async" />
                     <div className="bg-slate-900 rounded-tr-[60px] rounded-bl-[20px] rounded-br-[20px] p-8 flex flex-col justify-center text-white">
                       <span className="text-amber-500 font-black text-4xl mb-2">15%</span>
                       <span className="text-xs uppercase tracking-widest font-bold opacity-80">Average Corporate Savings</span>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=600" className="w-full h-full object-cover rounded-bl-[60px] rounded-tr-[20px] rounded-tl-[20px] col-span-2" alt="Corporate Meeting" />
+                    <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=600" width={600} height={400} className="w-full h-full object-cover rounded-bl-[60px] rounded-tr-[20px] rounded-tl-[20px] col-span-2" alt="Corporate Meeting" loading="lazy" decoding="async" />
                   </div>
                 )}
 
                 {selectedCategory === 'Religious / Pilgrimage Travel' && (
                   <div className="relative w-full h-[400px] mt-8 rounded-[40px] overflow-hidden shadow-2xl group">
-                    <img src="https://images.unsplash.com/photo-1542820229-081e0c12af0b?auto=format&fit=crop&q=80&w=1200" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Religious site" />
+                    <img
+                      src="https://images.unsplash.com/photo-1542820229-081e0c12af0b?auto=format&fit=crop&q=80&w=1200"
+                      width={1200}
+                      height={400}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                      alt="Religious site"
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/80 to-transparent"></div>
                     <div className="absolute bottom-8 left-8 right-8 text-center">
                       <p className="text-white font-black uppercase tracking-[0.4em] text-sm opacity-90 drop-shadow-lg">Journeys of the Spirit</p>
@@ -389,7 +408,15 @@ const TourPackages: React.FC = () => {
                   <div className="relative w-full h-[500px] mt-8">
                     <div className="absolute inset-0 flex justify-center items-center">
                       <div className="relative w-full h-full">
-                        <img src="/assets/regal-african-safaris-gwZAmtRwxBI-unsplash.jpg" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%] object-cover rounded-[60px] shadow-2xl z-10" alt="Safari Adventures" />
+                        <img
+                          src="/assets/regal-african-safaris-gwZAmtRwxBI-unsplash.jpg"
+                          width={1200}
+                          height={500}
+                          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%] object-cover rounded-[60px] shadow-2xl z-10"
+                          alt="Safari Adventures"
+                          loading="lazy"
+                          decoding="async"
+                        />
                       </div>
                     </div>
                   </div>
@@ -426,7 +453,15 @@ const TourPackages: React.FC = () => {
                   onClick={() => setSelectedCategory(cat.name)}
                   className="group relative h-[450px] overflow-hidden rounded-[40px] cursor-pointer shadow-2xl transition-all duration-700 hover:shadow-[0_0_50px_rgba(255,0,0,0.3)] hover:border-red-500/30 border border-transparent"
                 >
-                  <img src={cat.img} alt={cat.name} width={400} height={450} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" loading="lazy" />
+                  <img
+                    src={cat.img}
+                    alt={cat.name}
+                    width={400}
+                    height={450}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]"
+                    loading="lazy"
+                    decoding="async"
+                  />
 
                   {/* Glassmorphism Overlay */}
                   <div className="absolute inset-x-4 bottom-4 p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[32px] transform translate-y-2 group-hover:translate-y-0 transition-all duration-500 shadow-2xl flex flex-col items-center text-center">

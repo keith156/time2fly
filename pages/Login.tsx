@@ -25,7 +25,7 @@ const Login: React.FC = () => {
       <div className="max-w-md w-full bg-white rounded-[40px] shadow-2xl overflow-hidden border border-slate-100">
         <div className="bg-slate-950 p-10 text-center text-white relative">
           <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl overflow-hidden p-2">
-            <img src="/favicon.png" alt="Time2Fly Logo" className="w-full h-full object-contain" />
+            <img src="/favicon.png" alt="Time2Fly Logo" width={80} height={80} className="w-full h-full object-contain" loading="eager" decoding="async" />
           </div>
           <h2 className="text-h2 text-white">Admin Portal</h2>
           <p className="text-body text-slate-400 mt-2">Access management dashboard</p>

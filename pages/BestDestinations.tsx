@@ -13,7 +13,16 @@ const BestDestinations: React.FC = () => {
             />
             <div className="bg-blue-900 py-24 px-4 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20 pointer-events-none">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="Best Destinations" />
+                    <img
+                        src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=2000"
+                        width={1920}
+                        height={600}
+                        className="w-full h-full object-cover"
+                        alt="Best Destinations"
+                        loading="eager"
+                        decoding="async"
+                        fetchPriority="high"
+                    />
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <span className="text-caption text-amber-500 mb-4 block">Explorer's Guide 2026</span>
@@ -30,7 +39,14 @@ const BestDestinations: React.FC = () => {
                         <Link to="/packages" className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full font-black uppercase tracking-widest text-xs hover:bg-slate-900 transition-all">Explore Tour Adventures</Link>
                     </div>
                     <div className="rounded-[40px] overflow-hidden shadow-2xl skew-y-2 hover:skew-y-0 transition-transform duration-700">
-                        <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&q=80&w=1000" alt="Destination View" />
+                        <img
+                            src="https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&q=80&w=1000"
+                            width={500}
+                            height={625}
+                            alt="Destination View"
+                            loading="lazy"
+                            decoding="async"
+                        />
                     </div>
                 </div>
 
