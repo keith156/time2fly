@@ -4,7 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { Menu, X, ArrowRight, ChevronRight, Star, Globe, Shield, Compass, Plane, MessageCircle, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Lock, Music2, VolumeX, Volume2, Search, RefreshCcw, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-const Home = React.lazy(() => import('./pages/Home'));
+import Home from './pages/Home';
 const About = React.lazy(() => import('./pages/About'));
 const TourPackages = React.lazy(() => import('./pages/TourPackages'));
 const Services = React.lazy(() => import('./pages/Services'));

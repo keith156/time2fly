@@ -194,16 +194,15 @@ const Home: React.FC = () => {
     <div>
       <SEO />
       {/* Redesigned Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0">
           <video
-            autoPlay={true}
-            loop={true}
-            muted={true}
-            playsInline={true}
+            autoPlay
+            loop
+            muted
+            playsInline
             preload="auto"
-            poster="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?auto=format&fit=crop&q=80&w=2000"
-            key="/assets/WhatsApp%20Video%202026-02-18%20at%202.04.02%20PM%20(1).mp4"
+            poster="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&q=80&w=1200"
             className="w-full h-full object-cover scale-105"
             onEnded={(e) => e.currentTarget.play()}
           >
