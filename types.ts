@@ -25,6 +25,7 @@ export interface Destination {
   name: string;
   image: string;
   details: string;
+  tagline?: string;
 }
 
 export interface BlogPost {

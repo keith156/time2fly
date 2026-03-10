@@ -166,6 +166,11 @@ const DestinationDetail: React.FC = () => {
                         <h1 className="text-h1 text-white mb-4 animate-fade-in-up">
                             {destination.name}
                         </h1>
+                        {destination.tagline && (
+                            <p className="text-xl md:text-2xl text-slate-200 font-medium max-w-2xl animate-fade-in-up delay-100 italic">
+                                "{destination.tagline}"
+                            </p>
+                        )}
                     </div>
                 </div>
             </section>

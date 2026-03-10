@@ -75,12 +75,14 @@ CREATE TABLE IF NOT EXISTS blogs (
 */
 
 -- 4. destinations table
+ALTER TABLE destinations ADD COLUMN IF NOT EXISTS tagline TEXT;
 /*
 CREATE TABLE IF NOT EXISTS destinations (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   name TEXT,
   image TEXT,
   details TEXT,
+  tagline TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 */
