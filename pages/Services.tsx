@@ -205,40 +205,28 @@ const Services: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
       <SEO
-        title="Our Services | Time2Fly Tours & Travel Ltd"
-        description="Explore our range of travel services including guided tours, holiday escapes, educational trips, hotel reservations, and seamless travel logistics."
-        url="https://time2flytnt.com/#/services"
+        title="Travel Services | Flight Booking & Safari Adventures Uganda"
+        description="Comprehensive travel services including flight reservations, wildlife tracking, hotel bookings, and custom holiday packages across Uganda and the world."
       />
-      {/* ── Hero / Tab Switcher ─────────────────────────────────────────── */}
-      <section className="relative min-h-[55vh] flex flex-col items-center justify-center overflow-hidden pt-28 pb-0">
-
-        {/* Animated background image — fades between tabs */}
-        {categories.map(c => (
+      {/* Hero Section */}
+      <section className="relative min-h-[55vh] flex flex-col items-center justify-center overflow-hidden pt-28 pb-12">
+        {/* Animated background image */}
+        <div className="absolute inset-0 z-0 bg-slate-950">
+          <img
+            src={cat.bgImage}
+            alt={cat.label}
+            className="w-full h-full object-cover opacity-40 transition-all duration-1000 scale-105"
+            loading="eager"
+            fetchPriority="high"
+          />
           <div
-            key={c.id}
-            className="absolute inset-0 transition-opacity duration-1000"
-            style={{ opacity: activeTab === c.id ? 1 : 0 }}
-          >
-            <img
-              src={c.bgImage}
-              alt={c.label}
-              width={1920}
-              height={600}
-              className="w-full h-full object-cover"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(to bottom, #00008b99 0%, ${c.gradientFrom}cc 40%, #0000ff11 70%, #0a0a0f 100%)`,
-              }}
-            />
-          </div>
-        ))}
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(to bottom, #00008b99 0%, #0a0a2ecc 40%, #0000ff11 70%, #0a0a0f 100%)`,
+            }}
+          />
+        </div>
 
-        {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <span
             className="text-caption mb-6 px-4 py-2 rounded-full border inline-block"
@@ -391,7 +379,7 @@ const Services: React.FC = () => {
             Ready to Travel?
           </span>
           <h2 className="text-h2 text-white mb-6">
-            Let's Plan Your <span className="text-red-600">Perfect Trip</span>
+            Let's Plan Your <span className="text-red-600">Perfect Trip Today</span>
           </h2>
           <p className="text-body-lg text-slate-400 mb-10">
             Whether it's a weekend getaway or a month-long expedition — our team is ready to make it happen.

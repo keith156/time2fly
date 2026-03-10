@@ -30,10 +30,8 @@ const Blog: React.FC = () => {
     return (
       <div className="pt-20 bg-white min-h-screen">
         <SEO
-          title={`${selectedPost.title} | Time2Fly Blog`}
+          title={`${selectedPost.title} | Time2Fly Travel Journal`}
           description={selectedPost.excerpt}
-          url={`https://time2flytnt.com/#/blog`}
-          image={selectedPost.image}
         />
         {/* Reading Progress Bar */}
         <div
@@ -153,9 +151,8 @@ const Blog: React.FC = () => {
   return (
     <div className="pt-24 bg-white pb-0">
       <SEO
-        title="Travel Journal & Insights | Time2Fly Tours & Travel Ltd"
-        description="Read our latest travel guides, tips, and inspiring stories from around the globe to help plan your next adventure."
-        url="https://time2flytnt.com/#/blog"
+        title="Travel Journal & Insights | Time2Fly Uganda"
+        description="Discover expert travel guides, safari tips, and inspiring stories from Time2Fly Tours and Travel. Your source for authentic travel knowledge in Uganda and beyond."
       />
       {/* Mesmerizing Hero Section */}
       <section className="relative h-[60vh] flex flex-col items-center justify-center overflow-hidden">
@@ -232,12 +229,12 @@ const Blog: React.FC = () => {
                     <span className="flex items-center"><Calendar size={14} className="mr-1.5 text-[#0000ff]" /> {post.date}</span>
                     <span className="flex items-center"><User size={14} className="mr-1.5 text-[#0000ff]" /> {post.author.split(' ')[0]}</span>
                   </div>
-                  <h2
+                  <h3
                     className="text-h4 text-slate-900 mb-4 hover:text-[#0000ff] transition-colors cursor-pointer line-clamp-2"
                     onClick={() => setSelectedPost(post)}
                   >
                     {post.title}
-                  </h2>
+                  </h3>
                   <p className="text-body text-slate-500 mb-6 line-clamp-3 italic flex-grow">
                     {post.excerpt}
                   </p>

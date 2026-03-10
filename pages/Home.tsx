@@ -192,7 +192,10 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <SEO />
+      <SEO
+        title="Time2Fly | Travels & Tours Ltd — Uganda's Leading Travel Agency"
+        description="Book affordable flights, luxury safaris, and custom tour packages with Uganda's premier travel agency. Visit Time2Fly for expert travel advice and seamless bookings."
+      />
       {/* Redesigned Hero Section */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0">
@@ -257,7 +260,8 @@ const Home: React.FC = () => {
               </div>
             </div>
 
-            <h1 className="font-black leading-none tracking-tighter uppercase mb-4 w-full text-5xl md:text-[66px]">
+            <h1 className="sr-only">Time2Fly Tours & Travel Ltd — Uganda's Premier Travel Agency</h1>
+            <div className="font-black leading-none tracking-tighter uppercase mb-4 w-full text-5xl md:text-[66px]">
               {/* DISCOVER - 66px on desktop */}
               <svg
                 viewBox="0 0 520 90"
@@ -300,7 +304,7 @@ const Home: React.FC = () => {
                   MORE
                 </text>
               </svg>
-            </h1>
+            </div>
 
             <div className="space-y-6">
               <p className="text-lg md:text-xl text-slate-100 font-light max-w-2xl mx-auto leading-relaxed uppercase tracking-widest opacity-90">
@@ -338,7 +342,7 @@ const Home: React.FC = () => {
       {/* Partners Section */}
       <section className="section-spacing bg-navy-900 relative overflow-hidden">
         <div className="max-w-3xl mx-auto px-6 text-center mb-12 relative z-20">
-          <p className="text-[14px] font-black uppercase tracking-widest text-white/40 mb-4">Our Global Partners</p>
+          <h2 className="text-[14px] font-black uppercase tracking-widest text-white/40 mb-4">Our Global Partners</h2>
           <p className="text-white/60 text-sm md:text-base font-normal leading-relaxed max-w-xl mx-auto lowercase tracking-widest opacity-80">
             trusted partnerships with leading airlines and travel providers worldwide, ensuring seamless journeys and competitive fares.
           </p>

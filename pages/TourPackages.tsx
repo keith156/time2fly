@@ -68,8 +68,6 @@ const TourPackages: React.FC = () => {
         <SEO
           title={`${selectedPackage.destination} | Time2Fly Tours`}
           description={selectedPackage.description}
-          url={`https://time2flytnt.com/#/packages?pkg=${selectedPackage.id}`}
-          image={selectedPackage.image}
         />
         <article className="animate-fade-in-up">
           {/* Hero Section */}
@@ -81,7 +79,6 @@ const TourPackages: React.FC = () => {
               height={900}
               className="w-full h-full object-cover"
               loading="eager"
-              decoding="async"
               fetchPriority="high"
             />
             <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>

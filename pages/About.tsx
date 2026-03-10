@@ -113,44 +113,50 @@ const About: React.FC = () => {
   return (
     <div className="bg-white">
       <SEO
-        title="About Us | Time2Fly Tours & Travel Ltd"
-        description="Learn about Time2Fly Tours and Travel Limited, a locally owned independent travel agency in Uganda offering professional and reliable travel experiences."
-        url="https://time2flytnt.com/#/about"
+        title="About Time2Fly | Uganda's Independent Travel Agency"
+        description="Learn about Time2Fly Tours and Travel Limited, a locally owned travel agency in Uganda. Discover our mission, vision, and commitment to excellence since 2018."
       />
       {/* Hero Section */}
-      <section className="relative flex items-center pt-36 md:pt-44 section-spacing overflow-hidden bg-navy-800">
+      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-800 via-navy-800/80 to-transparent z-10"></div>
           <img
-            src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=2000"
-            width={1920}
-            height={600}
-            className="w-full h-full object-cover opacity-40 scale-105"
-            alt="Travel Hero"
+            src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&q=80&w=2000"
+            className="w-full h-full object-cover opacity-60"
+            alt="About Time2Fly"
             loading="eager"
-            decoding="async"
             fetchPriority="high"
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 to-slate-900/80"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center pt-20">
+          <span className="text-amber-500 font-black uppercase tracking-[0.4em] text-xs mb-6 block animate-fade-in-up">Discover Our Story</span>
+          <h1 className="text-h1 text-white mb-8 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            About <span className="text-red-600">Time2Fly</span>
+          </h1>
+        </div>
+      </section>
+
+      {/* Director Section */}
+      <section className="section-spacing bg-white pt-24 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up">
               <span className="text-caption text-red-500 mb-4 block">Established July 2018 — Uganda</span>
-              <h1 className="text-h1 text-white mb-4 md:mb-6">WE ARE <br /><span className="text-[#0000ff]">TIME</span><span className="text-red-500">2</span><span className="text-[#f7c9ab]">FLY</span></h1>
-              <p className="text-body-lg text-slate-300 mb-6 md:mb-8 italic">"Explore the world, Travelling is knowledge"</p>
-              <p className="text-body text-slate-300 mb-8">
+              <h2 className="text-h2 text-slate-900 mb-6 font-black uppercase tracking-tight leading-tight">WE ARE <br /><span className="text-navy-800">TIME</span><span className="text-red-600">2</span><span className="text-amber-500">FLY</span></h2>
+              <p className="text-body-lg text-slate-600 mb-8 italic">"Explore the world, Travelling is knowledge"</p>
+              <p className="text-body text-slate-700 mb-8">
                 Time2Fly Tours & Travel Ltd is your dependable travel partner for stress-free planning and unforgettable destinations. With a commitment to professionalism, integrity, and innovation, we turn travel dreams into reality.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link to="/packages" className="inline-flex items-center bg-red-600 hover:bg-amber-500 text-white font-black px-8 py-4 rounded-full transition-all uppercase tracking-widest text-xs whitespace-nowrap">View Our Tour Adventures</Link>
-                <div className="flex items-center space-x-3 bg-white/5 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/10">
-                  <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-red-500"><Compass className="animate-spin-slow" size={20} /></div>
-                  <span className="text-white text-[10px] font-black uppercase tracking-widest leading-tight">Navigating your <br /> next adventure</span>
+                <div className="flex items-center space-x-3 bg-slate-50 border border-slate-100 px-5 py-3 rounded-2xl">
+                  <div className="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center"><Compass className="animate-spin-slow" size={20} /></div>
+                  <span className="text-slate-900 text-[10px] font-black uppercase tracking-widest leading-tight">Navigating your <br /> next adventure</span>
                 </div>
               </div>
             </div>
             <div className="relative mt-12 lg:mt-0 max-w-md mx-auto">
-              <div className="relative z-10 rounded-[32px] overflow-hidden border-2 border-white/10 shadow-2xl">
+              <div className="relative z-10 rounded-[32px] overflow-hidden border-2 border-slate-100 shadow-2xl">
                 <div className="w-full h-full max-h-[450px] bg-slate-800">
                   <img
                     src="/assets/ceo_final.jpeg"
@@ -159,7 +165,6 @@ const About: React.FC = () => {
                     className="w-full h-full object-cover"
                     alt="Director"
                     loading="eager"
-                    decoding="async"
                   />
                 </div>
               </div>
@@ -246,7 +251,6 @@ const About: React.FC = () => {
         </div>
       </section>
 
-
       {/* Why Choose Us */}
       <section className="section-spacing bg-slate-950 relative overflow-hidden">
         {/* Background Accents */}
@@ -276,7 +280,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Vision & Mission */}
-      <section className="section-spacing bg-slate-50" >
+      <section className="section-spacing bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             <div className="bg-white p-8 md:p-10 rounded-[30px] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
@@ -299,10 +303,10 @@ const About: React.FC = () => {
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Global Impact Stats - Updated with Counting Animation */}
-      <section className="section-spacing bg-white relative overflow-hidden border-y border-slate-50" >
+      <section className="section-spacing bg-white relative overflow-hidden border-y border-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
@@ -316,10 +320,10 @@ const About: React.FC = () => {
             ))}
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Final CTA */}
-      <section className="section-spacing bg-navy-800 relative overflow-hidden text-center" >
+      <section className="section-spacing bg-navy-800 relative overflow-hidden text-center">
         <div className="absolute inset-0 opacity-20 z-0">
           <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover" alt="CTA" />
         </div>
@@ -333,8 +337,8 @@ const About: React.FC = () => {
             </div>
           </div>
         </div>
-      </section >
-    </div >
+      </section>
+    </div>
   );
 };
 

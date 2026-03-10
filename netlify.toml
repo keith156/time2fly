@@ -3,6 +3,12 @@
   publish = "dist"
 
 [[redirects]]
+  from = "https://www.time2flytnt.com/*"
+  to = "https://time2flytnt.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
