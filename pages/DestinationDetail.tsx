@@ -216,12 +216,14 @@ const DestinationDetail: React.FC = () => {
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
 
                                 {/* Content Glassmorphism Box */}
-                                <div className="absolute top-1/2 bottom-4 left-4 right-4 p-6 md:p-8 rounded-[30px] bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl transform group-hover:-translate-y-2 transition-transform duration-700 overflow-y-auto no-scrollbar">
-                                    <div className="w-12 h-12 bg-amber-500 text-white rounded-xl flex items-center justify-center mb-4 shadow-xl shadow-amber-500/30">
+                                <div className="absolute top-[25%] bottom-4 left-4 right-4 p-5 md:p-6 rounded-[30px] bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl transform group-hover:-translate-y-2 transition-transform duration-700 overflow-y-auto no-scrollbar">
+                                    <div className="w-10 h-10 bg-amber-500 text-white rounded-xl flex items-center justify-center mb-2 shadow-xl shadow-amber-500/30">
                                         {getIcon(item.title)}
                                     </div>
-                                    <h4 className="text-h3 text-white mb-3">{item.title}</h4>
-                                    <p className="text-slate-100/90 text-sm font-medium leading-relaxed text-left">
+                                    <h4 className="text-xl font-black text-white mb-1.5 tracking-tight uppercase">
+                                        {item.title.toLowerCase().includes('lakes, islands') ? 'island retreats' : item.title}
+                                    </h4>
+                                    <p className="text-slate-100/90 text-[13px] font-medium leading-relaxed text-left">
                                         {item.content}
                                     </p>
                                 </div>
