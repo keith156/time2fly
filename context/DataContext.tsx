@@ -44,6 +44,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true); // Start loading by default
   const [isUploading, setIsUploading] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+  const [deletedDummyIds, setDeletedDummyIds] = useState<string[]>(() => {
+    const saved = localStorage.getItem('deleted_dummy_ids');
+    return saved ? JSON.parse(saved) : [];
+  });
 
   // Initial Fetch & Real-time Subscription
   useEffect(() => {
@@ -97,14 +101,23 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         supabase.from('live_tickets').select('*').order('order_index', { ascending: true })
       ]);
 
-      // Packages
+      // Packages - Deduplicate by normalized destination name and filter deleted dummies
       const realPackages = pkgResult.data || [];
-      const dummyPackages = PACKAGES.filter(dummy => !realPackages.some(real => real.destination === dummy.destination));
+      const dummyPackages = PACKAGES.filter(dummy =>
+        !deletedDummyIds.includes(dummy.id) &&
+        !realPackages.some(real =>
+          real.destination.toLowerCase().trim() === dummy.destination.toLowerCase().trim()
+        )
+      );
       setPackages([...realPackages, ...dummyPackages]);
 
-      // Blogs
+      // Blogs - Deduplicate by normalized title
       const realBlogs = blogResult.data || [];
-      const dummyBlogs = BLOG_POSTS.filter(dummy => !realBlogs.some(real => real.title === dummy.title));
+      const dummyBlogs = BLOG_POSTS.filter(dummy =>
+        !realBlogs.some(real =>
+          real.title.toLowerCase().trim() === dummy.title.toLowerCase().trim()
+        )
+      );
       setBlogs([...realBlogs, ...dummyBlogs]);
 
       // Destinations
@@ -213,15 +226,20 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deletePackage = async (id: string) => {
-    // If it's a dummy ID, just remove from state
-    if (typeof id === 'string' && (id.startsWith('h') || id.startsWith('c') || id.startsWith('f') || id.startsWith('s') || id.startsWith('r'))) {
+    // If it's a dummy ID, just remove from state and persist to localStorage
+    const isDummy = PACKAGES.some(p => p.id === id);
+    if (isDummy) {
       setPackages(prev => prev.filter(item => item.id !== id));
+      const newDeletedIds = [...deletedDummyIds, id];
+      setDeletedDummyIds(newDeletedIds);
+      localStorage.setItem('deleted_dummy_ids', JSON.stringify(newDeletedIds));
       return;
     }
 
     const { error } = await supabase.from('packages').delete().eq('id', id);
     if (error) {
       console.error('Package delete error:', error);
+      alert(`Failed to delete package: ${error.message}`);
     } else {
       setPackages(prev => prev.filter(item => item.id !== id));
     }
