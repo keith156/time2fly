@@ -338,87 +338,59 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-[#000033] text-white section-spacing border-t-4 border-red-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Brand/Contact Column */}
-          <div className="flex flex-col space-y-6">
-            <h3 className="text-amber-500 font-bold uppercase tracking-widest text-xs">
-              Get In Touch
-            </h3>
-            <div className="space-y-4 text-sm font-medium">
-              <div className="flex items-center space-x-3">
-                <MapPin size={18} className="text-amber-500 flex-shrink-0" />
-                <span>Kampala, Uganda</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <Phone size={18} className="text-amber-500 flex-shrink-0 mt-1" />
-                <div className="flex flex-col space-y-1">
-                  <span>+256 759 243 331</span>
-                  <span>+256 783 084 521</span>
-                </div>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail size={18} className="text-amber-500 flex-shrink-0" />
-                <span className="break-all">info@time2flytnt.com</span>
+        <div className="flex flex-col items-center mb-4 px-4 text-center">
+          <h3 className="font-bold mb-4 text-amber-500 uppercase tracking-widest text-xs max-w-2xl leading-relaxed">
+            For inquiries, support, or additional details, our team is happy to assist you. please Get In Touch With Us
+          </h3>
+          <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 text-white font-medium">
+            <div className="flex items-center space-x-3">
+              <MapPin size={18} className="text-amber-500 flex-shrink-0" />
+              <span>Kampala, Uganda</span>
+            </div>
+            <div className="flex items-start md:items-center space-x-3">
+              <Phone size={18} className="text-amber-500 flex-shrink-0 mt-1 md:mt-0" />
+              <div className="flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-4">
+                <span className="whitespace-nowrap">+256 759 243 331</span>
+                <span className="text-white/20 hidden md:block">|</span>
+                <span className="whitespace-nowrap">+256 783 084 521</span>
               </div>
             </div>
-          </div>
-
-          {/* Quick Links Column */}
-          <div className="flex flex-col space-y-6">
-            <h3 className="text-amber-500 font-bold uppercase tracking-widest text-xs">
-              Quick Links
-            </h3>
-            <div className="grid grid-cols-2 gap-4 text-xs font-black uppercase tracking-widest">
-              <Link to="/" className="hover:text-amber-400 transition-colors">Home</Link>
-              <Link to="/about" className="hover:text-amber-400 transition-colors">About Us</Link>
-              <Link to="/services" className="hover:text-amber-400 transition-colors">Our Services</Link>
-              <Link to="/packages" className="hover:text-amber-400 transition-colors">Tour Packages</Link>
-              <Link to="/blog" className="hover:text-amber-400 transition-colors">Travel Blog</Link>
-              <Link to="/contact" className="hover:text-amber-400 transition-colors">Contact</Link>
-              <Link to="/destinations" className="hover:text-amber-400 transition-colors">Destinations</Link>
-              <Link to="/special-offers" className="hover:text-amber-400 transition-colors">Special Offers</Link>
-            </div>
-          </div>
-
-          {/* Popular Services */}
-          <div className="flex flex-col space-y-6">
-            <h3 className="text-amber-500 font-bold uppercase tracking-widest text-xs">
-              Specialties
-            </h3>
-            <div className="flex flex-col space-y-3 text-xs font-black uppercase tracking-widest text-white/70">
-              <Link to="/luxury-safari" className="hover:text-white transition-colors">Luxury Safari</Link>
-              <Link to="/corporate-travel" className="hover:text-white transition-colors">Corporate Travel</Link>
-              <Link to="/live-prices" className="hover:text-white transition-colors">Flight Booking</Link>
-              <Link to="/best-destinations" className="hover:text-white transition-colors">Best Destinations</Link>
-            </div>
-          </div>
-
-          {/* Social Media Column */}
-          <div className="flex flex-col space-y-6">
-            <h3 className="text-amber-500 font-bold uppercase tracking-widest text-xs text-center lg:text-left">
-              Connect With Us
-            </h3>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-3">
-              <a href="https://www.facebook.com/timetofly.ug/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-blue-600 transition-all hover:-translate-y-1 text-white border border-white/10" title="Facebook"><Facebook size={18} /></a>
-              <a href="https://x.com/time2fly06/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="X (Twitter)"><Twitter size={18} /></a>
-              <a href="https://www.instagram.com/time2fly06/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-pink-600 transition-all hover:-translate-y-1 text-white border border-white/10" title="Instagram"><Instagram size={18} /></a>
-              <a href="https://ug.linkedin.com/company/time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-blue-700 transition-all hover:-translate-y-1 text-white border border-white/10" title="LinkedIn"><Linkedin size={18} /></a>
-              <a href="https://www.tiktok.com/@time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="TikTok"><Music2 size={18} /></a>
+            <div className="flex items-center space-x-3">
+              <Mail size={18} className="text-amber-500 flex-shrink-0" />
+              <span>info@time2flytnt.com</span>
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/10 flex flex-col items-center justify-center text-center text-white/50 text-[10px] font-black uppercase tracking-widest gap-6">
+        {/* Social Media - Centered Row */}
+        <div className="flex justify-center flex-wrap gap-4 mb-4">
+          <a href="https://www.facebook.com/timetofly.ug/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-blue-600 transition-all hover:-translate-y-1 text-white border border-white/10" title="Facebook"><Facebook size={20} /></a>
+          <a href="https://x.com/time2fly06/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="X (Twitter)"><Twitter size={20} /></a>
+          <a href="https://www.instagram.com/time2fly06/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-pink-600 transition-all hover:-translate-y-1 text-white border border-white/10" title="Instagram"><Instagram size={20} /></a>
+          <a href="https://ug.linkedin.com/company/time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-blue-700 transition-all hover:-translate-y-1 text-white border border-white/10" title="LinkedIn"><Linkedin size={20} /></a>
+          <a href="https://medium.com/@time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="Medium">
+            {/* Medium Icon */}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+            </svg>
+          </a>
+          <a href="https://www.tripadvisor.com/Profile/Time2Fly5" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-green-500 transition-all hover:-translate-y-1 text-white border border-white/10" title="TripAdvisor">
+            <img src="/assets/tripadvisor-icon.png" alt="TripAdvisor" className="w-5 h-5 object-contain invert" />
+          </a>
+          <a href="https://www.tiktok.com/@time2fly06" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-black transition-all hover:-translate-y-1 text-white border border-white/10" title="TikTok"><Music2 size={20} /></a>
+        </div>
+
+        <div className="pt-6 border-t border-blue-700 flex flex-col items-center justify-center text-center text-white/50 text-sm font-medium gap-4">
           <p className="text-white">© 2026 Time2Fly Tours & Travel Ltd. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-8">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/login" className="flex items-center space-x-1 opacity-20 hover:opacity-100 transition-opacity">
-              <Lock size={12} />
+              <Lock size={14} />
               <span>Admin Login</span>
             </Link>
           </div>
           {lastUpdated && (
-            <div className="flex items-center space-x-2 text-slate-600">
+            <div className="flex items-center space-x-2 text-[10px] uppercase font-black tracking-widest text-slate-600">
               <span>Last Synced: {new Date(lastUpdated).toLocaleTimeString()}</span>
               <button
                 onClick={handleManualRefresh}
