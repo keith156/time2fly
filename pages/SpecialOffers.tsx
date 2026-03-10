@@ -92,9 +92,8 @@ const SpecialOffers: React.FC = () => {
                                                 <div className="flex items-center justify-between">
                                                     <div>
                                                         <span className="text-[10px] text-slate-400 block uppercase font-black tracking-[0.2em] mb-1">Value Price</span>
-                                                        <div className="flex items-baseline gap-1">
-                                                            <span className="text-2xl font-black text-[#0000ff] tracking-tighter">${pkg.price}</span>
-                                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">USD</span>
+                                                        <div className="flex items-baseline">
+                                                            <span className="text-4xl font-black text-[#0000ff] tracking-tighter">${pkg.price}</span>
                                                             <span className="text-slate-400 text-xs font-bold ml-2 line-through">${(pkg.price * 1.2).toFixed(0)}</span>
                                                         </div>
                                                     </div>

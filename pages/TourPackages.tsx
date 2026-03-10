@@ -175,9 +175,12 @@ const TourPackages: React.FC = () => {
                   <span className="text-caption text-amber-500 block mb-4">Premium Package</span>
                   <div className="mb-8">
                     <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-1">Starting From</p>
-                    <div className="flex items-baseline">
-                      <span className="text-h1 text-white">{selectedPackage.price}</span>
-                      <span className="text-slate-400 font-bold text-sm ml-2">/ Guest</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl md:text-5xl font-black text-white">{selectedPackage.price}</span>
+                      <div className="flex flex-col">
+                        <span className="text-amber-500 font-bold text-[10px] leading-none uppercase tracking-widest">USD</span>
+                        <span className="text-slate-400 font-bold text-sm">/ Guest</span>
+                      </div>
                     </div>
                   </div>
 
