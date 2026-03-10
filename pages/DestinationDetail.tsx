@@ -216,7 +216,7 @@ const DestinationDetail: React.FC = () => {
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
 
                                 {/* Content Glassmorphism Box */}
-                                <div className="absolute bottom-4 left-4 right-4 p-6 md:p-8 rounded-[30px] bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl transform group-hover:-translate-y-2 transition-transform duration-700">
+                                <div className="absolute top-1/2 bottom-4 left-4 right-4 p-6 md:p-8 rounded-[30px] bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl transform group-hover:-translate-y-2 transition-transform duration-700 overflow-y-auto no-scrollbar">
                                     <div className="w-12 h-12 bg-amber-500 text-white rounded-xl flex items-center justify-center mb-4 shadow-xl shadow-amber-500/30">
                                         {getIcon(item.title)}
                                     </div>
