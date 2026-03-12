@@ -5,7 +5,8 @@ import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, Ar
 import SectionTitle from '../components/SectionTitle.tsx';
 import FlightSearchBar from '../components/FlightSearchBar.tsx';
 import SEO from '../components/SEO.tsx';
-import { SERVICES, TESTIMONIALS, PARTNERS } from '../constants.tsx';
+import { SERVICES, TESTIMONIALS } from '../constants.tsx';
+import AirlinesNetwork from '../components/AirlinesNetwork.tsx';
 import { useData } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
 
@@ -62,15 +63,6 @@ const Home: React.FC = () => {
   };
 
   const extendedTestimonials = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
-  const extendedPartners = [...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS];
-
-  // Split partners for two distinct rows
-  const half = Math.ceil(PARTNERS.length / 2);
-  const row1 = PARTNERS.slice(0, half);
-  const row2 = PARTNERS.slice(half);
-
-  const extendedRow1 = [...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1, ...row1];
-  const extendedRow2 = [...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2, ...row2];
 
   const openGoogleFlights = () => {
     window.open('https://www.google.com/travel/flights', '_blank');
@@ -340,52 +332,7 @@ const Home: React.FC = () => {
       <FlightSearchBar />
 
       {/* Partners Section */}
-      <section className="section-spacing bg-navy-900 relative overflow-hidden">
-        <div className="max-w-3xl mx-auto px-6 text-center mb-12 relative z-20">
-          <h2 className="text-[14px] font-black uppercase tracking-widest text-white/40 mb-4">Our Global Partners</h2>
-          <p className="text-white/60 text-sm md:text-base font-normal leading-relaxed max-w-xl mx-auto lowercase tracking-widest opacity-80">
-            trusted partnerships with leading airlines and travel providers worldwide, ensuring seamless journeys and competitive fares.
-          </p>
-        </div>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(90deg, #0f172a, transparent)' }}></div>
-          <div className="absolute inset-y-0 right-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(270deg, #0f172a, transparent)' }}></div>
-          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
-            {extendedRow1.map((partner, i) => (
-              <div key={`${partner.name}-${i}`} className="inline-block px-3 shrink-0">
-                <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl border border-white/10 p-4 w-[260px] h-[130px] flex items-center justify-center hover:scale-105 hover:bg-white transition-all duration-300">
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    width={260}
-                    height={130}
-                    className="h-full w-full object-contain opacity-85 hover:opacity-100 transition-opacity duration-300"
-                    loading="lazy"
-                    style={{ transform: `scale(${partner.scale || 1})` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex whitespace-nowrap animate-marquee-reverse hover:[animation-play-state:paused] mt-8">
-            {extendedRow2.map((partner, i) => (
-              <div key={`${partner.name}-rev-${i}`} className="inline-block px-3 shrink-0">
-                <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl border border-white/10 p-4 w-[260px] h-[130px] flex items-center justify-center hover:scale-105 hover:bg-white transition-all duration-300">
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    width={260}
-                    height={130}
-                    className="h-full w-full object-contain opacity-85 hover:opacity-100 transition-opacity duration-300"
-                    loading="lazy"
-                    style={{ transform: `scale(${partner.scale || 1})` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <AirlinesNetwork />
 
 
 
