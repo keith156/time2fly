@@ -5,8 +5,7 @@ import { Star, ArrowRight, Plane, Hotel, Map, Shield, Globe, Landmark, Quote, Ar
 import SectionTitle from '../components/SectionTitle.tsx';
 import FlightSearchBar from '../components/FlightSearchBar.tsx';
 import SEO from '../components/SEO.tsx';
-import { SERVICES, TESTIMONIALS } from '../constants.tsx';
-import AirlinesNetwork from '../components/AirlinesNetwork.tsx';
+import { SERVICES, TESTIMONIALS, PARTNERS } from '../constants.tsx';
 import { useData } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
 
@@ -331,8 +330,18 @@ const Home: React.FC = () => {
       {/* Flight Search Bar */}
       <FlightSearchBar />
 
-      {/* Partners Section */}
-      <AirlinesNetwork />
+      {/* Partners Section - Static Image */}
+      <section className="section-spacing bg-white overflow-hidden flex items-center justify-center py-0">
+        <img
+          src="/WhatsApp Image 2026-03-12 at 1.08.49 PM (1).jpeg"
+          alt="Airlines Connecting Uganda to the World"
+          width={1280}
+          height={720}
+          className="w-full max-w-7xl h-auto shadow-2xl"
+          loading="lazy"
+          decoding="async"
+        />
+      </section>
 
 
 
