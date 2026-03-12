@@ -330,17 +330,27 @@ const Home: React.FC = () => {
       {/* Flight Search Bar */}
       <FlightSearchBar />
 
-      {/* Partners Section - Static Image */}
-      <section className="section-spacing bg-white overflow-hidden flex items-center justify-center py-0">
-        <img
-          src="/WhatsApp Image 2026-03-12 at 1.08.49 PM (1).jpeg"
-          alt="Airlines Connecting Uganda to the World"
-          width={1280}
-          height={720}
-          className="w-full max-w-7xl h-auto shadow-2xl"
-          loading="lazy"
-          decoding="async"
-        />
+      {/* Partners Section - Static Image with Title and Subtitle */}
+      <section id="partners-section" className="bg-white overflow-hidden pt-12">
+        <div className="max-w-7xl mx-auto px-6 text-center mb-10">
+          <h2 className="text-3xl md:text-5xl font-black text-navy-900 mb-4 tracking-tight">
+            Airlines Connecting Uganda to the World
+          </h2>
+          <p className="text-slate-600 text-lg md:text-xl font-medium leading-relaxed max-w-5xl mx-auto opacity-80 lowercase tracking-widest">
+            trusted partnerships with leading airlines and travel providers worldwide, ensuring seamless journeys and competitive fares
+          </p>
+        </div>
+        <div className="flex items-center justify-center">
+          <img
+            src="/WhatsApp Image 2026-03-12 at 1.08.49 PM (1).jpeg"
+            alt="Airlines Connecting Uganda to the World"
+            width={1280}
+            height={720}
+            className="w-full max-w-7xl h-auto shadow-2xl"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </section>
 
 
