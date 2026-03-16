@@ -48,6 +48,19 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const saved = localStorage.getItem('deleted_dummy_ids');
     return saved ? JSON.parse(saved) : [];
   });
+  // Track dummy ticket IDs that have been "promoted" to real Supabase records
+  const [promotedDummyTicketIds, setPromotedDummyTicketIds] = useState<string[]>(() => {
+    const saved = localStorage.getItem('promoted_dummy_ticket_ids');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [promotedDummyPackageIds, setPromotedDummyPackageIds] = useState<string[]>(() => {
+    const saved = localStorage.getItem('promoted_dummy_package_ids');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [promotedDummyBlogIds, setPromotedDummyBlogIds] = useState<string[]>(() => {
+    const saved = localStorage.getItem('promoted_dummy_blog_ids');
+    return saved ? JSON.parse(saved) : [];
+  });
 
   // Initial Fetch & Real-time Subscription
   useEffect(() => {
@@ -101,19 +114,23 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         supabase.from('live_tickets').select('*').order('order_index', { ascending: true })
       ]);
 
-      // Packages - Deduplicate by normalized destination name and filter deleted dummies
+      // Packages - Deduplicate by normalized destination name and filter deleted/promoted dummies
       const realPackages = pkgResult.data || [];
+      const promotedPkgIds: string[] = JSON.parse(localStorage.getItem('promoted_dummy_package_ids') || '[]');
       const dummyPackages = PACKAGES.filter(dummy =>
         !deletedDummyIds.includes(dummy.id) &&
+        !promotedPkgIds.includes(dummy.id) &&
         !realPackages.some(real =>
           real.destination.toLowerCase().trim() === dummy.destination.toLowerCase().trim()
         )
       );
       setPackages([...realPackages, ...dummyPackages]);
 
-      // Blogs - Deduplicate by normalized title
+      // Blogs - Deduplicate by normalized title and filter promoted dummies
       const realBlogs = blogResult.data || [];
+      const promotedBlogIds: string[] = JSON.parse(localStorage.getItem('promoted_dummy_blog_ids') || '[]');
       const dummyBlogs = BLOG_POSTS.filter(dummy =>
+        !promotedBlogIds.includes(dummy.id) &&
         !realBlogs.some(real =>
           real.title.toLowerCase().trim() === dummy.title.toLowerCase().trim()
         )
@@ -127,7 +144,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       // Live Tickets
       const realTickets = ticketResult.data || [];
-      const dummyTickets = DUMMY_TICKETS.filter(dummy => !realTickets.some(real => real.from === dummy.from && real.to === dummy.to));
+      // Read promoted dummy IDs fresh from localStorage to avoid stale closure
+      const promotedIds: string[] = JSON.parse(localStorage.getItem('promoted_dummy_ticket_ids') || '[]');
+      const dummyTickets = DUMMY_TICKETS.filter(dummy =>
+        !promotedIds.includes(dummy.id) &&
+        !realTickets.some(real => real.from === dummy.from && real.to === dummy.to)
+      );
       const combinedTickets = [...realTickets, ...dummyTickets];
       const sortedTickets = combinedTickets.sort((a, b) => {
         const orderA = a.order_index ?? 999;
@@ -202,8 +224,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const updatedPkg = { ...pkg };
 
-      // If it's a dummy ID, treat it as a new package
+      // If it's a dummy ID, promote it to a real Supabase record
       if (typeof pkg.id === 'string' && (pkg.id.startsWith('h') || pkg.id.startsWith('c') || pkg.id.startsWith('f') || pkg.id.startsWith('s') || pkg.id.startsWith('r'))) {
+        // Mark this dummy as promoted
+        const newPromotedIds = [...promotedDummyPackageIds, pkg.id];
+        setPromotedDummyPackageIds(newPromotedIds);
+        localStorage.setItem('promoted_dummy_package_ids', JSON.stringify(newPromotedIds));
+        // Remove dummy from current state
+        setPackages(prev => prev.filter(item => item.id !== pkg.id));
         return addPackage(pkg);
       }
 
@@ -271,8 +299,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const updatedBlog = { ...blog };
 
-      // If it's a dummy ID, treat it as a new blog
+      // If it's a dummy ID, promote it to a real Supabase record
       if (typeof blog.id === 'string' && blog.id.startsWith('b-seo')) {
+        // Mark this dummy as promoted
+        const newPromotedIds = [...promotedDummyBlogIds, blog.id];
+        setPromotedDummyBlogIds(newPromotedIds);
+        localStorage.setItem('promoted_dummy_blog_ids', JSON.stringify(newPromotedIds));
+        // Remove dummy from current state
+        setBlogs(prev => prev.filter(item => item.id !== blog.id));
         return addBlog(blog);
       }
 
@@ -295,8 +329,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteBlog = async (id: string) => {
-    // If it's a dummy ID, just remove from state
+    // If it's a dummy ID, mark it as promoted/hidden permanently
     if (typeof id === 'string' && id.startsWith('b-seo')) {
+      const newPromotedIds = [...promotedDummyBlogIds, id];
+      setPromotedDummyBlogIds(newPromotedIds);
+      localStorage.setItem('promoted_dummy_blog_ids', JSON.stringify(newPromotedIds));
       setBlogs(prev => prev.filter(item => item.id !== id));
       return;
     }
@@ -413,8 +450,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const { id, ...updateData } = ticket;
 
-      // If it's a dummy ID, treat it as a new ticket
+      // If it's a dummy ID, promote it to a real Supabase record
       if (typeof id === 'string' && id.startsWith('d')) {
+        // Mark this dummy as promoted so fetchInitialData won't show it again
+        const newPromotedIds = [...promotedDummyTicketIds, id];
+        setPromotedDummyTicketIds(newPromotedIds);
+        localStorage.setItem('promoted_dummy_ticket_ids', JSON.stringify(newPromotedIds));
+        // Remove dummy from current state immediately to prevent duplicates
+        setLiveTickets(prev => prev.filter(item => item.id !== id));
+        // Insert as a brand new real ticket
         return addLiveTicket(ticket);
       }
 
@@ -442,8 +486,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteLiveTicket = async (id: string) => {
-    // If it's a dummy ticket, just remove it from local state
+    // If it's a dummy ticket, mark it as promoted/hidden permanently
     if (id.startsWith('d')) {
+      const newPromotedIds = [...promotedDummyTicketIds, id];
+      setPromotedDummyTicketIds(newPromotedIds);
+      localStorage.setItem('promoted_dummy_ticket_ids', JSON.stringify(newPromotedIds));
       setLiveTickets(prev => prev.filter(item => item.id !== id));
       return;
     }

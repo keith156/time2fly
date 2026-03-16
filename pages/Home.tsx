@@ -185,7 +185,8 @@ const Home: React.FC = () => {
     <div>
       <SEO
         title="Time2Fly | Travels & Tours Ltd — Uganda's Leading Travel Agency"
-        description="Book affordable flights, luxury safaris, and custom tour packages with Uganda's premier travel agency. Visit Time2Fly for expert travel advice and seamless bookings."
+        description="Book affordable flights, luxury safaris, and custom tour packages with Uganda's premier travel agency. Expert advice for gorilla tracking and East African adventures."
+        keywords="Time2Fly, Uganda travel agency, flight bookings, safari tours, gorilla trekking, holiday packages, corporate travel, Kampala travel, Entebbe transfers"
       />
       {/* Redesigned Hero Section */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900">

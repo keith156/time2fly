@@ -13,8 +13,8 @@ interface SEOProps {
 
 const SEO: React.FC<SEOProps> = ({
     title = "Time2Fly | Tours & Travel Ltd — Uganda's Premier Travel Agency",
-    description = "Time2Fly Tours & Travel Ltd is Uganda's premier travel agency. We offer affordable flight bookings, luxury safari adventures, personalized holiday packages, and corporate travel solutions. Experience world-class service based in Kampala, serving global destinations.",
-    keywords = "Uganda travel agency, flights Uganda, safari tours Uganda, Kampala travel, holiday packages Uganda, Time2Fly, gorilla tracking Uganda, corporate travel Uganda, luxury safari Africa",
+    description = "Time2Fly Tours & Travel Ltd is your premier partner for travel in Uganda and beyond. We specialize in affordable flight bookings, luxury safari adventures, gorilla tracking, personalized holiday packages, and comprehensive corporate travel solutions.",
+    keywords = "travel agency Uganda, flights Uganda, safari tours Uganda, gorilla tracking, Kampala travel, holiday packages, Time2Fly, corporate travel management, luxury safari Africa, Entebbe flights, Uganda tours",
     image = "https://time2flytnt.com/assets/logo.png",
     url = "https://time2flytnt.com/",
     type = "website",

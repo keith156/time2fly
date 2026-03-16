@@ -8,7 +8,8 @@ const CorporateTravel: React.FC = () => {
         <div className="pt-24 min-h-screen bg-slate-50">
             <SEO
                 title="Corporate Travel Solutions | Time2Fly Tours"
-                description="Optimizing business travel for performance, cost, and efficiency. Enjoy exclusive corporate rates and 24/7 global support."
+                description="Optimizing business travel for performance, cost, and efficiency. Enjoy exclusive corporate rates and 24/7 global support for your company missions from Uganda."
+                keywords="corporate travel Uganda, business travel management Kampala, executive travel solutions, corporate flight bookings, business trip planning, company travel perks"
                 url="https://time2flytnt.com/#/corporate-travel"
             />
             <div className="bg-slate-900 py-24 px-4 relative">

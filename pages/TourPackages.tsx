@@ -233,6 +233,7 @@ const TourPackages: React.FC = () => {
       <SEO
         title={selectedCategory ? `${selectedCategory} | Time2Fly Tours` : "Tour Packages & Adventures | Time2Fly Tours"}
         description={selectedCategory ? `Explore our curated ${selectedCategory} packages for your next adventure.` : "Browse our collection of curated tour packages, from safari adventures to romantic retreats and family getaways."}
+        keywords={selectedCategory ? `${selectedCategory}, Uganda tours, travel packages, ${selectedCategory} deals` : "tour packages Uganda, safari adventures, romantic retreats, family getaways, holiday escapes, business travel"}
         url={selectedCategory ? `https://time2flytnt.com/#/packages?category=${encodeURIComponent(selectedCategory)}` : "https://time2flytnt.com/#/packages"}
       />
       <div className="bg-slate-950 pt-32 section-spacing px-4 relative overflow-hidden h-auto min-h-[400px] flex items-center justify-center">

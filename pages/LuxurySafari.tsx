@@ -8,7 +8,8 @@ const LuxurySafari: React.FC = () => {
         <div className="pt-24 min-h-screen bg-[#fafaf5]">
             <SEO
                 title="Luxury Safari Experiences | Time2Fly Tours"
-                description="Experience the heart of the savannah with unparalleled comfort. Stay in exclusive 5-star lodges with private trackers on our luxury safaris."
+                description="Experience the heart of the savannah with unparalleled comfort. Stay in exclusive 5-star lodges with private trackers on our luxury safaris in Uganda and East Africa."
+                keywords="luxury safari Uganda, 5-star safari lodges, private safari tours, Serengeti luxury safari, Masai Mara elite expeditions, Bwindi gorilla tracking luxury"
                 url="https://time2flytnt.com/#/luxury-safari"
             />
             <div className="h-[70vh] relative overflow-hidden">
