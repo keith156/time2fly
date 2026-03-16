@@ -102,6 +102,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
+  // Normalize a city name by stripping IATA codes like "(EBB)" or "(NBO)" so that
+  // "Entebbe (EBB)" and "Entebbe" are treated as the same city for deduplication.
+  const normalizeCityName = (city: string): string =>
+    city.replace(/\s*\([A-Z]{3}\)\s*/g, '').trim().toLowerCase();
+
   const fetchInitialData = async () => {
     try {
       setLoading(true);
@@ -148,7 +153,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const promotedIds: string[] = JSON.parse(localStorage.getItem('promoted_dummy_ticket_ids') || '[]');
       const dummyTickets = DUMMY_TICKETS.filter(dummy =>
         !promotedIds.includes(dummy.id) &&
-        !realTickets.some(real => real.from === dummy.from && real.to === dummy.to)
+        !realTickets.some(real =>
+          normalizeCityName(real.from) === normalizeCityName(dummy.from) &&
+          normalizeCityName(real.to) === normalizeCityName(dummy.to)
+        )
       );
       const combinedTickets = [...realTickets, ...dummyTickets];
       const sortedTickets = combinedTickets.sort((a, b) => {
