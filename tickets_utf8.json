@@ -1,0 +1,62 @@
+﻿[
+    {
+        "id":  24,
+        "from":  "Entebbe(EBB)",
+        "to":  "Nairobi(NBO)"
+    },
+    {
+        "id":  25,
+        "from":  "Entebbe(EBB)",
+        "to":  "Kigali(KGL)"
+    },
+    {
+        "id":  34,
+        "from":  "Entebbe(EBB)",
+        "to":  "Kigali"
+    },
+    {
+        "id":  26,
+        "from":  "Entebbe(EBB)",
+        "to":  "Addis Ababa(ADD)"
+    },
+    {
+        "id":  27,
+        "from":  "Entebbe(EBB)",
+        "to":  "Dubai(DXB)"
+    },
+    {
+        "id":  28,
+        "from":  "Entebbe(EBB)",
+        "to":  "Doha(DOH)"
+    },
+    {
+        "id":  29,
+        "from":  "Entebbe(EBB)",
+        "to":  "Istanbul(IST)"
+    },
+    {
+        "id":  30,
+        "from":  "Entebbe(EBB)",
+        "to":  "Johannesburg(JNB)"
+    },
+    {
+        "id":  31,
+        "from":  "Entebbe(EBB)",
+        "to":  "London(LON)"
+    },
+    {
+        "id":  32,
+        "from":  "Entebbe(EBB)",
+        "to":  "Toronto(YTO)"
+    },
+    {
+        "id":  33,
+        "from":  "Entebbe(EBB)",
+        "to":  "Mumbai(BOM)"
+    },
+    {
+        "id":  35,
+        "from":  "Entebbe(EBB)",
+        "to":  "Kigalie"
+    }
+]

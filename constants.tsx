@@ -266,8 +266,136 @@ Bali is famous for its world-class spa and wellness industry. From private flowe
     date: 'March 7, 2026',
     author: 'Time2Fly Expert',
     category: 'Holiday Escapes'
+  },
+  {
+    id: 'b-gorilla-1',
+    title: 'Mountain Gorilla Trekking in Uganda: Everything You Need to Know',
+    excerpt: 'Discover the ultimate guide to gorilla trekking in Bwindi. From permits to what to pack, we cover everything for your encounter with the gentle giants.',
+    content: `Gorilla trekking in Uganda is often described as a life-changing experience. Standing just meters away from a family of mountain gorillas in their natural habitat is a privilege few get to enjoy. As the "Pearl of Africa," Uganda is home to more than half of the world's remaining mountain gorilla population, primarily in Bwindi Impenetrable National Park and Mgahinga Gorilla National Park.
+
+### Securing Your Gorilla Permits
+The most critical step in planning your trek is securing a permit. Permits are in high demand and limited to 8 people per gorilla family per day. At Time2Fly, we specialize in handling the permit acquisition process directly with the Uganda Wildlife Authority (UWA), ensuring you don't miss out on this bucket-list adventure.
+
+### Best Time for Gorilla Trekking
+While trekking can be done year-round, the dry seasons (June to August and December to February) offer the best conditions. The trails are less slippery, and the dense forest is easier to navigate. However, the rainy season has its own charm, with lush greenery and fewer crowds.
+
+### What to Pack for the Jungle
+Preparation is key to an enjoyable trek. We recommend:
+*   Long-sleeved shirts and trousers to protect against nettles.
+*   Sturdy, waterproof hiking boots with good grip.
+*   Garden gloves for clutching onto vegetation.
+*   A light raincoat and plenty of water.
+
+### Conservation and Impact
+Your visit directly contributes to the conservation of these endangered primates. A portion of the permit fee goes towards protecting the habitat and supporting local communities, ensuring that future generations can also witness these majestic creatures.`,
+    image: 'https://images.unsplash.com/photo-1547407139-3c921a66005c?auto=format&fit=crop&q=80&w=1200',
+    date: 'March 15, 2026',
+    author: 'Time2Fly Expert',
+    category: 'Safari Adventures'
+  },
+  {
+    id: 'b-jinja-1',
+    title: 'Adventure on the Nile: White Water Rafting & Bungee Jumping in Jinja',
+    excerpt: 'Jinja is the adrenaline capital of East Africa. Explore the thrill of the Nile with our guide to white water rafting and bungee jumping.',
+    content: `Jinja, located at the source of the River Nile, is a haven for thrill-seekers. It’s a place where the calm waters of Lake Victoria transform into powerful rapids, offering some of the best white water rafting experiences in the world.
+
+### Conquering the Grade 5 Rapids
+White water rafting on the Nile is an exhilarating journey. From "Big Brother" to "The Bad Place," the rapids are challenging but incredibly rewarding. Whether you are a first-timer or a seasoned rafter, the professional guides we partner with ensure a safe and adrenaline-fueled experience.
+
+### Bungee Jumping into the Nile
+For those who want to take their adventure to the next level, bungee jumping over the Nile is a must. Plunging 44 meters towards the historic river is a heart-stopping moment that offers a unique perspective of the landscape.
+
+### Beyond the Adrenaline
+Jinja isn't just about extreme sports. You can also enjoy:
+*   **Quad Biking**: Explore the local villages and riverbanks on four wheels.
+*   **Horseback Safaris**: A peaceful way to take in the scenery along the Nile.
+*   **Sunset Cruises**: Relax with a drink as the sun dips below the horizon at the source of the Nile.
+
+At Time2Fly, we curate custom Jinja adventure packages that include transportation, accommodation, and all your chosen activities for a seamless trip.`,
+    image: 'https://images.unsplash.com/photo-1533727937480-da3a97967e95?auto=format&fit=crop&q=80&w=1200',
+    date: 'March 14, 2026',
+    author: 'Time2Fly Expert',
+    category: 'Adventure Seeker'
+  },
+  {
+    id: 'b-safari-tips-1',
+    title: 'Safari 101: How to Spot the Big Five in Murchison Falls & Serengeti',
+    excerpt: 'Planning your first safari? Learn the secrets to spotting the Big Five and capturing stunning wildlife photography on your next African adventure.',
+    content: `An African safari is a dream for many, and spotting the "Big Five"—Lion, Leopard, Elephant, Buffalo, and Rhino—is usually at the top of the list. Uganda and Tanzania offer some of the most diverse and spectacular wildlife viewing opportunities on the continent.
+
+### Murchison Falls: Where the Nile Meets the Wild
+Murchison Falls National Park is Uganda's largest conservation area. Here, you can witness the Nile squeezing through a narrow 7-meter gorge before exploding into the "Devil's Cauldron." The plains are teeming with elephants, giraffes, and various antelope species. For the best chance to see lions and leopards, early morning game drives are essential.
+
+### The Serengeti: The Endless Plains
+A safari in the Serengeti is synonymous with the Great Migration. Witnessing millions of wildebeest and zebras crossing the plains is a spectacle like no other. This vast ecosystem is also one of the best places in the world to see large predators in action.
+
+### Expert Tips for Wildlife Spotting
+1.  **Be Patient**: Wildlife doesn't run on a schedule. Spend time at watering holes and keep your eyes peeled.
+2.  **Listen to Your Guide**: Our expert guides have years of experience and "bush eyes" that can spot a leopard camouflaged in a tree from miles away.
+3.  **Invest in Good Optics**: A high-quality pair of binoculars is a game-changer for observing animal behavior from a distance.
+
+### Responsible Safari Practices
+Respecting the animals and their environment is paramount. Always stay in your vehicle, keep noise to a minimum, and never throw anything out of the window. We believe in "Take only photos, leave only footprints."`,
+    image: 'https://images.unsplash.com/photo-1516422266218-9d686613d9f4?auto=format&fit=crop&q=80&w=1200',
+    date: 'March 13, 2026',
+    author: 'Time2Fly Expert',
+    category: 'Safari Adventures'
+  },
+  {
+    id: 'b-visa-advice-1',
+    title: 'Navigating Visa Requirements: Your Step-by-Step Guide for International Travel',
+    excerpt: 'Dont let paperwork stop your dreams. Our travel experts share essential visa advice for Ugandans and international travelers.',
+    content: `One of the biggest hurdles in international travel is the visa application process. From complex forms to stack of documentation, it can be overwhelming. However, with the right guidance, it doesn't have to be.
+
+### Understanding Your Destination's Requirements
+Every country has its own set of rules. Some offer visas on arrival, some require e-visas, and others demand a visit to the embassy. Researching these requirements months in advance is crucial to avoiding last-minute stress.
+
+### The Essential Documentation Checklist
+While requirements vary, most visa applications will need:
+*   A valid passport with at least 6 months remaining.
+*   Recent passport-sized photographs.
+*   Proof of travel insurance.
+*   Flight itineraries and hotel bookings.
+*   Bank statements as proof of funds.
+
+### How Time2Fly Simplifies the Process
+We provide end-to-end visa assistance to our clients. Our services include:
+*   **Personalized Consultations**: We assess your specific travel needs and advise on the best visa category.
+*   **Document Review**: We meticulously check your documents to ensure they meet embassy standards.
+*   **Interview Preparation**: For countries that require interviews, we provide coaching to boost your confidence.
+
+By letting us handle the logistics, you can focus on the exciting part—planning what you'll do once you arrive!`,
+    image: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&q=80&w=1200',
+    date: 'March 12, 2026',
+    author: 'Time2Fly Expert',
+    category: 'Corporate Travel'
+  },
+  {
+    id: 'b-uganda-pearl-1',
+    title: 'The Pearl of Africa: Why Uganda Should Be Your Next Travel Destination',
+    excerpt: 'From snow-capped mountains to lush rainforests, discover why Winston Churchill famously called Uganda the Pearl of Africa.',
+    content: `Uganda is a country of staggering beauty and diversity. It is a place where you can find snow-capped mountains on the equator, vast savannahs teeming with wildlife, and the largest lake in Africa. Here is why Uganda should be at the top of your travel list.
+
+### Diverse Landscapes
+Uganda's geography is incredibly varied. The Rwenzori Mountains, also known as the "Mountains of the Moon," offer world-class hiking. In the west, the crater lakes provide a serene backdrop for relaxation, while the Sipi Falls in the east are a sight to behold.
+
+### The Warmth of Ugandan Hospitality
+Ugandans are known for being some of the friendliest and most welcoming people in the world. Whether you are in the bustling city of Kampala or a remote village, you will be greeted with genuine smiles and hospitality.
+
+### Unique Wildlife Encounters
+Beyond the mountain gorillas and the Big Five, Uganda is a paradise for birdwatchers, with over 1,000 species recorded. You can also find tree-climbing lions in Ishasha and chimpanzees in Kibale Forest.
+
+### Cultural Richness
+With over 56 tribes, Uganda has a rich tapestry of cultures, traditions, and cuisines. Exploring the local markets, attending traditional dance performances, and tasting local delicacies like "Luwombo" or "Matooke" is an essential part of the experience.
+
+As a local agency, Time2Fly is uniquely positioned to show you the authentic side of the Pearl of Africa. We don't just take you to places; we immerse you in the soul of Uganda.`,
+    image: 'https://images.unsplash.com/photo-1549194388-f61be84a6e9e?auto=format&fit=crop&q=80&w=1200',
+    date: 'March 11, 2026',
+    author: 'Time2Fly Expert',
+    category: 'Cultural Explorer'
   }
 ];
+
 
 export const TESTIMONIALS: Testimonial[] = [
   {

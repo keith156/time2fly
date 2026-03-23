@@ -115,7 +115,16 @@ const Contact: React.FC = () => {
             <div className="lg:col-span-2">
               <div className="bg-slate-50 p-6 md:p-8 rounded-[40px] shadow-sm border border-slate-100">
                 <h3 className="text-h3 text-slate-900 mb-8">Inquiry Form</h3>
-                <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert('Time2Fly team will contact you shortly!'); }}>
+                <form className="space-y-6" onSubmit={(e) => {
+                  e.preventDefault();
+                  if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'generate_lead', {
+                      event_category: 'Contact',
+                      event_label: 'Inquiry Form'
+                    });
+                  }
+                  alert('Time2Fly team will contact you shortly!');
+                }}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
                       <label className="text-caption text-slate-500 ml-1">Full Name</label>

@@ -428,12 +428,19 @@ const App: React.FC = () => {
   const RouteTracker = () => {
     const location = useLocation();
     useEffect(() => {
-      if (typeof window.gtag === 'function') {
-        window.gtag('config', 'G-FBJ3BGE9E0', {
-          page_path: location.pathname + location.search,
-          page_title: document.title
-        });
-      }
+      const handlePageView = () => {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'page_view', {
+            page_path: location.pathname + location.search,
+            page_location: window.location.href,
+            page_title: document.title
+          });
+        }
+      };
+
+      // Give Helmet a small delay to ensure it updates document.title before we send it to GA
+      const timeoutId = setTimeout(handlePageView, 100);
+      return () => clearTimeout(timeoutId);
     }, [location]);
     return null;
   };
