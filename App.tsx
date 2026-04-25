@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMuted, setIsMuted] = useState(false); // Auto-play music on load
+  const [isMuted, setIsMuted] = useState(true); // Default to muted for better UX and security reputation
   const [searchQuery, setSearchQuery] = useState('');
   const audioRef = React.useRef<HTMLAudioElement>(null);
   const location = useLocation();

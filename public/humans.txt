@@ -1,0 +1,10 @@
+/* TEAM */
+  Founder: Time2Fly Tours & Travel Ltd
+  Contact: info@time2flytnt.com
+  Location: Kampala, Uganda
+
+/* SITE */
+  Last update: 2026/04/25
+  Standards: HTML5, CSS3, React, TypeScript
+  Components: Lucide Icons, Tailwind CSS
+  Software: Vite

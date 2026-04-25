@@ -22,7 +22,10 @@ const PrivacyPolicy: React.FC = () => {
                         <div>
                             <h2 className="font-black uppercase tracking-tight text-slate-900 mb-4 text-4xl md:text-5xl tracking-tighter">1. Information We Collect</h2>
                             <p className="text-body text-slate-600">
-                                When you use our inquiry forms or contact us via WhatsApp, we may collect personal information such as your name, phone number, email address, and travel preferences. This information is necessary for us to provide you with accurate travel quotes and services.
+                                When you use our inquiry forms or contact us via WhatsApp, we may collect personal information such as your name, phone number, email address, and travel preferences.
+                            </p>
+                            <p className="text-body text-slate-600 mt-4">
+                                We also use third-party services like Google Analytics (GTM) and Cloudflare Web Analytics to collect anonymized usage data. This helps us understand how visitors interact with our site, including pages visited and duration of stay, to improve our services.
                             </p>
                         </div>
 
