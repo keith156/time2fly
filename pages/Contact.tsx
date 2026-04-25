@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Mail, Phone, MapPin, MessageSquare, Clock, Instagram, Facebook, Music2, Linkedin, ExternalLink } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageSquare, Clock, Instagram, Facebook, Music2, Linkedin, ExternalLink, CheckCircle2 } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle.tsx';
 import SEO from '../components/SEO.tsx';
 
@@ -9,6 +9,47 @@ const Contact: React.FC = () => {
   const whatsAppNumber = "+256 783 084 521";
   const whatsAppUrl = `https://wa.me/${whatsAppNumber.replace(/\D/g, '')}`;
   const mapsUrl = "https://share.google/Cfq91VFGLqOJaaU9y";
+
+  const [status, setStatus] = React.useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [result, setResult] = React.useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('loading');
+    
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'Contact',
+        event_label: 'Inquiry Form'
+      });
+    }
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", "0f499afe-5446-4ab4-900d-7848dda03d30");
+    formData.append("subject", `New Inquiry from ${formData.get("name")}`);
+    formData.append("from_name", "Time2Fly Website Inquiry");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('success');
+        setResult("Thank you! Your message has been sent successfully. Our team will contact you shortly.");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setStatus('error');
+        setResult(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setStatus('error');
+      setResult("Network error. Please check your connection and try again.");
+    }
+  };
 
   return (
     <div className="pt-24 min-h-screen bg-white">
@@ -115,60 +156,85 @@ const Contact: React.FC = () => {
             <div className="lg:col-span-2">
               <div className="bg-slate-50 p-6 md:p-8 rounded-[40px] shadow-sm border border-slate-100">
                 <h3 className="text-h3 text-slate-900 mb-8">Inquiry Form</h3>
-                <form className="space-y-6" onSubmit={(e) => {
-                  e.preventDefault();
-                  if (typeof window.gtag === 'function') {
-                    window.gtag('event', 'generate_lead', {
-                      event_category: 'Contact',
-                      event_label: 'Inquiry Form'
-                    });
-                  }
-                  alert('Time2Fly team will contact you shortly!');
-                }}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-3">
-                      <label className="text-caption text-slate-500 ml-1">Full Name</label>
-                      <input type="text" className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="e.g. John Doe" required />
+                
+                {status === 'success' ? (
+                  <div className="bg-green-50 border border-green-200 p-8 rounded-3xl text-center space-y-4 animate-fade-in">
+                    <div className="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle2 size={40} />
                     </div>
-                    <div className="space-y-3">
-                      <label className="text-caption text-slate-500 ml-1">Phone Number</label>
-                      <input type="tel" className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="e.g. +256..." required />
-                    </div>
+                    <h4 className="text-2xl font-black text-green-900">Message Sent!</h4>
+                    <p className="text-green-700 font-medium">{result}</p>
+                    <button 
+                      onClick={() => setStatus('idle')}
+                      className="mt-6 text-green-600 font-bold hover:underline uppercase tracking-widest text-xs"
+                    >
+                      Send another message
+                    </button>
                   </div>
-                  <div className="space-y-3">
-                    <label className="text-caption text-slate-500 ml-1">Email Address</label>
-                    <input type="email" className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="john@example.com" required />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-caption text-slate-500 ml-1">Primary Interest</label>
-                    <div className="relative">
-                      <select className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 appearance-none bg-white font-medium cursor-pointer">
-                        <option>Flight Ticketing</option>
-                        <option>Vacation Adventures</option>
-                        <option>Corporate Travel</option>
-                        <option>Visa Consultation</option>
-                        <option>Hotel Booking</option>
-                      </select>
-                      <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-40">
-                        <MessageSquare size={18} />
+                ) : (
+                  <form className="space-y-6" onSubmit={handleSubmit}>
+                    {status === 'error' && (
+                      <div className="bg-red-50 border border-red-200 p-4 rounded-2xl text-red-700 text-sm font-medium">
+                        {result}
+                      </div>
+                    )}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="space-y-3">
+                        <label className="text-caption text-slate-500 ml-1">Full Name</label>
+                        <input name="name" type="text" className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="e.g. John Doe" required />
+                      </div>
+                      <div className="space-y-3">
+                        <label className="text-caption text-slate-500 ml-1">Phone Number</label>
+                        <input name="phone" type="tel" className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="e.g. +256..." required />
                       </div>
                     </div>
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-caption text-slate-500 ml-1">Additional Details</label>
-                    <textarea rows={6} className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 resize-none font-medium bg-white" placeholder="Tell us about your travel dates and destination preference..." required></textarea>
-                  </div>
-                  <div className="bg-white/50 p-4 rounded-xl border border-slate-200">
-                    <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
-                      By sending this inquiry, you agree to our <a href="/#/privacy-policy" className="text-blue-600 font-bold hover:underline">Privacy Policy</a>. We collect your data solely to process your request and will never share it with unauthorized third parties.
-                    </p>
-                  </div>
-                  <button type="submit" className="w-full bg-slate-900 hover:bg-amber-500 text-white font-black px-12 py-4 rounded-2xl transition-all shadow-xl hover:-translate-y-1 active:scale-95 uppercase tracking-[0.2em] text-sm">
-                    Send Inquiry
-                  </button>
-                </form>
+                    <div className="space-y-3">
+                      <label className="text-caption text-slate-500 ml-1">Email Address</label>
+                      <input name="email" type="email" className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 font-medium bg-white" placeholder="john@example.com" required />
+                    </div>
+                    <div className="space-y-3">
+                      <label className="text-caption text-slate-500 ml-1">Primary Interest</label>
+                      <div className="relative">
+                        <select name="interest" className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 appearance-none bg-white font-medium cursor-pointer">
+                          <option>Flight Ticketing</option>
+                          <option>Vacation Adventures</option>
+                          <option>Corporate Travel</option>
+                          <option>Visa Consultation</option>
+                          <option>Hotel Booking</option>
+                        </select>
+                        <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-40">
+                          <MessageSquare size={18} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <label className="text-caption text-slate-500 ml-1">Additional Details</label>
+                      <textarea name="message" rows={6} className="w-full px-6 py-4 rounded-2xl border-none shadow-sm focus:ring-2 focus:ring-amber-500 resize-none font-medium bg-white" placeholder="Tell us about your travel dates and destination preference..." required></textarea>
+                    </div>
+                    <div className="bg-white/50 p-4 rounded-xl border border-slate-200">
+                      <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
+                        By sending this inquiry, you agree to our <a href="/#/privacy-policy" className="text-blue-600 font-bold hover:underline">Privacy Policy</a>. We collect your data solely to process your request and will never share it with unauthorized third parties.
+                      </p>
+                    </div>
+                    <button 
+                      type="submit" 
+                      disabled={status === 'loading'}
+                      className={`w-full ${status === 'loading' ? 'bg-slate-400' : 'bg-slate-900 hover:bg-amber-500'} text-white font-black px-12 py-4 rounded-2xl transition-all shadow-xl hover:-translate-y-1 active:scale-95 uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-3`}
+                    >
+                      {status === 'loading' ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          Sending...
+                        </>
+                      ) : (
+                        'Send Inquiry'
+                      )}
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
+
           </div>
         </div>
       </section>
