@@ -133,16 +133,16 @@ const DatePickerDropdown: React.FC<DatePickerProps> = ({ value, onChange, minDat
                 ref={triggerRef}
                 type="button"
                 onClick={() => setOpen(o => !o)}
-                className="w-full flex items-center gap-3 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus:border-white/30 focus:ring-4 focus:ring-white/10 transition-all text-left min-w-0 backdrop-blur-sm premium-float-shadow"
+                className="w-full flex items-center gap-3 px-5 py-4 rounded-2xl border border-white/10 bg-[#0000ff] hover:bg-blue-600 focus:border-white/30 focus:ring-4 focus:ring-white/10 transition-all text-left min-w-0 backdrop-blur-sm premium-float-shadow"
             >
-                <Calendar size={16} className="text-blue-400 shrink-0" />
+                <Calendar size={16} className="text-white shrink-0" />
                 <div className="flex flex-col min-w-0 flex-1">
-                    <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">{label}</span>
-                    <span className={`text-[15px] font-bold truncate ${displayValue ? 'text-white' : 'text-white/40'}`}>
+                    <span className="text-[10px] font-bold text-white uppercase tracking-widest">{label}</span>
+                    <span className={`text-[15px] font-bold truncate ${displayValue ? 'text-white' : 'text-white/70'}`}>
                         {displayValue || 'Select date'}
                     </span>
                 </div>
-                <ChevronDown size={14} className={`text-white/30 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
+                <ChevronDown size={14} className={`text-white/70 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
             </button>
 
             <DropdownPortal anchorRef={triggerRef as React.RefObject<HTMLElement>} open={open}>
@@ -391,11 +391,11 @@ const FlightSearchBar: React.FC = () => {
                 <div className="flex flex-col md:flex-row items-stretch gap-3">
 
                     {/* From */}
-                    <div className="flex items-center gap-3 flex-1 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus-within:border-white/30 focus-within:ring-4 focus-within:ring-white/10 transition-all min-w-0 backdrop-blur-sm premium-float-shadow">
-                        <div className="w-3 h-3 rounded-full border-[2.5px] border-blue-400 shrink-0" />
+                    <div className="flex items-center gap-3 flex-1 px-5 py-4 rounded-2xl border border-white/10 bg-[#0000ff] hover:bg-blue-600 focus-within:border-white/30 focus-within:ring-4 focus-within:ring-white/10 transition-all min-w-0 backdrop-blur-sm premium-float-shadow">
+                        <div className="w-3 h-3 rounded-full border-[2.5px] border-white shrink-0" />
                         <div className="flex flex-col min-w-0 flex-1">
-                            <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-0.5">From</span>
-                            <input value={from} onChange={e => setFrom(e.target.value)} className="flex-1 bg-transparent text-[15px] text-white placeholder-white/30 outline-none font-bold min-w-0" placeholder="Origin city or airport" />
+                            <span className="text-[10px] font-bold text-white uppercase tracking-widest mb-0.5">From</span>
+                            <input value={from} onChange={e => setFrom(e.target.value)} className="flex-1 bg-transparent text-[15px] text-white placeholder-white/70 outline-none font-bold min-w-0" placeholder="Origin city or airport" />
                         </div>
                     </div>
 
@@ -405,11 +405,11 @@ const FlightSearchBar: React.FC = () => {
                     </button>
 
                     {/* To */}
-                    <div className="flex items-center gap-3 flex-1 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 focus-within:border-white/30 focus-within:ring-4 focus-within:ring-white/10 transition-all min-w-0 md:ml-3 backdrop-blur-sm premium-float-shadow">
-                        <MapPin size={16} className="text-blue-400 shrink-0" />
+                    <div className="flex items-center gap-3 flex-1 px-5 py-4 rounded-2xl border border-white/10 bg-[#0000ff] hover:bg-blue-600 focus-within:border-white/30 focus-within:ring-4 focus-within:ring-white/10 transition-all min-w-0 md:ml-3 backdrop-blur-sm premium-float-shadow">
+                        <MapPin size={16} className="text-white shrink-0" />
                         <div className="flex flex-col min-w-0 flex-1">
-                            <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-0.5">To</span>
-                            <input value={to} onChange={e => setTo(e.target.value)} className="flex-1 bg-transparent text-[15px] text-white placeholder-white/30 outline-none font-bold min-w-0" placeholder="Destination city or airport" />
+                            <span className="text-[10px] font-bold text-white uppercase tracking-widest mb-0.5">To</span>
+                            <input value={to} onChange={e => setTo(e.target.value)} className="flex-1 bg-transparent text-[15px] text-white placeholder-white/70 outline-none font-bold min-w-0" placeholder="Destination city or airport" />
                         </div>
                     </div>
 
@@ -420,7 +420,7 @@ const FlightSearchBar: React.FC = () => {
                     )}
 
                     {/* Explore button */}
-                    <button type="button" onClick={handleExplore} className="flex items-center justify-center gap-2 bg-[#0000ff] hover:bg-blue-600 active:scale-95 text-white font-black px-8 py-4 rounded-2xl shadow-[0_4px_20px_rgba(0,0,255,0.4)] hover:shadow-[0_4px_25px_rgba(0,0,255,0.6)] border border-white/20 transition-all duration-300 text-[13px] uppercase tracking-widest shrink-0 mt-2 md:mt-0 md:ml-1">
+                    <button type="button" onClick={handleExplore} className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 active:scale-95 text-white font-black px-8 py-4 rounded-2xl shadow-[0_4px_20px_rgba(220,38,38,0.4)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.6)] border border-white/20 transition-all duration-300 text-[13px] uppercase tracking-widest shrink-0 mt-2 md:mt-0 md:ml-1">
                         <Search size={18} />
                         <span>REQUEST QUOTE</span>
                     </button>
