@@ -275,7 +275,7 @@ const Navbar: React.FC = () => {
 
 
         {/* Mobile Menu */}
-        <div className={`md:hidden absolute top-full left-0 w-full px-4 pt-2 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
+        <div className={`lg:hidden absolute top-full left-0 w-full px-4 pt-2 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
           <div className="bg-red-600 rounded-3xl p-6 shadow-2xl border border-white/10 space-y-4 max-h-[calc(100vh-100px)] overflow-y-auto">
             {navLinks.map((link) => (
               <div key={link.name} className="space-y-2">
@@ -304,7 +304,7 @@ const Navbar: React.FC = () => {
                 )}
               </div>
             ))}
-            <div className="pt-4">
+            <div className="pt-4 md:hidden">
               <form onSubmit={handleSearch} className="bg-white rounded-full p-1 pl-4 flex items-center">
                 <input
                   type="text"
