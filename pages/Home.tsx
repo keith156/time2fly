@@ -343,7 +343,7 @@ const Home: React.FC = () => {
         </div>
         <div className="flex items-center justify-center">
           <img
-            src="/WhatsApp Image 2026-05-02 at 11.24.47 AM.jpeg"
+            src="/WhatsApp%20Image%202026-05-02%20at%2011.24.47%20AM.jpeg"
             alt="Airlines Connecting Uganda to the World"
             width={1280}
             height={720}
