@@ -332,7 +332,7 @@ const Home: React.FC = () => {
       <FlightSearchBar />
 
       {/* Partners Section - Static Image with Title and Subtitle */}
-      <section id="partners-section" className="bg-white overflow-hidden pt-12">
+      <section id="partners-section" className="bg-[#d4e4ff] overflow-hidden pt-12">
         <div className="max-w-7xl mx-auto px-6 text-center mb-10">
           <h2 className="text-3xl md:text-5xl font-black text-navy-900 mb-4 tracking-tight">
             Airlines Connecting Uganda to the World
@@ -343,7 +343,7 @@ const Home: React.FC = () => {
         </div>
         <div className="flex items-center justify-center">
           <img
-            src="/WhatsApp Image 2026-03-12 at 1.08.49 PM (1).jpeg"
+            src="/WhatsApp Image 2026-05-02 at 11.24.47 AM.jpeg"
             alt="Airlines Connecting Uganda to the World"
             width={1280}
             height={720}
