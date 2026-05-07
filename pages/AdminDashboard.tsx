@@ -5,6 +5,16 @@ import { useData } from '../context/DataContext.tsx';
 import { Package, BlogPost, Destination, LiveTicket } from '../types';
 import { PACKAGE_CATEGORIES } from '../constants';
 
+const AIRLINE_OPTIONS = [
+  "Ethiopian Airlines (ET)",
+  "Qatar Airways (QR)",
+  "Kenya Airways (KQ)",
+  "Uganda Airlines (UR)",
+  "Flydubai (FZ)",
+  "KLM Royal Dutch Airlines (KL)",
+  "RwandAir (WB)"
+];
+
 const AdminDashboard: React.FC = () => {
   const {
     packages, blogs, destinations, liveTickets, loading, isUploading,
@@ -20,6 +30,9 @@ const AdminDashboard: React.FC = () => {
   const [editingBlog, setEditingBlog] = useState<Partial<BlogPost> | null>(null);
   const [editingDest, setEditingDest] = useState<Partial<Destination> | null>(null);
   const [editingTicket, setEditingTicket] = useState<Partial<LiveTicket> | null>(null);
+  const [bulkDate, setBulkDate] = useState('');
+  const [isBulkUpdating, setIsBulkUpdating] = useState(false);
+  const [priceSpread, setPriceSpread] = useState<number | ''>('');
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -108,6 +121,26 @@ const AdminDashboard: React.FC = () => {
     if (editingTicket.id && !isDummy) await updateLiveTicket(ticket);
     else await addLiveTicket(ticket);
     setEditingTicket(null);
+    setPriceSpread('');
+  };
+
+  const handleBulkDateUpdate = async () => {
+    if (!bulkDate.trim()) return;
+    if (!confirm(`Are you sure you want to update the date to "${bulkDate}" for ALL ${liveTickets.length} tickets?`)) return;
+
+    setIsBulkUpdating(true);
+    try {
+      for (const ticket of liveTickets) {
+        await updateLiveTicket({ ...ticket, dates: bulkDate });
+      }
+      setBulkDate('');
+      alert('Successfully updated all ticket dates!');
+    } catch (err) {
+      console.error('Bulk update failed:', err);
+      alert('Some updates might have failed. Check console.');
+    } finally {
+      setIsBulkUpdating(false);
+    }
   };
 
   const handleAddNew = () => {
@@ -189,6 +222,30 @@ const AdminDashboard: React.FC = () => {
           <Plus size={20} />
           <span>Add New {activeTab === 'packages' ? 'Package' : activeTab === 'blogs' ? 'Post' : activeTab === 'destinations' ? 'Destination' : 'Ticket'}</span>
         </button>
+
+        {/* Bulk Actions for Tickets */}
+        {activeTab === 'tickets' && (
+          <div className="mb-8 bg-white p-8 rounded-[32px] shadow-sm border border-slate-100 flex flex-col md:flex-row items-end gap-6">
+            <div className="flex-1 space-y-2 w-full">
+              <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Bulk Update Dates (for all destinations)</label>
+              <input
+                type="text"
+                value={bulkDate}
+                onChange={e => setBulkDate(e.target.value)}
+                className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-blue-500 font-medium"
+                placeholder="e.g. Jun 12 - Jun 18"
+              />
+            </div>
+            <button
+              onClick={handleBulkDateUpdate}
+              disabled={isBulkUpdating || !bulkDate.trim()}
+              className="flex items-center justify-center space-x-2 bg-slate-900 hover:bg-blue-600 disabled:bg-slate-200 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest transition-all shadow-lg active:scale-95 w-full md:w-auto"
+            >
+              {isBulkUpdating ? <Loader2 className="animate-spin" size={18} /> : <Edit size={18} />}
+              <span>Apply to All</span>
+            </button>
+          </div>
+        )}
 
         {/* Modals (Package, Blog, Destination) */}
         {editingPackage && (
@@ -452,7 +509,34 @@ const AdminDashboard: React.FC = () => {
                   {/* Airline */}
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Airline</label>
-                    <input type="text" value={editingTicket.airline || ''} onChange={e => setEditingTicket({ ...editingTicket, airline: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="e.g. Uganda Airlines" />
+                    <div className="space-y-3">
+                      <select
+                        value={AIRLINE_OPTIONS.includes(editingTicket.airline || '') ? editingTicket.airline : (editingTicket.airline ? 'Other' : '')}
+                        onChange={e => {
+                          const val = e.target.value;
+                          if (val === 'Other') {
+                            setEditingTicket({ ...editingTicket, airline: '' });
+                          } else {
+                            setEditingTicket({ ...editingTicket, airline: val });
+                          }
+                        }}
+                        className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium"
+                      >
+                        <option value="" disabled>Select Airline</option>
+                        {AIRLINE_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                        <option value="Other">Other (Custom Name)</option>
+                      </select>
+
+                      {(!AIRLINE_OPTIONS.includes(editingTicket.airline || '') || editingTicket.airline === '') && (
+                        <input
+                          type="text"
+                          value={editingTicket.airline || ''}
+                          onChange={e => setEditingTicket({ ...editingTicket, airline: e.target.value })}
+                          className="w-full px-5 py-4 rounded-2xl bg-blue-50 border-none ring-2 ring-blue-100 focus:ring-2 focus:ring-amber-500 font-medium"
+                          placeholder="Enter Custom Airline Name"
+                        />
+                      )}
+                    </div>
                   </div>
                   {/* Dates */}
                   <div className="space-y-2">
@@ -463,10 +547,47 @@ const AdminDashboard: React.FC = () => {
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest">USD Range ($Min - $Max)</label>
                     <div className="flex items-center gap-3">
-                      <input type="number" value={editingTicket.price_usd_min || ''} onChange={e => setEditingTicket({ ...editingTicket, price_usd_min: Number(e.target.value) })} className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Min (e.g. 468)" />
+                      <input
+                        type="number"
+                        value={editingTicket.price_usd_min || ''}
+                        onChange={e => {
+                          const min = Number(e.target.value);
+                          const updates: any = { price_usd_min: min };
+                          if (priceSpread !== '') {
+                            updates.price_usd_max = min + Number(priceSpread);
+                          }
+                          setEditingTicket({ ...editingTicket, ...updates });
+                        }}
+                        className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium"
+                        placeholder="Min (e.g. 468)"
+                      />
                       <span className="text-slate-400">-</span>
-                      <input type="number" value={editingTicket.price_usd_max || ''} onChange={e => setEditingTicket({ ...editingTicket, price_usd_max: Number(e.target.value) })} className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Max (e.g. 540)" />
+                      <input
+                        type="number"
+                        value={editingTicket.price_usd_max || ''}
+                        onChange={e => setEditingTicket({ ...editingTicket, price_usd_max: Number(e.target.value) })}
+                        className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium"
+                        placeholder="Max (e.g. 540)"
+                      />
                     </div>
+                  </div>
+                  {/* Price Calculator Spread */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-blue-600 uppercase tracking-widest">Price Spread (+ Add to Min)</label>
+                    <input
+                      type="number"
+                      value={priceSpread}
+                      onChange={e => {
+                        const spread = e.target.value === '' ? '' : Number(e.target.value);
+                        setPriceSpread(spread);
+                        if (spread !== '' && editingTicket.price_usd_min) {
+                          setEditingTicket({ ...editingTicket, price_usd_max: Number(editingTicket.price_usd_min) + Number(spread) });
+                        }
+                      }}
+                      className="w-full px-5 py-4 rounded-2xl bg-blue-50 border-none ring-1 ring-blue-200 focus:ring-2 focus:ring-blue-500 font-medium"
+                      placeholder="e.g. 100"
+                    />
+                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Automatically calculates Max Price based on Min Price</p>
                   </div>
                   {/* Price Trend */}
                   <div className="space-y-2">
