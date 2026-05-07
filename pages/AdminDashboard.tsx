@@ -147,7 +147,19 @@ const AdminDashboard: React.FC = () => {
     if (activeTab === 'packages') setEditingPackage({});
     else if (activeTab === 'blogs') setEditingBlog({});
     else if (activeTab === 'destinations') setEditingDest({});
-    else setEditingTicket({});
+    else {
+      setEditingTicket({});
+      setPriceSpread('');
+    }
+  };
+
+  const handleEditTicket = (ticket: LiveTicket) => {
+    setEditingTicket(ticket);
+    if (ticket.price_usd_min && ticket.price_usd_max) {
+      setPriceSpread(ticket.price_usd_max - ticket.price_usd_min);
+    } else {
+      setPriceSpread('');
+    }
   };
 
   const toggleStar = (pkg: Package) => {
@@ -744,7 +756,7 @@ const AdminDashboard: React.FC = () => {
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
-                        <button onClick={() => setEditingTicket(ticket)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
+                        <button onClick={() => handleEditTicket(ticket)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
                         <button onClick={() => deleteLiveTicket(ticket.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>
