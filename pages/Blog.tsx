@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Calendar, User, ArrowRight, ArrowLeft, Share2, Bookmark, Clock, ChevronRight, Hash, Check, Link as LinkIcon } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { BlogPost } from '../types';
 import SEO from '../components/SEO.tsx';
@@ -10,17 +11,18 @@ const Blog: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [readingProgress, setReadingProgress] = useState(0);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const location = useLocation();
 
   // Open blog from URL query param (e.g. ?post=<id>)
   useEffect(() => {
     if (blogs.length === 0) return;
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(location.search);
     const postId = params.get('post');
     if (postId) {
       const found = blogs.find(b => b.id === postId);
       if (found) setSelectedPost(found);
     }
-  }, [blogs]);
+  }, [blogs, location.search]);
 
   // Scroll to top when a post is selected
   useEffect(() => {
@@ -40,7 +42,7 @@ const Blog: React.FC = () => {
 
   const handleShare = (e: React.MouseEvent, post: BlogPost) => {
     e.stopPropagation();
-    const shareUrl = `${window.location.origin}${window.location.pathname}?post=${post.id}`;
+    const shareUrl = `${window.location.origin}${window.location.pathname}#/blog?post=${post.id}`;
     navigator.clipboard.writeText(shareUrl).then(() => {
       setCopiedId(post.id);
       setTimeout(() => setCopiedId(null), 2000);
