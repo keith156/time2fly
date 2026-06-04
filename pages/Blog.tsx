@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Calendar, User, ArrowRight, ArrowLeft, Share2, Bookmark, Clock, ChevronRight, Hash } from 'lucide-react';
+import { Calendar, User, ArrowRight, ArrowLeft, Share2, Bookmark, Clock, ChevronRight, Hash, Check, Link as LinkIcon } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import { BlogPost } from '../types';
 import SEO from '../components/SEO.tsx';
@@ -9,6 +9,18 @@ const Blog: React.FC = () => {
   const { blogs, loading } = useData();
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [readingProgress, setReadingProgress] = useState(0);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  // Open blog from URL query param (e.g. ?post=<id>)
+  useEffect(() => {
+    if (blogs.length === 0) return;
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('post');
+    if (postId) {
+      const found = blogs.find(b => b.id === postId);
+      if (found) setSelectedPost(found);
+    }
+  }, [blogs]);
 
   // Scroll to top when a post is selected
   useEffect(() => {
@@ -25,6 +37,15 @@ const Blog: React.FC = () => {
       return () => window.removeEventListener('scroll', updateProgress);
     }
   }, [selectedPost]);
+
+  const handleShare = (e: React.MouseEvent, post: BlogPost) => {
+    e.stopPropagation();
+    const shareUrl = `${window.location.origin}${window.location.pathname}?post=${post.id}`;
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      setCopiedId(post.id);
+      setTimeout(() => setCopiedId(null), 2000);
+    });
+  };
 
   if (selectedPost) {
     return (
@@ -86,8 +107,13 @@ const Blog: React.FC = () => {
               {/* Floating Meta Sidebar */}
               <div className="lg:col-span-1 hidden lg:block">
                 <div className="sticky top-32 flex flex-col space-y-8 items-center">
-                  <button className="p-4 bg-slate-50 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-2xl transition-all"><Share2 size={20} /></button>
-                  <button className="p-4 bg-slate-50 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-2xl transition-all"><Bookmark size={20} /></button>
+                  <button
+                    onClick={(e) => handleShare(e, selectedPost)}
+                    className={`p-4 rounded-2xl transition-all ${copiedId === selectedPost.id ? 'bg-green-50 text-green-500' : 'bg-slate-50 text-slate-400 hover:text-amber-500 hover:bg-amber-50'}`}
+                    title="Copy link to share"
+                  >
+                    {copiedId === selectedPost.id ? <Check size={20} /> : <Share2 size={20} />}
+                  </button>
                   <div className="h-20 w-[1px] bg-slate-100"></div>
                   <span className="rotate-90 whitespace-nowrap text-[10px] font-black text-slate-300 uppercase tracking-[0.3em]">Scroll Down</span>
                 </div>
@@ -215,6 +241,15 @@ const Blog: React.FC = () => {
                   <span className="bg-white/20 backdrop-blur-md text-black border border-white/20 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">
                     {post.category}
                   </span>
+                </div>
+                <div className="absolute top-6 right-6 z-20">
+                  <button
+                    onClick={(e) => handleShare(e, post)}
+                    className="bg-white/90 backdrop-blur-md w-10 h-10 rounded-full text-slate-900 hover:text-blue-600 shadow-xl transition-all flex items-center justify-center"
+                    title="Copy link to share"
+                  >
+                    {copiedId === post.id ? <Check size={16} className="text-green-500" /> : <Share2 size={16} />}
+                  </button>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
                   <div className="flex items-center text-white text-[10px] font-black uppercase tracking-widest">
