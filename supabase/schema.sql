@@ -20,6 +20,53 @@ ALTER TABLE live_tickets ADD COLUMN IF NOT EXISTS is_available BOOLEAN DEFAULT T
 -- CREATE POLICY "Authenticated Update" ON storage.objects FOR UPDATE USING (bucket_id = 'images');
 -- CREATE POLICY "Authenticated Delete" ON storage.objects FOR DELETE USING (bucket_id = 'images');
 
+-- =============================================================
+-- ROW LEVEL SECURITY (RLS) POLICIES FOR DELETE
+-- =============================================================
+-- IMPORTANT: You MUST run these in the Supabase SQL Editor.
+-- Without these, DELETE operations from the frontend (anon key)
+-- are silently blocked: items vanish locally but stay in the DB,
+-- so other devices still see them.
+
+-- Enable RLS on all tables (if not already)
+ALTER TABLE packages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE blogs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE destinations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE live_tickets ENABLE ROW LEVEL SECURITY;
+
+-- Allow public (anon) full access — suitable for admin-only apps
+-- If you need tighter security, restrict to authenticated users.
+CREATE POLICY "Allow public select on packages" ON packages FOR SELECT USING (true);
+CREATE POLICY "Allow public insert on packages" ON packages FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public update on packages" ON packages FOR UPDATE USING (true);
+CREATE POLICY "Allow public delete on packages" ON packages FOR DELETE USING (true);
+
+CREATE POLICY "Allow public select on blogs" ON blogs FOR SELECT USING (true);
+CREATE POLICY "Allow public insert on blogs" ON blogs FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public update on blogs" ON blogs FOR UPDATE USING (true);
+CREATE POLICY "Allow public delete on blogs" ON blogs FOR DELETE USING (true);
+
+CREATE POLICY "Allow public select on destinations" ON destinations FOR SELECT USING (true);
+CREATE POLICY "Allow public insert on destinations" ON destinations FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public update on destinations" ON destinations FOR UPDATE USING (true);
+CREATE POLICY "Allow public delete on destinations" ON destinations FOR DELETE USING (true);
+
+CREATE POLICY "Allow public select on live_tickets" ON live_tickets FOR SELECT USING (true);
+CREATE POLICY "Allow public insert on live_tickets" ON live_tickets FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public update on live_tickets" ON live_tickets FOR UPDATE USING (true);
+CREATE POLICY "Allow public delete on live_tickets" ON live_tickets FOR DELETE USING (true);
+
+-- =============================================================
+-- REPLICA IDENTITY (Required for real-time DELETE events)
+-- =============================================================
+-- By default, Supabase real-time DELETE events don't include the
+-- old row data, so payload.old.id is undefined and other clients
+-- can't remove the deleted item from their state.
+ALTER TABLE packages REPLICA IDENTITY FULL;
+ALTER TABLE blogs REPLICA IDENTITY FULL;
+ALTER TABLE destinations REPLICA IDENTITY FULL;
+ALTER TABLE live_tickets REPLICA IDENTITY FULL;
+
 -- To clear all tickets and start fresh (if you see duplicates):
 -- TRUNCATE TABLE live_tickets;
 

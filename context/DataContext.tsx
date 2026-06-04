@@ -44,23 +44,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true); // Start loading by default
   const [isUploading, setIsUploading] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
-  const [deletedDummyIds, setDeletedDummyIds] = useState<string[]>(() => {
-    const saved = localStorage.getItem('deleted_dummy_ids');
-    return saved ? JSON.parse(saved) : [];
-  });
-  // Track dummy ticket IDs that have been "promoted" to real Supabase records
-  const [promotedDummyTicketIds, setPromotedDummyTicketIds] = useState<string[]>(() => {
-    const saved = localStorage.getItem('promoted_dummy_ticket_ids');
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [promotedDummyPackageIds, setPromotedDummyPackageIds] = useState<string[]>(() => {
-    const saved = localStorage.getItem('promoted_dummy_package_ids');
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [promotedDummyBlogIds, setPromotedDummyBlogIds] = useState<string[]>(() => {
-    const saved = localStorage.getItem('promoted_dummy_blog_ids');
-    return saved ? JSON.parse(saved) : [];
-  });
 
   // Initial Fetch & Real-time Subscription
   useEffect(() => {
@@ -119,47 +102,18 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         supabase.from('live_tickets').select('*').order('order_index', { ascending: true })
       ]);
 
-      // Packages - Deduplicate by normalized destination name and filter deleted/promoted dummies
-      const realPackages = pkgResult.data || [];
-      const promotedPkgIds: string[] = JSON.parse(localStorage.getItem('promoted_dummy_package_ids') || '[]');
-      const dummyPackages = PACKAGES.filter(dummy =>
-        !deletedDummyIds.includes(dummy.id) &&
-        !promotedPkgIds.includes(dummy.id) &&
-        !realPackages.some(real =>
-          real.destination.toLowerCase().trim() === dummy.destination.toLowerCase().trim()
-        )
-      );
-      setPackages([...realPackages, ...dummyPackages]);
+      // Packages
+      setPackages(pkgResult.data || PACKAGES);
 
-      // Blogs - Deduplicate by normalized title and filter promoted dummies
-      const realBlogs = blogResult.data || [];
-      const promotedBlogIds: string[] = JSON.parse(localStorage.getItem('promoted_dummy_blog_ids') || '[]');
-      const dummyBlogs = BLOG_POSTS.filter(dummy =>
-        !promotedBlogIds.includes(dummy.id) &&
-        !realBlogs.some(real =>
-          real.title.toLowerCase().trim() === dummy.title.toLowerCase().trim()
-        )
-      );
-      setBlogs([...realBlogs, ...dummyBlogs]);
+      // Blogs
+      setBlogs(blogResult.data || BLOG_POSTS);
 
       // Destinations
-      const realDestinations = destResult.data || [];
-      const dummyDestinations = DESTINATIONS.filter(dummy => !realDestinations.some(real => real.name === dummy.name));
-      setDestinations([...realDestinations, ...dummyDestinations]);
+      setDestinations(destResult.data || DESTINATIONS);
 
       // Live Tickets
-      const realTickets = ticketResult.data || [];
-      // Read promoted dummy IDs fresh from localStorage to avoid stale closure
-      const promotedIds: string[] = JSON.parse(localStorage.getItem('promoted_dummy_ticket_ids') || '[]');
-      const dummyTickets = DUMMY_TICKETS.filter(dummy =>
-        !promotedIds.includes(dummy.id) &&
-        !realTickets.some(real =>
-          normalizeCityName(real.from) === normalizeCityName(dummy.from) &&
-          normalizeCityName(real.to) === normalizeCityName(dummy.to)
-        )
-      );
-      const combinedTickets = [...realTickets, ...dummyTickets];
-      const sortedTickets = combinedTickets.sort((a, b) => {
+      const ticketsToUse = ticketResult.data || DUMMY_TICKETS;
+      const sortedTickets = [...ticketsToUse].sort((a, b) => {
         const orderA = a.order_index ?? 999;
         const orderB = b.order_index ?? 999;
         return orderA - orderB;
@@ -232,17 +186,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const updatedPkg = { ...pkg };
 
-      // If it's a dummy ID, promote it to a real Supabase record
-      if (typeof pkg.id === 'string' && (pkg.id.startsWith('h') || pkg.id.startsWith('c') || pkg.id.startsWith('f') || pkg.id.startsWith('s') || pkg.id.startsWith('r'))) {
-        // Mark this dummy as promoted
-        const newPromotedIds = [...promotedDummyPackageIds, pkg.id];
-        setPromotedDummyPackageIds(newPromotedIds);
-        localStorage.setItem('promoted_dummy_package_ids', JSON.stringify(newPromotedIds));
-        // Remove dummy from current state
-        setPackages(prev => prev.filter(item => item.id !== pkg.id));
-        return addPackage(pkg);
-      }
-
       if (updatedPkg.image && updatedPkg.image.startsWith('data:')) {
         updatedPkg.image = await uploadImage(updatedPkg.image, 'packages');
       }
@@ -262,20 +205,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deletePackage = async (id: string) => {
-    // If it's a dummy ID, just remove from state and persist to localStorage
-    const isDummy = PACKAGES.some(p => p.id === id);
-    if (isDummy) {
-      setPackages(prev => prev.filter(item => item.id !== id));
-      const newDeletedIds = [...deletedDummyIds, id];
-      setDeletedDummyIds(newDeletedIds);
-      localStorage.setItem('deleted_dummy_ids', JSON.stringify(newDeletedIds));
-      return;
-    }
-
-    const { error } = await supabase.from('packages').delete().eq('id', id);
+    const { error, count } = await supabase.from('packages').delete({ count: 'exact' }).eq('id', id);
     if (error) {
       console.error('Package delete error:', error);
       alert(`Failed to delete package: ${error.message}`);
+      throw error;
+    } else if (count === 0) {
+      console.error('Package delete blocked: 0 rows affected. Check Supabase RLS policies.');
+      alert('Delete was blocked by the database. Please check your Supabase RLS (Row Level Security) policies to allow DELETE on the packages table.');
+      throw new Error('Delete blocked by RLS policy');
     } else {
       setPackages(prev => prev.filter(item => item.id !== id));
     }
@@ -307,17 +245,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const updatedBlog = { ...blog };
 
-      // If it's a dummy ID, promote it to a real Supabase record
-      if (typeof blog.id === 'string' && blog.id.startsWith('b-seo')) {
-        // Mark this dummy as promoted
-        const newPromotedIds = [...promotedDummyBlogIds, blog.id];
-        setPromotedDummyBlogIds(newPromotedIds);
-        localStorage.setItem('promoted_dummy_blog_ids', JSON.stringify(newPromotedIds));
-        // Remove dummy from current state
-        setBlogs(prev => prev.filter(item => item.id !== blog.id));
-        return addBlog(blog);
-      }
-
       if (updatedBlog.image && updatedBlog.image.startsWith('data:')) {
         updatedBlog.image = await uploadImage(updatedBlog.image, 'blogs');
       }
@@ -337,18 +264,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteBlog = async (id: string) => {
-    // If it's a dummy ID, mark it as promoted/hidden permanently
-    if (typeof id === 'string' && id.startsWith('b-seo')) {
-      const newPromotedIds = [...promotedDummyBlogIds, id];
-      setPromotedDummyBlogIds(newPromotedIds);
-      localStorage.setItem('promoted_dummy_blog_ids', JSON.stringify(newPromotedIds));
-      setBlogs(prev => prev.filter(item => item.id !== id));
-      return;
-    }
-
-    const { error } = await supabase.from('blogs').delete().eq('id', id);
+    const { error, count } = await supabase.from('blogs').delete({ count: 'exact' }).eq('id', id);
     if (error) {
       console.error('Blog delete error:', error);
+      alert(`Failed to delete blog: ${error.message}`);
+      throw error;
+    } else if (count === 0) {
+      console.error('Blog delete blocked: 0 rows affected. Check Supabase RLS policies.');
+      alert('Delete was blocked by the database. Please check your Supabase RLS (Row Level Security) policies to allow DELETE on the blogs table.');
+      throw new Error('Delete blocked by RLS policy');
     } else {
       setBlogs(prev => prev.filter(item => item.id !== id));
     }
@@ -412,9 +336,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return;
     }
 
-    const { error } = await supabase.from('destinations').delete().eq('id', id);
+    const { error, count } = await supabase.from('destinations').delete({ count: 'exact' }).eq('id', id);
     if (error) {
       console.error('Destination delete error:', error);
+      alert(`Failed to delete destination: ${error.message}`);
+      throw error;
+    } else if (count === 0) {
+      console.error('Destination delete blocked: 0 rows affected. Check Supabase RLS policies.');
+      alert('Delete was blocked by the database. Please check your Supabase RLS (Row Level Security) policies to allow DELETE on the destinations table.');
+      throw new Error('Delete blocked by RLS policy');
     } else {
       setDestinations(prev => prev.filter(item => item.id !== id));
     }
@@ -458,18 +388,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const { id, ...updateData } = ticket;
 
-      // If it's a dummy ID, promote it to a real Supabase record
-      if (typeof id === 'string' && id.startsWith('d')) {
-        // Mark this dummy as promoted so fetchInitialData won't show it again
-        const newPromotedIds = [...promotedDummyTicketIds, id];
-        setPromotedDummyTicketIds(newPromotedIds);
-        localStorage.setItem('promoted_dummy_ticket_ids', JSON.stringify(newPromotedIds));
-        // Remove dummy from current state immediately to prevent duplicates
-        setLiveTickets(prev => prev.filter(item => item.id !== id));
-        // Insert as a brand new real ticket
-        return addLiveTicket(ticket);
-      }
-
       // Handle image upload if provided and it's a new base64 string
       if (updateData.city_image && updateData.city_image.startsWith('data:')) {
         updateData.city_image = await uploadImage(updateData.city_image, 'tickets');
@@ -494,18 +412,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteLiveTicket = async (id: string) => {
-    // If it's a dummy ticket, mark it as promoted/hidden permanently
-    if (id.startsWith('d')) {
-      const newPromotedIds = [...promotedDummyTicketIds, id];
-      setPromotedDummyTicketIds(newPromotedIds);
-      localStorage.setItem('promoted_dummy_ticket_ids', JSON.stringify(newPromotedIds));
-      setLiveTickets(prev => prev.filter(item => item.id !== id));
-      return;
-    }
-
-    const { error } = await supabase.from('live_tickets').delete().eq('id', id);
+    const { error, count } = await supabase.from('live_tickets').delete({ count: 'exact' }).eq('id', id);
     if (error) {
       console.error('Ticket delete error:', error);
+      alert(`Failed to delete ticket: ${error.message}`);
+      throw error;
+    } else if (count === 0) {
+      console.error('Ticket delete blocked: 0 rows affected. Check Supabase RLS policies.');
+      alert('Delete was blocked by the database. Please check your Supabase RLS (Row Level Security) policies to allow DELETE on the live_tickets table.');
+      throw new Error('Delete blocked by RLS policy');
     } else {
       setLiveTickets(prev => prev.filter(item => item.id !== id));
     }

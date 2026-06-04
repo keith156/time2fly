@@ -35,6 +35,15 @@ const AdminDashboard: React.FC = () => {
   const [priceSpread, setPriceSpread] = useState<number | ''>('');
   const navigate = useNavigate();
 
+  // Delete confirmation state
+  const [deleteConfirm, setDeleteConfirm] = useState<{
+    show: boolean;
+    type: 'package' | 'blog' | 'destination' | 'ticket';
+    id: string;
+    name: string;
+  } | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const handleLogout = () => {
     localStorage.removeItem('t2f_admin_auth');
     navigate('/');
@@ -164,6 +173,28 @@ const AdminDashboard: React.FC = () => {
 
   const toggleStar = (pkg: Package) => {
     updatePackage({ ...pkg, is_starred: !pkg.is_starred });
+  };
+
+  const requestDelete = (type: 'package' | 'blog' | 'destination' | 'ticket', id: string, name: string) => {
+    setDeleteConfirm({ show: true, type, id, name });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteConfirm) return;
+    setIsDeleting(true);
+    try {
+      switch (deleteConfirm.type) {
+        case 'package': await deletePackage(deleteConfirm.id); break;
+        case 'blog': await deleteBlog(deleteConfirm.id); break;
+        case 'destination': await deleteDestination(deleteConfirm.id); break;
+        case 'ticket': await deleteLiveTicket(deleteConfirm.id); break;
+      }
+    } catch (err) {
+      // Error already handled in context functions
+    } finally {
+      setIsDeleting(false);
+      setDeleteConfirm(null);
+    }
   };
 
 
@@ -708,7 +739,7 @@ const AdminDashboard: React.FC = () => {
                       <div className="flex justify-end space-x-2">
                         <button onClick={() => toggleStar(pkg)} className={`p-3 rounded-xl transition-all ${pkg?.is_starred ? 'bg-red-600 text-white shadow-lg shadow-red-200' : 'bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-500'}`} title={pkg?.is_starred ? 'Unstar' : 'Star for Special Offers'}><Star size={18} fill={pkg?.is_starred ? "white" : "none"} /></button>
                         <button onClick={() => setEditingPackage(pkg)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
-                        <button onClick={() => deletePackage(pkg.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
+                        <button onClick={() => requestDelete('package', pkg.id, pkg.destination)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>
                   </tr>
@@ -724,7 +755,7 @@ const AdminDashboard: React.FC = () => {
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
                         <button onClick={() => setEditingDest(dest)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
-                        <button onClick={() => deleteDestination(dest.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
+                        <button onClick={() => requestDelete('destination', dest.id, dest.name || 'this destination')} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>
                   </tr>
@@ -757,7 +788,7 @@ const AdminDashboard: React.FC = () => {
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
                         <button onClick={() => handleEditTicket(ticket)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
-                        <button onClick={() => deleteLiveTicket(ticket.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
+                        <button onClick={() => requestDelete('ticket', ticket.id, `${ticket.from} → ${ticket.to}`)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>
                   </tr>
@@ -773,7 +804,7 @@ const AdminDashboard: React.FC = () => {
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
                         <button onClick={() => setEditingBlog(blog)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
-                        <button onClick={() => deleteBlog(blog.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
+                        <button onClick={() => requestDelete('blog', blog.id, blog.title || 'this blog post')} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>
                   </tr>
@@ -783,6 +814,56 @@ const AdminDashboard: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4 animate-fade-in-up">
+          <div className="bg-white rounded-[40px] shadow-2xl w-full max-w-md border border-slate-200 overflow-hidden">
+            <div className="p-10 text-center">
+              {/* Animated warning icon */}
+              <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-red-100">
+                <Trash2 size={32} className="text-red-500" />
+              </div>
+              <h3 className="font-black uppercase tracking-tighter text-3xl text-slate-900 mb-3">Confirm Delete</h3>
+              <p className="text-slate-500 font-medium text-base mb-2">
+                Are you sure you want to delete this {deleteConfirm.type}?
+              </p>
+              <p className="text-slate-900 font-black text-lg uppercase tracking-tight mb-8 bg-slate-50 py-3 px-6 rounded-2xl inline-block">
+                {deleteConfirm.name}
+              </p>
+              <p className="text-red-400 text-xs font-bold uppercase tracking-widest mb-8">
+                This action cannot be undone.
+              </p>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => setDeleteConfirm(null)}
+                  disabled={isDeleting}
+                  className="flex-1 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest text-xs"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  disabled={isDeleting}
+                  className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-red-300 text-white font-black py-5 rounded-2xl transition-all shadow-xl shadow-red-600/20 uppercase tracking-widest text-xs flex items-center justify-center space-x-2"
+                >
+                  {isDeleting ? (
+                    <>
+                      <Loader2 className="animate-spin" size={18} />
+                      <span>Deleting...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Trash2 size={16} />
+                      <span>Delete Forever</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
