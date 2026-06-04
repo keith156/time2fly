@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Calendar, User, ArrowRight, ArrowLeft, Share2, Bookmark, Clock, ChevronRight, Hash, Eye } from 'lucide-react';
+import { Calendar, User, ArrowRight, ArrowLeft, Share2, Bookmark, Clock, ChevronRight, Hash } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import { BlogPost } from '../types';
 import SEO from '../components/SEO.tsx';
@@ -193,7 +193,7 @@ const Blog: React.FC = () => {
       {/* Mesmerizing Feed Grid */}
       <div className="max-w-7xl mx-auto px-6 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs.map((post) => (
+          {[...blogs].sort((a, b) => new Date(b.created_at || b.date || 0).getTime() - new Date(a.created_at || a.date || 0).getTime()).map((post) => (
             <article
               key={post.id}
               className="bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-4 border border-slate-100 group flex flex-col h-full animate-fade-in-up"
@@ -246,10 +246,6 @@ const Blog: React.FC = () => {
                   >
                     Read Journal <ArrowRight size={14} className="ml-2 group-hover:translate-x-3 transition-transform" />
                   </button>
-                  <div className="flex space-x-2 text-slate-300">
-                    <Eye size={16} />
-                    <span className="text-[10px] font-black">1.2K</span>
-                  </div>
                 </div>
               </div>
             </article>

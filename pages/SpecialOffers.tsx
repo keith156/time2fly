@@ -52,13 +52,13 @@ const SpecialOffers: React.FC = () => {
                         {displayPackages.length > 0 ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {displayPackages.map((pkg) => (
-                                    <div key={pkg.id} className="bg-white rounded-[48px] overflow-hidden border-2 border-red-100 shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 group flex flex-col h-full relative">
+                                    <div key={pkg.id} onClick={() => navigate(`/packages?pkg=${pkg.id}`)} className="bg-white rounded-[48px] overflow-hidden border-2 border-red-100 shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 group flex flex-col h-full relative cursor-pointer">
                                         {/* Dynamic Badge */}
                                         <div className="absolute top-6 left-6 z-20 bg-red-600 text-white px-4 py-2 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-lg animate-pulse">
                                             {pkg.is_starred ? 'Exclusive Offer' : 'New Package'}
                                         </div>
 
-                                        <div className="relative h-80 overflow-hidden cursor-pointer" onClick={() => navigate(`/packages?pkg=${pkg.id}`)}>
+                                        <div className="relative h-80 overflow-hidden">
                                             <img
                                                 src={pkg.image}
                                                 alt={pkg.destination}
@@ -102,7 +102,7 @@ const SpecialOffers: React.FC = () => {
                                                         <span className="text-[10px] font-black uppercase tracking-tighter text-slate-500">{pkg.duration}</span>
                                                     </div>
                                                 </div>
-                                                <Link to="/contact" className="block w-full text-center bg-red-600 hover:bg-slate-950 text-white py-5 rounded-[24px] font-black transition-all shadow-xl shadow-red-600/10 active:scale-95 uppercase tracking-widest text-xs">
+                                                <Link to="/contact" onClick={(e) => e.stopPropagation()} className="block w-full text-center bg-red-600 hover:bg-slate-950 text-white py-5 rounded-[24px] font-black transition-all shadow-xl shadow-red-600/10 active:scale-95 uppercase tracking-widest text-xs">
                                                     Claim Special Offer
                                                 </Link>
                                             </div>

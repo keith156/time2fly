@@ -37,6 +37,7 @@ export interface BlogPost {
   author: string;
   image: string;
   category: string;
+  created_at?: string;
 }
 
 export interface Testimonial {
