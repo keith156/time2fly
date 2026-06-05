@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cloudinary onboarding/credentials
+cloudinary.txt
+cloudinary_test.js
+

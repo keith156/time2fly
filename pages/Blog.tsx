@@ -128,15 +128,20 @@ const Blog: React.FC = () => {
                     "{selectedPost.excerpt}"
                   </p>
 
-                  <div className="text-body-lg text-slate-700 space-y-10 whitespace-pre-wrap">
-                    {selectedPost.content || `
+                  {selectedPost.content ? (
+                    <div
+                      className="text-body-lg text-slate-700 space-y-6 prose max-w-none ql-editor"
+                      dangerouslySetInnerHTML={{ __html: selectedPost.content }}
+                    />
+                  ) : (
+                    <div className="text-body-lg text-slate-700 space-y-10 whitespace-pre-wrap">
                       Traveling the world isn't just about seeing new places; it's about shifting your perspective. At Time2Fly, we believe every journey should be as unique as the traveler embarking on it.
 
                       When you step off that plane, you aren't just a tourist. You're a guest in someone else's home, a student of history, and an explorer of the unknown. This particular destination offers a blend of sensory experiences that simply cannot be captured in photographs alone.
 
                       The local culture here is deeply rooted in traditions that span centuries, yet there's a modern energy that's impossible to ignore. Whether you're navigating the bustling street markets or seeking silence in ancient ruins, you'll find that this place stays with you long after you've returned home.
-                    `}
-                  </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-24 p-12 bg-gradient-to-br from-[#0000ff] to-blue-700 rounded-[60px] relative overflow-hidden text-center group shadow-2xl shadow-blue-200">

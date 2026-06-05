@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Package as PackageIcon, FileText, Plus, Edit, Trash2, LogOut, Upload, X, User, MapPin, Star, Loader2, Plane, TrendingDown, TrendingUp, Minus } from 'lucide-react';
 import { useData } from '../context/DataContext.tsx';
 import { Package, BlogPost, Destination, LiveTicket } from '../types';
 import { PACKAGE_CATEGORIES } from '../constants';
+import Quill from 'quill';
+import 'quill/dist/quill.snow.css';
 
 const AIRLINE_OPTIONS = [
   "Ethiopian Airlines (ET)",
@@ -14,6 +16,148 @@ const AIRLINE_OPTIONS = [
   "KLM Royal Dutch Airlines (KL)",
   "RwandAir (WB)"
 ];
+
+const sha1 = async (str: string): Promise<string> => {
+  const utf8 = new TextEncoder().encode(str);
+  const hashBuffer = await crypto.subtle.digest('SHA-1', utf8);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+};
+
+const uploadToCloudinary = async (file: File, folder: string): Promise<string> => {
+  const timestamp = Math.round(new Date().getTime() / 1000).toString();
+  const apiSecret = 'zeiu4gZG7UIKsoo9icw6CUvDioU';
+  const apiKey = '965437698325973';
+  const cloudName = 'daxyoc7q4';
+
+  const stringToSign = `folder=${folder}&timestamp=${timestamp}${apiSecret}`;
+  const signature = await sha1(stringToSign);
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('folder', folder);
+  formData.append('timestamp', timestamp);
+  formData.append('api_key', apiKey);
+  formData.append('signature', signature);
+
+  const response = await fetch(
+    `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+    {
+      method: 'POST',
+      body: formData,
+    }
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Upload failed: ${errorText}`);
+  }
+
+  const data = await response.json();
+  return data.secure_url.replace('/upload/', '/upload/f_auto,q_auto/');
+};
+
+interface RichTextEditorProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  onImageUpload?: (file: File) => Promise<string>;
+}
+
+const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange, placeholder, onImageUpload }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const quillRef = useRef<Quill | null>(null);
+  const isSettingValueRef = useRef(false);
+
+  useEffect(() => {
+    if (containerRef.current && !quillRef.current) {
+      quillRef.current = new Quill(containerRef.current, {
+        theme: 'snow',
+        placeholder: placeholder || 'Write something amazing...',
+        modules: {
+          toolbar: {
+            container: [
+              [{ header: [1, 2, 3, false] }],
+              ['bold', 'italic', 'underline', 'strike'],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              ['link', 'image'],
+              ['clean']
+            ],
+            handlers: {
+              image: function () {
+                if (onImageUpload) {
+                  const input = document.createElement('input');
+                  input.setAttribute('type', 'file');
+                  input.setAttribute('accept', 'image/*');
+                  input.click();
+
+                  input.onchange = async () => {
+                    const file = input.files?.[0];
+                    if (file) {
+                      const range = quillRef.current?.getSelection(true);
+                      if (range) {
+                        quillRef.current?.insertText(range.index, '[Uploading image...]');
+                        try {
+                          const url = await onImageUpload(file);
+                          quillRef.current?.deleteText(range.index, '[Uploading image...]'.length);
+                          quillRef.current?.insertEmbed(range.index, 'image', url);
+                        } catch (err) {
+                          console.error('Image upload failed:', err);
+                          quillRef.current?.deleteText(range.index, '[Uploading image...]'.length);
+                          alert('Failed to upload image to Cloudinary');
+                        }
+                      }
+                    }
+                  };
+                } else {
+                  const range = quillRef.current?.getSelection();
+                  const val = prompt('What is the image URL?');
+                  if (val && range) {
+                    quillRef.current?.insertEmbed(range.index, 'image', val);
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+
+      quillRef.current.on('text-change', () => {
+        if (!isSettingValueRef.current) {
+          const editor = containerRef.current?.querySelector('.ql-editor');
+          const html = editor?.innerHTML || '';
+          if (html === '<p><br></p>') {
+            onChange('');
+          } else {
+            onChange(html);
+          }
+        }
+      });
+    }
+  }, [onImageUpload, placeholder]);
+
+  useEffect(() => {
+    if (quillRef.current) {
+      const editor = containerRef.current?.querySelector('.ql-editor');
+      const currentHtml = editor?.innerHTML || '';
+      if (value !== currentHtml && value !== '<p><br></p>') {
+        isSettingValueRef.current = true;
+        const range = quillRef.current.getSelection();
+        quillRef.current.root.innerHTML = value || '';
+        if (range) {
+          quillRef.current.setSelection(range.index, range.length);
+        }
+        isSettingValueRef.current = false;
+      }
+    }
+  }, [value]);
+
+  return (
+    <div className="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden">
+      <div ref={containerRef} style={{ minHeight: '300px' }} className="prose max-w-none text-slate-700 font-medium" />
+    </div>
+  );
+};
 
 const AdminDashboard: React.FC = () => {
   const {
@@ -43,35 +187,45 @@ const AdminDashboard: React.FC = () => {
     name: string;
   } | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('t2f_admin_auth');
     navigate('/');
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, type: 'pkg' | 'blog' | 'dest') => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: 'pkg' | 'blog' | 'dest') => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        if (type === 'pkg') setEditingPackage(prev => ({ ...prev, image: base64String }));
-        else if (type === 'blog') setEditingBlog(prev => ({ ...prev, image: base64String }));
-        else setEditingDest(prev => ({ ...prev, image: base64String }));
-      };
-      reader.readAsDataURL(file);
+      setIsUploadingImage(true);
+      try {
+        const folder = type === 'pkg' ? 'packages' : type === 'blog' ? 'blogs' : 'destinations';
+        const url = await uploadToCloudinary(file, folder);
+        if (type === 'pkg') setEditingPackage(prev => ({ ...prev, image: url }));
+        else if (type === 'blog') setEditingBlog(prev => ({ ...prev, image: url }));
+        else setEditingDest(prev => ({ ...prev, image: url }));
+      } catch (err) {
+        console.error('Cloudinary upload error:', err);
+        alert('Image upload failed. Please try again.');
+      } finally {
+        setIsUploadingImage(false);
+      }
     }
   };
 
-  const handleTicketImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTicketImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setEditingTicket(prev => ({ ...prev, city_image: base64String }));
-      };
-      reader.readAsDataURL(file);
+      setIsUploadingImage(true);
+      try {
+        const url = await uploadToCloudinary(file, 'tickets');
+        setEditingTicket(prev => ({ ...prev, city_image: url }));
+      } catch (err) {
+        console.error('Cloudinary upload error:', err);
+        alert('Image upload failed. Please try again.');
+      } finally {
+        setIsUploadingImage(false);
+      }
     }
   };
 
@@ -355,13 +509,13 @@ const AdminDashboard: React.FC = () => {
                 <div className="flex gap-4 pt-4">
                   <button
                     type="submit"
-                    disabled={isUploading}
+                    disabled={isUploading || isUploadingImage}
                     className="flex-1 bg-amber-500 hover:bg-slate-900 disabled:bg-slate-300 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest flex items-center justify-center space-x-2"
                   >
-                    {isUploading ? (
+                    {isUploading || isUploadingImage ? (
                       <>
                         <Loader2 className="animate-spin" size={20} />
-                        <span>Uploading...</span>
+                        <span>{isUploadingImage ? 'Uploading Image...' : 'Uploading...'}</span>
                       </>
                     ) : (
                       <span>Save Package</span>
@@ -369,7 +523,7 @@ const AdminDashboard: React.FC = () => {
                   </button>
                   <button
                     type="button"
-                    disabled={isUploading}
+                    disabled={isUploading || isUploadingImage}
                     onClick={() => setEditingPackage(null)}
                     className="flex-1 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest"
                   >
@@ -429,18 +583,23 @@ const AdminDashboard: React.FC = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Full Content</label>
-                  <textarea rows={10} value={editingBlog.content || ''} onChange={e => setEditingBlog({ ...editingBlog, content: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Write your blog post here..." required></textarea>
+                  <RichTextEditor
+                    value={editingBlog.content || ''}
+                    onChange={html => setEditingBlog({ ...editingBlog, content: html })}
+                    placeholder="Write your blog post here..."
+                    onImageUpload={file => uploadToCloudinary(file, 'blogs')}
+                  />
                 </div>
                 <div className="flex gap-4 pt-4">
                   <button
                     type="submit"
-                    disabled={isUploading}
+                    disabled={isUploading || isUploadingImage}
                     className="flex-1 bg-amber-500 hover:bg-slate-900 disabled:bg-slate-300 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest flex items-center justify-center space-x-2"
                   >
-                    {isUploading ? (
+                    {isUploading || isUploadingImage ? (
                       <>
                         <Loader2 className="animate-spin" size={20} />
-                        <span>Uploading...</span>
+                        <span>{isUploadingImage ? 'Uploading Image...' : 'Uploading...'}</span>
                       </>
                     ) : (
                       <span>Publish Post</span>
@@ -448,7 +607,7 @@ const AdminDashboard: React.FC = () => {
                   </button>
                   <button
                     type="button"
-                    disabled={isUploading}
+                    disabled={isUploading || isUploadingImage}
                     onClick={() => setEditingBlog(null)}
                     className="flex-1 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest"
                   >
@@ -504,13 +663,13 @@ const AdminDashboard: React.FC = () => {
                 <div className="flex gap-4 pt-4">
                   <button
                     type="submit"
-                    disabled={isUploading}
+                    disabled={isUploading || isUploadingImage}
                     className="flex-1 bg-amber-500 hover:bg-slate-900 disabled:bg-slate-300 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest flex items-center justify-center space-x-2"
                   >
-                    {isUploading ? (
+                    {isUploading || isUploadingImage ? (
                       <>
                         <Loader2 className="animate-spin" size={20} />
-                        <span>Uploading...</span>
+                        <span>{isUploadingImage ? 'Uploading Image...' : 'Uploading...'}</span>
                       </>
                     ) : (
                       <span>Save Destination</span>
@@ -518,7 +677,7 @@ const AdminDashboard: React.FC = () => {
                   </button>
                   <button
                     type="button"
-                    disabled={isUploading}
+                    disabled={isUploading || isUploadingImage}
                     onClick={() => setEditingDest(null)}
                     className="flex-1 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest"
                   >
@@ -684,13 +843,13 @@ const AdminDashboard: React.FC = () => {
                 <div className="flex gap-4 pt-4">
                   <button
                     type="submit"
-                    disabled={isUploading}
+                    disabled={isUploading || isUploadingImage}
                     className="flex-1 bg-amber-500 hover:bg-slate-900 disabled:bg-slate-300 text-white font-black py-5 rounded-2xl transition-all shadow-xl uppercase tracking-widest flex items-center justify-center space-x-2"
                   >
-                    {isUploading ? (
+                    {isUploading || isUploadingImage ? (
                       <>
                         <Loader2 className="animate-spin" size={20} />
-                        <span>Saving...</span>
+                        <span>{isUploadingImage ? 'Uploading Image...' : 'Saving...'}</span>
                       </>
                     ) : (
                       <span>Save Ticket</span>
@@ -698,8 +857,9 @@ const AdminDashboard: React.FC = () => {
                   </button>
                   <button
                     type="button"
+                    disabled={isUploading || isUploadingImage}
                     onClick={() => setEditingTicket(null)}
-                    className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest"
+                    className="flex-1 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-900 font-black py-5 rounded-2xl transition-all uppercase tracking-widest"
                   >
                     Cancel
                   </button>
