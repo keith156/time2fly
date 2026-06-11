@@ -140,9 +140,15 @@ const Home: React.FC = () => {
                   <h2 className="text-h2 text-slate-900 mb-8 border-b-4 border-amber-500 w-fit pb-2">The Experience</h2>
                   <p className="text-body-lg mb-10 italic">{selectedPackage.description}</p>
                   <div className="prose prose-slate prose-xl max-w-none">
-                    <div className="text-slate-700 leading-relaxed font-medium space-y-8 text-lg whitespace-pre-wrap bg-slate-50 p-10 rounded-[40px] border border-slate-100 shadow-sm">
+                    <div className="text-slate-700 leading-relaxed font-medium space-y-8 text-lg bg-slate-50 p-10 rounded-[40px] border border-slate-100 shadow-sm">
                       <h3 className="text-h3 text-slate-900 mb-4">Journey Breakdown</h3>
-                      {selectedPackage.itinerary || "Our travel experts are finalizing the daily breakdown for this premium package. Expect a perfect blend of adventure, culture, and relaxation."}
+                      {selectedPackage.itinerary ? (
+                        <div className="ql-editor prose max-w-none text-slate-700 font-medium" dangerouslySetInnerHTML={{ __html: selectedPackage.itinerary }} />
+                      ) : (
+                        <div className="whitespace-pre-wrap">
+                          {"Our travel experts are finalizing the daily breakdown for this premium package. Expect a perfect blend of adventure, culture, and relaxation."}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </section>

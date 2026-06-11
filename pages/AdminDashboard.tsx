@@ -504,7 +504,12 @@ const AdminDashboard: React.FC = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Detailed Itinerary</label>
-                  <textarea rows={6} value={editingPackage.itinerary || ''} onChange={e => setEditingPackage({ ...editingPackage, itinerary: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Day 1: Arrival... Day 2: Tour..."></textarea>
+                  <RichTextEditor
+                    value={editingPackage.itinerary || ''}
+                    onChange={html => setEditingPackage({ ...editingPackage, itinerary: html })}
+                    placeholder="Day 1: Arrival... Day 2: Tour..."
+                    onImageUpload={file => uploadToCloudinary(file, 'packages')}
+                  />
                 </div>
                 <div className="flex gap-4 pt-4">
                   <button
