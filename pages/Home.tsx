@@ -142,7 +142,11 @@ const Home: React.FC = () => {
                   <div className="prose prose-slate prose-xl max-w-none">
                     <div className="text-slate-700 leading-relaxed font-medium space-y-8 text-lg whitespace-pre-wrap bg-slate-50 p-10 rounded-[40px] border border-slate-100 shadow-sm">
                       <h3 className="text-h3 text-slate-900 mb-4">Journey Breakdown</h3>
-                      {selectedPackage.itinerary || "Our travel experts are finalizing the daily breakdown for this premium package. Expect a perfect blend of adventure, culture, and relaxation."}
+                      {selectedPackage.itinerary ? (
+                        <div dangerouslySetInnerHTML={{ __html: selectedPackage.itinerary }} />
+                      ) : (
+                        "Our travel experts are finalizing the daily breakdown for this premium package. Expect a perfect blend of adventure, culture, and relaxation."
+                      )}
                     </div>
                   </div>
                 </section>

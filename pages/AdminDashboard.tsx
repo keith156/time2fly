@@ -140,14 +140,47 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange, placeh
     if (quillRef.current) {
       const editor = containerRef.current?.querySelector('.ql-editor');
       const currentHtml = editor?.innerHTML || '';
-      if (value !== currentHtml && value !== '<p><br></p>') {
+      
+      let htmlValue = value || '';
+      
+      // If the value doesn't start with a tag, wrap it so Quill parses it as a block.
+      if (htmlValue && !htmlValue.trim().startsWith('<')) {
+         htmlValue = `<p>${htmlValue.replace(/\n/g, '<br>')}</p>`;
+      }
+
+      if (htmlValue !== currentHtml && htmlValue !== '<p><br></p>') {
         isSettingValueRef.current = true;
         const range = quillRef.current.getSelection();
-        quillRef.current.root.innerHTML = value || '';
-        if (range) {
-          quillRef.current.setSelection(range.index, range.length);
+        
+        try {
+          // Attempt dangerouslyPasteHTML first (most reliable if available)
+          if (typeof quillRef.current.clipboard.dangerouslyPasteHTML === 'function') {
+            quillRef.current.clipboard.dangerouslyPasteHTML(htmlValue);
+          } 
+          // Fallback to Quill 2.x convert API
+          else if (quillRef.current.clipboard && typeof quillRef.current.clipboard.convert === 'function') {
+            const delta = quillRef.current.clipboard.convert({ html: htmlValue });
+            quillRef.current.setContents(delta, 'silent');
+          } 
+          // Final fallback
+          else {
+            quillRef.current.root.innerHTML = htmlValue;
+          }
+        } catch (err) {
+          console.error("Quill paste error:", err);
+          quillRef.current.root.innerHTML = htmlValue;
         }
-        isSettingValueRef.current = false;
+        
+        if (range) {
+          try {
+            quillRef.current.setSelection(range.index, range.length);
+          } catch(e) {}
+        }
+        
+        // Use a short timeout to reset the flag to prevent immediate onChange triggers from normalizing
+        setTimeout(() => {
+          isSettingValueRef.current = false;
+        }, 50);
       }
     }
   }, [value]);
@@ -504,7 +537,12 @@ const AdminDashboard: React.FC = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Detailed Itinerary</label>
-                  <textarea rows={6} value={editingPackage.itinerary || ''} onChange={e => setEditingPackage({ ...editingPackage, itinerary: e.target.value })} className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-amber-500 font-medium" placeholder="Day 1: Arrival... Day 2: Tour..."></textarea>
+                  <RichTextEditor
+                    value={editingPackage.itinerary || ''}
+                    onChange={html => setEditingPackage({ ...editingPackage, itinerary: html })}
+                    placeholder="Day 1: Arrival... Day 2: Tour..."
+                    onImageUpload={file => uploadToCloudinary(file, 'packages')}
+                  />
                 </div>
                 <div className="flex gap-4 pt-4">
                   <button
