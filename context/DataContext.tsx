@@ -103,16 +103,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       ]);
 
       // Packages
-      setPackages(pkgResult.data || PACKAGES);
+      setPackages(pkgResult.data || []);
 
       // Blogs
-      setBlogs(blogResult.data || BLOG_POSTS);
+      setBlogs(blogResult.data || []);
 
       // Destinations
-      setDestinations(destResult.data || DESTINATIONS);
+      setDestinations(destResult.data || []);
 
       // Live Tickets
-      const ticketsToUse = ticketResult.data || DUMMY_TICKETS;
+      const ticketsToUse = ticketResult.data || [];
       const sortedTickets = [...ticketsToUse].sort((a, b) => {
         const orderA = a.order_index ?? 999;
         const orderB = b.order_index ?? 999;
@@ -123,10 +123,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLastUpdated(new Date().toISOString());
     } catch (err) {
       console.error('Unexpected Supabase fetch error:', err);
-      // Ensure we still have some data in extreme failure cases
-      if (packages.length === 0) setPackages(PACKAGES);
-      if (blogs.length === 0) setBlogs(BLOG_POSTS);
-      if (liveTickets.length === 0) setLiveTickets(DUMMY_TICKETS);
+      // Removed fallback to dummy data so deleted items don't come back
     } finally {
       setLoading(false);
     }
