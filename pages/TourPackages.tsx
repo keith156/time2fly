@@ -4,6 +4,7 @@ import { useData } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
 import { Link, useLocation } from 'react-router-dom';
 import SEO from '../components/SEO.tsx';
+import { supabase } from '../context/DataContext.tsx';
 
 const TourPackages: React.FC = () => {
   const { packages, loading } = useData();
@@ -44,6 +45,26 @@ const TourPackages: React.FC = () => {
   useEffect(() => {
     if (selectedPackage) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Lazy load the itinerary if it's not present
+      if (selectedPackage.itinerary === undefined) {
+        const fetchItinerary = async () => {
+          try {
+            const { data, error } = await supabase
+              .from('packages')
+              .select('itinerary')
+              .eq('id', selectedPackage.id)
+              .single();
+              
+            if (!error && data) {
+              setSelectedPackage(prev => prev ? { ...prev, itinerary: data.itinerary } : null);
+            }
+          } catch (err) {
+            console.error('Error fetching itinerary:', err);
+          }
+        };
+        fetchItinerary();
+      }
     }
   }, [selectedPackage]);
 

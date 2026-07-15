@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Package as PackageIcon, FileText, Plus, Edit, Trash2, LogOut, Upload, X, User, MapPin, Star, Loader2, Plane, TrendingDown, TrendingUp, Minus } from 'lucide-react';
-import { useData } from '../context/DataContext.tsx';
+import { useData, supabase } from '../context/DataContext.tsx';
 import { Package, BlogPost, Destination, LiveTicket } from '../types';
 import { PACKAGE_CATEGORIES } from '../constants';
 import Quill from 'quill';
@@ -355,6 +355,36 @@ const AdminDashboard: React.FC = () => {
       setPriceSpread(ticket.price_usd_max - ticket.price_usd_min);
     } else {
       setPriceSpread('');
+    }
+  };
+
+  const handleEditPackage = async (pkg: Package) => {
+    // Optimistically set it so the modal opens quickly
+    setEditingPackage(pkg);
+    if (pkg.itinerary === undefined) {
+      try {
+        const { data, error } = await supabase.from('packages').select('itinerary').eq('id', pkg.id).single();
+        if (!error && data) {
+          setEditingPackage(prev => prev ? { ...prev, itinerary: data.itinerary } : null);
+        }
+      } catch (err) {
+        console.error('Error fetching itinerary:', err);
+      }
+    }
+  };
+
+  const handleEditBlog = async (blog: BlogPost) => {
+    // Optimistically set it so the modal opens quickly
+    setEditingBlog(blog);
+    if (blog.content === undefined) {
+      try {
+        const { data, error } = await supabase.from('blogs').select('content').eq('id', blog.id).single();
+        if (!error && data) {
+          setEditingBlog(prev => prev ? { ...prev, content: data.content } : null);
+        }
+      } catch (err) {
+        console.error('Error fetching blog content:', err);
+      }
     }
   };
 
@@ -936,7 +966,7 @@ const AdminDashboard: React.FC = () => {
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
                         <button onClick={() => toggleStar(pkg)} className={`p-3 rounded-xl transition-all ${pkg?.is_starred ? 'bg-red-600 text-white shadow-lg shadow-red-200' : 'bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-500'}`} title={pkg?.is_starred ? 'Unstar' : 'Star for Special Offers'}><Star size={18} fill={pkg?.is_starred ? "white" : "none"} /></button>
-                        <button onClick={() => setEditingPackage(pkg)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
+                        <button onClick={() => handleEditPackage(pkg)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
                         <button onClick={() => requestDelete('package', pkg.id, pkg.destination)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>
@@ -1001,7 +1031,7 @@ const AdminDashboard: React.FC = () => {
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex justify-end space-x-2">
-                        <button onClick={() => setEditingBlog(blog)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
+                        <button onClick={() => handleEditBlog(blog)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"><Edit size={18} /></button>
                         <button onClick={() => requestDelete('blog', blog.id, blog.title || 'this blog post')} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18} /></button>
                       </div>
                     </td>

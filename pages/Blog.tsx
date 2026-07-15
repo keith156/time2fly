@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, User, ArrowRight, ArrowLeft, Share2, Bookmark, Clock, ChevronRight, Hash, Check, Link as LinkIcon } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
-import { useData } from '../context/DataContext';
+import { useData, supabase } from '../context/DataContext';
 import { BlogPost } from '../types';
 import SEO from '../components/SEO.tsx';
 
@@ -36,6 +36,27 @@ const Blog: React.FC = () => {
       };
 
       window.addEventListener('scroll', updateProgress);
+      
+      // Lazy load the content if it's not present
+      if (selectedPost.content === undefined) {
+        const fetchContent = async () => {
+          try {
+            const { data, error } = await supabase
+              .from('blogs')
+              .select('content')
+              .eq('id', selectedPost.id)
+              .single();
+              
+            if (!error && data) {
+              setSelectedPost(prev => prev ? { ...prev, content: data.content } : null);
+            }
+          } catch (err) {
+            console.error('Error fetching blog content:', err);
+          }
+        };
+        fetchContent();
+      }
+
       return () => window.removeEventListener('scroll', updateProgress);
     }
   }, [selectedPost]);

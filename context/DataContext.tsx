@@ -8,7 +8,7 @@ import { compressImage } from '../utils/imageCompression';
 // Supabase Configuration
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co';
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder';
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 interface DataContextType {
   packages: Package[];
@@ -61,7 +61,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
               setter(prev => [payload.new, ...prev]);
             }
           } else if (payload.eventType === 'UPDATE') {
-            setter(prev => prev.map(item => item.id === payload.new.id ? payload.new : item));
+            // For updates, we might receive partial objects or objects without heavy fields
+            // We should merge them carefully or just update the main fields. 
+            // In a robust app we might just trigger a re-fetch, but for now we merge.
+            setter(prev => prev.map(item => item.id === payload.new.id ? { ...item, ...payload.new } : item));
           } else if (payload.eventType === 'DELETE') {
             setter(prev => prev.filter(item => item.id !== payload.old.id));
           }
@@ -96,8 +99,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       // Fetch each table individually to handle failures separately and avoid all-or-nothing errors
       const [pkgResult, blogResult, destResult, ticketResult] = await Promise.all([
-        supabase.from('packages').select('*').order('created_at', { ascending: false }),
-        supabase.from('blogs').select('*').order('created_at', { ascending: false }),
+        supabase.from('packages').select('id, destination, price, duration, description, image, rating, is_starred, category, created_at').order('created_at', { ascending: false }),
+        supabase.from('blogs').select('id, title, excerpt, date, author, image, created_at').order('created_at', { ascending: false }),
         supabase.from('destinations').select('*').order('created_at', { ascending: true }),
         supabase.from('live_tickets').select('*').order('order_index', { ascending: true })
       ]);

@@ -6,7 +6,7 @@ import SectionTitle from '../components/SectionTitle.tsx';
 import FlightSearchBar from '../components/FlightSearchBar.tsx';
 import SEO from '../components/SEO.tsx';
 import { SERVICES, TESTIMONIALS, PARTNERS } from '../constants.tsx';
-import { useData } from '../context/DataContext.tsx';
+import { useData, supabase } from '../context/DataContext.tsx';
 import { Package } from '../types.ts';
 
 const IconMap: Record<string, any> = {
@@ -49,6 +49,26 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (selectedPackage) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Lazy load the itinerary if it's not present
+      if (selectedPackage.itinerary === undefined) {
+        const fetchItinerary = async () => {
+          try {
+            const { data, error } = await supabase
+              .from('packages')
+              .select('itinerary')
+              .eq('id', selectedPackage.id)
+              .single();
+              
+            if (!error && data) {
+              setSelectedPackage(prev => prev ? { ...prev, itinerary: data.itinerary } : null);
+            }
+          } catch (err) {
+            console.error('Error fetching itinerary:', err);
+          }
+        };
+        fetchItinerary();
+      }
     }
   }, [selectedPackage]);
 
