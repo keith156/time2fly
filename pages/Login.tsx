@@ -1,22 +1,62 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, User, Plane } from 'lucide-react';
+import { Lock, User } from 'lucide-react';
+import { supabase } from '../context/DataContext.tsx';
+
+// Precomputed SHA-256 hashes for fallback authentication
+const USER_HASH = 'db03d157fdc7f5358055c5c83f9801452dfaaeb1aefca740445d5ef833ee463b';
+const PASS_HASH = '9ea63a2aaedbc835cf190c1f5d6ff736341f9d6db6c72808e06385d34208a0df';
+
+async function hashString(str: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(str);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Demo credentials
-    if (username === 'T2F' && password === 'T2F@2026') {
-      localStorage.setItem('t2f_admin_auth', 'true');
-      navigate('/admin');
-    } else {
-      setError('Invalid username or password');
+    setError('');
+    setLoading(true);
+
+    try {
+      // 1. Attempt Supabase Auth if configured with an email address
+      if (username.includes('@')) {
+        const { data, error: sbError } = await supabase.auth.signInWithPassword({
+          email: username,
+          password: password,
+        });
+
+        if (!sbError && data.session) {
+          localStorage.setItem('t2f_admin_auth', 'true');
+          navigate('/admin');
+          return;
+        }
+      }
+
+      // 2. Hash-based fallback check (no plaintext passwords in JS bundle)
+      const uHash = await hashString(username.trim());
+      const pHash = await hashString(password.trim());
+
+      if (uHash === USER_HASH && pHash === PASS_HASH) {
+        localStorage.setItem('t2f_admin_auth', 'true');
+        navigate('/admin');
+      } else {
+        setError('Invalid username or password');
+      }
+    } catch (err: any) {
+      setError(err.message || 'Authentication error');
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -27,3 +27,6 @@ dist-ssr
 cloudinary.txt
 cloudinary_test.js
 
+# Outcasts / Draft assets
+outcasts/
+
